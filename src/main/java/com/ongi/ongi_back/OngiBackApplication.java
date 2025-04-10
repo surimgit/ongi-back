@@ -6,7 +6,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class OngiBackApplication {
 
-	// branch 생성 sdaf
+	// branch 생성
 	public static void main(String[] args) {
 		SpringApplication.run(OngiBackApplication.class, args);
 	}
