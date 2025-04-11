@@ -1,5 +1,7 @@
 package com.ongi.ongi_back.common.entity;
 
+import com.ongi.ongi_back.common.dto.request.auth.SignUpRequestDto;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
@@ -35,5 +37,13 @@ public class UserEntity {
     private Integer userPoint;
     private Boolean isAdmin;
     private Boolean isResigned;
+
+    public UserEntity(SignUpRequestDto dto){
+        this.userId = dto.getUserId();
+        this.userPassword = dto.getUserPassword();
+        this.name = dto.getName();
+        this.telNumber = dto.getTelNumber();
+        this.gender = dto.getGender();
+    }
 
 }
