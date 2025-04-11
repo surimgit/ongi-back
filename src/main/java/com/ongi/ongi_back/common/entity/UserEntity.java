@@ -25,15 +25,13 @@ public class UserEntity {
     private String detailAddress;
     private Integer zipCode;
     private String birth;
-    private String telNum;
+    private String telNumber;
     private Boolean isSeller;
     private String gender;
-    private String profileImg;
+    private String profileImage;
     private String mbti;
-    private String likeKeyword;
     private String job;
     private String selfIntro;
-    private String badges;
     private Integer userPoint;
     private Boolean isAdmin;
     private Boolean isResigned;
