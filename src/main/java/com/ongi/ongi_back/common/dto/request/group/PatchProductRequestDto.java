@@ -1,7 +1,8 @@
-package com.ongi.ongi_back.common.dto.Request;
+package com.ongi.ongi_back.common.dto.Request.group;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Pattern;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -11,7 +12,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class PostProductRequestDto {
+public class PatchProductRequestDto {
   
   @NotBlank
   private String name;
@@ -20,6 +21,7 @@ public class PostProductRequestDto {
   private Integer price;
 
   @NotBlank
+  @Pattern(regexp = "^식품|의류|생필품|가전제품|기타$")
   private String category;
 
   @NotBlank
@@ -28,19 +30,10 @@ public class PostProductRequestDto {
   @NotNull
   private Integer productQuantity;
 
-  @NotNull
-  private Integer boughtAmount;
-
   @NotBlank
   private String deadline;
-
+  
   @NotNull
-  private Boolean isSoldOut;
-
-  @NotNull
-  private Integer purchasedPeople;
-
-  private Integer adPayment;
-  private String reserveDate;
-
+  private String image;
 }
+

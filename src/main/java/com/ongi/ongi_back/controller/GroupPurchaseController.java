@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.ongi.ongi_back.common.dto.Request.PostProductRequestDto;
+import com.ongi.ongi_back.common.dto.Request.group.PostProductRequestDto;
 import com.ongi.ongi_back.common.dto.Response.ResponseDto;
 import com.ongi.ongi_back.service.GroupPurchaseService;
 

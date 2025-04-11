@@ -4,7 +4,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import com.ongi.ongi_back.common.dto.Request.PostProductRequestDto;
+import com.ongi.ongi_back.common.dto.Request.group.PatchProductRequestDto;
+import com.ongi.ongi_back.common.dto.Request.group.PostProductRequestDto;
 import com.ongi.ongi_back.common.dto.Response.ResponseDto;
 import com.ongi.ongi_back.common.entity.ProductEntity;
 import com.ongi.ongi_back.repository.GroupPurchaseRepository;
@@ -22,7 +23,6 @@ public class GroupPurchaseServiceImplements implements GroupPurchaseService{
   @Override
   public ResponseEntity<ResponseDto> postProduct(PostProductRequestDto dto) {
     
-
     try {
       String userId = "asdf1234";
       ProductEntity productEntity = new ProductEntity(dto, userId);
@@ -33,6 +33,20 @@ public class GroupPurchaseServiceImplements implements GroupPurchaseService{
     }
 
     return ResponseDto.success(HttpStatus.OK);
+  }
+
+  @Override
+  public ResponseEntity<ResponseDto> patchProduct(PatchProductRequestDto dto) {
+
+    try {
+
+    } catch(Exception exception) {
+      exception.printStackTrace();
+      return ResponseDto.databaseError();
+    }
+
+    return ResponseDto.success(HttpStatus.OK);
+
   }
   
 }

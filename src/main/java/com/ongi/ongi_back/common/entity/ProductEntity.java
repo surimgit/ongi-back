@@ -1,6 +1,6 @@
 package com.ongi.ongi_back.common.entity;
 
-import com.ongi.ongi_back.common.dto.Request.PostProductRequestDto;
+import com.ongi.ongi_back.common.dto.Request.group.PostProductRequestDto;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -32,8 +32,9 @@ public class ProductEntity {
   private Integer purchasedPeople;
   private String deadline;
   private Boolean isSoldOut;
+  private String image;
   private Integer adPayment;
-  private String reserveDate;
+  private String openDate;
 
   public ProductEntity(PostProductRequestDto dto, String userId) {
     this.name = dto.getName();
@@ -46,7 +47,8 @@ public class ProductEntity {
     this.purchasedPeople = dto.getPurchasedPeople();
     this.deadline = dto.getDeadline();
     this.isSoldOut = dto.getIsSoldOut();
+    this.image = dto.getImage();
     this.adPayment = dto.getAdPayment();
-    this.reserveDate = dto.getReserveDate();
+    this.openDate = dto.getOpenDate();
   }
 }
