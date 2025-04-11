@@ -1,4 +1,4 @@
-package com.ongi.ongi_back.common.dto.Response;
+package com.ongi.ongi_back.common.dto.response;
 
 public interface ResponseMessage {
     // HTTP/1.1 200 OK
