@@ -1,4 +1,4 @@
-package com.ongi.ongi_back.common.dto;
+package com.ongi.ongi_back.common.dto.request;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
