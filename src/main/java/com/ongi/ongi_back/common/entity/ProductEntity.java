@@ -1,6 +1,7 @@
 package com.ongi.ongi_back.common.entity;
 
-import com.ongi.ongi_back.common.dto.Request.group.PostProductRequestDto;
+import com.ongi.ongi_back.common.dto.request.group.PatchProductRequestDto;
+import com.ongi.ongi_back.common.dto.request.group.PostProductRequestDto;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -23,7 +24,7 @@ public class ProductEntity {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Integer sequence;
   private String name;
-  private String sellerId;
+  private String userId;
   private Integer price;
   private String category;
   private String content;
@@ -38,7 +39,7 @@ public class ProductEntity {
 
   public ProductEntity(PostProductRequestDto dto, String userId) {
     this.name = dto.getName();
-    this.sellerId = userId;
+    this.userId = userId;
     this.price = dto.getPrice();
     this.category = dto.getCategory();
     this.content = dto.getCategory();
@@ -50,5 +51,15 @@ public class ProductEntity {
     this.image = dto.getImage();
     this.adPayment = dto.getAdPayment();
     this.openDate = dto.getOpenDate();
+  }
+
+  public void patch(PatchProductRequestDto dto) {
+    this.name = dto.getName();
+    this.price = dto.getPrice();
+    this.category = dto.getCategory();
+    this.content = dto.getContent();
+    this.productQuantity = dto.getProductQuantity();
+    this.deadline = dto.getDeadline();
+    this.image = dto.getImage();
   }
 }

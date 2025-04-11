@@ -54,7 +54,7 @@ public class WebSecurityConfig {
       .cors(cors -> cors.configurationSource(corsConfigurationSource()))
       // description: 인가 설정 //
       .authorizeHttpRequests(request -> request
-        .requestMatchers("/api/v1/product").permitAll()
+        .requestMatchers("/api/v1/product/**","/api/v1/auth/**").permitAll()
         .anyRequest().authenticated()
       )
       // description: 인증 또는 인가 실패에대한 처리 //
