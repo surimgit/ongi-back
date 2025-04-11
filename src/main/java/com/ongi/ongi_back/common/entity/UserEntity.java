@@ -30,10 +30,8 @@ public class UserEntity {
     private String gender;
     private String profileImg;
     private String mbti;
-    private String likeKeyword;
     private String job;
     private String selfIntro;
-    private String badges;
     private Integer userPoint;
     private Boolean isAdmin;
     private Boolean isResigned;

@@ -35,8 +35,9 @@ public class AuhtServiceImplement implements AuthService{
             if (userEntity == null) return ResponseDto.authFail();
 
             String userPassword = dto.getUserPassword();
-            String encodedPassword = userEntity.getUserPassword();
-            boolean isMatch = passwordEncoder.matches(userPassword, encodedPassword);
+            // String encodedPassword = userEntity.getUserPassword();
+            // boolean isMatch = passwordEncoder.matches(userPassword, encodedPassword);
+            boolean isMatch = userPassword.equals(userEntity.getUserPassword());
             if (!isMatch) return ResponseDto.authFail();
 
             accessToken = jwtProvider.create(userId);
