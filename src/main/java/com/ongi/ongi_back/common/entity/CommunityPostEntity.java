@@ -1,6 +1,6 @@
 package com.ongi.ongi_back.common.entity;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 import com.ongi.ongi_back.common.dto.request.community.PostCommunityPostRequestDto;
@@ -33,7 +33,7 @@ public class CommunityPostEntity {
     private Integer liked;
 
     public CommunityPostEntity(PostCommunityPostRequestDto dto, String userId) {
-        LocalDate now = LocalDate.now();
+        LocalDateTime now = LocalDateTime.now();
         DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         this.userId = userId;
         this.postDate = now.format(dateTimeFormatter);
