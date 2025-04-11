@@ -24,7 +24,7 @@ public class GroupPurchaseController {
   
   private final GroupPurchaseService groupPurchaseService;
 
-  @PostMapping({"","/"})
+  @PostMapping("/write")
   public ResponseEntity<ResponseDto> postProduct(
     @RequestBody @Valid PostProductRequestDto dto,
     @AuthenticationPrincipal String userId

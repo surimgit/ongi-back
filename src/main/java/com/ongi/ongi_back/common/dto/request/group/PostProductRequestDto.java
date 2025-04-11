@@ -34,6 +34,9 @@ public class PostProductRequestDto {
   private String deadline;
 
   @NotNull
+  private String image;
+
+  @NotNull
   private Integer boughtAmount = 0;
 
   @NotNull
@@ -41,10 +44,7 @@ public class PostProductRequestDto {
 
   @NotNull
   private Integer purchasedPeople = 0;
-
-  @NotNull
-  private String image;
-
+  
   private Integer adPayment;
   private String openDate;
 }
