@@ -4,7 +4,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import com.ongi.ongi_back.common.dto.request.PostCommunityPostRequestDto;
+import com.ongi.ongi_back.common.dto.request.community.PostCommunityPostRequestDto;
 import com.ongi.ongi_back.common.dto.response.ResponseDto;
 import com.ongi.ongi_back.common.entity.CommunityPostEntity;
 import com.ongi.ongi_back.repository.CommunityPostRepository;

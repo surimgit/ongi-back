@@ -3,7 +3,7 @@ package com.ongi.ongi_back.common.entity;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-import com.ongi.ongi_back.common.dto.request.PostCommunityPostRequestDto;
+import com.ongi.ongi_back.common.dto.request.community.PostCommunityPostRequestDto;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -34,7 +34,7 @@ public class CommunityPostEntity {
 
     public CommunityPostEntity(PostCommunityPostRequestDto dto, String userId) {
         LocalDate now = LocalDate.now();
-        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         this.userId = userId;
         this.postDate = now.format(dateTimeFormatter);
         this.category = dto.getCategory();

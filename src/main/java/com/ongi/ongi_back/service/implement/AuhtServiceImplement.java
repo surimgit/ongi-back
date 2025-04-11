@@ -24,12 +24,11 @@ public class AuhtServiceImplement implements AuthService{
     private PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
     @Override
-    public ResponseEntity<? super SignInResponseDto> signIn(SignInRequestDto dto) {
+    public ResponseEntity<? super ResponseDto> signIn(SignInRequestDto dto) {
         
         String accessToken = null;
 
         try {
-            
             String userId = dto.getUserId();
             UserEntity userEntity = userRepository.findByUserId(userId);
             if (userEntity == null) return ResponseDto.authFail();
@@ -44,11 +43,12 @@ public class AuhtServiceImplement implements AuthService{
 
         } catch (Exception exception) {
             exception.printStackTrace();
-            return null;
+            return ResponseDto.databaseError();
         }
         
         return SignInResponseDto.success(accessToken);
     }
+
 
     @Override
     public ResponseEntity<ResponseDto> signUp(ResponseDto dto) {
