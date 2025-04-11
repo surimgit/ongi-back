@@ -24,30 +24,30 @@ public class AuhtServiceImplement implements AuthService{
     private PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
     @Override
-    public ResponseEntity<? super SignInResponseDto> signIn(SignInRequestDto dto) {
+    public ResponseEntity<? super ResponseDto> signIn(SignInRequestDto dto) {
         
         String accessToken = null;
 
         try {
-            
             String userId = dto.getUserId();
             UserEntity userEntity = userRepository.findByUserId(userId);
             if (userEntity == null) return ResponseDto.authFail();
 
             String userPassword = dto.getUserPassword();
-            String encodedPassword = userEntity.getUserPassword();
-            boolean isMatch = passwordEncoder.matches(userPassword, encodedPassword);
-            if (!isMatch) return ResponseDto.authFail();
+            String savedPassword = userEntity.getUserPassword();
+
+            if (!userPassword.equals(savedPassword)) return ResponseDto.authFail();
 
             accessToken = jwtProvider.create(userId);
 
         } catch (Exception exception) {
             exception.printStackTrace();
-            return null;
+            return ResponseDto.databaseError();
         }
         
         return SignInResponseDto.success(accessToken);
     }
+
 
     @Override
     public ResponseEntity<ResponseDto> signUp(ResponseDto dto) {
