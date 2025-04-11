@@ -3,7 +3,7 @@ package com.ongi.ongi_back.common.entity;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-import com.ongi.ongi_back.common.dto.PostCommunityPostRequestDto;
+import com.ongi.ongi_back.common.dto.request.PostCommunityPostRequestDto;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
