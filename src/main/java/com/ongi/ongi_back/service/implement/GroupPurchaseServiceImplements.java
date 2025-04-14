@@ -25,6 +25,7 @@ public class GroupPurchaseServiceImplements implements GroupPurchaseService{
 
   private final ProductRepository productRepository;
   private final UserRepository userRepository;
+  
   @Override
   public ResponseEntity<ResponseDto> postProduct(PostProductRequestDto dto, String userId) {
     

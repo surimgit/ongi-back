@@ -55,6 +55,7 @@ public class WebSecurityConfig {
       // description: 인가 설정 //
       .authorizeHttpRequests(request -> request
         .requestMatchers("/api/v1/product/**","/api/v1/auth/**").permitAll()
+        .requestMatchers("/file/**").permitAll()
         .anyRequest().authenticated()
       )
       // description: 인증 또는 인가 실패에대한 처리 //
