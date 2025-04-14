@@ -1,5 +1,8 @@
 package com.ongi.ongi_back.service.implement;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -7,9 +10,10 @@ import org.springframework.stereotype.Service;
 import com.ongi.ongi_back.common.dto.request.group.PatchProductRequestDto;
 import com.ongi.ongi_back.common.dto.request.group.PostProductRequestDto;
 import com.ongi.ongi_back.common.dto.response.ResponseDto;
+import com.ongi.ongi_back.common.dto.response.group.GetProductListResponseDto;
 import com.ongi.ongi_back.common.entity.ProductEntity;
 import com.ongi.ongi_back.common.entity.UserEntity;
-import com.ongi.ongi_back.repository.GroupPurchaseRepository;
+import com.ongi.ongi_back.repository.ProductRepository;
 import com.ongi.ongi_back.repository.UserRepository;
 import com.ongi.ongi_back.service.GroupPurchaseService;
 
@@ -19,14 +23,14 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class GroupPurchaseServiceImplements implements GroupPurchaseService{
 
-  private final GroupPurchaseRepository groupPurchaseRepository;
+  private final ProductRepository productRepository;
   private final UserRepository userRepository;
   @Override
   public ResponseEntity<ResponseDto> postProduct(PostProductRequestDto dto, String userId) {
     
     try {
       ProductEntity productEntity = new ProductEntity(dto, userId);
-      groupPurchaseRepository.save(productEntity);
+      productRepository.save(productEntity);
     } catch(Exception exception) {
       exception.printStackTrace();
       return ResponseDto.databaseError();
@@ -40,10 +44,10 @@ public class GroupPurchaseServiceImplements implements GroupPurchaseService{
 
     try {
       
-      ProductEntity productEntity = groupPurchaseRepository.findByUserIdAndSequence(userId, productNumber);
+      ProductEntity productEntity = productRepository.findByUserIdAndSequence(userId, productNumber);
       productEntity.patch(dto);
 
-      groupPurchaseRepository.save(productEntity);
+      productRepository.save(productEntity);
 
     } catch(Exception exception) {
       exception.printStackTrace();
@@ -52,6 +56,23 @@ public class GroupPurchaseServiceImplements implements GroupPurchaseService{
 
     return ResponseDto.success(HttpStatus.OK);
 
+  }
+
+  @Override
+  public ResponseEntity<? super GetProductListResponseDto> getProductList(String userId) {
+    
+    List<ProductEntity> productEntities = new ArrayList<>();
+
+    try {
+
+      productEntities = productRepository.findByOrderBySequenceDesc();
+
+    } catch(Exception exception) {
+      exception.printStackTrace();
+      return ResponseDto.databaseError();
+    }
+
+    return GetProductListResponseDto.success(productEntities);
   }
   
 }

@@ -2,6 +2,7 @@ package com.ongi.ongi_back.controller;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.ongi.ongi_back.common.dto.request.group.PatchProductRequestDto;
 import com.ongi.ongi_back.common.dto.request.group.PostProductRequestDto;
 import com.ongi.ongi_back.common.dto.response.ResponseDto;
+import com.ongi.ongi_back.common.dto.response.group.GetProductListResponseDto;
 import com.ongi.ongi_back.service.GroupPurchaseService;
 
 import jakarta.validation.Valid;
@@ -42,4 +44,13 @@ public class GroupPurchaseController {
     ResponseEntity<ResponseDto> response = groupPurchaseService.patchProduct(dto, productNumber, userId);
     return response;
   }
+
+  @GetMapping({"/",""})
+  public ResponseEntity<? super GetProductListResponseDto> getProductList(
+    @AuthenticationPrincipal String userId
+  ){
+    ResponseEntity<? super GetProductListResponseDto> response = groupPurchaseService.getProductList(userId);
+    return response;
+  }
 }
+
