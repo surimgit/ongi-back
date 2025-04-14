@@ -11,7 +11,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class PostCommunityPostRequestDto {
+public class PostInfoPostRequestDto {
     @NotBlank
     @Pattern(regexp="^공부|미용|여행|영화/드라마|운동|자취꿀팁|재테크|패션|핫딜$")
     private String category;
