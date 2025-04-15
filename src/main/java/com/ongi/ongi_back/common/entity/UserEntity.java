@@ -44,6 +44,9 @@ public class UserEntity {
         this.name = dto.getName();
         this.telNumber = dto.getTelNumber();
         this.gender = dto.getGender();
+
+        this.isAdmin = false;
+        this.isResigned = false;
     }
 
 }

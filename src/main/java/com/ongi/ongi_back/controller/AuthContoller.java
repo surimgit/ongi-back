@@ -12,6 +12,7 @@ import com.ongi.ongi_back.common.dto.request.auth.IdCheckRequestDto;
 import com.ongi.ongi_back.common.dto.request.auth.ResignedCheckRequestDto;
 import com.ongi.ongi_back.common.dto.request.auth.SignInRequestDto;
 import com.ongi.ongi_back.common.dto.request.auth.SignUpRequestDto;
+import com.ongi.ongi_back.common.dto.request.auth.VerificationRequestDto;
 import com.ongi.ongi_back.common.dto.response.ResponseDto;
 import com.ongi.ongi_back.common.dto.response.auth.SignInResponseDto;
 import com.ongi.ongi_back.service.AuthService;
@@ -42,12 +43,20 @@ public class AuthContoller {
         return response;
     }
 
-    @PostMapping("/verify-code")
+    @PostMapping("/send-verify-code")
     public ResponseEntity<? super ResponseDto> sendVerificationCode(
         @RequestBody Map<String, String> request
     ){
         String telNumber = request.get("telNumber");
         return authService.sendVerificationCode(telNumber);
+    }
+
+    @PostMapping("/verify-code")
+    public ResponseEntity<Boolean> validateVerificationCode(
+        @RequestBody VerificationRequestDto requestBody
+    ){
+        boolean isValid = authService.validateVerificationCode(requestBody.getTelNumber(),requestBody.getCode());
+        return ResponseEntity.ok(isValid);
     }
 
     @PostMapping("/resigned-check")
