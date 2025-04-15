@@ -11,6 +11,7 @@ import lombok.Getter;
 public class ProductVO {
   private Integer sequence;
   private String name;
+  private String category;
   private Integer price;
   private double rating;
   private Integer purchasedPeople;
@@ -23,6 +24,7 @@ public class ProductVO {
   public ProductVO(ProductEntity productEntity) {
     this.sequence = productEntity.getSequence();
     this.name = productEntity.getName();
+    this.category = productEntity.getCategory();
     this.price = productEntity.getPrice();
     this.purchasedPeople = productEntity.getPurchasedPeople();
     this.deadline = productEntity.getDeadline();

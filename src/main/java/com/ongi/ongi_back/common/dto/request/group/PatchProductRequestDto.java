@@ -21,7 +21,7 @@ public class PatchProductRequestDto {
   private Integer price;
 
   @NotBlank
-  @Pattern(regexp = "^식품|의류|생필품|가전제품|기타$")
+  @Pattern(regexp = "^건강식품|패션의류|스포츠|가전제품|식품|뷰티|기타$")
   private String category;
 
   @NotBlank
