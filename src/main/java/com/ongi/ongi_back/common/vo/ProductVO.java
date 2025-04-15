@@ -20,6 +20,7 @@ public class ProductVO {
   private Integer boughtAmount;
   private Integer productQuantity;
   private String image;
+  private String openDate;
 
   public ProductVO(ProductEntity productEntity) {
     this.sequence = productEntity.getSequence();
@@ -31,6 +32,7 @@ public class ProductVO {
     this.boughtAmount = productEntity.getBoughtAmount();
     this.productQuantity = productEntity.getProductQuantity();
     this.image = productEntity.getImage();
+    this.openDate = productEntity.getOpenDate();
   }
 
   public static List<ProductVO> getList(List<ProductEntity> productEntities){
