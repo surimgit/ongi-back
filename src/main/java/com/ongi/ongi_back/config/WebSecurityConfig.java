@@ -25,6 +25,10 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 
+// class: Spring Web 보안 설정 클래스 //
+// description: Bearer 인증 방식을 사용하기 위해 Basic 인증 미사용 //
+// description: REST API 서버로 Session 유지하지 않음 //
+// description: CORS 정책은 모든 출처 및 리소스에 대해서 허용 //
 @Configurable
 @Configuration
 @EnableWebSecurity
@@ -50,7 +54,8 @@ public class WebSecurityConfig {
       .cors(cors -> cors.configurationSource(corsConfigurationSource()))
       // description: 인가 설정 //
       .authorizeHttpRequests(request -> request
-        .requestMatchers("/api/v1/auth", "/api/v1/auth/**").permitAll()
+        .requestMatchers("/api/v1/product/**","/api/v1/auth/**","/api/v1/question/**").permitAll()
+        .requestMatchers("/file/**").permitAll()
         .anyRequest().authenticated()
       )
       // description: 인증 또는 인가 실패에대한 처리 //
@@ -71,6 +76,7 @@ public class WebSecurityConfig {
     configuration.addAllowedHeader("*");
     configuration.addAllowedMethod("*");
     configuration.addAllowedOrigin("*");
+    configuration.addAllowedOrigin("http://localhost:3000"); 
 
     UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
     source.registerCorsConfiguration("/**", configuration);
@@ -93,7 +99,5 @@ class AuthenticationFailEntryPoint implements AuthenticationEntryPoint {
     response.getWriter().write("{ \"code\": \"AF\", \"message\": \"Auth Fail.\" }");
 
   }
-
-  
 
 }
