@@ -163,6 +163,11 @@ public class ResponseDto {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(body);
     }
 
+    public static ResponseEntity<ResponseDto> noExistShoppingCart() {
+        ResponseDto body = new ResponseDto(ResponseCode.NO_EXIST_SHOPPING_CART, ResponseMessage.NO_EXIST_SHOPPING_CART);
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(body);
+    }
+
     public static ResponseEntity<ResponseDto> noExistUser() {
         ResponseDto body = new ResponseDto(ResponseCode.NO_EXIST_USER, ResponseMessage.NO_EXIST_USER);
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(body);
