@@ -13,6 +13,7 @@ public interface ResponseMessage {
     String VALIDATION_FAIL = "Validation Fail.";
     String PRODUCT_NOT_FOUND = "Product Not Found.";
     String EXIST_USER = "Exist User.";
+    String RESIGNED_USER = "Resigned User.";
 
     String UNVERIFIED_PHONE_NUMBER = "Unverified Phone Number.";
     String INVALID_PHONE_NUMBER_FORMAT = "Invalid Phone Number Format.";

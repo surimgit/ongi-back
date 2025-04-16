@@ -28,6 +28,7 @@ import com.ongi.ongi_back.repository.UserRepository;
 import com.ongi.ongi_back.repository.VerificationCodeRepository;
 import com.ongi.ongi_back.service.AuthService;
 
+import jakarta.transaction.Transactional;
 import lombok.extern.slf4j.Slf4j;
 import net.nurigo.sdk.NurigoApp;
 import net.nurigo.sdk.message.model.Message;
@@ -125,6 +126,7 @@ public class AuhtServiceImplement implements AuthService {
     }
 
     @Scheduled(fixedRate=3600000) //1시간마다  실행
+    @Transactional
     public void deleteExpiredVerificationCodes(){
         LocalDateTime now = LocalDateTime.now();
         verificationCodeRepository.deleteAllByExpiryTimeBefore(now);
@@ -187,7 +189,8 @@ public class AuhtServiceImplement implements AuthService {
     public ResponseEntity<ResponseDto> resignedCheck(ResignedCheckRequestDto dto) {
         try {
             UserEntity userEntity = userRepository.findByTelNumber(dto.getTelNumber());
-            if (userEntity == null || userEntity.getIsResigned()) return ResponseDto.authFail();
+            if (userEntity == null) return ResponseDto.authFail();
+            if (userEntity.getIsResigned()) return ResponseDto.resignedUser();
         } catch (Exception e) {
             e.printStackTrace();
             return ResponseDto.databaseError();

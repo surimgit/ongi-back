@@ -277,4 +277,9 @@ public class ResponseDto {
         ResponseDto body = new ResponseDto(ResponseCode.FAILED_PAYMENT_INTERNAL_SYSTEM_PROCESSING, ResponseMessage.FAILED_PAYMENT_INTERNAL_SYSTEM_PROCESSING);
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(body);
     }
+
+    public static ResponseEntity<ResponseDto> resignedUser() {
+        ResponseDto body = new ResponseDto(ResponseCode.RESIGNED_USER, ResponseMessage.RESIGNED_USER);
+        return ResponseEntity.status(HttpStatus.FORBIDDEN).body(body);
+    }
 }
