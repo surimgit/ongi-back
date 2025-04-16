@@ -198,6 +198,16 @@ public class ResponseDto {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(body);
     }
 
+    public static ResponseEntity<ResponseDto> noSearchKeyword() {
+        ResponseDto body = new ResponseDto(ResponseCode.NO_SEARCH_KEYWORD, ResponseMessage.NO_SEARCH_KEYWORD);
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(body);
+    }
+
+    public static ResponseEntity<ResponseDto> alreadyLikedPost() {
+        ResponseDto body = new ResponseDto(ResponseCode.ALREADY_LIKED_POST, ResponseMessage.ALREADY_LIKED_POST);
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(body);
+    }
+
     public static ResponseEntity<ResponseDto> unauthorizedKey() {
         ResponseDto body = new ResponseDto(ResponseCode.UNAUTHORIZED_KEY, ResponseMessage.UNAUTHORIZED_KEY);
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(body);

@@ -18,6 +18,7 @@ public class GetCommunityPostResponseDto extends ResponseDto {
     private String title;
     private String content;
     private Integer liked;
+    private Integer viewCount;
 
     private GetCommunityPostResponseDto(CommunityPostEntity communityPostEntity) {
         this.postSequence = communityPostEntity.getPostSequence();
@@ -28,6 +29,7 @@ public class GetCommunityPostResponseDto extends ResponseDto {
         this.title = communityPostEntity.getTitle();
         this.content = communityPostEntity.getContent();
         this.liked = communityPostEntity.getLiked();
+        this.viewCount = communityPostEntity.getViewCount();
     }
 
     public static ResponseEntity<GetCommunityPostResponseDto> success(CommunityPostEntity communityPostEntity) {

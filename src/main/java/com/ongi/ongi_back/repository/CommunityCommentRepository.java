@@ -1,5 +1,7 @@
 package com.ongi.ongi_back.repository;
 
+import java.util.List;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -11,4 +13,11 @@ import jakarta.transaction.Transactional;
 public interface CommunityCommentRepository extends JpaRepository<CommunityCommentEntity, Integer>{
     @Transactional
     void deleteByPostSequence(Integer postSequence);
+
+    @Transactional
+    void deleteByCommentSequence(Integer commentSequence);
+
+    CommunityCommentEntity findByCommentSequence(Integer commentSequence);
+
+    List<CommunityCommentEntity> findByPostSequenceOrderByPostDateDesc(Integer postSequence);
 }

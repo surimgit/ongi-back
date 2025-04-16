@@ -16,6 +16,7 @@ public class CommunityVO {
     private String category;
     private String title;
     private Integer liked;
+    private Integer viewCount;
 
     private CommunityVO(CommunityPostEntity communityPostEntity) {
         this.postSequence = communityPostEntity.getPostSequence();
@@ -25,6 +26,7 @@ public class CommunityVO {
         this.category = communityPostEntity.getCategory();
         this.title = communityPostEntity.getTitle();
         this.liked = communityPostEntity.getLiked();
+        this.viewCount = communityPostEntity.getViewCount();
     }
 
     public static List<CommunityVO> getList(List<CommunityPostEntity> communityEntities) {

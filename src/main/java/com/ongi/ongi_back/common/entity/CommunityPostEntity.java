@@ -3,7 +3,8 @@ package com.ongi.ongi_back.common.entity;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-import com.ongi.ongi_back.common.dto.request.community.PostInfoPostRequestDto;
+import com.ongi.ongi_back.common.dto.request.community.PatchCommunityPostRequestDto;
+import com.ongi.ongi_back.common.dto.request.community.PostCommunityRequestDto;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -32,8 +33,9 @@ public class CommunityPostEntity {
     private String title;
     private String content;
     private Integer liked;
+    private Integer viewCount;
 
-    public CommunityPostEntity(PostInfoPostRequestDto dto, String userId, String nickname) {
+    public CommunityPostEntity(PostCommunityRequestDto dto, String userId, String nickname) {
         LocalDateTime now = LocalDateTime.now();
         DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         this.userId = userId;
@@ -43,5 +45,12 @@ public class CommunityPostEntity {
         this.title = dto.getTitle();
         this.content = dto.getContent();
         this.liked = 0;
+        this.viewCount = 0;
+    }
+
+    public void patch(PatchCommunityPostRequestDto dto) {
+        this.category = dto.getCategory();
+        this.title = dto.getTitle();
+        this.content = dto.getContent();
     }
 }
