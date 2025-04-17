@@ -7,6 +7,7 @@ public interface ResponseCode {
     // HTTP/1.1 400 Bad Request
     String VALIDATION_FAIL = "VF";
     String EXIST_USER = "EU";
+    String RESIGNED_USER = "RU";
 
     String UNVERIFIED_PHONE_NUMBER = "UP";
     String INVALID_PHONE_NUMBER_FORMAT = "IPF";
