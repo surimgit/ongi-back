@@ -46,6 +46,10 @@ public interface ResponseCode {
     String NO_EXIST_SCHEDULE = "NS";
     
     String NOT_ENOUGH_POINT = "NPO";
+
+    String NO_SEARCH_KEYWORD = "NSK";
+
+    String ALREADY_LIKED_POST = "ALP";
     // ============================================== //
     // HTTP/1.1 401 Unauthorized
     String UNAUTHORIZED_KEY = "UNAUTHORIZED_KEY";

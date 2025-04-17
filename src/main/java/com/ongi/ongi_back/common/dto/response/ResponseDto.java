@@ -43,7 +43,7 @@ public class ResponseDto {
         return ResponseEntity.status(status).body(body);
     }
 
-    public static ResponseEntity<ResponseDto> valdationFail() {
+    public static ResponseEntity<ResponseDto> validationFail() {
         ResponseDto body = new ResponseDto(ResponseCode.VALIDATION_FAIL, ResponseMessage.VALIDATION_FAIL);
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(body);
     }
@@ -158,7 +158,7 @@ public class ResponseDto {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(body);
     }
 
-    public static ResponseEntity<ResponseDto> noExsitProduct() {
+    public static ResponseEntity<ResponseDto> noExistProduct() {
         ResponseDto body = new ResponseDto(ResponseCode.NO_EXIST_PRODUCT, ResponseMessage.NO_EXIST_PRODUCT);
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(body);
     }
@@ -195,6 +195,16 @@ public class ResponseDto {
 
     public static ResponseEntity<ResponseDto> notEnoughPoint() {
         ResponseDto body = new ResponseDto(ResponseCode.NOT_ENOUGH_POINT, ResponseMessage.NOT_ENOUGH_POINT);
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(body);
+    }
+
+    public static ResponseEntity<ResponseDto> noSearchKeyword() {
+        ResponseDto body = new ResponseDto(ResponseCode.NO_SEARCH_KEYWORD, ResponseMessage.NO_SEARCH_KEYWORD);
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(body);
+    }
+
+    public static ResponseEntity<ResponseDto> alreadyLikedPost() {
+        ResponseDto body = new ResponseDto(ResponseCode.ALREADY_LIKED_POST, ResponseMessage.ALREADY_LIKED_POST);
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(body);
     }
 
