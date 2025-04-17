@@ -18,6 +18,11 @@ public class ResponseDto {
         this.message = ResponseMessage.SUCCESS;
     }
 
+    public static ResponseEntity<ResponseDto> tossConfirmFailure(String code, String message, HttpStatus status) {
+        ResponseDto body = new ResponseDto(code, message);
+        return ResponseEntity.status(status).body(body);
+    }
+
     public static ResponseEntity<ResponseDto> success(HttpStatus status) {
         ResponseDto body = new ResponseDto();
         return ResponseEntity.status(status).body(body);

@@ -54,7 +54,7 @@ public class WebSecurityConfig {
       .cors(cors -> cors.configurationSource(corsConfigurationSource()))
       // description: 인가 설정 //
       .authorizeHttpRequests(request -> request
-        .requestMatchers("/api/v1/product/**","/api/v1/auth/**").permitAll()
+        .requestMatchers("/api/v1/product/**","/api/v1/auth/**", "/api/v1/payments/**").permitAll()
         .requestMatchers("/file/**").permitAll()
         .anyRequest().authenticated()
       )
@@ -76,7 +76,6 @@ public class WebSecurityConfig {
     configuration.addAllowedHeader("*");
     configuration.addAllowedMethod("*");
     configuration.addAllowedOrigin("*");
-    configuration.addAllowedOrigin("http://localhost:3000"); 
 
     UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
     source.registerCorsConfiguration("/**", configuration);

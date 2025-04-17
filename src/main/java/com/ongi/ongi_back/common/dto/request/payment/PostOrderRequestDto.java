@@ -5,28 +5,17 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 @Getter
-@Setter
-@NoArgsConstructor
 @AllArgsConstructor
-public class PostConfirmRequestDto {
-
+public class PostOrderRequestDto {
   @NotBlank
-  private String paymentKey;
-
-  @NotBlank
+  @Pattern(regexp = "^[a-zA-Z0-9_-]{6,64}$")
   private String orderId;
-  
+
   @NotNull
   private Integer amount;
 
   @NotBlank
-  @Pattern(regexp = "^READY|IN_PROGRESS|WAITING_FOR_DEPOSIT|DONE|CANCELED|PARTIAL_CANCELED|ABORTED|EXPIRED$")
-  private String status = "READY";
-
-  private String approvedAt;
-  
+  private String buyerAddress;
 }

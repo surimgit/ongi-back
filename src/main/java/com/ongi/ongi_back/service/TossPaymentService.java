@@ -1,10 +1,12 @@
 package com.ongi.ongi_back.service;
 
-import org.json.JSONObject;
 import org.springframework.http.ResponseEntity;
 
 import com.ongi.ongi_back.common.dto.request.payment.PostConfirmRequestDto;
+import com.ongi.ongi_back.common.dto.request.payment.PostOrderRequestDto;
+import com.ongi.ongi_back.common.dto.response.ResponseDto;
 
 public interface TossPaymentService {
-  ResponseEntity<JSONObject> confirmPayment(PostConfirmRequestDto dto, String userId) throws Exception;
+  ResponseEntity<ResponseDto> postOrder(PostOrderRequestDto dto, String userId);
+  ResponseEntity<ResponseDto> confirmPayment(PostConfirmRequestDto dto, String userId) throws Exception;
 }
