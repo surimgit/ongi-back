@@ -52,6 +52,10 @@ public interface ResponseMessage {
     String NO_EXIST_SCHEDULE = "No Exist Schedule.";
 
     String NOT_ENOUGH_POINT = "Not Enough Point.";
+
+    String NO_SEARCH_KEYWORD = "No Search Keyword.";
+
+    String ALREADY_LIKED_POST = "Already Liked Post.";
     // ============================================== //
     // HTTP/1.1 401 Unauthorized
     String UNAUTHORIZED_KEY = "인증되지 않은 시크릿 키 혹은 클라이언트 키 입니다.";
