@@ -10,6 +10,6 @@ import com.ongi.ongi_back.common.entity.QuestionEntity;
 @Repository
 public interface QuestionRepository extends JpaRepository<QuestionEntity, Integer>{
   QuestionEntity findByQuestionSequence(Integer questionSequence);
-  List<QuestionEntity> findAll();
+  List<QuestionEntity> findAllByOrderByQuestionSequenceDesc();
 
 }

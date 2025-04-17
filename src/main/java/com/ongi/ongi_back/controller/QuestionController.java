@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.ongi.ongi_back.common.dto.request.question.PatchAnswerRequestDto;
 import com.ongi.ongi_back.common.dto.request.question.PatchQuestionRequestDto;
 import com.ongi.ongi_back.common.dto.request.question.PostQuestionRequestDto;
 import com.ongi.ongi_back.common.dto.response.Question.GetQuestionListResponseDto;
@@ -45,16 +44,6 @@ public class QuestionController {
     @AuthenticationPrincipal String userId
   ){
     ResponseEntity<ResponseDto> response = questionService.patchQuestion(requestBody, questionSequence, userId);
-    return response;
-  }
-
-  @PatchMapping("/{questionSequence}/answer")
-  public ResponseEntity<ResponseDto> patchAnswer(
-    @RequestBody @Valid PatchAnswerRequestDto requestBody,
-    @PathVariable("questionSequence") Integer questionSequence,
-    @AuthenticationPrincipal String userId
-  ){
-    ResponseEntity<ResponseDto> response = questionService.patchAnswer(requestBody, questionSequence, userId);
     return response;
   }
 

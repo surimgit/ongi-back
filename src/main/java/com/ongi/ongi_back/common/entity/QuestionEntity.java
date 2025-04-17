@@ -3,7 +3,7 @@ package com.ongi.ongi_back.common.entity;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-import com.ongi.ongi_back.common.dto.request.question.PatchAnswerRequestDto;
+import com.ongi.ongi_back.common.dto.request.admin.PatchAnswerRequestDto;
 import com.ongi.ongi_back.common.dto.request.question.PatchQuestionRequestDto;
 import com.ongi.ongi_back.common.dto.request.question.PostQuestionRequestDto;
 

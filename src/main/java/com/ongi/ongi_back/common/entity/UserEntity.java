@@ -1,6 +1,8 @@
 package com.ongi.ongi_back.common.entity;
 
 import com.ongi.ongi_back.common.dto.request.auth.SignUpRequestDto;
+import com.ongi.ongi_back.common.dto.request.user.PatchUserRequestDto;
+import com.ongi.ongi_back.common.dto.request.user.UpdateIntroductionRequestDto;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -22,7 +24,6 @@ public class UserEntity {
     private String userId;
     private String nickname;
     private String userPassword;
-    private String name;
     private String address;
     private String detailAddress;
     private Integer zipCode;
@@ -41,12 +42,27 @@ public class UserEntity {
     public UserEntity(SignUpRequestDto dto){
         this.userId = dto.getUserId();
         this.userPassword = dto.getUserPassword();
-        this.name = dto.getName();
+        this.nickname = dto.getNickname();
         this.telNumber = dto.getTelNumber();
         this.gender = dto.getGender();
 
         this.isAdmin = false;
         this.isResigned = false;
+    }
+
+    public void updateIntroduction(UpdateIntroductionRequestDto dto){
+        if (dto.getNickname() != null) this.nickname = dto.getNickname();
+        if (dto.getBirth() != null) this.birth = dto.getBirth();
+        if (dto.getGender() != null) this.gender = dto.getGender();
+        if (dto.getMbti() != null) this.mbti = dto.getMbti();
+        if (dto.getJob() != null) this.job = dto.getJob();
+        if (dto.getSelfIntro() != null) this.selfIntro = dto.getSelfIntro();
+    }
+
+    public void patchUserInformation(PatchUserRequestDto dto){
+        if (dto.getUserPassword() != null) this.userPassword = dto.getUserPassword();
+        if (dto.getAddress() != null) this.address = dto.getAddress();
+        if (dto.getDetailAddress() != null) this.detailAddress = dto.getDetailAddress();
     }
 
 }

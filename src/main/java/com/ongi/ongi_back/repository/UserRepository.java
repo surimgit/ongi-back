@@ -12,4 +12,5 @@ public interface UserRepository extends JpaRepository<UserEntity, String>{
     UserEntity findByTelNumber(String telNumber);
 
     UserEntity findByIsAdminTrue();
+
 }

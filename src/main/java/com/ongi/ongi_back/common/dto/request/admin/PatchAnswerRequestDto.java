@@ -1,4 +1,4 @@
-package com.ongi.ongi_back.common.dto.request.question;
+package com.ongi.ongi_back.common.dto.request.admin;
 
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;

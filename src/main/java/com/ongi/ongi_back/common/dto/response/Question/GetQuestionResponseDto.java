@@ -15,6 +15,7 @@ public class GetQuestionResponseDto extends ResponseDto{
   private String title;
   private String content;
   private String answer;
+  private String userId;
 
   private GetQuestionResponseDto(QuestionEntity questionEntity){
     this.postDate = questionEntity.getPostDate();
@@ -22,6 +23,7 @@ public class GetQuestionResponseDto extends ResponseDto{
     this.title = questionEntity.getTitle();
     this.content = questionEntity.getContent();
     this.answer = questionEntity.getAnswer();
+    this.userId = questionEntity.getUserId();
   }
 
   public static ResponseEntity<GetQuestionResponseDto> success(QuestionEntity questionEntity){

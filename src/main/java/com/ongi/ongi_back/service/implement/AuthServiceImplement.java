@@ -33,7 +33,7 @@ import net.nurigo.sdk.message.service.DefaultMessageService;
 @Slf4j
 @Service
 @PropertySource("classpath:application.properties")
-public class AuhtServiceImplement implements AuthService {
+public class AuthServiceImplement implements AuthService {
 
     @Autowired
     // private VerificationCodeRepository verificationCodeRepository;
@@ -44,7 +44,7 @@ public class AuhtServiceImplement implements AuthService {
     private final DefaultMessageService messageService;
     private final String senderTelNumber;
 
-    public AuhtServiceImplement(
+    public AuthServiceImplement(
         UserRepository userRepository,
         JwtProvider jwtProvider,
         RedisUtil redisUtil,
