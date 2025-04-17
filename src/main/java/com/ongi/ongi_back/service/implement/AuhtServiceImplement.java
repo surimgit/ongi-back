@@ -143,6 +143,8 @@ public class AuhtServiceImplement implements AuthService {
             dto.setUserPassword(encodedPassword);
 
             UserEntity userEntity = new UserEntity(dto);
+            String nickname = userEntity.getName();
+            userEntity.setNickname(nickname);
             userRepository.save(userEntity);
 
         } catch (Exception e) {
