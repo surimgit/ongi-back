@@ -158,7 +158,7 @@ public class ResponseDto {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(body);
     }
 
-    public static ResponseEntity<ResponseDto> noExsitProduct() {
+    public static ResponseEntity<ResponseDto> noExistProduct() {
         ResponseDto body = new ResponseDto(ResponseCode.NO_EXIST_PRODUCT, ResponseMessage.NO_EXIST_PRODUCT);
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(body);
     }
