@@ -1,7 +1,6 @@
 package com.ongi.ongi_back.common.entity;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
+import org.springframework.data.annotation.Transient;
 
 import com.ongi.ongi_back.common.dto.request.shoppingCart.PatchShoppingCartRequestDto;
 import com.ongi.ongi_back.common.dto.request.shoppingCart.PostShoppingCartRequestDto;
@@ -22,7 +21,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class CartEntity {
+public class ShoppingCartEntity {
   
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -31,16 +30,11 @@ public class CartEntity {
   private String userId;
   private Integer productSequence;
   private Integer quantity;
-  private String added_date;
 
-  public CartEntity(PostShoppingCartRequestDto dto, String userId) {
-    LocalDateTime now = LocalDateTime.now();
-    DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-
+  public ShoppingCartEntity(PostShoppingCartRequestDto dto, String userId) {
     this.userId = userId;
     this.productSequence = dto.getProductSequence();
     this.quantity = dto.getQuantity();
-    this.added_date = now.format(dateTimeFormatter);
   }
 
   public void patch(Integer quantity){
@@ -50,4 +44,5 @@ public class CartEntity {
   public void patch(PatchShoppingCartRequestDto dto){
     this.quantity = dto.getQuantity();
   }
+
 }

@@ -1,6 +1,5 @@
 package com.ongi.ongi_back.common.dto.request.shoppingCart;
 
-import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -18,5 +17,6 @@ public class PostShoppingCartRequestDto {
 
   @NotNull
   private Integer quantity;
+
   
 }

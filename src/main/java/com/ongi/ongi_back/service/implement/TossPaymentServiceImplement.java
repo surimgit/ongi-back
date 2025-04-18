@@ -19,7 +19,7 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.ongi.ongi_back.common.dto.request.payment.PostConfirmRequestDto;
 import com.ongi.ongi_back.common.dto.request.payment.PostOrderRequestDto;
 import com.ongi.ongi_back.common.dto.response.ResponseDto;
-import com.ongi.ongi_back.common.dto.response.payment.TossConfirmResponse;
+import com.ongi.ongi_back.common.dto.response.payment.TossConfirmResponseDto;
 import com.ongi.ongi_back.common.entity.PaymentOrderEntity;
 import com.ongi.ongi_back.common.entity.PaymentConfirmEntity;
 import com.ongi.ongi_back.handler.TossErrorStatusHandler;
@@ -76,7 +76,7 @@ public class TossPaymentServiceImplement implements TossPaymentService {
     InputStream responseStream = isSuccess ? connection.getInputStream() : connection.getErrorStream();
 
     ObjectMapper objectMapper = new ObjectMapper();
-    TossConfirmResponse tossResponse = objectMapper.readValue(responseStream, TossConfirmResponse.class);
+    TossConfirmResponseDto tossResponse = objectMapper.readValue(responseStream, TossConfirmResponseDto.class);
     responseStream.close();
 
     if (tossResponse.getFailure() != null) {
@@ -85,8 +85,6 @@ public class TossPaymentServiceImplement implements TossPaymentService {
       HttpStatus status = TossErrorStatusHandler.resolve(failureCode);
       return ResponseDto.tossConfirmFailure(failureCode, failureMessage, status);
     } else {
-
-      PostOrderRequestDto order = new PostOrderRequestDto(orderId, amount, tossResponse.getApprovedAt());
 
       PostConfirmRequestDto confirm = new PostConfirmRequestDto(
           paymentKey,
