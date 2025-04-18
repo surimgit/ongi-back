@@ -17,5 +17,4 @@ public interface ProductRepository extends JpaRepository<ProductEntity, Integer>
   List<ProductEntity> findByNameContainingOrderBySequenceDesc(String name);
   List<ProductEntity> findByCategoryAndNameContainingOrderBySequenceDesc(String name, String category);
 
-  
 }

@@ -36,6 +36,7 @@ public interface ResponseCode {
     String INVALID_TRANSACTION_KEY = "INVALID_TRANSACTION_KEY";
 
     String NO_EXIST_PRODUCT = "NEP";
+    String NO_EXIST_SHOPPING_CART = "NESC";
 
     String NO_EXIST_USER = "NU";
     

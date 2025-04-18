@@ -18,6 +18,11 @@ public class ResponseDto {
         this.message = ResponseMessage.SUCCESS;
     }
 
+    public static ResponseEntity<ResponseDto> tossConfirmFailure(String code, String message, HttpStatus status) {
+        ResponseDto body = new ResponseDto(code, message);
+        return ResponseEntity.status(status).body(body);
+    }
+
     public static ResponseEntity<ResponseDto> success(HttpStatus status) {
         ResponseDto body = new ResponseDto();
         return ResponseEntity.status(status).body(body);
@@ -160,6 +165,11 @@ public class ResponseDto {
 
     public static ResponseEntity<ResponseDto> noExistProduct() {
         ResponseDto body = new ResponseDto(ResponseCode.NO_EXIST_PRODUCT, ResponseMessage.NO_EXIST_PRODUCT);
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(body);
+    }
+
+    public static ResponseEntity<ResponseDto> noExistShoppingCart() {
+        ResponseDto body = new ResponseDto(ResponseCode.NO_EXIST_SHOPPING_CART, ResponseMessage.NO_EXIST_SHOPPING_CART);
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(body);
     }
 
