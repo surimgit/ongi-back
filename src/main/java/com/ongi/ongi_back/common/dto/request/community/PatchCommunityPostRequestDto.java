@@ -19,4 +19,7 @@ public class PatchCommunityPostRequestDto {
     @NotBlank
     @Pattern(regexp="^공부|미용|여행|영화/드라마|운동|자취꿀팁|재테크|패션|핫딜$")
     String category;
+    @NotBlank
+    @Pattern(regexp="^정보 게시판|우리 동네 게시판|인기 게시판$")
+    private String board;
 }

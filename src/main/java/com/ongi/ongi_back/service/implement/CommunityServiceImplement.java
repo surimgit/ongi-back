@@ -1,8 +1,11 @@
 package com.ongi.ongi_back.service.implement;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -35,6 +38,7 @@ public class CommunityServiceImplement implements CommunityService {
     private final CommunityCommentRepository communityCommentRepository;
     private final LikedRepository likedRepository;
 
+    // 게시글 작성
     @Override
     public ResponseEntity<ResponseDto> postCommunityPost(PostCommunityRequestDto dto, String userId) {
 
@@ -54,6 +58,7 @@ public class CommunityServiceImplement implements CommunityService {
         return ResponseDto.success(HttpStatus.CREATED);
     }
 
+    // 게시글 수정
     @Override
     public ResponseEntity<ResponseDto> patchCommunityPost(PatchCommunityPostRequestDto dto, Integer postSequence, String userId) {
 
@@ -150,6 +155,45 @@ public class CommunityServiceImplement implements CommunityService {
         } catch (Exception exception) {
             exception.printStackTrace();
             return ResponseDto.databaseError();
+        }
+
+        return GetCommunityResponseDto.success(communityPostEntities);
+    }
+
+    @Override
+    public ResponseEntity<? super GetCommunityResponseDto> getBoard(String board) {
+
+        List<CommunityPostEntity> communityPostEntities = new ArrayList<>();
+        
+        try {
+
+            if (board.equals("인기 게시판")){
+                communityPostEntities = communityPostRepository.findByHotPostTrueOrderByPostSequenceDesc();
+            }
+            else {
+                communityPostEntities = communityPostRepository.findByBoardOrderByPostSequenceDesc(board);
+            }
+            
+        } catch (Exception exception) {
+            exception.printStackTrace();
+            return ResponseDto.databaseError();
+        }
+
+        return GetCommunityResponseDto.success(communityPostEntities);
+    }
+
+    @Override
+    public ResponseEntity<? super GetCommunityResponseDto> getCategory(String category) {
+
+        List<CommunityPostEntity> communityPostEntities = new ArrayList<>();
+        
+        try {
+
+            communityPostEntities = communityPostRepository.findByCategoryOrderByPostSequenceDesc(category);
+            
+        } catch (Exception exception) {
+           exception.printStackTrace();
+           return ResponseDto.databaseError();
         }
 
         return GetCommunityResponseDto.success(communityPostEntities);
@@ -262,7 +306,7 @@ public class CommunityServiceImplement implements CommunityService {
         
         try {
 
-            communityCommentEntities = communityCommentRepository.findByPostSequenceOrderByPostDateDesc(postSequence);
+            communityCommentEntities = communityCommentRepository.findByPostSequence(postSequence);
             
         } catch (Exception exception) {
             exception.printStackTrace();
@@ -287,6 +331,9 @@ public class CommunityServiceImplement implements CommunityService {
 
                 Integer liked_count = communityPostEntity.getLiked();
                 communityPostEntity.setLiked(liked_count + 1);
+                if (communityPostEntity.getLiked() >= 10) {
+                    communityPostEntity.setHotPost(true);
+                }
                 communityPostRepository.save(communityPostEntity);
             }
             else {
@@ -317,6 +364,8 @@ public class CommunityServiceImplement implements CommunityService {
 
         return GetCommunityLikedResponseDto.success(likedEntities);
     }
+
+    
 
     
 
