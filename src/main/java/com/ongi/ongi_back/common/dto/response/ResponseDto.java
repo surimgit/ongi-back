@@ -208,6 +208,16 @@ public class ResponseDto {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(body);
     }
 
+    public static ResponseEntity<ResponseDto> noSearchKeyword() {
+        ResponseDto body = new ResponseDto(ResponseCode.NO_SEARCH_KEYWORD, ResponseMessage.NO_SEARCH_KEYWORD);
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(body);
+    }
+
+    public static ResponseEntity<ResponseDto> alreadyLikedPost() {
+        ResponseDto body = new ResponseDto(ResponseCode.ALREADY_LIKED_POST, ResponseMessage.ALREADY_LIKED_POST);
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(body);
+    }
+
     public static ResponseEntity<ResponseDto> unauthorizedKey() {
         ResponseDto body = new ResponseDto(ResponseCode.UNAUTHORIZED_KEY, ResponseMessage.UNAUTHORIZED_KEY);
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(body);
@@ -286,5 +296,10 @@ public class ResponseDto {
     public static ResponseEntity<ResponseDto> failedPaymentInternalSystemProcessing() {
         ResponseDto body = new ResponseDto(ResponseCode.FAILED_PAYMENT_INTERNAL_SYSTEM_PROCESSING, ResponseMessage.FAILED_PAYMENT_INTERNAL_SYSTEM_PROCESSING);
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(body);
+    }
+
+    public static ResponseEntity<ResponseDto> resignedUser() {
+        ResponseDto body = new ResponseDto(ResponseCode.RESIGNED_USER, ResponseMessage.RESIGNED_USER);
+        return ResponseEntity.status(HttpStatus.FORBIDDEN).body(body);
     }
 }
