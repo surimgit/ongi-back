@@ -43,21 +43,21 @@ public class AuthContoller {
         return response;
     }
 
-    @PostMapping("/send-verify-code")
-    public ResponseEntity<? super ResponseDto> sendVerificationCode(
-        @RequestBody Map<String, String> request
-    ){
-        String telNumber = request.get("telNumber");
-        return authService.sendVerificationCode(telNumber);
-    }
+    // @PostMapping("/send-verify-code")
+    // public ResponseEntity<? super ResponseDto> sendVerificationCode(
+    //     @RequestBody Map<String, String> request
+    // ){
+    //     String telNumber = request.get("telNumber");
+    //     return authService.sendVerificationCode(telNumber);
+    // }
 
-    @PostMapping("/verify-code")
-    public ResponseEntity<Boolean> validateVerificationCode(
-        @RequestBody VerificationRequestDto requestBody
-    ){
-        boolean isValid = authService.validateVerificationCode(requestBody.getTelNumber(),requestBody.getCode());
-        return ResponseEntity.ok(isValid);
-    }
+    // @PostMapping("/verify-code")
+    // public ResponseEntity<Boolean> validateVerificationCode(
+    //     @RequestBody VerificationRequestDto requestBody
+    // ){
+    //     boolean isValid = authService.validateVerificationCode(requestBody.getTelNumber(),requestBody.getCode());
+    //     return ResponseEntity.ok(isValid);
+    // }
 
     @PostMapping("/resigned-check")
     public ResponseEntity<ResponseDto> resignedCheck(

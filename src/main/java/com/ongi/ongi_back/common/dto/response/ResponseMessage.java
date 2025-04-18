@@ -42,6 +42,7 @@ public interface ResponseMessage {
     String INVALID_TRANSACTION_KEY = "잘못된 페이징 키 입니다.";
 
     String NO_EXIST_PRODUCT = "No Exist Product.";
+    String NO_EXIST_SHOPPING_CART = "No Exist Shopping Cart";
 
     String NO_EXIST_USER = "No Exist User.";
 

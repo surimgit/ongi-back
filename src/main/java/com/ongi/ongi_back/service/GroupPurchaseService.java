@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 
 import com.ongi.ongi_back.common.dto.request.group.PatchProductRequestDto;
 import com.ongi.ongi_back.common.dto.request.group.PostProductRequestDto;
+import com.ongi.ongi_back.common.dto.request.shoppingCart.PostShoppingCartRequestDto;
 import com.ongi.ongi_back.common.dto.response.ResponseDto;
 import com.ongi.ongi_back.common.dto.response.group.GetDetailProductDto;
 import com.ongi.ongi_back.common.dto.response.group.GetProductListResponseDto;
