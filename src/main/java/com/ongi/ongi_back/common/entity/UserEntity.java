@@ -1,8 +1,8 @@
 package com.ongi.ongi_back.common.entity;
 
 import com.ongi.ongi_back.common.dto.request.auth.SignUpRequestDto;
-import com.ongi.ongi_back.common.dto.request.user.PatchUserRequestDto;
-import com.ongi.ongi_back.common.dto.request.user.UpdateIntroductionRequestDto;
+import com.ongi.ongi_back.common.dto.request.user.PatchUserAccountRequestDto;
+import com.ongi.ongi_back.common.dto.request.user.PatchUserIntroductionRequestDto;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -50,7 +50,7 @@ public class UserEntity {
         this.isResigned = false;
     }
 
-    public void updateIntroduction(UpdateIntroductionRequestDto dto){
+    public void patchIntroduction(PatchUserIntroductionRequestDto dto){
         if (dto.getNickname() != null) this.nickname = dto.getNickname();
         if (dto.getBirth() != null) this.birth = dto.getBirth();
         if (dto.getGender() != null) this.gender = dto.getGender();
@@ -59,7 +59,7 @@ public class UserEntity {
         if (dto.getSelfIntro() != null) this.selfIntro = dto.getSelfIntro();
     }
 
-    public void patchUserInformation(PatchUserRequestDto dto){
+    public void patchUserAccount(PatchUserAccountRequestDto dto){
         if (dto.getUserPassword() != null) this.userPassword = dto.getUserPassword();
         if (dto.getAddress() != null) this.address = dto.getAddress();
         if (dto.getDetailAddress() != null) this.detailAddress = dto.getDetailAddress();

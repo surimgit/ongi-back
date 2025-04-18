@@ -13,7 +13,7 @@ import com.ongi.ongi_back.common.vo.LikeKeywordVO;
 import lombok.Getter;
 
 @Getter
-public class GetProfileResponseDto extends ResponseDto {
+public class GetUserIntroductionResponseDto extends ResponseDto {
   private List<LikeKeywordVO> likeKeywords;
 
   private String nickname;
@@ -24,7 +24,7 @@ public class GetProfileResponseDto extends ResponseDto {
   private String job;
   private String selfIntro;
 
-  private GetProfileResponseDto(UserEntity userEntity, List<LikeKeywordEntity> likeKeywordEntities){
+  private GetUserIntroductionResponseDto(UserEntity userEntity, List<LikeKeywordEntity> likeKeywordEntities){
     this.nickname = userEntity.getNickname();
     this.birth = userEntity.getBirth();
     this.gender = userEntity.getGender();
@@ -35,8 +35,8 @@ public class GetProfileResponseDto extends ResponseDto {
     this.likeKeywords = LikeKeywordVO.getLikeKeywordList(likeKeywordEntities);
   }
 
-  public static ResponseEntity<GetProfileResponseDto> success(UserEntity userEntity, List<LikeKeywordEntity> likeKeywordEntities){
-    GetProfileResponseDto body = new GetProfileResponseDto(userEntity, likeKeywordEntities);
+  public static ResponseEntity<GetUserIntroductionResponseDto> success(UserEntity userEntity, List<LikeKeywordEntity> likeKeywordEntities){
+    GetUserIntroductionResponseDto body = new GetUserIntroductionResponseDto(userEntity, likeKeywordEntities);
     return ResponseEntity.status(HttpStatus.OK).body(body);
   }
 

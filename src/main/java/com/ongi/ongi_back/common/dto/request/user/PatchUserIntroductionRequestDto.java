@@ -10,7 +10,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class UpdateIntroductionRequestDto {
+public class PatchUserIntroductionRequestDto {
   private String nickname;
   private String birth;
 

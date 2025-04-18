@@ -9,12 +9,12 @@ import org.springframework.stereotype.Service;
 
 import com.ongi.ongi_back.common.dto.request.user.AddLikeKeywordRequestDto;
 import com.ongi.ongi_back.common.dto.request.user.DeleteLikeKeywordRequestDto;
-import com.ongi.ongi_back.common.dto.request.user.PatchUserRequestDto;
-import com.ongi.ongi_back.common.dto.request.user.UpdateIntroductionRequestDto;
+import com.ongi.ongi_back.common.dto.request.user.PatchUserAccountRequestDto;
+import com.ongi.ongi_back.common.dto.request.user.PatchUserIntroductionRequestDto;
 import com.ongi.ongi_back.common.dto.response.ResponseDto;
 import com.ongi.ongi_back.common.dto.response.user.GetLikeKeywordListResponseDto;
-import com.ongi.ongi_back.common.dto.response.user.GetProfileResponseDto;
-import com.ongi.ongi_back.common.dto.response.user.GetSignInUserResponseDto;
+import com.ongi.ongi_back.common.dto.response.user.GetUserAccountResponseDto;
+import com.ongi.ongi_back.common.dto.response.user.GetUserIntroductionResponseDto;
 import com.ongi.ongi_back.common.entity.LikeKeywordEntity;
 import com.ongi.ongi_back.common.entity.UserEntity;
 import com.ongi.ongi_back.repository.LikeKeywordRepository;
@@ -22,7 +22,6 @@ import com.ongi.ongi_back.repository.UserRepository;
 import com.ongi.ongi_back.service.UserService;
 
 import lombok.RequiredArgsConstructor;
-import retrofit2.http.HTTP;
 
 @Service
 @RequiredArgsConstructor
@@ -31,13 +30,13 @@ public class UserServiceImplement implements UserService{
   private final LikeKeywordRepository likeKeywordRepository;
 
   @Override
-  public ResponseEntity<ResponseDto> updateIntroduction(UpdateIntroductionRequestDto dto, String userId) {
+  public ResponseEntity<ResponseDto> patchIntroduction(PatchUserIntroductionRequestDto dto, String userId) {
     
     try {
       UserEntity userEntity = userRepository.findByUserId(userId);
       if(userEntity == null) return ResponseDto.noExistUser();
 
-      userEntity.updateIntroduction(dto);
+      userEntity.patchIntroduction(dto);
       userRepository.save(userEntity);
     } catch (Exception e) {
       e.printStackTrace();
@@ -48,13 +47,13 @@ public class UserServiceImplement implements UserService{
   }
 
     @Override
-    public ResponseEntity<ResponseDto> patchUser(PatchUserRequestDto dto, String userId) {
+    public ResponseEntity<ResponseDto> patchUserAccount(PatchUserAccountRequestDto dto, String userId) {
 
       try {
         UserEntity userEntity = userRepository.findByUserId(userId);
         if(userEntity == null) return ResponseDto.noExistUser();
 
-        userEntity.patchUserInformation(dto);
+        userEntity.patchUserAccount(dto);
         userRepository.save(userEntity);
       } catch (Exception e) {
         e.printStackTrace();
@@ -95,8 +94,9 @@ public class UserServiceImplement implements UserService{
     return ResponseDto.success(HttpStatus.OK);
   }
 
+
   @Override
-  public ResponseEntity<? super GetSignInUserResponseDto> getUserProfileInformation(String userId) {
+  public ResponseEntity<? super GetUserAccountResponseDto> getUserAccount(String userId) {
     UserEntity userEntity = null;
 
     try {
@@ -107,26 +107,11 @@ public class UserServiceImplement implements UserService{
       return ResponseDto.databaseError();
     }
 
-    return GetSignInUserResponseDto.userProfileResponseSuccess(userEntity);
+    return GetUserAccountResponseDto.success(userEntity);
   }
 
   @Override
-  public ResponseEntity<? super GetSignInUserResponseDto> getUserSetting(String userId) {
-    UserEntity userEntity = null;
-
-    try {
-      userEntity = userRepository.findByUserId(userId);
-
-    } catch (Exception e) {
-      e.printStackTrace();
-      return ResponseDto.databaseError();
-    }
-
-    return GetSignInUserResponseDto.userSettingResponseSuccess(userEntity);
-  }
-
-  @Override
-  public ResponseEntity<? super GetLikeKeywordListResponseDto> getLikeKeyword(String userId) {
+  public ResponseEntity<? super GetLikeKeywordListResponseDto> getLikeKeywordList(String userId) {
     List<LikeKeywordEntity> likeKeywordEntities = new ArrayList<>();
 
     try {
@@ -140,7 +125,7 @@ public class UserServiceImplement implements UserService{
   }
 
   @Override
-  public ResponseEntity<? super GetProfileResponseDto> getUserProfile(String userId) {
+  public ResponseEntity<? super GetUserIntroductionResponseDto> getUserIntroduction(String userId) {
 
     List<LikeKeywordEntity> likeKeywordEntities = new ArrayList<>();
     UserEntity userEntity = null;
@@ -149,12 +134,11 @@ public class UserServiceImplement implements UserService{
       likeKeywordEntities = likeKeywordRepository.findAllByUserId(userId);
       userEntity = userRepository.findByUserId(userId);
     
-
     } catch (Exception e) {
       e.printStackTrace();
     }
 
-    return GetProfileResponseDto.success(userEntity, likeKeywordEntities);
+    return GetUserIntroductionResponseDto.success(userEntity, likeKeywordEntities);
   }
   
 }
