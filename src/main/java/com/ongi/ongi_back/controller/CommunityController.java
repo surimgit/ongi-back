@@ -33,7 +33,7 @@ public class CommunityController {
     
     private final CommunityService communityService;
 
-    @PostMapping({"write"})
+    @PostMapping({"/write"})
     public ResponseEntity<ResponseDto> postCommunityPost(
         @RequestBody @Valid PostCommunityRequestDto requestBody,
         @AuthenticationPrincipal String userId
@@ -54,7 +54,8 @@ public class CommunityController {
 
     @PatchMapping({"/{postSequence}/view"})
     public ResponseEntity<ResponseDto> patchCommunityViewCount(
-        @PathVariable("postSequence") Integer postSequence
+        @PathVariable("postSequence") Integer postSequence,
+        @AuthenticationPrincipal String userId
     )   {
         ResponseEntity<ResponseDto> response = communityService.patchCommunityViewCount(postSequence);
         return response;
@@ -78,16 +79,29 @@ public class CommunityController {
     }
 
     @GetMapping({"", "/"})
-    public ResponseEntity<? super GetCommunityResponseDto> getCommunity() {
-        ResponseEntity<? super GetCommunityResponseDto> response = communityService.getCommunity();
+    public ResponseEntity<? super GetCommunityResponseDto> getCommunity(
+        @RequestParam(value="board", required=false) String board,
+        @RequestParam(value="category", required=false) String category
+    ) {
+        ResponseEntity<? super GetCommunityResponseDto> response = null;
+        if (board.equals("전체 글")) {
+            response = communityService.getCommunity();
+        }
+        else {
+            response = communityService.getBoard(board);
+        }
+
+        if (category != null) {
+            response = communityService.getCategory(category);
+        }
+
         return response;
     }
 
     @GetMapping({"/search"})
     public ResponseEntity<? super GetCommunityResponseDto> getCommunityPost(
         @RequestParam(value="type", required=false) String type,
-        @RequestParam(value="keyword", required=false) String keyword,
-        @AuthenticationPrincipal String userId
+        @RequestParam(value="keyword", required=false) String keyword
     )   {
 
         ResponseEntity<? super GetCommunityResponseDto> response = null;

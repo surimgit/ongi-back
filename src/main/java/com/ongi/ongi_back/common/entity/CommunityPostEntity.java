@@ -29,11 +29,13 @@ public class CommunityPostEntity {
     private String userId;
     private String nickname;
     private String postDate;
+    private String board;
     private String category;
     private String title;
     private String content;
     private Integer liked;
     private Integer viewCount;
+    private boolean hotPost;
 
     public CommunityPostEntity(PostCommunityRequestDto dto, String userId, String nickname) {
         LocalDateTime now = LocalDateTime.now();
@@ -41,14 +43,17 @@ public class CommunityPostEntity {
         this.userId = userId;
         this.nickname = nickname;
         this.postDate = now.format(dateTimeFormatter);
+        this.board = dto.getBoard();
         this.category = dto.getCategory();
         this.title = dto.getTitle();
         this.content = dto.getContent();
         this.liked = 0;
         this.viewCount = 0;
+        this.hotPost = false;
     }
 
     public void patch(PatchCommunityPostRequestDto dto) {
+        this.board = dto.getBoard();
         this.category = dto.getCategory();
         this.title = dto.getTitle();
         this.content = dto.getContent();
