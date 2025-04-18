@@ -22,7 +22,6 @@ public class UserEntity {
     private String userId;
     private String nickname;
     private String userPassword;
-    private String name;
     private String address;
     private String detailAddress;
     private Integer zipCode;
@@ -41,7 +40,7 @@ public class UserEntity {
     public UserEntity(SignUpRequestDto dto){
         this.userId = dto.getUserId();
         this.userPassword = dto.getUserPassword();
-        this.name = dto.getName();
+        this.nickname = dto.getNickname();
         this.telNumber = dto.getTelNumber();
         this.gender = dto.getGender();
 

@@ -143,7 +143,7 @@ public class AuhtServiceImplement implements AuthService {
             dto.setUserPassword(encodedPassword);
 
             UserEntity userEntity = new UserEntity(dto);
-            String nickname = userEntity.getName();
+            String nickname = userEntity.getNickname();
             userEntity.setNickname(nickname);
             userRepository.save(userEntity);
 
@@ -174,9 +174,9 @@ public class AuhtServiceImplement implements AuthService {
             String userId = dto.getUserId();
             UserEntity userEntity = userRepository.findByUserId(userId);
             if (userEntity == null) return ResponseDto.authFail();
-          
+
             boolean isMatch = passwordEncoder.matches(dto.getUserPassword(), userEntity.getUserPassword());
-          
+
             if (!isMatch) return ResponseDto.authFail();
 
             String accessToken = jwtProvider.create(userId);
