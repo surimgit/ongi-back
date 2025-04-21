@@ -1,4 +1,4 @@
-package com.ongi.ongi_back.common.dto.request.auth;
+package com.ongi.ongi_back.common.dto.request.community;
 
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
@@ -10,7 +10,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class ResignedCheckRequestDto {
+public class PostCommentRequestDto {
     @NotBlank
-    private String telNumber;
+    private String comment;
 }
