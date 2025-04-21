@@ -1,4 +1,4 @@
-package com.ongi.ongi_back.common.dto.response.Notice;
+package com.ongi.ongi_back.common.dto.response.notice;
 
 import java.util.List;
 

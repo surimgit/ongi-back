@@ -18,11 +18,14 @@ import com.ongi.ongi_back.common.dto.request.auth.SignUpRequestDto;
 import com.ongi.ongi_back.common.dto.response.ResponseDto;
 import com.ongi.ongi_back.common.dto.response.auth.SignInResponseDto;
 import com.ongi.ongi_back.common.entity.UserEntity;
+// import com.ongi.ongi_back.common.entity.VerificationCodeEntity;
 import com.ongi.ongi_back.common.util.RedisUtil;
 import com.ongi.ongi_back.provider.JwtProvider;
 import com.ongi.ongi_back.repository.UserRepository;
+// import com.ongi.ongi_back.repository.VerificationCodeRepository;
 import com.ongi.ongi_back.service.AuthService;
 
+import jakarta.transaction.Transactional;
 import lombok.extern.slf4j.Slf4j;
 import net.nurigo.sdk.NurigoApp;
 import net.nurigo.sdk.message.model.Message;
@@ -35,7 +38,7 @@ import net.nurigo.sdk.message.service.DefaultMessageService;
 @PropertySource("classpath:application.properties")
 public class AuthServiceImplement implements AuthService {
 
-    @Autowired
+    // @Autowired
     // private VerificationCodeRepository verificationCodeRepository;
 
     private final UserRepository userRepository;
@@ -119,11 +122,12 @@ public class AuthServiceImplement implements AuthService {
     //     }
     // }
 
-    // @Scheduled(fixedRate=3600000) //1시간마다  실행
-    // public void deleteExpiredVerificationCodes(){
-    //     LocalDateTime now = LocalDateTime.now();
-    //     verificationCodeRepository.deleteAllByExpiryTimeBefore(now);
-    // }
+    @Scheduled(fixedRate=3600000) //1시간마다  실행
+    @Transactional
+    public void deleteExpiredVerificationCodes(){
+        LocalDateTime now = LocalDateTime.now();
+        verificationCodeRepository.deleteAllByExpiryTimeBefore(now);
+    }
 
     @Override
     public ResponseEntity<ResponseDto> signUp(SignUpRequestDto dto) {
@@ -136,6 +140,8 @@ public class AuthServiceImplement implements AuthService {
             dto.setUserPassword(encodedPassword);
 
             UserEntity userEntity = new UserEntity(dto);
+            String nickname = userEntity.getNickname();
+            userEntity.setNickname(nickname);
             userRepository.save(userEntity);
 
         } catch (Exception e) {
@@ -183,7 +189,8 @@ public class AuthServiceImplement implements AuthService {
     public ResponseEntity<ResponseDto> resignedCheck(ResignedCheckRequestDto dto) {
         try {
             UserEntity userEntity = userRepository.findByTelNumber(dto.getTelNumber());
-            if (userEntity == null || userEntity.getIsResigned()) return ResponseDto.authFail();
+            if (userEntity == null) return ResponseDto.authFail();
+            if (userEntity.getIsResigned()) return ResponseDto.resignedUser();
         } catch (Exception e) {
             e.printStackTrace();
             return ResponseDto.databaseError();

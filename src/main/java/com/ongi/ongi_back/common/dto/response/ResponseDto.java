@@ -18,6 +18,11 @@ public class ResponseDto {
         this.message = ResponseMessage.SUCCESS;
     }
 
+    public static ResponseEntity<ResponseDto> tossConfirmFailure(String code, String message, HttpStatus status) {
+        ResponseDto body = new ResponseDto(code, message);
+        return ResponseEntity.status(status).body(body);
+    }
+
     public static ResponseEntity<ResponseDto> success(HttpStatus status) {
         ResponseDto body = new ResponseDto();
         return ResponseEntity.status(status).body(body);
@@ -163,6 +168,11 @@ public class ResponseDto {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(body);
     }
 
+    public static ResponseEntity<ResponseDto> noExistShoppingCart() {
+        ResponseDto body = new ResponseDto(ResponseCode.NO_EXIST_SHOPPING_CART, ResponseMessage.NO_EXIST_SHOPPING_CART);
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(body);
+    }
+
     public static ResponseEntity<ResponseDto> noExistUser() {
         ResponseDto body = new ResponseDto(ResponseCode.NO_EXIST_USER, ResponseMessage.NO_EXIST_USER);
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(body);
@@ -195,6 +205,16 @@ public class ResponseDto {
 
     public static ResponseEntity<ResponseDto> notEnoughPoint() {
         ResponseDto body = new ResponseDto(ResponseCode.NOT_ENOUGH_POINT, ResponseMessage.NOT_ENOUGH_POINT);
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(body);
+    }
+
+    public static ResponseEntity<ResponseDto> noSearchKeyword() {
+        ResponseDto body = new ResponseDto(ResponseCode.NO_SEARCH_KEYWORD, ResponseMessage.NO_SEARCH_KEYWORD);
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(body);
+    }
+
+    public static ResponseEntity<ResponseDto> alreadyLikedPost() {
+        ResponseDto body = new ResponseDto(ResponseCode.ALREADY_LIKED_POST, ResponseMessage.ALREADY_LIKED_POST);
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(body);
     }
 
@@ -276,5 +296,10 @@ public class ResponseDto {
     public static ResponseEntity<ResponseDto> failedPaymentInternalSystemProcessing() {
         ResponseDto body = new ResponseDto(ResponseCode.FAILED_PAYMENT_INTERNAL_SYSTEM_PROCESSING, ResponseMessage.FAILED_PAYMENT_INTERNAL_SYSTEM_PROCESSING);
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(body);
+    }
+
+    public static ResponseEntity<ResponseDto> resignedUser() {
+        ResponseDto body = new ResponseDto(ResponseCode.RESIGNED_USER, ResponseMessage.RESIGNED_USER);
+        return ResponseEntity.status(HttpStatus.FORBIDDEN).body(body);
     }
 }

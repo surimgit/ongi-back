@@ -13,5 +13,4 @@ import lombok.Setter;
 public class ResignedCheckRequestDto {
     @NotBlank
     private String telNumber;
-    private Boolean isResigned;
 }

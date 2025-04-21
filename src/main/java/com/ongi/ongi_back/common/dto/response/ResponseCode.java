@@ -7,6 +7,7 @@ public interface ResponseCode {
     // HTTP/1.1 400 Bad Request
     String VALIDATION_FAIL = "VF";
     String EXIST_USER = "EU";
+    String RESIGNED_USER = "RU";
 
     String UNVERIFIED_PHONE_NUMBER = "UP";
     String INVALID_PHONE_NUMBER_FORMAT = "IPF";
@@ -35,6 +36,7 @@ public interface ResponseCode {
     String INVALID_TRANSACTION_KEY = "INVALID_TRANSACTION_KEY";
 
     String NO_EXIST_PRODUCT = "NEP";
+    String NO_EXIST_SHOPPING_CART = "NESC";
 
     String NO_EXIST_USER = "NU";
     
@@ -45,6 +47,10 @@ public interface ResponseCode {
     String NO_EXIST_SCHEDULE = "NS";
     
     String NOT_ENOUGH_POINT = "NPO";
+
+    String NO_SEARCH_KEYWORD = "NSK";
+
+    String ALREADY_LIKED_POST = "ALP";
     // ============================================== //
     // HTTP/1.1 401 Unauthorized
     String UNAUTHORIZED_KEY = "UNAUTHORIZED_KEY";

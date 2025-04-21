@@ -9,9 +9,9 @@ import org.springframework.stereotype.Service;
 
 import com.ongi.ongi_back.common.dto.request.question.PatchQuestionRequestDto;
 import com.ongi.ongi_back.common.dto.request.question.PostQuestionRequestDto;
-import com.ongi.ongi_back.common.dto.response.Question.GetQuestionListResponseDto;
-import com.ongi.ongi_back.common.dto.response.Question.GetQuestionResponseDto;
 import com.ongi.ongi_back.common.dto.response.ResponseDto;
+import com.ongi.ongi_back.common.dto.response.question.GetQuestionListResponseDto;
+import com.ongi.ongi_back.common.dto.response.question.GetQuestionResponseDto;
 import com.ongi.ongi_back.common.entity.QuestionEntity;
 import com.ongi.ongi_back.repository.QuestionRepository;
 import com.ongi.ongi_back.repository.UserRepository;

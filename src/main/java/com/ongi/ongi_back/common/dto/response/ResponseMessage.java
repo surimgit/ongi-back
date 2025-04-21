@@ -13,6 +13,7 @@ public interface ResponseMessage {
     String VALIDATION_FAIL = "Validation Fail.";
     String PRODUCT_NOT_FOUND = "Product Not Found.";
     String EXIST_USER = "Exist User.";
+    String RESIGNED_USER = "Resigned User.";
 
     String UNVERIFIED_PHONE_NUMBER = "Unverified Phone Number.";
     String INVALID_PHONE_NUMBER_FORMAT = "Invalid Phone Number Format.";
@@ -41,6 +42,7 @@ public interface ResponseMessage {
     String INVALID_TRANSACTION_KEY = "잘못된 페이징 키 입니다.";
 
     String NO_EXIST_PRODUCT = "No Exist Product.";
+    String NO_EXIST_SHOPPING_CART = "No Exist Shopping Cart";
 
     String NO_EXIST_USER = "No Exist User.";
 
@@ -51,6 +53,10 @@ public interface ResponseMessage {
     String NO_EXIST_SCHEDULE = "No Exist Schedule.";
 
     String NOT_ENOUGH_POINT = "Not Enough Point.";
+
+    String NO_SEARCH_KEYWORD = "No Search Keyword.";
+
+    String ALREADY_LIKED_POST = "Already Liked Post.";
     // ============================================== //
     // HTTP/1.1 401 Unauthorized
     String UNAUTHORIZED_KEY = "인증되지 않은 시크릿 키 혹은 클라이언트 키 입니다.";

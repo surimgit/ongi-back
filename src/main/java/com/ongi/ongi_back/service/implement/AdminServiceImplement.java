@@ -53,7 +53,7 @@ public class AdminServiceImplement implements AdminService {
       UserEntity userEntity = userRepository.findByIsAdminTrue();
       if(!userEntity.getUserId().equals(userId)) return ResponseDto.noPermission();
       
-      NoticeEntity noticeEntity = new NoticeEntity(dto, userId);
+      NoticeEntity noticeEntity = new (dto, userId);
       noticeRepository.save(noticeEntity);
 
     } catch (Exception e) {

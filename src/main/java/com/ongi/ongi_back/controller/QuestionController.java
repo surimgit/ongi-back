@@ -12,9 +12,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.ongi.ongi_back.common.dto.request.question.PatchQuestionRequestDto;
 import com.ongi.ongi_back.common.dto.request.question.PostQuestionRequestDto;
-import com.ongi.ongi_back.common.dto.response.Question.GetQuestionListResponseDto;
-import com.ongi.ongi_back.common.dto.response.Question.GetQuestionResponseDto;
 import com.ongi.ongi_back.common.dto.response.ResponseDto;
+import com.ongi.ongi_back.common.dto.response.question.GetQuestionListResponseDto;
+import com.ongi.ongi_back.common.dto.response.question.GetQuestionResponseDto;
 import com.ongi.ongi_back.service.QuestionService;
 
 import jakarta.validation.Valid;

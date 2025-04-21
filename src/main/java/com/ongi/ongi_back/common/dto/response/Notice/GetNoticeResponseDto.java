@@ -1,4 +1,4 @@
-package com.ongi.ongi_back.common.dto.response.Notice;
+package com.ongi.ongi_back.common.dto.response.notice;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

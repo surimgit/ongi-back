@@ -1,4 +1,4 @@
-package com.ongi.ongi_back.common.dto.response.Question;
+package com.ongi.ongi_back.common.dto.response.question;
 
 import java.util.List;
 

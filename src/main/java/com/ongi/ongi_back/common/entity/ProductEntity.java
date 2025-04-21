@@ -42,7 +42,7 @@ public class ProductEntity {
     this.userId = userId;
     this.price = dto.getPrice();
     this.category = dto.getCategory();
-    this.content = dto.getCategory();
+    this.content = dto.getContent();
     this.productQuantity = dto.getProductQuantity();
     this.boughtAmount = dto.getBoughtAmount();
     this.purchasedPeople = dto.getPurchasedPeople();

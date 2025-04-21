@@ -7,8 +7,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.ongi.ongi_back.common.dto.response.Notice.GetNoticeListResponseDto;
-import com.ongi.ongi_back.common.dto.response.Notice.GetNoticeResponseDto;
+import com.ongi.ongi_back.common.dto.response.notice.GetNoticeListResponseDto;
+import com.ongi.ongi_back.common.dto.response.notice.GetNoticeResponseDto;
 import com.ongi.ongi_back.service.NoticeService;
 
 import lombok.RequiredArgsConstructor;
