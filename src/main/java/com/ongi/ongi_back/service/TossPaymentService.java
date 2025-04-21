@@ -5,8 +5,10 @@ import org.springframework.http.ResponseEntity;
 import com.ongi.ongi_back.common.dto.request.payment.PostConfirmRequestDto;
 import com.ongi.ongi_back.common.dto.request.payment.PostOrderRequestDto;
 import com.ongi.ongi_back.common.dto.response.ResponseDto;
+import com.ongi.ongi_back.common.dto.response.payment.GetOrderResponseDto;
 
 public interface TossPaymentService {
   ResponseEntity<ResponseDto> postOrder(PostOrderRequestDto dto, String userId);
+  ResponseEntity<? super GetOrderResponseDto> getRecentlyOrder(String userId);
   ResponseEntity<ResponseDto> confirmPayment(PostConfirmRequestDto dto, String userId) throws Exception;
 }
