@@ -18,4 +18,10 @@ public class PostOrderRequestDto {
 
   @NotBlank
   private String buyerAddress;
+
+  @NotBlank
+  private String phoneNumber;
+
+  @NotBlank
+  private String userName;
 }
