@@ -8,7 +8,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.ongi.ongi_back.common.dto.request.payment.PostCancelRequestDto;
 import com.ongi.ongi_back.common.dto.request.payment.PostConfirmRequestDto;
+import com.ongi.ongi_back.common.dto.request.payment.PostOrderItemRequestDto;
 import com.ongi.ongi_back.common.dto.request.payment.PostOrderRequestDto;
 import com.ongi.ongi_back.common.dto.response.ResponseDto;
 import com.ongi.ongi_back.common.dto.response.payment.GetOrderResponseDto;
@@ -47,6 +49,24 @@ public class TossPaymentController {
     @AuthenticationPrincipal String userId
   ){
     ResponseEntity<? super GetOrderResponseDto> response = tossPaymentService.getRecentlyOrder(userId);
+    return response;
+  }
+
+  @PostMapping("/order-items")
+  public ResponseEntity<ResponseDto> postOrderItems(
+    @RequestBody @Valid PostOrderItemRequestDto requestBody,
+    @AuthenticationPrincipal String userId
+  ) throws Exception {
+    ResponseEntity<ResponseDto> response = tossPaymentService.postOrderItem(requestBody, userId);
+    return response;
+  }
+
+  @PostMapping("/cancel")
+  public ResponseEntity<ResponseDto> postCancel(
+    @RequestBody @Valid PostCancelRequestDto requestBody,
+    @AuthenticationPrincipal String userId
+  ) throws Exception {
+    ResponseEntity<ResponseDto> response = tossPaymentService.postCancelPayment(requestBody, userId);
     return response;
   }
 }

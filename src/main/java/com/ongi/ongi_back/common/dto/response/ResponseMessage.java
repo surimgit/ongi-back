@@ -43,6 +43,7 @@ public interface ResponseMessage {
 
     String NO_EXIST_PRODUCT = "No Exist Product.";
     String NO_EXIST_SHOPPING_CART = "No Exist Shopping Cart";
+    String NO_METADATA = "No Metadata";
 
     String NO_EXIST_USER = "No Exist User.";
 

@@ -33,6 +33,11 @@ public class ResponseDto {
         return ResponseEntity.status(status).body(body);
     }
 
+    public static ResponseEntity<ResponseDto> noMetadata() {
+        ResponseDto body = new ResponseDto(ResponseCode.NO_METADATA, ResponseMessage.NO_METADATA);
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(body);
+    }
+
     public static ResponseEntity<ResponseDto> deleted(HttpStatus status) {
         ResponseDto body = new ResponseDto(ResponseCode.SUCCESS, ResponseMessage.DELETED);
         return ResponseEntity.status(status).body(body);
@@ -54,7 +59,7 @@ public class ResponseDto {
     }
 
     public static ResponseEntity<ResponseDto> productNotFound() {
-        ResponseDto body = new ResponseDto(ResponseCode.VALIDATION_FAIL, ResponseMessage.PRODUCT_NOT_FOUND);
+        ResponseDto body = new ResponseDto(ResponseCode.PRODUCT_NOT_FOUND, ResponseMessage.PRODUCT_NOT_FOUND);
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(body);
     }
 

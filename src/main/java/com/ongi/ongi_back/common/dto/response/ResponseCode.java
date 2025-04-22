@@ -9,6 +9,7 @@ public interface ResponseCode {
     String EXIST_USER = "EU";
     String RESIGNED_USER = "RU";
 
+    String PRODUCT_NOT_FOUND = "RNF";
     String UNVERIFIED_PHONE_NUMBER = "UP";
     String INVALID_PHONE_NUMBER_FORMAT = "IPF";
     String INVALID_AUTHENTICATION_NUMBER = "IA";
@@ -37,6 +38,7 @@ public interface ResponseCode {
 
     String NO_EXIST_PRODUCT = "NEP";
     String NO_EXIST_SHOPPING_CART = "NESC";
+    String NO_METADATA = "NMD";
 
     String NO_EXIST_USER = "NU";
     

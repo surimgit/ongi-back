@@ -15,12 +15,14 @@ public class GetOrderResponseDto extends ResponseDto {
   private Integer amount;
   private String phoneNumber;
   private String userName;
+  private String buyerAddress;
 
   public GetOrderResponseDto(PaymentOrderEntity paymentOrderEntity){
     this.orderId = paymentOrderEntity.getOrderId();
     this.amount = paymentOrderEntity.getAmount();
     this.phoneNumber = paymentOrderEntity.getPhoneNumber();
     this.userName = paymentOrderEntity.getUserName();
+    this.buyerAddress = paymentOrderEntity.getBuyerAddress();
   }
 
   public static ResponseEntity<GetOrderResponseDto> success(PaymentOrderEntity paymentOrderEntity){

@@ -1,8 +1,15 @@
 package com.ongi.ongi_back.common.dto.request.payment;
 
-public class PostOrderItemRequestDto {
-  private String orderId;
-  private Integer amount;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Pattern;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
-  
+@Getter
+@NoArgsConstructor
+@AllArgsConstructor
+public class PostOrderItemRequestDto {
+  @NotBlank()
+  private String paymentKey;
 }
