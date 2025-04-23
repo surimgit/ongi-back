@@ -58,6 +58,8 @@ public class WebSecurityConfig {
         .requestMatchers("/api/v1/auth", "/api/v1/auth/**").permitAll()
         .requestMatchers("/api/v1/main", "/api/v1/main/**").permitAll()
         .requestMatchers("/api/v1/community", "/api/v1/community/**").permitAll()
+        .requestMatchers("/api/v1/alert/**").authenticated()
+        .requestMatchers("/api/v1/user/nickname").permitAll()
         .requestMatchers("/file/**").permitAll()
         .anyRequest().authenticated()
       )

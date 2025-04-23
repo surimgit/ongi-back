@@ -5,11 +5,11 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import com.ongi.ongi_back.common.dto.request.community.PatchCommunityCommentRequestDto;
 import com.ongi.ongi_back.common.dto.request.community.PatchCommunityPostRequestDto;
 import com.ongi.ongi_back.common.dto.request.community.PostCommentRequestDto;
 import com.ongi.ongi_back.common.dto.request.community.PostCommunityRequestDto;
@@ -317,6 +317,34 @@ public class CommunityServiceImplement implements CommunityService {
     }
 
     @Override
+    public ResponseEntity<ResponseDto> patchCommunityComment(PatchCommunityCommentRequestDto dto, Integer postSequence, Integer commentSequence, String userId) {
+        
+        CommunityCommentEntity communityCommentEntity = null;
+
+        try {
+
+            CommunityPostEntity communityPostEntity = communityPostRepository.findByPostSequence(postSequence);
+            if (communityPostEntity == null) return ResponseDto.noExistPost();
+
+            communityCommentEntity = communityCommentRepository.findByCommentSequence(commentSequence);
+            if (communityCommentEntity == null) return ResponseDto.noExsitComment();
+
+            String writerId = communityCommentEntity.getUserId();
+            boolean isWriter = writerId.equals(userId);
+            if (!isWriter) return ResponseDto.noPermission();
+
+            communityCommentEntity.setContent(dto.getContent());
+            communityCommentRepository.save(communityCommentEntity);
+            
+        } catch (Exception exception) {
+            exception.printStackTrace();
+            return ResponseDto.databaseError();
+        }
+
+        return ResponseDto.success(HttpStatus.OK);
+    }
+
+    @Override
     public ResponseEntity<ResponseDto> putCommunityLiked(Integer postSequence, String userId) {
         
         try {
@@ -364,9 +392,4 @@ public class CommunityServiceImplement implements CommunityService {
 
         return GetCommunityLikedResponseDto.success(likedEntities);
     }
-
-    
-
-    
-
 }

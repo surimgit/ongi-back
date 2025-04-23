@@ -9,4 +9,6 @@ import com.ongi.ongi_back.common.dto.response.alert.GetAlertResponseDto;
 public interface AlertService {
     ResponseEntity<ResponseDto> postAlert(PostAlertRequestDto dto);
     ResponseEntity<? super GetAlertResponseDto> getAlert(String userId);
+    ResponseEntity<ResponseDto> patchAlertRead(Integer alertSequence);
+    ResponseEntity<ResponseDto> deleteAlert(Integer alertSequence, String userId);
 }

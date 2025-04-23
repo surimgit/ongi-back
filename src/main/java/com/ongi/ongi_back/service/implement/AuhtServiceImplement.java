@@ -21,11 +21,11 @@ import com.ongi.ongi_back.common.dto.request.auth.SignUpRequestDto;
 import com.ongi.ongi_back.common.dto.response.ResponseDto;
 import com.ongi.ongi_back.common.dto.response.auth.SignInResponseDto;
 import com.ongi.ongi_back.common.entity.UserEntity;
-// import com.ongi.ongi_back.common.entity.VerificationCodeEntity;
+import com.ongi.ongi_back.common.entity.VerificationCodeEntity;
 import com.ongi.ongi_back.common.util.RedisUtil;
 import com.ongi.ongi_back.provider.JwtProvider;
 import com.ongi.ongi_back.repository.UserRepository;
-// import com.ongi.ongi_back.repository.VerificationCodeRepository;
+import com.ongi.ongi_back.repository.VerificationCodeRepository;
 import com.ongi.ongi_back.service.AuthService;
 
 import jakarta.transaction.Transactional;
@@ -41,8 +41,8 @@ import net.nurigo.sdk.message.service.DefaultMessageService;
 @PropertySource("classpath:application.properties")
 public class AuhtServiceImplement implements AuthService {
 
-    // @Autowired
-    // private VerificationCodeRepository verificationCodeRepository;
+    @Autowired
+    private VerificationCodeRepository verificationCodeRepository;
 
     private final UserRepository userRepository;
     private final JwtProvider jwtProvider;
