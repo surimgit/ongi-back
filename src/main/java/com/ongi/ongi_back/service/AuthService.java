@@ -9,10 +9,10 @@ import com.ongi.ongi_back.common.dto.request.auth.SignUpRequestDto;
 import com.ongi.ongi_back.common.dto.response.ResponseDto;
 
 public interface  AuthService {
-    // boolean validateVerificationCode(String telNumber, String code);
+    boolean validateVerificationCode(String telNumber, String code);
     ResponseEntity<ResponseDto> idCheck(IdCheckRequestDto dto);
     ResponseEntity<ResponseDto> signUp(SignUpRequestDto dto);
     ResponseEntity<ResponseDto> resignedCheck(ResignedCheckRequestDto dto);
-    // ResponseEntity<? super ResponseDto> sendVerificationCode(String telNumber);
+    ResponseEntity<? super ResponseDto> sendVerificationCode(String telNumber);
     ResponseEntity<? super ResponseDto> signIn(SignInRequestDto dto);
 }

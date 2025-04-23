@@ -14,6 +14,7 @@ public class GetCommunityPostResponseDto extends ResponseDto {
     private String userId;
     private String nickname;
     private String postDate;
+    private String board;
     private String category;
     private String title;
     private String content;
@@ -25,6 +26,7 @@ public class GetCommunityPostResponseDto extends ResponseDto {
         this.userId = communityPostEntity.getUserId();
         this.nickname = communityPostEntity.getNickname();
         this.postDate = communityPostEntity.getPostDate();
+        this.board = communityPostEntity.getBoard();
         this.category = communityPostEntity.getCategory();
         this.title = communityPostEntity.getTitle();
         this.content = communityPostEntity.getContent();

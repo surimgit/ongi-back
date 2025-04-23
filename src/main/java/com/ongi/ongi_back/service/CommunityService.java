@@ -2,6 +2,7 @@ package com.ongi.ongi_back.service;
 
 import org.springframework.http.ResponseEntity;
 
+import com.ongi.ongi_back.common.dto.request.community.PatchCommunityCommentRequestDto;
 import com.ongi.ongi_back.common.dto.request.community.PatchCommunityPostRequestDto;
 import com.ongi.ongi_back.common.dto.request.community.PostCommentRequestDto;
 import com.ongi.ongi_back.common.dto.request.community.PostCommunityRequestDto;
@@ -29,10 +30,11 @@ public interface CommunityService {
     ResponseEntity<? super GetCommunityResponseDto> getCommunityPostByTitle(String keyword);
     ResponseEntity<? super GetCommunityResponseDto> getCommunityPostByContent(String keyword);
 
-    // 댓글 작성, 삭제, 리스트
+    // 댓글 작성, 삭제, 리스트, 갯수
     ResponseEntity<ResponseDto> postComment(PostCommentRequestDto dto, Integer postSequence, String userId);
     ResponseEntity<ResponseDto> deleteCommunityComment(Integer postSequence, Integer commentSequence, String userId);
     ResponseEntity<? super GetCommunityCommentResponseDto> getCommunityComment(Integer postSequence);
+    ResponseEntity<ResponseDto> patchCommunityComment(PatchCommunityCommentRequestDto dto, Integer postSequence, Integer commentSequence, String userId);
 
     // 좋아요 누르기, 누른 명단 불러오기
     ResponseEntity<ResponseDto> putCommunityLiked(Integer postSequence, String userId);
