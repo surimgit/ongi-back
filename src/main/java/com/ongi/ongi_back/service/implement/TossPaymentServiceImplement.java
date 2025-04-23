@@ -4,33 +4,34 @@ import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URI;
 import java.net.URL;
-import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Base64;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.ongi.ongi_back.common.dto.request.payment.PostCancelRequestDto;
 import com.ongi.ongi_back.common.dto.request.payment.PostConfirmRequestDto;
 import com.ongi.ongi_back.common.dto.request.payment.PostOrderItemRequestDto;
 import com.ongi.ongi_back.common.dto.request.payment.PostOrderRequestDto;
+import com.ongi.ongi_back.common.dto.request.payment.GetTransactionRequestDto;
 import com.ongi.ongi_back.common.dto.response.ResponseDto;
 import com.ongi.ongi_back.common.dto.response.payment.GetOrderResponseDto;
 import com.ongi.ongi_back.common.dto.response.payment.TossCancelResponseDto;
 import com.ongi.ongi_back.common.dto.response.payment.TossConfirmResponseDto;
 import com.ongi.ongi_back.common.dto.response.payment.TossGetPaymentKeyResponseDto;
+import com.ongi.ongi_back.common.dto.response.payment.TossTransactionResponseDto;
 import com.ongi.ongi_back.common.entity.PaymentOrderEntity;
 import com.ongi.ongi_back.common.entity.ProductEntity;
+import com.ongi.ongi_back.common.entity.StockReservationEntity;
+import com.ongi.ongi_back.common.entity.UserEntity;
 import com.ongi.ongi_back.common.vo.TossCancel;
 import com.ongi.ongi_back.common.entity.OrderItemEntity;
 import com.ongi.ongi_back.common.entity.PaymentCancelEntity;
@@ -48,8 +49,10 @@ public class TossPaymentServiceImplement implements TossPaymentService {
   private final PaymentConfirmRepository paymentRepository;
   private final OrderRepository orderRepository;
   private final ProductRepository productRepository;
+  private final StockReservationRepository stockReservationRepository;
   private final OrderItemRepository orderItemRepository;
   private final PaymentCancelRepository paymentCancelRepository;
+  private final UserRepository userRepository;
 
   @Override
   public ResponseEntity<ResponseDto> confirmPayment(PostConfirmRequestDto dto, String userId) throws Exception {
@@ -99,7 +102,7 @@ public class TossPaymentServiceImplement implements TossPaymentService {
       String failureCode = tossResponse.getFailure().getCode();
       String failureMessage = tossResponse.getFailure().getMessage();
       HttpStatus status = TossErrorStatusHandler.resolve(failureCode);
-      return ResponseDto.tossConfirmFailure(failureCode, failureMessage, status);
+      return ResponseDto.tossFailure(failureCode, failureMessage, status);
     } else {
 
       PostConfirmRequestDto confirm = new PostConfirmRequestDto(
@@ -112,6 +115,8 @@ public class TossPaymentServiceImplement implements TossPaymentService {
     
       PaymentConfirmEntity paymentConfirmEntity = new PaymentConfirmEntity(confirm);
       paymentRepository.save(paymentConfirmEntity);
+
+      
 
       return ResponseDto.success(HttpStatus.OK);
     }
@@ -175,16 +180,28 @@ public class TossPaymentServiceImplement implements TossPaymentService {
     int code = connection.getResponseCode();
     boolean isSuccess = code == 200;
 
+    
     // 연결이 되었다면 api 호출 응답을 받고, 연결이 되지 않았다면 에러 스트림이 할당됨
     InputStream responseStream = isSuccess ? connection.getInputStream() : connection.getErrorStream();
 
-    String responseJson = new BufferedReader(new InputStreamReader(responseStream))
-    .lines()
-    .collect(Collectors.joining("\n"));
+    if(!isSuccess) {
+      ResponseDto response = mapper.readValue(responseStream, ResponseDto.class);
+      String errorCode = response.getCode();
+      String errorMessage = response.getMessage();
+      return ResponseDto.tossFailure(errorCode, errorMessage, HttpStatus.valueOf(errorCode));
+    }
 
+    String responseJson;
+
+    try(BufferedReader reader = new BufferedReader(new InputStreamReader(responseStream))){
+      responseJson = reader
+        .lines()
+        .collect(Collectors.joining("\n"));
+    }
+    
     TossGetPaymentKeyResponseDto tossResponse = mapper.readValue(responseJson, TossGetPaymentKeyResponseDto.class);
     
-    String tossResponseStr = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(tossResponse);
+    responseStream.close();
 
     Map<String, String> metadata = tossResponse.getMetadata();
 
@@ -193,20 +210,29 @@ public class TossPaymentServiceImplement implements TossPaymentService {
     // productSequence 처리
     String productSequences = (String) metadata.get("productSequences");
     List<Integer> productSequencesArr = parseIntegerListFromMetadata(productSequences);
+    
 
     // productQuantity 처리
     String productQuantities = (String) metadata.get("productQuantity");
     List<Integer> productQuantitiesArr = parseIntegerListFromMetadata(productQuantities);
-
-    // productSequencesArr와 productQuantitiesArr의 크기가 동일하다는 가정 하에 처리
-    List<ProductEntity> productEntities = productRepository.findBySequences(productSequencesArr);
-
     
-    for(int i = 0; i < productEntities.size(); i++){
-      ProductEntity productEntity = productEntities.get(i);
+    for(int i = 0; i < productSequencesArr.size(); i++){
+      int productSequence = productSequencesArr.get(i);
       int quantity = productQuantitiesArr.get(i);
-      OrderItemEntity orderItemEntity = new OrderItemEntity(productEntity, quantity, paymentKey);
+      PostOrderItemRequestDto requestDto = new PostOrderItemRequestDto(paymentKey, productSequence, quantity);
+      OrderItemEntity orderItemEntity = new OrderItemEntity(requestDto);
       orderItemRepository.save(orderItemEntity);
+
+      StockReservationEntity stockReservationEntity = stockReservationRepository.findByUserIdAndProductSequence(userId, productSequence);
+      if(stockReservationEntity != null) stockReservationRepository.deleteByUserIdAndProductSequence(userId, productSequence);
+      
+      ProductEntity productEntity = productRepository.findBySequence(stockReservationEntity.getProductSequence());
+      if(productEntity == null) return ResponseDto.noExistProduct();
+
+      Integer newBought = productEntity.getBoughtAmount() + quantity;
+      productEntity.setBoughtAmount(newBought);
+
+      productRepository.save(productEntity);
     }
 
     return ResponseDto.success(HttpStatus.OK);
@@ -263,24 +289,85 @@ public class TossPaymentServiceImplement implements TossPaymentService {
     int code = connection.getResponseCode();
     boolean isSuccess = code == 200;
 
+
     InputStream responseStream = isSuccess ? connection.getInputStream() : connection.getErrorStream();
     TossCancelResponseDto tossResponse = mapper.readValue(responseStream, TossCancelResponseDto.class);
 
-    String tossResponseStr = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(tossResponse);
-    System.out.println("📦 Toss 응답 객체 (DTO):");
-    System.out.println(tossResponseStr);
+    if(!isSuccess) {
+      ResponseDto response = mapper.readValue(responseStream, ResponseDto.class);
+      String errorCode = response.getCode();
+      String errorMessage = response.getMessage();
+      return ResponseDto.tossFailure(errorCode, errorMessage, HttpStatus.valueOf(errorCode));
+    }
+
+    // String tossResponseStr = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(tossResponse);
+    // System.out.println("📦 Toss 응답 객체 (DTO):");
+    // System.out.println(tossResponseStr);
 
     List<TossCancel> cancels = tossResponse.getCancels();
   
-    if(cancels == null) return ResponseDto.noExistShoppingCart();
+    if(cancels == null) return ResponseDto.notCancelablePayment();
 
-    for(TossCancel cancel: cancels){
-      PaymentCancelEntity paymentCancelEntity = new PaymentCancelEntity(cancel, paymentKey, cancelReason, productSequence);
-      paymentCancelRepository.save(paymentCancelEntity);
-      orderItemRepository.deleteByPaymentKeyAndProductSequence(paymentKey, productSequence);
+    try{
+      for(TossCancel cancel: cancels){
+        PaymentCancelEntity paymentCancelEntity = new PaymentCancelEntity(cancel, paymentKey, cancelReason, productSequence);
+        paymentCancelRepository.save(paymentCancelEntity);
+        orderItemRepository.deleteByPaymentKeyAndProductSequence(paymentKey, productSequence);
+      }
+    } catch(Exception exception) {
+      return ResponseDto.databaseError();
     }
+    
 
     return ResponseDto.success(HttpStatus.OK);
+  }
+
+  @Override
+  public List<TossTransactionResponseDto> getTransaction(GetTransactionRequestDto dto, String userId) throws Exception {
+    UserEntity user = userRepository.findByUserId(userId);
+    // if(!user.getIsAdmin()) return null;
+
+    String startDate = dto.getStartDate();
+    String endDate = dto.getEndDate();
+
+    ObjectMapper mapper = new ObjectMapper();
+    ObjectNode obj = mapper.createObjectNode();
+    obj.put("startDate", startDate);
+    obj.put("endDate", endDate);
+
+    String widgetSecurityHeader = "test_gsk_docs_OaPz8L5KdmQXkzRz3y47BMw6";
+    String encodedString = Base64.getEncoder().encodeToString((widgetSecurityHeader + ":").getBytes());
+    String authorization = "Basic " + encodedString;
+
+    URI uri = new URI("https://api.tosspayments.com/v1/transactions?startDate=" + startDate + "&endDate=" + endDate);
+    URL url = uri.toURL();
+
+    HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+    connection.setRequestProperty("Authorization", authorization);
+    connection.setRequestMethod("GET");
+
+    int code = connection.getResponseCode();
+    boolean isSuccess = code == 200;
+
+    InputStream responseStream = isSuccess ? connection.getInputStream() : connection.getErrorStream();
+
+    if(!isSuccess) {
+      ResponseDto response = mapper.readValue(responseStream, ResponseDto.class);
+      String errorCode = response.getCode();
+      String errorMessage = response.getMessage();
+      System.out.println(ResponseDto.tossFailure(errorCode, errorMessage, HttpStatus.valueOf(errorCode))); 
+    }
+
+    String responseJson;
+    try(BufferedReader reader = new BufferedReader(new InputStreamReader(responseStream))){
+      responseJson = reader
+        .lines()
+        .collect(Collectors.joining("\n"));
+    }
+
+    List<TossTransactionResponseDto> list = mapper.readValue(responseJson, new TypeReference<List<TossTransactionResponseDto>>() {});
+
+    return list;
   }
 
 

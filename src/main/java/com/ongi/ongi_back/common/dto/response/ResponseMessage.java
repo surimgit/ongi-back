@@ -23,6 +23,7 @@ public interface ResponseMessage {
     String MISMATCH_PREVIOUS_PASSWORD = "Mismatch Previous Password.";
 
     String ALREADY_LEFT_ANSWER = "Already Left Answer.";
+    String OUT_OF_STOCK = "Out Of Stock";
 
     String EXIST_PAYMENT = "Exist Payment.";
     String ALREADY_PROCESSED_PAYMENT = "이미 처리된 결제 입니다.";

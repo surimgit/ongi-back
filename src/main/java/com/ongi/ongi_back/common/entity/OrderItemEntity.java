@@ -1,5 +1,7 @@
 package com.ongi.ongi_back.common.entity;
 
+import com.ongi.ongi_back.common.dto.request.payment.PostOrderItemRequestDto;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -20,19 +22,11 @@ public class OrderItemEntity {
   private Integer orderItemSequence;
   private String paymentKey;
   private Integer productSequence;
-  private String productName;
-  private Integer price;
   private Integer quantity;
-  private Integer totalPrice;
-  private String image;
 
-  public OrderItemEntity(ProductEntity productEntity, Integer quantity, String paymentKey){
-    this.paymentKey = paymentKey;
-    this.productSequence = productEntity.getSequence();
-    this.productName = productEntity.getName();
-    this.price = productEntity.getPrice();
-    this.quantity = quantity;
-    this.totalPrice = price * quantity;
-    this.image = productEntity.getImage();
+  public OrderItemEntity(PostOrderItemRequestDto requestDto){
+    this.paymentKey = requestDto.getPaymentKey();
+    this.productSequence = requestDto.getProductSequence();
+    this.quantity = requestDto.getQuantity();
   }
 }

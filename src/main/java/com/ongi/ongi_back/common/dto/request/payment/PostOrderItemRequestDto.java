@@ -12,4 +12,6 @@ import lombok.NoArgsConstructor;
 public class PostOrderItemRequestDto {
   @NotBlank()
   private String paymentKey;
+  private Integer productSequence;
+  private Integer quantity;
 }

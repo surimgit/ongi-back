@@ -18,7 +18,7 @@ public class ResponseDto {
         this.message = ResponseMessage.SUCCESS;
     }
 
-    public static ResponseEntity<ResponseDto> tossConfirmFailure(String code, String message, HttpStatus status) {
+    public static ResponseEntity<ResponseDto> tossFailure(String code, String message, HttpStatus status) {
         ResponseDto body = new ResponseDto(code, message);
         return ResponseEntity.status(status).body(body);
     }
@@ -305,6 +305,11 @@ public class ResponseDto {
 
     public static ResponseEntity<ResponseDto> resignedUser() {
         ResponseDto body = new ResponseDto(ResponseCode.RESIGNED_USER, ResponseMessage.RESIGNED_USER);
+        return ResponseEntity.status(HttpStatus.FORBIDDEN).body(body);
+    }
+
+    public static ResponseEntity<ResponseDto> outOfStock() {
+        ResponseDto body = new ResponseDto(ResponseCode.OUT_OF_STOCK, ResponseMessage.OUT_OF_STOCK);
         return ResponseEntity.status(HttpStatus.FORBIDDEN).body(body);
     }
 }

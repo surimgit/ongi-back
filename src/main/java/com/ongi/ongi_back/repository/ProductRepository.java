@@ -18,7 +18,7 @@ public interface ProductRepository extends JpaRepository<ProductEntity, Integer>
   List<ProductEntity> findByNameContainingOrderBySequenceDesc(String name);
   List<ProductEntity> findByCategoryAndNameContainingOrderBySequenceDesc(String name, String category);
   
-  @Query("SELECT p FROM product p WHERE p.sequence IN :sequences")
+  @Query("SELECT p FROM product p WHERE p.sequence IN :sequences ORDER BY sequence DESC")
   List<ProductEntity> findBySequences(List<Integer> sequences);
 
 }

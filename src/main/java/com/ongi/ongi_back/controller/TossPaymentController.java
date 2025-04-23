@@ -1,5 +1,7 @@
 package com.ongi.ongi_back.controller;
 
+import java.util.List;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -8,12 +10,14 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.ongi.ongi_back.common.dto.request.payment.GetTransactionRequestDto;
 import com.ongi.ongi_back.common.dto.request.payment.PostCancelRequestDto;
 import com.ongi.ongi_back.common.dto.request.payment.PostConfirmRequestDto;
 import com.ongi.ongi_back.common.dto.request.payment.PostOrderItemRequestDto;
 import com.ongi.ongi_back.common.dto.request.payment.PostOrderRequestDto;
 import com.ongi.ongi_back.common.dto.response.ResponseDto;
 import com.ongi.ongi_back.common.dto.response.payment.GetOrderResponseDto;
+import com.ongi.ongi_back.common.dto.response.payment.TossTransactionResponseDto;
 import com.ongi.ongi_back.service.TossPaymentService;
 
 import jakarta.validation.Valid;
@@ -67,6 +71,15 @@ public class TossPaymentController {
     @AuthenticationPrincipal String userId
   ) throws Exception {
     ResponseEntity<ResponseDto> response = tossPaymentService.postCancelPayment(requestBody, userId);
+    return response;
+  }
+
+  @GetMapping("/transaction")
+  public List<TossTransactionResponseDto> getTransaction(
+    @RequestBody @Valid GetTransactionRequestDto requestBody,
+    @AuthenticationPrincipal String userId
+  )throws Exception{
+    List<TossTransactionResponseDto> response = tossPaymentService.getTransaction(requestBody, userId);
     return response;
   }
 }
