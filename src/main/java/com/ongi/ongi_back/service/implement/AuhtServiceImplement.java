@@ -18,28 +18,23 @@ import com.ongi.ongi_back.common.dto.request.auth.SignUpRequestDto;
 import com.ongi.ongi_back.common.dto.response.ResponseDto;
 import com.ongi.ongi_back.common.dto.response.auth.SignInResponseDto;
 import com.ongi.ongi_back.common.entity.UserEntity;
-// import com.ongi.ongi_back.common.entity.VerificationCodeEntity;
 import com.ongi.ongi_back.common.util.RedisUtil;
 import com.ongi.ongi_back.provider.JwtProvider;
 import com.ongi.ongi_back.repository.UserRepository;
-// import com.ongi.ongi_back.repository.VerificationCodeRepository;
+import com.ongi.ongi_back.repository.VerificationCodeRepository;
 import com.ongi.ongi_back.service.AuthService;
 
-import jakarta.transaction.Transactional;
 import lombok.extern.slf4j.Slf4j;
 import net.nurigo.sdk.NurigoApp;
-import net.nurigo.sdk.message.model.Message;
-import net.nurigo.sdk.message.request.SingleMessageSendingRequest;
-import net.nurigo.sdk.message.response.SingleMessageSentResponse;
 import net.nurigo.sdk.message.service.DefaultMessageService;
 
 @Slf4j
 @Service
 @PropertySource("classpath:application.properties")
-public class AuthServiceImplement implements AuthService {
+public class AuhtServiceImplement implements AuthService {
 
-    // @Autowired
-    // private VerificationCodeRepository verificationCodeRepository;
+    @Autowired
+    private VerificationCodeRepository verificationCodeRepository;
 
     private final UserRepository userRepository;
     private final JwtProvider jwtProvider;
@@ -47,18 +42,19 @@ public class AuthServiceImplement implements AuthService {
     private final DefaultMessageService messageService;
     private final String senderTelNumber;
 
-    public AuthServiceImplement(
+    public AuhtServiceImplement(
         UserRepository userRepository,
         JwtProvider jwtProvider,
         RedisUtil redisUtil,
         @Value("${solapi.apiKey}") String apiKey,
         @Value("${solapi.apiSecret}") String apiSecret,
         @Value("${solapi.sender}") String senderTelNumber
-    ) {
+    , VerificationCodeRepository verificationCodeRepository) {
         this.userRepository = userRepository;
         this.jwtProvider = jwtProvider;
         this.senderTelNumber = senderTelNumber;
         this.messageService = NurigoApp.INSTANCE.initialize(apiKey, apiSecret, "https://api.solapi.com");
+        this.verificationCodeRepository = verificationCodeRepository;
     }
 
     public static String createSmsKey() {
@@ -70,24 +66,24 @@ public class AuthServiceImplement implements AuthService {
         return key.toString();
     }
 
-    public ResponseEntity<? super ResponseDto> solapiSendSms(String to, String text) {
-        try {
-            Message message = new Message();
-            message.setFrom(senderTelNumber);
-            message.setTo(to);
-            message.setText(text);
+    // public ResponseEntity<? super ResponseDto> solapiSendSms(String to, String text) {
+    //     try {
+    //         Message message = new Message();
+    //         message.setFrom(senderTelNumber);
+    //         message.setTo(to);
+    //         message.setText(text);
 
-            SingleMessageSendingRequest request = new SingleMessageSendingRequest(message);
+    //         SingleMessageSendingRequest request = new SingleMessageSendingRequest(message);
 
-            SingleMessageSentResponse response = messageService.sendOne(request);
-            log.info("SMS 전송 성공: {}", response.getMessageId());
+    //         SingleMessageSentResponse response = messageService.sendOne(request);
+    //         log.info("SMS 전송 성공: {}", response.getMessageId());
 
-            return ResponseDto.success(HttpStatus.OK);
-        } catch (Exception e) {
-            log.error("SMS 발송 중 예외 발생: ", e);
-            return ResponseDto.databaseError();
-        }
-    }
+    //         return ResponseDto.success(HttpStatus.OK);
+    //     } catch (Exception e) {
+    //         log.error("SMS 발송 중 예외 발생: ", e);
+    //         return ResponseDto.databaseError();
+    //     }
+    // }
 
     // @Override
     // public ResponseEntity<? super ResponseDto> sendVerificationCode(String telNumber) {
@@ -122,12 +118,12 @@ public class AuthServiceImplement implements AuthService {
     //     }
     // }
 
-    @Scheduled(fixedRate=3600000) //1시간마다  실행
-    @Transactional
-    public void deleteExpiredVerificationCodes(){
-        LocalDateTime now = LocalDateTime.now();
-        verificationCodeRepository.deleteAllByExpiryTimeBefore(now);
-    }
+    // @Scheduled(fixedRate=3600000) //1시간마다  실행
+    // @Transactional
+    // public void deleteExpiredVerificationCodes(){
+    //     LocalDateTime now = LocalDateTime.now();
+    //     verificationCodeRepository.deleteAllByExpiryTimeBefore(now);
+    // }
 
     @Override
     public ResponseEntity<ResponseDto> signUp(SignUpRequestDto dto) {

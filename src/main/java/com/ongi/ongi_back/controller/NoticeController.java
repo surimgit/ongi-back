@@ -14,7 +14,7 @@ import com.ongi.ongi_back.service.NoticeService;
 import lombok.RequiredArgsConstructor;
 
 @RestController
-@RequestMapping("/api/v1/notice")
+@RequestMapping("/api/v1/mypage/notice")
 @RequiredArgsConstructor
 public class NoticeController {
   

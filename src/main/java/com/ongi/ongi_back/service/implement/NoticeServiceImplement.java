@@ -6,8 +6,8 @@ import java.util.List;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import com.ongi.ongi_back.common.dto.response.Notice.GetNoticeListResponseDto;
-import com.ongi.ongi_back.common.dto.response.Notice.GetNoticeResponseDto;
+import com.ongi.ongi_back.common.dto.response.notice.GetNoticeListResponseDto;
+import com.ongi.ongi_back.common.dto.response.notice.GetNoticeResponseDto;
 import com.ongi.ongi_back.common.dto.response.ResponseDto;
 import com.ongi.ongi_back.common.entity.NoticeEntity;
 import com.ongi.ongi_back.repository.NoticeRepository;

@@ -16,6 +16,8 @@ import com.ongi.ongi_back.common.dto.request.user.DeleteLikeKeywordRequestDto;
 import com.ongi.ongi_back.common.dto.request.user.PatchUserAccountRequestDto;
 import com.ongi.ongi_back.common.dto.request.user.PatchUserIntroductionRequestDto;
 import com.ongi.ongi_back.common.dto.response.ResponseDto;
+import com.ongi.ongi_back.common.dto.response.community.GetCommunityCommentResponseDto;
+import com.ongi.ongi_back.common.dto.response.community.GetCommunityResponseDto;
 import com.ongi.ongi_back.common.dto.response.user.GetLikeKeywordListResponseDto;
 import com.ongi.ongi_back.common.dto.response.user.GetUserAccountResponseDto;
 import com.ongi.ongi_back.common.dto.response.user.GetUserIntroductionResponseDto;
@@ -23,6 +25,7 @@ import com.ongi.ongi_back.service.MypageService;
 
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+
 
 @RestController
 @RequestMapping("/api/v1/mypage")
@@ -35,7 +38,7 @@ public class MypageController {
     @RequestBody @Valid PatchUserIntroductionRequestDto requestBody,
     @AuthenticationPrincipal String userId
   ){
-    ResponseEntity<ResponseDto> response = mypageSerivce.patchIntroduction(requestBody, userId);
+    ResponseEntity<ResponseDto> response = mypageService.patchIntroduction(requestBody, userId);
     return response;
   }
 
@@ -43,7 +46,7 @@ public class MypageController {
   public ResponseEntity<? super GetUserIntroductionResponseDto> getUserIntroduction(
     @AuthenticationPrincipal String userId
   ){
-    ResponseEntity<? super GetUserIntroductionResponseDto> response = mypageSerivce.getUserIntroduction(userId);
+    ResponseEntity<? super GetUserIntroductionResponseDto> response = mypageService.getUserIntroduction(userId);
     return response;
   }
 
@@ -51,7 +54,7 @@ public class MypageController {
   public ResponseEntity<? super GetUserIntroductionResponseDto> getOtherUserIntroduction(
     @PathVariable("userId") String userId
   ){
-    ResponseEntity<? super GetUserIntroductionResponseDto> response = mypageSerivce.getUserIntroduction(userId);
+    ResponseEntity<? super GetUserIntroductionResponseDto> response = mypageService.getUserIntroduction(userId);
     return response;
   }
 
@@ -60,7 +63,7 @@ public class MypageController {
   public ResponseEntity<? super GetLikeKeywordListResponseDto> getLikeKeywordList(
     @AuthenticationPrincipal String userId
   ){
-    ResponseEntity<? super GetLikeKeywordListResponseDto> response = mypageSerivce.getLikeKeywordList(userId);
+    ResponseEntity<? super GetLikeKeywordListResponseDto> response = mypageService.getLikeKeywordList(userId);
     return response;
   }
 
@@ -70,7 +73,7 @@ public class MypageController {
     @RequestBody @Valid AddLikeKeywordRequestDto requestBody,
     @AuthenticationPrincipal String userId
   ){
-    ResponseEntity<ResponseDto> response = mypageSerivce.addLikeKeyword(requestBody, userId);
+    ResponseEntity<ResponseDto> response = mypageService.addLikeKeyword(requestBody, userId);
     return response;
   }
 
@@ -79,7 +82,7 @@ public class MypageController {
     @RequestBody @Valid DeleteLikeKeywordRequestDto requestBody,
     @AuthenticationPrincipal String userId
   ){
-    ResponseEntity<ResponseDto> response = mypageSerivce.deleteLikeKeyword(requestBody, userId);
+    ResponseEntity<ResponseDto> response = mypageService.deleteLikeKeyword(requestBody, userId);
     return response;
   }
   
@@ -89,7 +92,7 @@ public class MypageController {
     @RequestBody @Valid PatchUserAccountRequestDto requestBody,
     @AuthenticationPrincipal String userId
   ){
-    ResponseEntity<ResponseDto> response = mypageSerivce.patchUserAccount(requestBody, userId);
+    ResponseEntity<ResponseDto> response = mypageService.patchUserAccount(requestBody, userId);
     return response;
   }
 
@@ -97,7 +100,33 @@ public class MypageController {
   public ResponseEntity<? super GetUserAccountResponseDto> getUserAccount(
     @AuthenticationPrincipal String userId
   ){
-    ResponseEntity<? super GetUserAccountResponseDto> response = mypageSerivce.getUserAccount(userId);
+    ResponseEntity<? super GetUserAccountResponseDto> response = mypageService.getUserAccount(userId);
     return response;
   }
+
+
+  @GetMapping("/community/post")
+  public ResponseEntity<? super GetCommunityResponseDto> getMyCommunityPost(
+    @AuthenticationPrincipal String userId
+  ) {
+    ResponseEntity<? super GetCommunityResponseDto> response = mypageService.getMyCommunityPost(userId);
+    return response;
+  }
+  
+  @GetMapping("/community/comment")
+  public ResponseEntity<? super GetCommunityCommentResponseDto> getMyCommunityComment(
+    @AuthenticationPrincipal String userId
+  ) {
+    ResponseEntity<? super GetCommunityCommentResponseDto> response = mypageService.getMyCommunityComment(userId);
+    return response;
+  }
+  
+  @GetMapping("/community/liked")
+  public ResponseEntity<? super GetCommunityResponseDto> getMyCommunityLikedPostComment(
+    @AuthenticationPrincipal String userId
+  ) {
+    ResponseEntity<? super GetCommunityResponseDto> response = mypageService.getMyCommunityLikedPostComment(userId);
+    return response;
+  }
+  
 }

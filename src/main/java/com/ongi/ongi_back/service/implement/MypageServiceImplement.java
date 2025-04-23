@@ -2,6 +2,7 @@ package com.ongi.ongi_back.service.implement;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,12 +13,22 @@ import com.ongi.ongi_back.common.dto.request.user.DeleteLikeKeywordRequestDto;
 import com.ongi.ongi_back.common.dto.request.user.PatchUserAccountRequestDto;
 import com.ongi.ongi_back.common.dto.request.user.PatchUserIntroductionRequestDto;
 import com.ongi.ongi_back.common.dto.response.ResponseDto;
+import com.ongi.ongi_back.common.dto.response.community.GetCommunityCommentResponseDto;
+import com.ongi.ongi_back.common.dto.response.community.GetCommunityResponseDto;
+import com.ongi.ongi_back.common.dto.response.group.GetProductListResponseDto;
 import com.ongi.ongi_back.common.dto.response.user.GetLikeKeywordListResponseDto;
 import com.ongi.ongi_back.common.dto.response.user.GetUserAccountResponseDto;
 import com.ongi.ongi_back.common.dto.response.user.GetUserIntroductionResponseDto;
+import com.ongi.ongi_back.common.entity.CommunityCommentEntity;
+import com.ongi.ongi_back.common.entity.CommunityPostEntity;
 import com.ongi.ongi_back.common.entity.LikeKeywordEntity;
+import com.ongi.ongi_back.common.entity.LikedEntity;
 import com.ongi.ongi_back.common.entity.UserEntity;
+import com.ongi.ongi_back.repository.CommunityCommentRepository;
+import com.ongi.ongi_back.repository.CommunityPostRepository;
 import com.ongi.ongi_back.repository.LikeKeywordRepository;
+import com.ongi.ongi_back.repository.LikedRepository;
+import com.ongi.ongi_back.repository.ProductRepository;
 import com.ongi.ongi_back.repository.UserRepository;
 import com.ongi.ongi_back.service.MypageService;
 
@@ -26,8 +37,13 @@ import lombok.RequiredArgsConstructor;
 @Service
 @RequiredArgsConstructor
 public class MypageServiceImplement implements MypageService{
+  
   private final LikeKeywordRepository likeKeywordRepository;
   private final UserRepository userRepository;
+  private final CommunityPostRepository communityPostRepository;
+  private final CommunityCommentRepository communityCommentRepository;
+  private final LikedRepository likedRepository;
+  private final ProductRepository productRepository;
 
   @Override
   public ResponseEntity<ResponseDto> patchIntroduction(PatchUserIntroductionRequestDto dto, String userId) {
@@ -140,5 +156,78 @@ public class MypageServiceImplement implements MypageService{
 
     return GetUserIntroductionResponseDto.success(userEntity, likeKeywordEntities);
   }
+
+  @Override
+  public ResponseEntity<? super GetCommunityResponseDto> getMyCommunityPost(String userId) {
+    
+    List<CommunityPostEntity> communityPostEntities = new ArrayList<>();
+    UserEntity userEntity = null;
+
+    try {
+      userEntity = userRepository.findByUserId(userId);
+      String nickname = userEntity.getNickname();
+      communityPostEntities = communityPostRepository.findByNicknameOrderByPostSequenceDesc(nickname);
+
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+
+    return GetCommunityResponseDto.success(communityPostEntities);
+  }
+
+  @Override
+  public ResponseEntity<? super GetCommunityCommentResponseDto> getMyCommunityComment(String userId) {
+    
+    List<CommunityCommentEntity> communityCommentEntities = new ArrayList<>();
+    UserEntity userEntity = null;
+
+    try {
+      userEntity = userRepository.findByUserId(userId);
+      String nickname = userEntity.getNickname();
+      communityCommentEntities = communityCommentRepository.findByNicknameOrderByCommentSequenceDesc(nickname);
+
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+
+    return GetCommunityCommentResponseDto.success(communityCommentEntities);
+  }
+
+  @Override
+  public ResponseEntity<? super GetCommunityResponseDto> getMyCommunityLikedPostComment(String userId) {
+      List<LikedEntity> likedEntities = new ArrayList<>();
+      List<CommunityPostEntity> communityPostEntities = new ArrayList<>();
+    try {
+      likedEntities = likedRepository.findByUserId(userId);
+      List<Integer> postSequenceList = likedEntities.stream()
+        .map(LikedEntity::getLikedPostSequence)
+        .collect(Collectors.toList());
+
+      communityPostEntities = communityPostRepository.findAllByPostSequenceInOrderByPostSequenceDesc(postSequenceList);
+      
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+    return GetCommunityResponseDto.success(communityPostEntities);
+  }
+
+  @Override
+  public ResponseEntity<? super GetProductListResponseDto> getMyPurchaseList(String userId) {
+    // TODO Auto-generated method stub
+    throw new UnsupportedOperationException("Unimplemented method 'getMyPurchaseList'");
+  }
+
+  @Override
+  public ResponseEntity<? super GetProductListResponseDto> getMySelledList(String userId) {
+    // TODO Auto-generated method stub
+    throw new UnsupportedOperationException("Unimplemented method 'getMySelledList'");
+  }
+
+  @Override
+  public ResponseEntity<? super GetProductListResponseDto> getMyWishList(String userId) {
+    // TODO Auto-generated method stub
+    throw new UnsupportedOperationException("Unimplemented method 'getMyWishList'");
+  }
+
   
 }

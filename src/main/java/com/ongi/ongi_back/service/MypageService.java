@@ -7,6 +7,9 @@ import com.ongi.ongi_back.common.dto.request.user.DeleteLikeKeywordRequestDto;
 import com.ongi.ongi_back.common.dto.request.user.PatchUserAccountRequestDto;
 import com.ongi.ongi_back.common.dto.request.user.PatchUserIntroductionRequestDto;
 import com.ongi.ongi_back.common.dto.response.ResponseDto;
+import com.ongi.ongi_back.common.dto.response.community.GetCommunityCommentResponseDto;
+import com.ongi.ongi_back.common.dto.response.community.GetCommunityResponseDto;
+import com.ongi.ongi_back.common.dto.response.group.GetProductListResponseDto;
 import com.ongi.ongi_back.common.dto.response.user.GetLikeKeywordListResponseDto;
 import com.ongi.ongi_back.common.dto.response.user.GetUserAccountResponseDto;
 import com.ongi.ongi_back.common.dto.response.user.GetUserIntroductionResponseDto;
@@ -22,4 +25,11 @@ public interface MypageService {
   ResponseEntity<? super GetUserAccountResponseDto> getUserAccount(String userId);
   ResponseEntity<? super GetLikeKeywordListResponseDto> getLikeKeywordList(String userId);
 
+  ResponseEntity<? super GetCommunityResponseDto> getMyCommunityPost(String userId);
+  ResponseEntity<? super GetCommunityCommentResponseDto> getMyCommunityComment(String userId);
+  ResponseEntity<? super GetCommunityResponseDto> getMyCommunityLikedPostComment(String userId);
+
+  ResponseEntity<? super GetProductListResponseDto> getMyPurchaseList(String userId);
+  ResponseEntity<? super GetProductListResponseDto> getMySelledList(String userId);
+  ResponseEntity<? super GetProductListResponseDto> getMyWishList(String userId);
 }

@@ -1,15 +1,13 @@
 package com.ongi.ongi_back.service.implement;
 
-import java.io.*;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URI;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.util.Base64;
 
-
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -20,11 +18,11 @@ import com.ongi.ongi_back.common.dto.request.payment.PostConfirmRequestDto;
 import com.ongi.ongi_back.common.dto.request.payment.PostOrderRequestDto;
 import com.ongi.ongi_back.common.dto.response.ResponseDto;
 import com.ongi.ongi_back.common.dto.response.payment.TossConfirmResponseDto;
-import com.ongi.ongi_back.common.entity.PaymentOrderEntity;
 import com.ongi.ongi_back.common.entity.PaymentConfirmEntity;
+import com.ongi.ongi_back.common.entity.PaymentOrderEntity;
 import com.ongi.ongi_back.handler.TossErrorStatusHandler;
 import com.ongi.ongi_back.repository.OrderRepository;
-import com.ongi.ongi_back.repository.PaymentConfirmRepository;
+import com.ongi.ongi_back.repository.PaymentConformRepository;
 import com.ongi.ongi_back.service.TossPaymentService;
 
 import lombok.RequiredArgsConstructor;
@@ -33,7 +31,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class TossPaymentServiceImplement implements TossPaymentService {
 
-  private final PaymentConfirmRepository paymentRepository;
+  private final PaymentConformRepository paymentRepository;
   private final OrderRepository orderRepository;
   @Override
   public ResponseEntity<ResponseDto> confirmPayment(PostConfirmRequestDto dto, String userId) throws Exception {

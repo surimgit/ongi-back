@@ -24,7 +24,6 @@ import lombok.RequiredArgsConstructor;
 public class QuestionServiceImplement implements QuestionService {
 
   private final QuestionRepository questionRepository;
-  private final UserRepository userRepository;
 
   @Override
   public ResponseEntity<ResponseDto> postQuestion(PostQuestionRequestDto dto, String userId) {
