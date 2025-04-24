@@ -18,10 +18,10 @@ import com.ongi.ongi_back.common.dto.request.community.PatchCommunityPostRequest
 import com.ongi.ongi_back.common.dto.request.community.PostCommentRequestDto;
 import com.ongi.ongi_back.common.dto.request.community.PostCommunityRequestDto;
 import com.ongi.ongi_back.common.dto.response.ResponseDto;
-import com.ongi.ongi_back.common.dto.response.community.GetCommunityPostResponseDto;
-import com.ongi.ongi_back.common.dto.response.community.GetCommunityResponseDto;
 import com.ongi.ongi_back.common.dto.response.community.GetCommunityCommentResponseDto;
 import com.ongi.ongi_back.common.dto.response.community.GetCommunityLikedResponseDto;
+import com.ongi.ongi_back.common.dto.response.community.GetCommunityPostResponseDto;
+import com.ongi.ongi_back.common.dto.response.community.GetCommunityResponseDto;
 import com.ongi.ongi_back.service.CommunityService;
 
 import jakarta.validation.Valid;
