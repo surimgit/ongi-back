@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository;
 import com.ongi.ongi_back.common.entity.PaymentConfirmEntity;
 
 @Repository
-public interface PaymentConfirmRepository extends JpaRepository<PaymentConfirmEntity, String> {
+public interface PaymentConformRepository extends JpaRepository<PaymentConfirmEntity, String> {
   PaymentConfirmEntity findByPaymentKey(String paymentKey);
 }

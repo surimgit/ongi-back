@@ -1,6 +1,7 @@
 package com.ongi.ongi_back.service.implement;
 
-import java.io.*;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URI;
 import java.net.URL;
@@ -36,7 +37,9 @@ import com.ongi.ongi_back.common.vo.TossCancel;
 import com.ongi.ongi_back.common.entity.OrderItemEntity;
 import com.ongi.ongi_back.common.entity.PaymentCancelEntity;
 import com.ongi.ongi_back.common.entity.PaymentConfirmEntity;
+import com.ongi.ongi_back.common.entity.PaymentOrderEntity;
 import com.ongi.ongi_back.handler.TossErrorStatusHandler;
+
 import com.ongi.ongi_back.repository.*;
 import com.ongi.ongi_back.service.TossPaymentService;
 
@@ -46,7 +49,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class TossPaymentServiceImplement implements TossPaymentService {
 
-  private final PaymentConfirmRepository paymentRepository;
+  private final PaymentConformRepository paymentRepository;
   private final OrderRepository orderRepository;
   private final ProductRepository productRepository;
   private final StockReservationRepository stockReservationRepository;

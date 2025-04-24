@@ -13,14 +13,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.ongi.ongi_back.common.dto.request.community.PatchCommunityCommentRequestDto;
 import com.ongi.ongi_back.common.dto.request.community.PatchCommunityPostRequestDto;
 import com.ongi.ongi_back.common.dto.request.community.PostCommentRequestDto;
 import com.ongi.ongi_back.common.dto.request.community.PostCommunityRequestDto;
 import com.ongi.ongi_back.common.dto.response.ResponseDto;
-import com.ongi.ongi_back.common.dto.response.community.GetCommunityPostResponseDto;
-import com.ongi.ongi_back.common.dto.response.community.GetCommunityResponseDto;
 import com.ongi.ongi_back.common.dto.response.community.GetCommunityCommentResponseDto;
 import com.ongi.ongi_back.common.dto.response.community.GetCommunityLikedResponseDto;
+import com.ongi.ongi_back.common.dto.response.community.GetCommunityPostResponseDto;
+import com.ongi.ongi_back.common.dto.response.community.GetCommunityResponseDto;
 import com.ongi.ongi_back.service.CommunityService;
 
 import jakarta.validation.Valid;
@@ -145,6 +146,17 @@ public class CommunityController {
         @PathVariable("postSequence") Integer postSequence
     )   {
         ResponseEntity<? super GetCommunityCommentResponseDto> response = communityService.getCommunityComment(postSequence);
+        return response;
+    }
+
+    @PatchMapping("/{postSequence}/comment/{commentSequence}")
+    public ResponseEntity<ResponseDto> patchCommunityComment(
+        @RequestBody @Valid PatchCommunityCommentRequestDto dto,
+        @PathVariable("postSequence") Integer postSequence,
+        @PathVariable("commentSequence") Integer commentSequence,
+        @AuthenticationPrincipal String userId
+    )   {
+        ResponseEntity<ResponseDto> response = communityService.patchCommunityComment(dto, postSequence, commentSequence, userId);
         return response;
     }
 

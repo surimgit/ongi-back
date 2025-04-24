@@ -55,7 +55,7 @@ public class AlertServiceimplement implements AlertService {
         
         try {
 
-            alertEntities = alertRespository.findByReceiverId(userId);
+            alertEntities = alertRespository.findByReceiverIdOrderByAlertSequenceDesc(userId);
             
         } catch (Exception exception) {
             exception.printStackTrace();
@@ -63,6 +63,49 @@ public class AlertServiceimplement implements AlertService {
         }
 
         return GetAlertResponseDto.success(alertEntities);
+    }
+
+    @Override
+    public ResponseEntity<ResponseDto> patchAlertRead(Integer alertSequence) {
+        
+        try {
+
+            AlertEntity alertEntity = alertRespository.findByAlertSequence(alertSequence);
+            alertEntity.setReadPara(true);
+            alertRespository.save(alertEntity);
+            
+        } catch (Exception exception) {
+            exception.printStackTrace();
+            return ResponseDto.databaseError();
+        }
+
+        return ResponseDto.success(HttpStatus.OK);
+    }
+
+    @Override
+    public ResponseEntity<ResponseDto> deleteAlert(Integer alertSequence, String userId) {
+        
+        try {
+
+            if (alertSequence == null) {
+                alertRespository.deleteByReceiverId(userId);
+            }
+            else {
+                AlertEntity alertEntity = alertRespository.findByAlertSequence(alertSequence);
+                
+                String receiverId = alertEntity.getReceiverId();
+                boolean isReceiver = receiverId.equals(userId);
+                if (!isReceiver) return ResponseDto.noPermission();
+
+                alertRespository.deleteByAlertSequence(alertSequence);
+            }
+            
+        } catch (Exception exception) {
+            exception.printStackTrace();
+            return ResponseDto.databaseError();
+        }
+
+        return ResponseDto.success(HttpStatus.OK);
     }
     
 }

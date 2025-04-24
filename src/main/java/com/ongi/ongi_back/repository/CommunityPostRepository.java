@@ -22,5 +22,7 @@ public interface CommunityPostRepository extends JpaRepository<CommunityPostEnti
     List<CommunityPostEntity> findByTitleContainingOrderByPostSequenceDesc(String title);
     List<CommunityPostEntity> findByContentContainingOrderByPostSequenceDesc(String keyword);
 
+    List<CommunityPostEntity> findAllByPostSequenceInOrderByPostSequenceDesc(List<Integer> postSequence);
+
     boolean existsByPostSequence(Integer postSequence);
 }

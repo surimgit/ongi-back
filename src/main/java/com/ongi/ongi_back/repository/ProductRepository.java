@@ -21,4 +21,6 @@ public interface ProductRepository extends JpaRepository<ProductEntity, Integer>
   @Query("SELECT p FROM product p WHERE p.sequence IN :sequences ORDER BY sequence DESC")
   List<ProductEntity> findBySequences(List<Integer> sequences);
 
+  List<ProductEntity> findAllByUserIdOrderBySequenceDesc(String userId);
+
 }

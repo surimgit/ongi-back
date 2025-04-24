@@ -22,8 +22,7 @@ public class SignUpRequestDto {
   private String userPassword;
 
   @NotBlank
-  @Pattern(regexp="^[가-힣]{2,5}$")
-  private String name;
+  private String nickname;
 
   @NotBlank
   @Pattern(regexp="^01([0|1|6|7|8|9])([0-9]{3,4})([0-9]{4})$")
