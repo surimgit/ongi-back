@@ -195,7 +195,5 @@ public class GroupPurchaseServiceImplements implements GroupPurchaseService{
 
     return GetReservationResponseDto.success(quantity);
   }
-
-
   
 }

@@ -47,6 +47,7 @@ public interface ResponseMessage {
     String NO_METADATA = "No Metadata";
 
     String NO_EXIST_USER = "No Exist User.";
+    String NO_EXIST_WISH_LIST = "No Exist Wish List.";
 
     String NO_EXIST_NEEDHELPERPOST = "No Exist NeedhelperPost.";
     String NO_EXIST_CHATROOM = "No Exist ChatRoom.";

@@ -96,6 +96,5 @@ public class GroupPurchaseController {
     ResponseEntity<? super GetReservationResponseDto> response = groupPurchaseService.getStockReservation(sequence);
     return response;
   }
-
 }
 

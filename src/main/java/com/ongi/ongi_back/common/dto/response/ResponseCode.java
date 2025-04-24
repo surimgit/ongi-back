@@ -43,6 +43,7 @@ public interface ResponseCode {
     String NO_METADATA = "NMD";
 
     String NO_EXIST_USER = "NU";
+    String NO_EXIST_WISH_LIST = "NEWL";
     
     String NO_EXIST_NEEDHELPERPOST = "NN";
     String NO_EXIST_CHATROOM = "NC";

@@ -38,6 +38,11 @@ public class ResponseDto {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(body);
     }
 
+    public static ResponseEntity<ResponseDto> noExistWishList() {
+        ResponseDto body = new ResponseDto(ResponseCode.NO_EXIST_WISH_LIST, ResponseMessage.NO_EXIST_WISH_LIST);
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(body);
+    }
+
     public static ResponseEntity<ResponseDto> deleted(HttpStatus status) {
         ResponseDto body = new ResponseDto(ResponseCode.SUCCESS, ResponseMessage.DELETED);
         return ResponseEntity.status(status).body(body);
