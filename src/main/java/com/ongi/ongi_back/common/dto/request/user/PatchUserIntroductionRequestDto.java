@@ -24,6 +24,6 @@ public class PatchUserIntroductionRequestDto {
   
   private String job;
   private String selfIntro;
-
+  private String profileImage;
 }
                                                                               

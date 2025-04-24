@@ -57,6 +57,7 @@ public class UserEntity {
         if (dto.getMbti() != null) this.mbti = dto.getMbti();
         if (dto.getJob() != null) this.job = dto.getJob();
         if (dto.getSelfIntro() != null) this.selfIntro = dto.getSelfIntro();
+        if (dto.getProfileImage() != null) this.profileImage = dto.getProfileImage();
     }
 
     public void patchUserAccount(PatchUserAccountRequestDto dto){

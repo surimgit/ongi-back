@@ -51,8 +51,10 @@ public class MypageServiceImplement implements MypageService{
     try {
       UserEntity userEntity = userRepository.findByUserId(userId);
       if(userEntity == null) return ResponseDto.noExistUser();
-
       userEntity.patchIntroduction(dto);
+      if(dto.getProfileImage() != null && !dto.getProfileImage().isBlank()){
+        userEntity.setProfileImage(dto.getProfileImage());
+      }
       userRepository.save(userEntity);
     } catch (Exception e) {
       e.printStackTrace();
@@ -71,6 +73,7 @@ public class MypageServiceImplement implements MypageService{
 
         userEntity.patchUserAccount(dto);
         userRepository.save(userEntity);
+        
       } catch (Exception e) {
         e.printStackTrace();
         return ResponseDto.databaseError();
@@ -149,7 +152,8 @@ public class MypageServiceImplement implements MypageService{
     try {
       likeKeywordEntities = likeKeywordRepository.findAllByUserId(userId);
       userEntity = userRepository.findByUserId(userId);
-    
+      if(likeKeywordEntities == null | userEntity == null) return ResponseDto.noExistUser();
+
     } catch (Exception e) {
       e.printStackTrace();
     }
