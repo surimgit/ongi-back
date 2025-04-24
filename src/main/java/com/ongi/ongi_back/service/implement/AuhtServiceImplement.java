@@ -18,6 +18,7 @@ import com.ongi.ongi_back.common.dto.request.auth.SignUpRequestDto;
 import com.ongi.ongi_back.common.dto.response.ResponseDto;
 import com.ongi.ongi_back.common.dto.response.auth.SignInResponseDto;
 import com.ongi.ongi_back.common.entity.UserEntity;
+import com.ongi.ongi_back.common.entity.VerificationCodeEntity;
 import com.ongi.ongi_back.common.util.RedisUtil;
 import com.ongi.ongi_back.provider.JwtProvider;
 import com.ongi.ongi_back.repository.UserRepository;

@@ -17,6 +17,7 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.ongi.ongi_back.common.dto.request.payment.PostConfirmRequestDto;
 import com.ongi.ongi_back.common.dto.request.payment.PostOrderRequestDto;
 import com.ongi.ongi_back.common.dto.response.ResponseDto;
+import com.ongi.ongi_back.common.dto.response.payment.GetOrderResponseDto;
 import com.ongi.ongi_back.common.dto.response.payment.TossConfirmResponseDto;
 import com.ongi.ongi_back.common.entity.PaymentConfirmEntity;
 import com.ongi.ongi_back.common.entity.PaymentOrderEntity;
@@ -113,6 +114,20 @@ public class TossPaymentServiceImplement implements TossPaymentService {
 
     return ResponseDto.success(HttpStatus.OK);
 
+  }
+
+  @Override
+  public ResponseEntity<? super GetOrderResponseDto> getRecentlyOrder(String userId) {
+    PaymentOrderEntity paymentOrderEntity;
+
+    try {
+      paymentOrderEntity = orderRepository.findByUserIdOrderByCreatedAtDesc(userId);
+      
+    } catch(Exception exception) {
+      return ResponseDto.databaseError();
+    }
+
+    return GetOrderResponseDto.success(paymentOrderEntity);
   }
 
 }

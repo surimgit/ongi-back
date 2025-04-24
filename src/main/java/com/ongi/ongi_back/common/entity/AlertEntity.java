@@ -27,6 +27,7 @@ public class AlertEntity {
     private String receiverId;
     private Integer alertEntitySequence;
     private String alertContent;
+    private boolean readPara;
 
     public AlertEntity(PostAlertRequestDto dto) {
         this.alertType = dto.getAlertType();
@@ -34,5 +35,10 @@ public class AlertEntity {
         this.receiverId = dto.getReceiverId();
         this.alertEntitySequence = dto.getAlertEntitySequence();
         this.alertContent = "";
-    };
+        this.readPara = false;
+    }
+
+    public void patch() {
+        this.readPara = true;
+    }
 }

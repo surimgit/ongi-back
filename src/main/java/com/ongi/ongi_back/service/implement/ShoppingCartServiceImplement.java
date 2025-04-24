@@ -85,7 +85,6 @@ public class ShoppingCartServiceImplement implements ShoppingCartService {
     try {
 
       list = shoppingCartRepository.findCartDetails(userId);
-      if(list.size() == 0) return ResponseDto.noExistShoppingCart();
 
     } catch(Exception exception){
       exception.printStackTrace();
@@ -103,7 +102,6 @@ public class ShoppingCartServiceImplement implements ShoppingCartService {
       Integer shoppingCartSequence = dto.getShoppingCartSequence();
       
       ShoppingCartEntity cartEntity = shoppingCartRepository.findByShoppingCartSequenceAndUserId(shoppingCartSequence, userId);
-      if(cartEntity == null) return ResponseDto.noExistShoppingCart();
 
       String cartUserId = cartEntity.getUserId();
       boolean isUser = cartUserId.equals(userId);
