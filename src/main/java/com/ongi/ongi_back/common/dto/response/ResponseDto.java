@@ -218,6 +218,17 @@ public class ResponseDto {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(body);
     }
 
+    public static ResponseEntity<ResponseDto> noExistReport() {
+        ResponseDto body = new ResponseDto(ResponseCode.NO_EXIST_REPORT, ResponseMessage.NO_EXIST_REPORT);
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(body);
+    }
+
+    public static ResponseEntity<ResponseDto> alreadyResigned() {
+        ResponseDto body = new ResponseDto(ResponseCode.ALREADY_RESIGNED_USER, ResponseMessage.ALREADY_RESIGNED_USER);
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(body);
+    }
+
+
     public static ResponseEntity<ResponseDto> unauthorizedKey() {
         ResponseDto body = new ResponseDto(ResponseCode.UNAUTHORIZED_KEY, ResponseMessage.UNAUTHORIZED_KEY);
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(body);

@@ -51,12 +51,14 @@ public interface ResponseMessage {
     String NO_EXIST_POST = "No Exist Post.";
     String NO_EXIST_COMMENT = "No Exist Comment.";
     String NO_EXIST_SCHEDULE = "No Exist Schedule.";
+    String NO_EXIST_REPORT = "No Exist Report.";
 
     String NOT_ENOUGH_POINT = "Not Enough Point.";
 
     String NO_SEARCH_KEYWORD = "No Search Keyword.";
 
     String ALREADY_LIKED_POST = "Already Liked Post.";
+    String ALREADY_RESIGNED_USER = "Already Resigned User.";
     // ============================================== //
     // HTTP/1.1 401 Unauthorized
     String UNAUTHORIZED_KEY = "인증되지 않은 시크릿 키 혹은 클라이언트 키 입니다.";

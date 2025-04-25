@@ -15,6 +15,7 @@ import com.ongi.ongi_back.common.dto.request.community.PostCommentRequestDto;
 import com.ongi.ongi_back.common.dto.request.community.PostCommunityRequestDto;
 import com.ongi.ongi_back.common.dto.response.ResponseDto;
 import com.ongi.ongi_back.common.dto.response.community.GetCommunityCommentResponseDto;
+import com.ongi.ongi_back.common.dto.response.community.GetCommunityCommentsResponseDto;
 import com.ongi.ongi_back.common.dto.response.community.GetCommunityLikedResponseDto;
 import com.ongi.ongi_back.common.dto.response.community.GetCommunityPostResponseDto;
 import com.ongi.ongi_back.common.dto.response.community.GetCommunityResponseDto;
@@ -300,7 +301,7 @@ public class CommunityServiceImplement implements CommunityService {
     }
 
     @Override
-    public ResponseEntity<? super GetCommunityCommentResponseDto> getCommunityComment(Integer postSequence) {
+    public ResponseEntity<? super GetCommunityCommentsResponseDto> getCommunityComments(Integer postSequence) {
 
         List<CommunityCommentEntity> communityCommentEntities = new ArrayList<>();
         
@@ -313,7 +314,7 @@ public class CommunityServiceImplement implements CommunityService {
             return ResponseDto.databaseError();
         }
 
-        return GetCommunityCommentResponseDto.success(communityCommentEntities);
+        return GetCommunityCommentsResponseDto.success(communityCommentEntities);
     }
 
     @Override
@@ -342,6 +343,27 @@ public class CommunityServiceImplement implements CommunityService {
         }
 
         return ResponseDto.success(HttpStatus.OK);
+    }
+
+    @Override
+    public ResponseEntity<? super GetCommunityCommentResponseDto> getCommunityComment(Integer postSequence, Integer commentSequence) {
+        
+        CommunityCommentEntity communityCommentEntity = null;
+
+        try {
+
+            CommunityPostEntity communityPostEntity = communityPostRepository.findByPostSequence(postSequence);
+            if (communityPostEntity == null) return ResponseDto.noExistPost();
+
+            communityCommentEntity = communityCommentRepository.findByCommentSequence(commentSequence);
+            if (communityCommentEntity == null) return ResponseDto.noExsitComment();
+            
+        } catch (Exception exception) {
+            exception.printStackTrace();
+            return ResponseDto.databaseError();
+        }
+
+        return GetCommunityCommentResponseDto.success(communityCommentEntity);
     }
 
     @Override
