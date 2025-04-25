@@ -1,5 +1,7 @@
 package com.ongi.ongi_back.controller;
 
+import java.util.Map;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -12,6 +14,7 @@ import com.ongi.ongi_back.common.dto.request.auth.IdCheckRequestDto;
 import com.ongi.ongi_back.common.dto.request.auth.ResignedCheckRequestDto;
 import com.ongi.ongi_back.common.dto.request.auth.SignInRequestDto;
 import com.ongi.ongi_back.common.dto.request.auth.SignUpRequestDto;
+import com.ongi.ongi_back.common.dto.request.auth.VerificationRequestDto;
 import com.ongi.ongi_back.common.dto.response.ResponseDto;
 import com.ongi.ongi_back.common.dto.response.auth.SignInResponseDto;
 import com.ongi.ongi_back.service.AuthService;
