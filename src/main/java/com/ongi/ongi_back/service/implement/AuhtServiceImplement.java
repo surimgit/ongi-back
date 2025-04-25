@@ -18,7 +18,6 @@ import com.ongi.ongi_back.common.dto.request.auth.SignUpRequestDto;
 import com.ongi.ongi_back.common.dto.response.ResponseDto;
 import com.ongi.ongi_back.common.dto.response.auth.SignInResponseDto;
 import com.ongi.ongi_back.common.entity.UserEntity;
-import com.ongi.ongi_back.common.entity.VerificationCodeEntity;
 import com.ongi.ongi_back.common.util.RedisUtil;
 import com.ongi.ongi_back.provider.JwtProvider;
 import com.ongi.ongi_back.repository.UserRepository;
@@ -195,4 +194,10 @@ public class AuhtServiceImplement implements AuthService {
 
         return ResponseDto.success(HttpStatus.CREATED);
     }
+
+    // @Override
+    // public boolean validateVerificationCode(String telNumber, String code) {
+    //     // TODO Auto-generated method stub
+    //     throw new UnsupportedOperationException("Unimplemented method 'validateVerificationCode'");
+    // }
 }
