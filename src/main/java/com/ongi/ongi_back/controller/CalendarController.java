@@ -43,7 +43,7 @@ public class CalendarController {
 
     @PatchMapping("/{calendarSequence}")
     public ResponseEntity<ResponseDto> patchSchedule(
-            @RequestBody @Valid PatchCalendarRequestDto requestBody,
+            @RequestBody PatchCalendarRequestDto requestBody,
             @PathVariable("calendarSequence") Integer calendarSequence,
             @AuthenticationPrincipal String userId
     ) {

@@ -2,6 +2,8 @@ package com.ongi.ongi_back.service;
 
 import org.springframework.http.ResponseEntity;
 
+import com.ongi.ongi_back.common.dto.request.auth.FindIdRequestDto;
+import com.ongi.ongi_back.common.dto.request.auth.FindPasswordRequestDto;
 import com.ongi.ongi_back.common.dto.request.auth.IdCheckRequestDto;
 import com.ongi.ongi_back.common.dto.request.auth.ResignedCheckRequestDto;
 import com.ongi.ongi_back.common.dto.request.auth.SignInRequestDto;
@@ -15,4 +17,7 @@ public interface  AuthService {
     ResponseEntity<ResponseDto> resignedCheck(ResignedCheckRequestDto dto);
     ResponseEntity<? super ResponseDto> sendVerificationCode(String telNumber);
     ResponseEntity<? super ResponseDto> signIn(SignInRequestDto dto);
+
+    ResponseEntity<? super ResponseDto> findId(FindIdRequestDto dto);
+    ResponseEntity<? super ResponseDto> findPassword(FindPasswordRequestDto dto);
 }
