@@ -24,6 +24,7 @@ public interface ResponseMessage {
 
     String ALREADY_LEFT_ANSWER = "Already Left Answer.";
     String OUT_OF_STOCK = "Out Of Stock";
+    String ALREADY_POST_REVIEW = "Already Post Review";
 
     String EXIST_PAYMENT = "Exist Payment.";
     String ALREADY_PROCESSED_PAYMENT = "이미 처리된 결제 입니다.";

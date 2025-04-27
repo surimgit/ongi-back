@@ -195,4 +195,16 @@ public class AuhtServiceImplement implements AuthService {
 
         return ResponseDto.success(HttpStatus.CREATED);
     }
+
+    @Override
+    public boolean validateVerificationCode(String telNumber, String code) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'validateVerificationCode'");
+    }
+
+    @Override
+    public ResponseEntity<? super ResponseDto> sendVerificationCode(String telNumber) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'sendVerificationCode'");
+    }
 }

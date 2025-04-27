@@ -32,6 +32,7 @@ public interface ResponseCode {
     String NOT_AVAILABLE_PAYMENT = "NOT_AVAILABLE_PAYMENT";
 
     String OUT_OF_STOCK = "OOS";
+    String ALREADY_POST_REVIEW = "APR";
 
     String ALREADY_CANCELED_PAYMENT = "ALREADY_CANCELED_PAYMENT";
     

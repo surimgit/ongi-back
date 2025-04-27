@@ -317,4 +317,9 @@ public class ResponseDto {
         ResponseDto body = new ResponseDto(ResponseCode.OUT_OF_STOCK, ResponseMessage.OUT_OF_STOCK);
         return ResponseEntity.status(HttpStatus.FORBIDDEN).body(body);
     }
+
+    public static ResponseEntity<ResponseDto> alreadyPostReview() {
+        ResponseDto body = new ResponseDto(ResponseCode.ALREADY_POST_REVIEW, ResponseMessage.ALREADY_POST_REVIEW);
+        return ResponseEntity.status(HttpStatus.FORBIDDEN).body(body);
+    }
 }
