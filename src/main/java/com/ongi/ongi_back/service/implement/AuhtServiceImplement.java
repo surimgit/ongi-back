@@ -1,5 +1,6 @@
 package com.ongi.ongi_back.service.implement;
 
+import java.security.SecureRandom;
 import java.time.LocalDateTime;
 import java.util.Optional;
 import java.util.Random;
@@ -14,11 +15,14 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.ongi.ongi_back.common.dto.request.auth.FindIdRequestDto;
+import com.ongi.ongi_back.common.dto.request.auth.FindPasswordRequestDto;
 import com.ongi.ongi_back.common.dto.request.auth.IdCheckRequestDto;
 import com.ongi.ongi_back.common.dto.request.auth.ResignedCheckRequestDto;
 import com.ongi.ongi_back.common.dto.request.auth.SignInRequestDto;
 import com.ongi.ongi_back.common.dto.request.auth.SignUpRequestDto;
 import com.ongi.ongi_back.common.dto.response.ResponseDto;
+import com.ongi.ongi_back.common.dto.response.auth.FindIdResponseDto;
 import com.ongi.ongi_back.common.dto.response.auth.SignInResponseDto;
 import com.ongi.ongi_back.common.entity.UserEntity;
 import com.ongi.ongi_back.common.entity.VerificationCodeEntity;
@@ -57,11 +61,12 @@ public class AuhtServiceImplement implements AuthService {
         @Value("${solapi.apiKey}") String apiKey,
         @Value("${solapi.apiSecret}") String apiSecret,
         @Value("${solapi.sender}") String senderTelNumber
-    ) {
+    , VerificationCodeRepository verificationCodeRepository) {
         this.userRepository = userRepository;
         this.jwtProvider = jwtProvider;
         this.senderTelNumber = senderTelNumber;
         this.messageService = NurigoApp.INSTANCE.initialize(apiKey, apiSecret, "https://api.solapi.com");
+        this.verificationCodeRepository = verificationCodeRepository;
     }
 
     public static String createSmsKey() {
@@ -200,5 +205,51 @@ public class AuhtServiceImplement implements AuthService {
         }
 
         return ResponseDto.success(HttpStatus.CREATED);
+    }
+
+    @Override
+    public ResponseEntity<? super ResponseDto> findId(FindIdRequestDto dto) {
+        try {
+            UserEntity userEntity = userRepository.findByNicknameAndTelNumber(dto.getNickname(), dto.getTelNumber());
+            if(userEntity == null) return ResponseDto.noExistUser();
+
+            return FindIdResponseDto.success(userEntity.getUserId());
+        } catch (Exception exception) {
+            exception.printStackTrace();
+            return ResponseDto.databaseError();
+        }
+    }
+
+    @Override
+    public ResponseEntity<? super ResponseDto> findPassword(FindPasswordRequestDto dto) {
+        try {
+            UserEntity userEntity = userRepository.findByUserIdAndTelNumber(dto.getUserId(), dto.getTelNumber());
+            if(userEntity == null) return ResponseDto.noExistUser();
+
+            String tempPassword = createTempPassword();
+            String encoded = passwordEncoder.encode(tempPassword);
+            userEntity.setUserPassword(encoded);
+            userRepository.save(userEntity);
+
+            String message = "[온기] 임시 비밀번호는 [" + tempPassword + "] 입니다.";
+            return solapiSendSms(dto.getTelNumber(), message);
+        } catch (Exception exception) {
+            exception.printStackTrace();
+            return ResponseDto.databaseError();
+        }
+    }
+
+    public String createTempPassword() {
+        int length = 10;
+        String chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+        StringBuilder sb = new StringBuilder();
+        SecureRandom random = new SecureRandom();
+
+        for (int i = 0; i < length; i++) {
+            int index = random.nextInt(chars.length());
+            sb.append(chars.charAt(index));
+        }
+
+        return sb.toString();
     }
 }

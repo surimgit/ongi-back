@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.ongi.ongi_back.common.dto.request.user.PatchResignRequestDto;
 import com.ongi.ongi_back.common.dto.response.ResponseDto;
+import com.ongi.ongi_back.common.dto.response.admin.GetIsAdminResponseDto;
 import com.ongi.ongi_back.common.dto.response.user.GetSignInUserResponseDto;
 import com.ongi.ongi_back.common.dto.response.user.GetUserNicknameResponseDto;
 import com.ongi.ongi_back.service.UserService;
@@ -48,6 +49,14 @@ public class UserController {
         @AuthenticationPrincipal String userId
     )   {
         ResponseEntity<ResponseDto> response = userService.resignUser(dto, userId);
+        return response;
+    }
+
+    @GetMapping("/is-admin")
+    public ResponseEntity<? super GetIsAdminResponseDto> getIsAdmin(
+        @AuthenticationPrincipal String userId
+    ) {
+        ResponseEntity<? super GetIsAdminResponseDto> response = userService.getIsAdmin(userId);
         return response;
     }
 }

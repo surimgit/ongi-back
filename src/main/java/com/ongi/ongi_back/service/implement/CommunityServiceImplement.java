@@ -7,7 +7,9 @@ import java.util.List;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.ongi.ongi_back.common.dto.request.community.PatchCommunityCommentRequestDto;
 import com.ongi.ongi_back.common.dto.request.community.PatchCommunityPostRequestDto;
@@ -414,4 +416,19 @@ public class CommunityServiceImplement implements CommunityService {
 
         return GetCommunityLikedResponseDto.success(likedEntities);
     }
+
+    @Override
+    @Scheduled(cron = " 0 0 12 * * ? ")
+    @Transactional
+    public void selectHotPosts() {
+
+        List<CommunityPostEntity> hotPosts = new ArrayList<>();
+        hotPosts = communityPostRepository.findTop10RecentPopularPosts();
+
+        for (CommunityPostEntity communityPostEntity: hotPosts) {
+            communityPostEntity.setHotPost(true);
+        }
+        communityPostRepository.saveAll(hotPosts);
+    }
+
 }

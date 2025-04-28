@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import com.ongi.ongi_back.common.dto.request.user.PatchResignRequestDto;
 import com.ongi.ongi_back.common.dto.response.ResponseDto;
+import com.ongi.ongi_back.common.dto.response.admin.GetIsAdminResponseDto;
 import com.ongi.ongi_back.common.dto.response.user.GetSignInUserResponseDto;
 import com.ongi.ongi_back.common.dto.response.user.GetUserNicknameResponseDto;
 import com.ongi.ongi_back.common.entity.UserEntity;
@@ -96,4 +97,21 @@ public class UserServiceImplement implements UserService{
         return ResponseDto.success(HttpStatus.OK);
     }
     
+    @Override
+    public ResponseEntity<? super GetIsAdminResponseDto> getIsAdmin(String userId) {
+
+        UserEntity userEntity = null;
+        
+        try {
+
+        userEntity = userRepository.findByIsAdminTrue();
+        if (userEntity.getIsResigned()) return ResponseDto.alreadyResigned();
+        
+        } catch (Exception exception) {
+        exception.printStackTrace();
+        return ResponseDto.databaseError();
+        }
+
+        return GetIsAdminResponseDto.success(userEntity);
+    }
 }

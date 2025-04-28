@@ -5,6 +5,7 @@ import org.springframework.stereotype.Repository;
 
 import com.ongi.ongi_back.common.entity.UserEntity;
 
+
 @Repository
 public interface UserRepository extends JpaRepository<UserEntity, String>{
     
@@ -13,6 +14,8 @@ public interface UserRepository extends JpaRepository<UserEntity, String>{
     String findNicknameByUserId(String userId);
     UserEntity findByUserId(String userId);
     UserEntity findByTelNumber(String telNumber);
-
+    UserEntity findByNicknameAndTelNumber(String nickname, String telNumber);
+    UserEntity findByUserIdAndTelNumber(String userId, String telNumber);
+    UserEntity findByIsAdminTrue();
     Integer countAllByIsResigned(boolean isResigned);
 }

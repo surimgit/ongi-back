@@ -41,4 +41,7 @@ public interface CommunityService {
     // 좋아요 누르기, 누른 명단 불러오기
     ResponseEntity<ResponseDto> putCommunityLiked(Integer postSequence, String userId);
     ResponseEntity<? super GetCommunityLikedResponseDto> getCommunityLiked(Integer postSequence);
+
+    // 인기글
+    public void selectHotPosts();
 }

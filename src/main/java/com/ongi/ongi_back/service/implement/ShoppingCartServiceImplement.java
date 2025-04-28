@@ -13,9 +13,7 @@ import com.ongi.ongi_back.common.dto.request.shoppingCart.PostShoppingCartReques
 import com.ongi.ongi_back.common.dto.response.ResponseDto;
 import com.ongi.ongi_back.common.dto.response.shoppingCart.GetShoppingCartResponseDto;
 import com.ongi.ongi_back.common.entity.ShoppingCartEntity;
-import com.ongi.ongi_back.common.entity.ProductEntity;
 import com.ongi.ongi_back.common.vo.ShoppingCartVO;
-import com.ongi.ongi_back.repository.ProductRepository;
 import com.ongi.ongi_back.repository.ShoppingCartRepository;
 import com.ongi.ongi_back.service.ShoppingCartService;
 

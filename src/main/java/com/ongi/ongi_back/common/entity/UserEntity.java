@@ -1,6 +1,8 @@
 package com.ongi.ongi_back.common.entity;
 
 import com.ongi.ongi_back.common.dto.request.auth.SignUpRequestDto;
+import com.ongi.ongi_back.common.dto.request.user.PatchUserAccountRequestDto;
+import com.ongi.ongi_back.common.dto.request.user.PatchUserIntroductionRequestDto;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -46,6 +48,22 @@ public class UserEntity {
 
         this.isAdmin = false;
         this.isResigned = false;
+    }
+
+    public void patchIntroduction(PatchUserIntroductionRequestDto dto){
+        if (dto.getNickname() != null) this.nickname = dto.getNickname();
+        if (dto.getBirth() != null) this.birth = dto.getBirth();
+        if (dto.getGender() != null) this.gender = dto.getGender();
+        if (dto.getMbti() != null) this.mbti = dto.getMbti();
+        if (dto.getJob() != null) this.job = dto.getJob();
+        if (dto.getSelfIntro() != null) this.selfIntro = dto.getSelfIntro();
+        if (dto.getProfileImage() != null) this.profileImage = dto.getProfileImage();
+    }
+
+    public void patchUserAccount(PatchUserAccountRequestDto dto){
+        if (dto.getUserPassword() != null) this.userPassword = dto.getUserPassword();
+        if (dto.getAddress() != null) this.address = dto.getAddress();
+        if (dto.getDetailAddress() != null) this.detailAddress = dto.getDetailAddress();
     }
 
 }

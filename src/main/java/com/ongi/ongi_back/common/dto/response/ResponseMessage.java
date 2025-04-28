@@ -23,6 +23,7 @@ public interface ResponseMessage {
     String MISMATCH_PREVIOUS_PASSWORD = "Mismatch Previous Password.";
 
     String ALREADY_LEFT_ANSWER = "Already Left Answer.";
+    String OUT_OF_STOCK = "Out Of Stock";
 
     String EXIST_PAYMENT = "Exist Payment.";
     String ALREADY_PROCESSED_PAYMENT = "이미 처리된 결제 입니다.";
@@ -43,8 +44,10 @@ public interface ResponseMessage {
 
     String NO_EXIST_PRODUCT = "No Exist Product.";
     String NO_EXIST_SHOPPING_CART = "No Exist Shopping Cart";
+    String NO_METADATA = "No Metadata";
 
     String NO_EXIST_USER = "No Exist User.";
+    String NO_EXIST_WISH_LIST = "No Exist Wish List.";
 
     String NO_EXIST_NEEDHELPERPOST = "No Exist NeedhelperPost.";
     String NO_EXIST_CHATROOM = "No Exist ChatRoom.";
