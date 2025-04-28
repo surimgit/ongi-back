@@ -14,6 +14,7 @@ import com.ongi.ongi_back.common.dto.request.user.PatchUserAccountRequestDto;
 import com.ongi.ongi_back.common.dto.request.user.PatchUserIntroductionRequestDto;
 import com.ongi.ongi_back.common.dto.response.ResponseDto;
 import com.ongi.ongi_back.common.dto.response.community.GetCommunityCommentResponseDto;
+import com.ongi.ongi_back.common.dto.response.community.GetCommunityCommentsResponseDto;
 import com.ongi.ongi_back.common.dto.response.community.GetCommunityResponseDto;
 import com.ongi.ongi_back.common.dto.response.group.GetProductListResponseDto;
 import com.ongi.ongi_back.common.dto.response.user.GetLikeKeywordListResponseDto;
@@ -180,7 +181,7 @@ public class MypageServiceImplement implements MypageService{
   }
 
   @Override
-  public ResponseEntity<? super GetCommunityCommentResponseDto> getMyCommunityComment(String userId) {
+  public ResponseEntity<? super GetCommunityCommentsResponseDto> getMyCommunityComment(String userId) {
     
     List<CommunityCommentEntity> communityCommentEntities = new ArrayList<>();
     UserEntity userEntity = null;
@@ -194,7 +195,7 @@ public class MypageServiceImplement implements MypageService{
       e.printStackTrace();
     }
 
-    return GetCommunityCommentResponseDto.success(communityCommentEntities);
+    return GetCommunityCommentsResponseDto.success(communityCommentEntities);
   }
 
   @Override

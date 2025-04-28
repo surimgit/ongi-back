@@ -16,7 +16,7 @@ import com.ongi.ongi_back.common.dto.request.user.DeleteLikeKeywordRequestDto;
 import com.ongi.ongi_back.common.dto.request.user.PatchUserAccountRequestDto;
 import com.ongi.ongi_back.common.dto.request.user.PatchUserIntroductionRequestDto;
 import com.ongi.ongi_back.common.dto.response.ResponseDto;
-import com.ongi.ongi_back.common.dto.response.community.GetCommunityCommentResponseDto;
+import com.ongi.ongi_back.common.dto.response.community.GetCommunityCommentsResponseDto;
 import com.ongi.ongi_back.common.dto.response.community.GetCommunityResponseDto;
 import com.ongi.ongi_back.common.dto.response.user.GetLikeKeywordListResponseDto;
 import com.ongi.ongi_back.common.dto.response.user.GetUserAccountResponseDto;
@@ -114,10 +114,10 @@ public class MypageController {
   }
   
   @GetMapping("/community/comment")
-  public ResponseEntity<? super GetCommunityCommentResponseDto> getMyCommunityComment(
+  public ResponseEntity<? super GetCommunityCommentsResponseDto> getMyCommunityComment(
     @AuthenticationPrincipal String userId
   ) {
-    ResponseEntity<? super GetCommunityCommentResponseDto> response = mypageService.getMyCommunityComment(userId);
+    ResponseEntity<? super GetCommunityCommentsResponseDto> response = mypageService.getMyCommunityComment(userId);
     return response;
   }
   

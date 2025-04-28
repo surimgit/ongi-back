@@ -3,6 +3,7 @@ package com.ongi.ongi_back.repository;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import com.ongi.ongi_back.common.entity.CommunityPostEntity;
@@ -25,4 +26,11 @@ public interface CommunityPostRepository extends JpaRepository<CommunityPostEnti
     List<CommunityPostEntity> findAllByPostSequenceInOrderByPostSequenceDesc(List<Integer> postSequence);
 
     boolean existsByPostSequence(Integer postSequence);
+
+    @Query(value = "SELECT * FROM community_post " +
+                   "WHERE board IN ('정보 게시판', '우리 동네 게시판') " +
+                   "AND post_date >= NOW() - INTERVAL 1 DAY " +
+                   "ORDER BY liked DESC, view_count DESC " +
+                   "LIMIT 10", nativeQuery = true)
+    List<CommunityPostEntity> findTop10RecentPopularPosts();
 }

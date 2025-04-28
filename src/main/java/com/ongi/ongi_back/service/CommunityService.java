@@ -9,6 +9,7 @@ import com.ongi.ongi_back.common.dto.request.community.PostCommunityRequestDto;
 import com.ongi.ongi_back.common.dto.response.ResponseDto;
 import com.ongi.ongi_back.common.dto.response.community.GetCommunityPostResponseDto;
 import com.ongi.ongi_back.common.dto.response.community.GetCommunityResponseDto;
+import com.ongi.ongi_back.common.dto.response.community.GetCommunityCommentsResponseDto;
 import com.ongi.ongi_back.common.dto.response.community.GetCommunityCommentResponseDto;
 import com.ongi.ongi_back.common.dto.response.community.GetCommunityLikedResponseDto;
 
@@ -33,10 +34,14 @@ public interface CommunityService {
     // 댓글 작성, 삭제, 리스트, 갯수
     ResponseEntity<ResponseDto> postComment(PostCommentRequestDto dto, Integer postSequence, String userId);
     ResponseEntity<ResponseDto> deleteCommunityComment(Integer postSequence, Integer commentSequence, String userId);
-    ResponseEntity<? super GetCommunityCommentResponseDto> getCommunityComment(Integer postSequence);
+    ResponseEntity<? super GetCommunityCommentsResponseDto> getCommunityComments(Integer postSequence);
     ResponseEntity<ResponseDto> patchCommunityComment(PatchCommunityCommentRequestDto dto, Integer postSequence, Integer commentSequence, String userId);
+    ResponseEntity<? super GetCommunityCommentResponseDto> getCommunityComment(Integer postSequence, Integer commentSequence);
 
     // 좋아요 누르기, 누른 명단 불러오기
     ResponseEntity<ResponseDto> putCommunityLiked(Integer postSequence, String userId);
     ResponseEntity<? super GetCommunityLikedResponseDto> getCommunityLiked(Integer postSequence);
+
+    // 인기글
+    public void selectHotPosts();
 }
