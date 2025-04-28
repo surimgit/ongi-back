@@ -9,6 +9,7 @@ import com.ongi.ongi_back.common.dto.request.group.PostStockReservationRequestDt
 import com.ongi.ongi_back.common.dto.response.ResponseDto;
 import com.ongi.ongi_back.common.dto.response.group.GetDetailProductDto;
 import com.ongi.ongi_back.common.dto.response.group.GetProductListResponseDto;
+import com.ongi.ongi_back.common.dto.response.group.GetProductReviewResponseDto;
 import com.ongi.ongi_back.common.dto.response.group.GetReservationResponseDto;
 
 public interface GroupPurchaseService {
@@ -23,4 +24,6 @@ public interface GroupPurchaseService {
 
   ResponseEntity<ResponseDto> postStockReservation(PostStockReservationRequestDto dto, String userId);
   ResponseEntity<? super GetReservationResponseDto> getStockReservation(Integer sequence);
+
+  ResponseEntity<? super GetProductReviewResponseDto> getProductReview(Integer sequence);
 }

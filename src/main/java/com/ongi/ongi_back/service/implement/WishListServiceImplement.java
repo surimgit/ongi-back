@@ -10,6 +10,7 @@ import com.ongi.ongi_back.common.dto.response.ResponseDto;
 import com.ongi.ongi_back.common.dto.response.wishList.GetWishListResponseDto;
 import com.ongi.ongi_back.common.dto.response.wishList.GetWishResponseDto;
 import com.ongi.ongi_back.common.entity.WishListEntity;
+import com.ongi.ongi_back.common.vo.WishVO;
 import com.ongi.ongi_back.repository.WishListRepository;
 import com.ongi.ongi_back.service.WishListService;
 
@@ -26,8 +27,6 @@ public class WishListServiceImplement implements WishListService {
 
     try{
 
-      System.out.println(userId);
-      System.out.println(productSequence);
       WishListEntity wishListEntity = wishListRepository.findByUserIdAndProductSequence(userId, productSequence);
       if(wishListEntity != null) return ResponseDto.alreadyLikedPost();
 
@@ -46,7 +45,7 @@ public class WishListServiceImplement implements WishListService {
   @Override
   public ResponseEntity<? super GetWishListResponseDto> getWishList(String userId) {
     
-    List<WishListEntity> wishListEntities;
+    List<WishVO> wishListEntities;
 
     try{
       
@@ -54,6 +53,7 @@ public class WishListServiceImplement implements WishListService {
       if(wishListEntities == null) return ResponseDto.noExistWishList();
 
     } catch(Exception exception) {
+      exception.printStackTrace();
       return ResponseDto.databaseError();
     }
 
@@ -69,8 +69,6 @@ public class WishListServiceImplement implements WishListService {
 
       wishListEntity = wishListRepository.findByUserIdAndProductSequence(userId, productSequence);
       if(wishListEntity == null) return ResponseDto.noExistWishList();
-
-      System.out.println(wishListEntity.toString());
 
     } catch(Exception exception) {
       return ResponseDto.databaseError();

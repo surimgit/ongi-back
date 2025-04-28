@@ -19,6 +19,7 @@ import com.ongi.ongi_back.common.dto.request.group.PostStockReservationRequestDt
 import com.ongi.ongi_back.common.dto.response.ResponseDto;
 import com.ongi.ongi_back.common.dto.response.group.GetDetailProductDto;
 import com.ongi.ongi_back.common.dto.response.group.GetProductListResponseDto;
+import com.ongi.ongi_back.common.dto.response.group.GetProductReviewResponseDto;
 import com.ongi.ongi_back.common.dto.response.group.GetReservationResponseDto;
 import com.ongi.ongi_back.service.GroupPurchaseService;
 
@@ -94,6 +95,14 @@ public class GroupPurchaseController {
     @PathVariable("sequence") Integer sequence
   ){
     ResponseEntity<? super GetReservationResponseDto> response = groupPurchaseService.getStockReservation(sequence);
+    return response;
+  }
+
+  @GetMapping("/{sequence}/review")
+  public ResponseEntity<? super GetProductReviewResponseDto> getProductReview(
+    @PathVariable("sequence") Integer sequence
+  ){
+    ResponseEntity<? super GetProductReviewResponseDto> response = groupPurchaseService.getProductReview(sequence);
     return response;
   }
 }
