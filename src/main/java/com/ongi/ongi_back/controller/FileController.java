@@ -47,6 +47,4 @@ public class FileController {
     return resource;
   }
 
-
-
 }

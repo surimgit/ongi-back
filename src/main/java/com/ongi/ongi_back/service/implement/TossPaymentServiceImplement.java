@@ -59,6 +59,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class TossPaymentServiceImplement implements TossPaymentService {
 
+  private final ShoppingCartRepository shoppingCartRepository;
   private final PaymentConformRepository paymentRepository;
   private final OrderRepository orderRepository;
   private final ProductRepository productRepository;
@@ -134,7 +135,8 @@ public class TossPaymentServiceImplement implements TossPaymentService {
     try {
 
       PaymentOrderEntity orderEntity = new PaymentOrderEntity(dto, userId);
-      orderRepository.save(orderEntity);            
+      orderRepository.save(orderEntity);     
+      shoppingCartRepository.deleteAll();
 
     }catch(Exception exception) {
       return ResponseDto.databaseError();
@@ -258,9 +260,11 @@ public class TossPaymentServiceImplement implements TossPaymentService {
     String cancelReason = dto.getCancelReason();
     Integer cancelAmount = dto.getCancelAmount();
     Integer productSequence = dto.getProductSequence();
+    Integer orderItemSequence = dto.getOrderItemSequence();
+    
     
     // 1. 결제 승인된 제품이 없다면 해당 응답 리턴
-    OrderItemEntity orderItemEntity = orderItemRepository.findByPaymentKeyAndProductSequence(paymentKey, productSequence);
+    OrderItemEntity orderItemEntity = orderItemRepository.findByPaymentKeyAndOrderItemSequence(paymentKey, orderItemSequence);
     if(orderItemEntity == null) return ResponseDto.noExistShoppingCart();
 
     // 2. 요청 바디 만들기
@@ -295,7 +299,7 @@ public class TossPaymentServiceImplement implements TossPaymentService {
     
     }
     
-    // 6. 취소 내역 저장
+    // 5. 취소 내역 저장
     List<TossCancel> cancels = tossResponse.getCancels();
   
     if(cancels == null) return ResponseDto.notCancelablePayment();
@@ -304,7 +308,7 @@ public class TossPaymentServiceImplement implements TossPaymentService {
       for(TossCancel cancel: cancels){
         PaymentCancelEntity paymentCancelEntity = new PaymentCancelEntity(cancel, paymentKey, cancelReason, productSequence);
         paymentCancelRepository.save(paymentCancelEntity);
-        orderItemRepository.deleteByPaymentKeyAndProductSequence(paymentKey, productSequence);
+        orderItemRepository.deleteByPaymentKeyAndOrderItemSequence(paymentKey, orderItemSequence);
       }
     } catch(Exception exception) {
       return ResponseDto.databaseError();

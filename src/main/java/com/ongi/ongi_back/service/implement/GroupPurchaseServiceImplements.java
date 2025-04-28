@@ -15,12 +15,15 @@ import com.ongi.ongi_back.common.dto.request.group.PostStockReservationRequestDt
 import com.ongi.ongi_back.common.dto.response.ResponseDto;
 import com.ongi.ongi_back.common.dto.response.group.GetDetailProductDto;
 import com.ongi.ongi_back.common.dto.response.group.GetProductListResponseDto;
+import com.ongi.ongi_back.common.dto.response.group.GetProductReviewResponseDto;
 import com.ongi.ongi_back.common.dto.response.group.GetReservationResponseDto;
 import com.ongi.ongi_back.common.entity.ProductEntity;
+import com.ongi.ongi_back.common.entity.ProductReviewEntity;
 import com.ongi.ongi_back.common.entity.StockReservationEntity;
 import com.ongi.ongi_back.common.entity.UserEntity;
 import com.ongi.ongi_back.common.vo.StockReservationVO;
 import com.ongi.ongi_back.repository.ProductRepository;
+import com.ongi.ongi_back.repository.ProductReviewRepository;
 import com.ongi.ongi_back.repository.StockReservationRepository;
 import com.ongi.ongi_back.repository.UserRepository;
 import com.ongi.ongi_back.service.GroupPurchaseService;
@@ -31,9 +34,11 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class GroupPurchaseServiceImplements implements GroupPurchaseService{
 
+  private final ProductReviewRepository productReviewRepository;
   private final ProductRepository productRepository;
   private final UserRepository userRepository;
   private final StockReservationRepository stockReservationRepository;
+
   
   @Override
   public ResponseEntity<ResponseDto> postProduct(PostProductRequestDto dto, String userId) {
@@ -194,6 +199,23 @@ public class GroupPurchaseServiceImplements implements GroupPurchaseService{
     }
 
     return GetReservationResponseDto.success(quantity);
+  }
+
+  @Override
+  public ResponseEntity<? super GetProductReviewResponseDto> getProductReview(Integer sequence) {
+
+    List<ProductReviewEntity> productReviewEntities;
+
+    try {
+      
+      productReviewEntities = productReviewRepository.findByProductSequence(sequence);
+
+    }catch(Exception exception) {
+      exception.printStackTrace();
+      return ResponseDto.databaseError();
+    }
+
+    return GetProductReviewResponseDto.success(productReviewEntities);
   }
   
 }

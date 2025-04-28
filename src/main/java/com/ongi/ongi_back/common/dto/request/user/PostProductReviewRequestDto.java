@@ -13,11 +13,13 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class PostProductReviewRequestDto {
   @NotNull
+  private Integer orderItemSequence;
+  @NotNull
   private Integer productSequence;
   @NotNull
   private Integer rating;
   @NotBlank
   private String content;
   
-  private MultipartFile[] reviewImages;
+  private String[] reviewImages;
 }

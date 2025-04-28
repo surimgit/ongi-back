@@ -21,4 +21,7 @@ public class PostCancelRequestDto {
 
   @NotNull
   private Integer productSequence; 
+
+  @NotNull 
+  private Integer orderItemSequence;
 }

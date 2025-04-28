@@ -10,7 +10,9 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class MyBuyingVO {
+  private String paymentKey;
   private Integer orderItemSequence;
+  private Integer productSequence;
   private String name;
   private String image;
   private Integer quantity;

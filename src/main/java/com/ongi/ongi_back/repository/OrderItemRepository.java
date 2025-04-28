@@ -15,10 +15,10 @@ import jakarta.transaction.Transactional;
 
 @Repository
 public interface OrderItemRepository extends JpaRepository<OrderItemEntity, Integer> {
-  OrderItemEntity findByPaymentKeyAndProductSequence(String paymentKey, Integer productSequence);
+  OrderItemEntity findByPaymentKeyAndOrderItemSequence(String paymentKey, Integer productSequence);
   
   @Query(
-  "SELECT new com.ongi.ongi_back.common.vo.MyBuyingVO(o.orderItemSequence, pr.name, pr.image, o.quantity, pr.price, p.approvedTime) " +
+  "SELECT new com.ongi.ongi_back.common.vo.MyBuyingVO(o.paymentKey, o.orderItemSequence, o.productSequence, pr.name, pr.image, o.quantity, pr.price, p.approvedTime) " +
   "FROM order_item o " +
   "JOIN payment_confirm p ON o.paymentKey = p.paymentKey " +
   "JOIN payment_order po ON p.orderId = po.orderId " +
@@ -29,5 +29,5 @@ List<MyBuyingVO> findMyBuyingList(@Param("userId") String userId);
 
 
   @Transactional
-  void deleteByPaymentKeyAndProductSequence(String paymentKey, Integer productSequence);
+  void deleteByPaymentKeyAndOrderItemSequence(String paymentKey, Integer orderItemSequence);
 }

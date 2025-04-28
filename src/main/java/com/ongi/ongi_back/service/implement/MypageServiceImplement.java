@@ -275,7 +275,7 @@ public class MypageServiceImplement implements MypageService{
 
       Integer reviewSequence = productReviewEntity.getReviewSequence();
 
-      String[] reviewImages = fileService.uploadMultipleFiles(dto.getReviewImages());
+      String[] reviewImages = dto.getReviewImages();
 
       if(reviewImages != null) {
         for(int i = 0; i < reviewImages.length; i++){
@@ -287,8 +287,6 @@ public class MypageServiceImplement implements MypageService{
         }
       }
       
-
-
     } catch(Exception exception){
       exception.printStackTrace();
       return ResponseDto.databaseError();

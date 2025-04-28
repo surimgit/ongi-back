@@ -29,7 +29,6 @@ public class FileServiceImplement implements FileService {
     String uuid = UUID.randomUUID().toString();
     String saveFileName = uuid + extension;
     String savePath = filePath + saveFileName; // 파일 경로
-    System.out.println(savePath);
 
     try {
       file.transferTo(new File(savePath)); // 실제 저장
@@ -59,6 +58,7 @@ public class FileServiceImplement implements FileService {
         String uuid = UUID.randomUUID().toString();
         String saveFileName = uuid + extension;
         String savePath = filePath + saveFileName; // 파일 경로
+        System.out.println(savePath);
 
         try {
             file.transferTo(new File(savePath)); // 실제 저장
@@ -68,7 +68,7 @@ public class FileServiceImplement implements FileService {
         }
 
         // 서버에서 파일에 접근할 수 있는 URL (localhost:4000을 사용)
-        fileUrls[i] = "http://localhost:4000/" + saveFileName;
+        fileUrls[i] = fileUrl + saveFileName;
     }
 
     return fileUrls;

@@ -26,6 +26,7 @@ public class ProductReviewEntity {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Integer reviewSequence;
+  private Integer orderItemSequence;
   private Integer productSequence;
   private String userId;
   private String postDate;
@@ -36,6 +37,7 @@ public class ProductReviewEntity {
     LocalDateTime now = LocalDateTime.now();
     DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 
+    this.orderItemSequence = dto.getOrderItemSequence();
     this.productSequence = dto.getProductSequence();
     this.rating = dto.getRating();
     this.content = dto.getContent();
