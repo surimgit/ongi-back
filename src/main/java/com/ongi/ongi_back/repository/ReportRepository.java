@@ -11,4 +11,6 @@ import com.ongi.ongi_back.common.entity.ReportEntity;
 public interface ReportRepository extends JpaRepository<ReportEntity, Integer> {
     List<ReportEntity> findByReportProcessIsNullOrderByReportSequenceDesc();
     List<ReportEntity> findByReportProcessIsNotNullOrderByReportSequenceDesc();
+    ReportEntity findByReportSequence(Integer reportSequence);
+    Integer countAllByReportedIdAndReportProcess(String userId, String process);
 }

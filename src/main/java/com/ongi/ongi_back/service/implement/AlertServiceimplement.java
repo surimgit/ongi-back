@@ -34,8 +34,14 @@ public class AlertServiceimplement implements AlertService {
             UserEntity senderEntity = userRepository.findByUserId(alertEntity.getSenderId());
             String senderNickname = senderEntity.getNickname();
 
+            UserEntity receiverEntity = userRepository.findByUserId(alertEntity.getReceiverId());
+            if (receiverEntity.getIsResigned()) return ResponseDto.alreadyResigned();
+
             if (alertEntity.getAlertType().equals("community_comment")) {
                 alertEntity.setAlertContent(senderNickname + " 님이 댓글을 달았습니다.");
+            }
+            else if (alertEntity.getAlertType().equals("report_alerted")) {
+                alertEntity.setAlertContent("신고가 접수되어 경고를 받았습니다.(사유:"+alertEntity.getReason()+")");
             }
 
             alertRespository.save(alertEntity);

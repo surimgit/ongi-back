@@ -20,4 +20,5 @@ public class PostAlertRequestDto {
     private String receiverId;
     @NotNull
     private Integer alertEntitySequence;
+    private String reason;
 }

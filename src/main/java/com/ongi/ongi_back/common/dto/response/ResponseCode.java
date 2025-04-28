@@ -51,12 +51,14 @@ public interface ResponseCode {
     String NO_EXIST_POST = "NPS";
     String NO_EXIST_COMMENT = "NEC";
     String NO_EXIST_SCHEDULE = "NS";
+    String NO_EXIST_REPORT = "NER";
     
     String NOT_ENOUGH_POINT = "NPO";
 
     String NO_SEARCH_KEYWORD = "NSK";
 
     String ALREADY_LIKED_POST = "ALP";
+    String ALREADY_RESIGNED_USER = "ARU";
     // ============================================== //
     // HTTP/1.1 401 Unauthorized
     String UNAUTHORIZED_KEY = "UNAUTHORIZED_KEY";
