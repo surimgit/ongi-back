@@ -23,6 +23,8 @@ public interface ResponseMessage {
     String MISMATCH_PREVIOUS_PASSWORD = "Mismatch Previous Password.";
 
     String ALREADY_LEFT_ANSWER = "Already Left Answer.";
+    String OUT_OF_STOCK = "Out Of Stock";
+    String ALREADY_POST_REVIEW = "Already Post Review";
 
     String EXIST_PAYMENT = "Exist Payment.";
     String ALREADY_PROCESSED_PAYMENT = "이미 처리된 결제 입니다.";
@@ -43,14 +45,17 @@ public interface ResponseMessage {
 
     String NO_EXIST_PRODUCT = "No Exist Product.";
     String NO_EXIST_SHOPPING_CART = "No Exist Shopping Cart";
+    String NO_METADATA = "No Metadata";
 
     String NO_EXIST_USER = "No Exist User.";
+    String NO_EXIST_WISH_LIST = "No Exist Wish List.";
 
     String NO_EXIST_NEEDHELPERPOST = "No Exist NeedhelperPost.";
     String NO_EXIST_CHATROOM = "No Exist ChatRoom.";
     String NO_EXIST_POST = "No Exist Post.";
     String NO_EXIST_COMMENT = "No Exist Comment.";
     String NO_EXIST_SCHEDULE = "No Exist Schedule.";
+    String NO_EXIST_REPORT = "No Exist Report.";
 
     String NOT_ENOUGH_POINT = "Not Enough Point.";
 
@@ -59,6 +64,7 @@ public interface ResponseMessage {
     String NO_SEARCH_KEYWORD = "No Search Keyword.";
 
     String ALREADY_LIKED_POST = "Already Liked Post.";
+    String ALREADY_RESIGNED_USER = "Already Resigned User.";
     // ============================================== //
     // HTTP/1.1 401 Unauthorized
     String UNAUTHORIZED_KEY = "인증되지 않은 시크릿 키 혹은 클라이언트 키 입니다.";

@@ -8,6 +8,7 @@ import com.ongi.ongi_back.common.dto.request.admin.PatchAnswerRequestDto;
 import com.ongi.ongi_back.common.dto.request.admin.PatchNoticeRequestDto;
 import com.ongi.ongi_back.common.dto.request.admin.PostNoticeRequestDto;
 import com.ongi.ongi_back.common.dto.response.ResponseDto;
+import com.ongi.ongi_back.common.dto.response.admin.GetIsAdminResponseDto;
 import com.ongi.ongi_back.common.entity.NoticeEntity;
 import com.ongi.ongi_back.common.entity.QuestionEntity;
 import com.ongi.ongi_back.common.entity.UserEntity;

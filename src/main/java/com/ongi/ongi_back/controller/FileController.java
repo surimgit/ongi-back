@@ -31,6 +31,14 @@ public class FileController {
     return url;
   }
 
+  @PostMapping("/uploads")
+  public String[] uploads(
+    @RequestParam("files") MultipartFile[] files
+  ){
+    String[] urls = fileService.uploadMultipleFiles(files);
+    return urls;
+  }
+
   @GetMapping(value="/{fileName}", produces={MediaType.IMAGE_PNG_VALUE, MediaType.IMAGE_JPEG_VALUE})
   public Resource getImageFile(
     @PathVariable("fileName") String fileName
@@ -38,7 +46,5 @@ public class FileController {
     Resource resource = fileService.getImageFile(fileName);
     return resource;
   }
-
-
 
 }

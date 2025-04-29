@@ -7,28 +7,41 @@ import java.util.stream.Collectors;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.ongi.ongi_back.common.dto.request.user.AddLikeKeywordRequestDto;
 import com.ongi.ongi_back.common.dto.request.user.DeleteLikeKeywordRequestDto;
 import com.ongi.ongi_back.common.dto.request.user.PatchUserAccountRequestDto;
 import com.ongi.ongi_back.common.dto.request.user.PatchUserIntroductionRequestDto;
+import com.ongi.ongi_back.common.dto.request.user.PostProductReviewRequestDto;
+import com.ongi.ongi_back.common.dto.request.user.PostReviewImagesRequestDto;
 import com.ongi.ongi_back.common.dto.response.ResponseDto;
 import com.ongi.ongi_back.common.dto.response.community.GetCommunityCommentResponseDto;
+import com.ongi.ongi_back.common.dto.response.community.GetCommunityCommentsResponseDto;
 import com.ongi.ongi_back.common.dto.response.community.GetCommunityResponseDto;
 import com.ongi.ongi_back.common.dto.response.group.GetProductListResponseDto;
 import com.ongi.ongi_back.common.dto.response.user.GetLikeKeywordListResponseDto;
+import com.ongi.ongi_back.common.dto.response.user.GetMyBuyingResponseDto;
 import com.ongi.ongi_back.common.dto.response.user.GetUserAccountResponseDto;
 import com.ongi.ongi_back.common.dto.response.user.GetUserIntroductionResponseDto;
 import com.ongi.ongi_back.common.entity.CommunityCommentEntity;
 import com.ongi.ongi_back.common.entity.CommunityPostEntity;
 import com.ongi.ongi_back.common.entity.LikeKeywordEntity;
 import com.ongi.ongi_back.common.entity.LikedEntity;
+import com.ongi.ongi_back.common.entity.ProductReviewEntity;
+import com.ongi.ongi_back.common.entity.ReviewImagesEntity;
 import com.ongi.ongi_back.common.entity.UserEntity;
+import com.ongi.ongi_back.common.vo.MyBuyingVO;
 import com.ongi.ongi_back.repository.CommunityCommentRepository;
 import com.ongi.ongi_back.repository.CommunityPostRepository;
 import com.ongi.ongi_back.repository.LikeKeywordRepository;
 import com.ongi.ongi_back.repository.LikedRepository;
+import com.ongi.ongi_back.repository.OrderItemRepository;
+import com.ongi.ongi_back.repository.ProductRepository;
+import com.ongi.ongi_back.repository.ProductReviewRepository;
+import com.ongi.ongi_back.repository.ReviewImagesRepository;
 import com.ongi.ongi_back.repository.UserRepository;
+import com.ongi.ongi_back.service.FileService;
 import com.ongi.ongi_back.service.MypageService;
 
 import lombok.RequiredArgsConstructor;
@@ -42,6 +55,11 @@ public class MypageServiceImplement implements MypageService{
   private final CommunityPostRepository communityPostRepository;
   private final CommunityCommentRepository communityCommentRepository;
   private final LikedRepository likedRepository;
+  private final ProductRepository productRepository;
+  private final ProductReviewRepository productReviewRepository;
+  private final OrderItemRepository orderItemRepository;
+  private final ReviewImagesRepository reviewImagesRepository;
+  private final FileService fileService;
 
   @Override
   public ResponseEntity<ResponseDto> patchIntroduction(PatchUserIntroductionRequestDto dto, String userId) {
@@ -178,7 +196,7 @@ public class MypageServiceImplement implements MypageService{
   }
 
   @Override
-  public ResponseEntity<? super GetCommunityCommentResponseDto> getMyCommunityComment(String userId) {
+  public ResponseEntity<? super GetCommunityCommentsResponseDto> getMyCommunityComment(String userId) {
     
     List<CommunityCommentEntity> communityCommentEntities = new ArrayList<>();
     UserEntity userEntity = null;
@@ -192,7 +210,7 @@ public class MypageServiceImplement implements MypageService{
       e.printStackTrace();
     }
 
-    return GetCommunityCommentResponseDto.success(communityCommentEntities);
+    return GetCommunityCommentsResponseDto.success(communityCommentEntities);
   }
 
   @Override
@@ -214,9 +232,20 @@ public class MypageServiceImplement implements MypageService{
   }
 
   @Override
-  public ResponseEntity<? super GetProductListResponseDto> getMyPurchaseList(String userId) {
-    // TODO Auto-generated method stub
-    throw new UnsupportedOperationException("Unimplemented method 'getMyPurchaseList'");
+  public ResponseEntity<? super GetMyBuyingResponseDto> getMyPurchaseList(String userId) {
+
+    List<MyBuyingVO> list = new ArrayList<>();
+
+    try{
+      
+      list = orderItemRepository.findMyBuyingList(userId);
+      
+    } catch(Exception exception) {
+      exception.printStackTrace();
+      return ResponseDto.databaseError();
+    }
+
+    return GetMyBuyingResponseDto.success(list);
   }
 
   @Override
@@ -247,6 +276,43 @@ public class MypageServiceImplement implements MypageService{
     }
 
     return GetUserIntroductionResponseDto.success(userEntity, likeKeywordEntities);
+  }
+  
+  @Override
+  public ResponseEntity<ResponseDto> postProductReview(PostProductReviewRequestDto dto, String userId) {
+    
+    try {
+
+      Integer productSequence = dto.getProductSequence();
+
+      ProductReviewEntity productReviewEntity = productReviewRepository.findByUserIdAndProductSequence(userId, productSequence);
+      if(productReviewEntity != null) return ResponseDto.alreadyPostReview();
+
+      productReviewEntity = new ProductReviewEntity(dto, userId);
+
+      productReviewRepository.save(productReviewEntity);
+
+      Integer reviewSequence = productReviewEntity.getReviewSequence();
+
+      String[] reviewImages = dto.getReviewImages();
+
+      if(reviewImages != null) {
+        for(int i = 0; i < reviewImages.length; i++){
+          if(reviewImages[i] != null) {
+            PostReviewImagesRequestDto imageDto = new PostReviewImagesRequestDto(reviewSequence, i, reviewImages[i]); 
+            ReviewImagesEntity reviewImagesEntity = new ReviewImagesEntity(imageDto);
+            reviewImagesRepository.save(reviewImagesEntity);
+          }
+        }
+      }
+      
+    } catch(Exception exception){
+      exception.printStackTrace();
+      return ResponseDto.databaseError();
+    }
+
+    return ResponseDto.success(HttpStatus.OK);
+
   }
   
 }

@@ -15,10 +15,12 @@ import com.ongi.ongi_back.common.dto.request.user.AddLikeKeywordRequestDto;
 import com.ongi.ongi_back.common.dto.request.user.DeleteLikeKeywordRequestDto;
 import com.ongi.ongi_back.common.dto.request.user.PatchUserAccountRequestDto;
 import com.ongi.ongi_back.common.dto.request.user.PatchUserIntroductionRequestDto;
+import com.ongi.ongi_back.common.dto.request.user.PostProductReviewRequestDto;
 import com.ongi.ongi_back.common.dto.response.ResponseDto;
-import com.ongi.ongi_back.common.dto.response.community.GetCommunityCommentResponseDto;
+import com.ongi.ongi_back.common.dto.response.community.GetCommunityCommentsResponseDto;
 import com.ongi.ongi_back.common.dto.response.community.GetCommunityResponseDto;
 import com.ongi.ongi_back.common.dto.response.user.GetLikeKeywordListResponseDto;
+import com.ongi.ongi_back.common.dto.response.user.GetMyBuyingResponseDto;
 import com.ongi.ongi_back.common.dto.response.user.GetUserAccountResponseDto;
 import com.ongi.ongi_back.common.dto.response.user.GetUserIntroductionResponseDto;
 import com.ongi.ongi_back.service.MypageService;
@@ -114,10 +116,10 @@ public class MypageController {
   }
   
   @GetMapping("/community/comment")
-  public ResponseEntity<? super GetCommunityCommentResponseDto> getMyCommunityComment(
+  public ResponseEntity<? super GetCommunityCommentsResponseDto> getMyCommunityComment(
     @AuthenticationPrincipal String userId
   ) {
-    ResponseEntity<? super GetCommunityCommentResponseDto> response = mypageService.getMyCommunityComment(userId);
+    ResponseEntity<? super GetCommunityCommentsResponseDto> response = mypageService.getMyCommunityComment(userId);
     return response;
   }
   
@@ -129,4 +131,20 @@ public class MypageController {
     return response;
   }
   
+  @GetMapping("/buy/my")
+  public ResponseEntity<? super GetMyBuyingResponseDto> getMyPurchaseList(
+    @AuthenticationPrincipal String userId
+  ){
+    ResponseEntity<? super GetMyBuyingResponseDto> response = mypageService.getMyPurchaseList(userId);
+    return response;
+  }
+
+  @PostMapping("buy/my/review")
+  public ResponseEntity<ResponseDto> postPurchaseReview(
+    @RequestBody @Valid PostProductReviewRequestDto requestBody,
+    @AuthenticationPrincipal String userId
+  ){
+    ResponseEntity<ResponseDto> response = mypageService.postProductReview(requestBody, userId);
+    return response;
+  }
 }

@@ -18,10 +18,11 @@ import com.ongi.ongi_back.common.dto.request.community.PatchCommunityPostRequest
 import com.ongi.ongi_back.common.dto.request.community.PostCommentRequestDto;
 import com.ongi.ongi_back.common.dto.request.community.PostCommunityRequestDto;
 import com.ongi.ongi_back.common.dto.response.ResponseDto;
-import com.ongi.ongi_back.common.dto.response.community.GetCommunityCommentResponseDto;
-import com.ongi.ongi_back.common.dto.response.community.GetCommunityLikedResponseDto;
 import com.ongi.ongi_back.common.dto.response.community.GetCommunityPostResponseDto;
 import com.ongi.ongi_back.common.dto.response.community.GetCommunityResponseDto;
+import com.ongi.ongi_back.common.dto.response.community.GetCommunityCommentsResponseDto;
+import com.ongi.ongi_back.common.dto.response.community.GetCommunityCommentResponseDto;
+import com.ongi.ongi_back.common.dto.response.community.GetCommunityLikedResponseDto;
 import com.ongi.ongi_back.service.CommunityService;
 
 import jakarta.validation.Valid;
@@ -142,10 +143,10 @@ public class CommunityController {
     }
 
     @GetMapping("/{postSequence}/comment")
-    public ResponseEntity<? super GetCommunityCommentResponseDto> getCommunityComment(
+    public ResponseEntity<? super GetCommunityCommentsResponseDto> getCommunityComments(
         @PathVariable("postSequence") Integer postSequence
     )   {
-        ResponseEntity<? super GetCommunityCommentResponseDto> response = communityService.getCommunityComment(postSequence);
+        ResponseEntity<? super GetCommunityCommentsResponseDto> response = communityService.getCommunityComments(postSequence);
         return response;
     }
 
@@ -157,6 +158,15 @@ public class CommunityController {
         @AuthenticationPrincipal String userId
     )   {
         ResponseEntity<ResponseDto> response = communityService.patchCommunityComment(dto, postSequence, commentSequence, userId);
+        return response;
+    }
+
+    @GetMapping("/{postSequence}/comment/{commentSequence}")
+    public ResponseEntity<? super GetCommunityCommentResponseDto> getCommunityComment(
+        @PathVariable("postSequence") Integer postSequence,
+        @PathVariable("commentSequence") Integer commentSequence
+    )   {
+        ResponseEntity<? super GetCommunityCommentResponseDto> response = communityService.getCommunityComment(postSequence, commentSequence);
         return response;
     }
 

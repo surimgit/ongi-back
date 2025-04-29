@@ -7,5 +7,5 @@ import com.ongi.ongi_back.common.entity.PaymentOrderEntity;
 
 @Repository
 public interface OrderRepository extends JpaRepository<PaymentOrderEntity, String> {
-  PaymentOrderEntity findByUserIdOrderByCreatedAtDesc(String userId);
+  PaymentOrderEntity findTopByUserIdOrderByCreatedAtDesc(String userId);
 }

@@ -9,6 +9,7 @@ public interface ResponseCode {
     String EXIST_USER = "EU";
     String RESIGNED_USER = "RU";
 
+    String PRODUCT_NOT_FOUND = "RNF";
     String UNVERIFIED_PHONE_NUMBER = "UP";
     String INVALID_PHONE_NUMBER_FORMAT = "IPF";
     String INVALID_AUTHENTICATION_NUMBER = "IA";
@@ -30,6 +31,9 @@ public interface ResponseCode {
     String INVALID_CARD_NUMBER = "INVALID_CARD_NUMBER";
     String NOT_AVAILABLE_PAYMENT = "NOT_AVAILABLE_PAYMENT";
 
+    String OUT_OF_STOCK = "OOS";
+    String ALREADY_POST_REVIEW = "APR";
+
     String ALREADY_CANCELED_PAYMENT = "ALREADY_CANCELED_PAYMENT";
     
     String INVALID_DATE = "INVALID_DATE";
@@ -37,8 +41,10 @@ public interface ResponseCode {
 
     String NO_EXIST_PRODUCT = "NEP";
     String NO_EXIST_SHOPPING_CART = "NESC";
+    String NO_METADATA = "NMD";
 
     String NO_EXIST_USER = "NU";
+    String NO_EXIST_WISH_LIST = "NEWL";
     
     String NO_EXIST_NEEDHELPERPOST = "NN";
     String NO_EXIST_CHATROOM = "NC";
@@ -47,12 +53,15 @@ public interface ResponseCode {
     String NO_EXIST_SCHEDULE = "NS";
 
     String NO_EXIST_QUESTION = "NEQ";
-    
+
+    String NO_EXIST_REPORT = "NER";
+
     String NOT_ENOUGH_POINT = "NPO";
 
     String NO_SEARCH_KEYWORD = "NSK";
 
     String ALREADY_LIKED_POST = "ALP";
+    String ALREADY_RESIGNED_USER = "ARU";
     // ============================================== //
     // HTTP/1.1 401 Unauthorized
     String UNAUTHORIZED_KEY = "UNAUTHORIZED_KEY";

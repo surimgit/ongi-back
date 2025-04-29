@@ -15,4 +15,13 @@ public class PostCancelRequestDto {
 
   @NotBlank
   private String cancelReason;
+
+  @NotNull
+  private Integer cancelAmount;
+
+  @NotNull
+  private Integer productSequence; 
+
+  @NotNull 
+  private Integer orderItemSequence;
 }
