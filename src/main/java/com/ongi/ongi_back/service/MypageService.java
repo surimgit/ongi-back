@@ -35,6 +35,7 @@ public interface MypageService {
   ResponseEntity<? super GetProductListResponseDto> getMySelledList(String userId);
   ResponseEntity<? super GetProductListResponseDto> getMyWishList(String userId);
 
+  ResponseEntity<? super GetUserIntroductionResponseDto> getOtherUserIntroduction(String userId);
+
   ResponseEntity<ResponseDto> postProductReview(PostProductReviewRequestDto dto, String userId);
 }
-

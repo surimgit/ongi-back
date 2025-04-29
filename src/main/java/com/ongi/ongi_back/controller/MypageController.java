@@ -56,7 +56,7 @@ public class MypageController {
   public ResponseEntity<? super GetUserIntroductionResponseDto> getOtherUserIntroduction(
     @PathVariable("userId") String userId
   ){
-    ResponseEntity<? super GetUserIntroductionResponseDto> response = mypageService.getUserIntroduction(userId);
+    ResponseEntity<? super GetUserIntroductionResponseDto> response = mypageService.getOtherUserIntroduction(userId);
     return response;
   }
 

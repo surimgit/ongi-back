@@ -14,8 +14,10 @@ public interface UserRepository extends JpaRepository<UserEntity, String>{
     String findNicknameByUserId(String userId);
     UserEntity findByUserId(String userId);
     UserEntity findByTelNumber(String telNumber);
+    
+    UserEntity findByIsAdminTrue();
+
     UserEntity findByNicknameAndTelNumber(String nickname, String telNumber);
     UserEntity findByUserIdAndTelNumber(String userId, String telNumber);
-    UserEntity findByIsAdminTrue();
     Integer countAllByIsResigned(boolean isResigned);
 }

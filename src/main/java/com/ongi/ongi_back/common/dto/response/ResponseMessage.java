@@ -59,6 +59,8 @@ public interface ResponseMessage {
 
     String NOT_ENOUGH_POINT = "Not Enough Point.";
 
+    String NO_EXIST_QUESTION = "No Exist Question";
+
     String NO_SEARCH_KEYWORD = "No Search Keyword.";
 
     String ALREADY_LIKED_POST = "Already Liked Post.";

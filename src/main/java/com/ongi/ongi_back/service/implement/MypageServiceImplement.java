@@ -187,7 +187,7 @@ public class MypageServiceImplement implements MypageService{
       userEntity = userRepository.findByUserId(userId);
       String nickname = userEntity.getNickname();
       communityPostEntities = communityPostRepository.findByNicknameOrderByPostSequenceDesc(nickname);
-
+      
     } catch (Exception e) {
       e.printStackTrace();
     }
@@ -261,6 +261,24 @@ public class MypageServiceImplement implements MypageService{
   }
 
   @Override
+  public ResponseEntity<? super GetUserIntroductionResponseDto> getOtherUserIntroduction(String userId) {
+    
+    List<LikeKeywordEntity> likeKeywordEntities = new ArrayList<>();
+    UserEntity userEntity = userRepository.findByUserId(userId);
+    
+
+    try {
+      likeKeywordEntities = likeKeywordRepository.findAllByUserId(userEntity.getUserId());
+      if(likeKeywordEntities == null | userEntity == null) return ResponseDto.noExistUser();
+
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+
+    return GetUserIntroductionResponseDto.success(userEntity, likeKeywordEntities);
+  }
+  
+  @Override
   public ResponseEntity<ResponseDto> postProductReview(PostProductReviewRequestDto dto, String userId) {
     
     try {
@@ -296,6 +314,5 @@ public class MypageServiceImplement implements MypageService{
     return ResponseDto.success(HttpStatus.OK);
 
   }
-
   
 }
