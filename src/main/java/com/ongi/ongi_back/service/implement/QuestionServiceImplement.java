@@ -87,10 +87,32 @@ public class QuestionServiceImplement implements QuestionService {
       
     } catch (Exception e) {
       e.printStackTrace();
-      return ResponseDto.databaseError();
     }
 
     return GetQuestionListResponseDto.success(questionEntities);
+  }
+
+  @Override
+  public ResponseEntity<ResponseDto> deleteQuestion(Integer questionSequence, String userId) {
+
+    try {
+      QuestionEntity questionEntity = questionRepository.findByQuestionSequence(questionSequence);
+      if (questionEntity == null) return ResponseDto.noExistQuestion();
+
+      String writerId = questionEntity.getUserId();
+      boolean isWriter = writerId.equals(userId);
+      if(!isWriter) return ResponseDto.noPermission();
+      boolean isAnswerd = questionEntity.isAnswered();
+      if(isAnswerd) return ResponseDto.noPermission();
+
+      questionRepository.delete(questionEntity);
+
+    } catch (Exception e) {
+      e.printStackTrace();
+      return ResponseDto.databaseError();
+    }
+
+    return ResponseDto.success(HttpStatus.OK);
   }
 
   

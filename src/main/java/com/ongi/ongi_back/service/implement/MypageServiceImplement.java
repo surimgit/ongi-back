@@ -28,7 +28,6 @@ import com.ongi.ongi_back.repository.CommunityCommentRepository;
 import com.ongi.ongi_back.repository.CommunityPostRepository;
 import com.ongi.ongi_back.repository.LikeKeywordRepository;
 import com.ongi.ongi_back.repository.LikedRepository;
-import com.ongi.ongi_back.repository.ProductRepository;
 import com.ongi.ongi_back.repository.UserRepository;
 import com.ongi.ongi_back.service.MypageService;
 
@@ -43,7 +42,6 @@ public class MypageServiceImplement implements MypageService{
   private final CommunityPostRepository communityPostRepository;
   private final CommunityCommentRepository communityCommentRepository;
   private final LikedRepository likedRepository;
-  private final ProductRepository productRepository;
 
   @Override
   public ResponseEntity<ResponseDto> patchIntroduction(PatchUserIntroductionRequestDto dto, String userId) {
@@ -171,7 +169,7 @@ public class MypageServiceImplement implements MypageService{
       userEntity = userRepository.findByUserId(userId);
       String nickname = userEntity.getNickname();
       communityPostEntities = communityPostRepository.findByNicknameOrderByPostSequenceDesc(nickname);
-
+      
     } catch (Exception e) {
       e.printStackTrace();
     }
@@ -233,5 +231,22 @@ public class MypageServiceImplement implements MypageService{
     throw new UnsupportedOperationException("Unimplemented method 'getMyWishList'");
   }
 
+  @Override
+  public ResponseEntity<? super GetUserIntroductionResponseDto> getOtherUserIntroduction(String userId) {
+    
+    List<LikeKeywordEntity> likeKeywordEntities = new ArrayList<>();
+    UserEntity userEntity = userRepository.findByUserId(userId);
+    
+
+    try {
+      likeKeywordEntities = likeKeywordRepository.findAllByUserId(userEntity.getUserId());
+      if(likeKeywordEntities == null | userEntity == null) return ResponseDto.noExistUser();
+
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+
+    return GetUserIntroductionResponseDto.success(userEntity, likeKeywordEntities);
+  }
   
 }

@@ -45,6 +45,8 @@ public interface ResponseCode {
     String NO_EXIST_POST = "NPS";
     String NO_EXIST_COMMENT = "NEC";
     String NO_EXIST_SCHEDULE = "NS";
+
+    String NO_EXIST_QUESTION = "NEQ";
     
     String NOT_ENOUGH_POINT = "NPO";
 

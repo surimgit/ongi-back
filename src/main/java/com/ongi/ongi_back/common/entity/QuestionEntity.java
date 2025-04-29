@@ -36,6 +36,7 @@ public class QuestionEntity {
   private String content;
   private String answer;  
   private boolean isAnswered;
+  
 
   public QuestionEntity(PostQuestionRequestDto dto, String userId){
     LocalDateTime now = LocalDateTime.now();
