@@ -12,21 +12,24 @@ import com.ongi.ongi_back.common.dto.request.group.PatchProductQuantityRequestDt
 import com.ongi.ongi_back.common.dto.request.group.PatchProductRequestDto;
 import com.ongi.ongi_back.common.dto.request.group.PostProductRequestDto;
 import com.ongi.ongi_back.common.dto.request.group.PostStockReservationRequestDto;
+import com.ongi.ongi_back.common.dto.request.payment.PostCancelRequestDto;
 import com.ongi.ongi_back.common.dto.response.ResponseDto;
 import com.ongi.ongi_back.common.dto.response.group.GetDetailProductDto;
 import com.ongi.ongi_back.common.dto.response.group.GetProductListResponseDto;
 import com.ongi.ongi_back.common.dto.response.group.GetProductReviewResponseDto;
 import com.ongi.ongi_back.common.dto.response.group.GetReservationResponseDto;
+import com.ongi.ongi_back.common.dto.response.group.GetReviewImagesResponseDto;
+import com.ongi.ongi_back.common.entity.OrderItemEntity;
 import com.ongi.ongi_back.common.entity.ProductEntity;
 import com.ongi.ongi_back.common.entity.ProductReviewEntity;
+import com.ongi.ongi_back.common.entity.ReviewImagesEntity;
 import com.ongi.ongi_back.common.entity.StockReservationEntity;
 import com.ongi.ongi_back.common.entity.UserEntity;
+import com.ongi.ongi_back.common.vo.ReviewImagesVO;
 import com.ongi.ongi_back.common.vo.StockReservationVO;
-import com.ongi.ongi_back.repository.ProductRepository;
-import com.ongi.ongi_back.repository.ProductReviewRepository;
-import com.ongi.ongi_back.repository.StockReservationRepository;
-import com.ongi.ongi_back.repository.UserRepository;
+import com.ongi.ongi_back.repository.*;
 import com.ongi.ongi_back.service.GroupPurchaseService;
+import com.ongi.ongi_back.service.TossPaymentService;
 
 import lombok.RequiredArgsConstructor;
 
@@ -34,11 +37,14 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class GroupPurchaseServiceImplements implements GroupPurchaseService{
 
+  private final ReviewImagesRepository reviewImagesRepository;
   private final ProductReviewRepository productReviewRepository;
   private final ProductRepository productRepository;
   private final UserRepository userRepository;
   private final StockReservationRepository stockReservationRepository;
+  private final OrderItemRepository orderItemRepository;
 
+  private final TossPaymentService tossPaymentService;
   
   @Override
   public ResponseEntity<ResponseDto> postProduct(PostProductRequestDto dto, String userId) {
@@ -216,6 +222,51 @@ public class GroupPurchaseServiceImplements implements GroupPurchaseService{
     }
 
     return GetProductReviewResponseDto.success(productReviewEntities);
+  }
+
+  @Override
+  public ResponseEntity<? super GetReviewImagesResponseDto> getReviewImages(Integer sequence) {
+
+    List<ReviewImagesVO> reviewImagesEntities;
+    
+    try {
+      
+      reviewImagesEntities = reviewImagesRepository.findReviewImages(sequence);
+
+    }catch(Exception exception) {
+      exception.printStackTrace();
+      return ResponseDto.databaseError();
+    }
+
+    return GetReviewImagesResponseDto.success(reviewImagesEntities);
+  }
+
+  @Override
+  public ResponseEntity<ResponseDto> deleteProduct(Integer sequence, String userId) {
+    
+    try {
+      ProductEntity productEntity = productRepository.findBySequence(sequence);
+      if(productEntity == null) return ResponseDto.noExistProduct();
+
+      String writerId = productEntity.getUserId();
+      boolean isWrite = writerId.equals(userId);
+
+      if(!isWrite) return ResponseDto.noPermission();
+
+      List<PostCancelRequestDto> list = orderItemRepository.findByCancelInfo(sequence);
+
+      for(PostCancelRequestDto dto: list){
+        tossPaymentService.postCancelPayment(dto, userId);
+      }
+      
+      productRepository.delete(productEntity);
+
+    } catch(Exception exception){
+      exception.printStackTrace();
+      return ResponseDto.databaseError();
+    }
+
+    return ResponseDto.success(HttpStatus.OK);
   }
   
 }

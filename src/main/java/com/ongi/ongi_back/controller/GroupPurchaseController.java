@@ -2,6 +2,7 @@ package com.ongi.ongi_back.controller;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -21,6 +22,7 @@ import com.ongi.ongi_back.common.dto.response.group.GetDetailProductDto;
 import com.ongi.ongi_back.common.dto.response.group.GetProductListResponseDto;
 import com.ongi.ongi_back.common.dto.response.group.GetProductReviewResponseDto;
 import com.ongi.ongi_back.common.dto.response.group.GetReservationResponseDto;
+import com.ongi.ongi_back.common.dto.response.group.GetReviewImagesResponseDto;
 import com.ongi.ongi_back.service.GroupPurchaseService;
 
 import jakarta.validation.Valid;
@@ -103,6 +105,23 @@ public class GroupPurchaseController {
     @PathVariable("sequence") Integer sequence
   ){
     ResponseEntity<? super GetProductReviewResponseDto> response = groupPurchaseService.getProductReview(sequence);
+    return response;
+  }
+
+  @GetMapping("/{sequence}/review-images")
+  public ResponseEntity<? super GetReviewImagesResponseDto> getReviewImages(
+    @PathVariable("sequence") Integer sequence
+  ){
+    ResponseEntity<? super GetReviewImagesResponseDto> response = groupPurchaseService.getReviewImages(sequence);
+    return response;
+  }
+
+  @DeleteMapping("/{sequence}")
+  public ResponseEntity<ResponseDto> deleteProduct(
+    @PathVariable("sequence") Integer sequence,
+    @AuthenticationPrincipal String userId
+  ){
+    ResponseEntity<ResponseDto> response = groupPurchaseService.deleteProduct(sequence, userId);
     return response;
   }
 }

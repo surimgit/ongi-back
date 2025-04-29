@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import com.ongi.ongi_back.common.dto.request.payment.PostCancelRequestDto;
 import com.ongi.ongi_back.common.dto.response.user.GetMyBuyingResponseDto;
 import com.ongi.ongi_back.common.entity.OrderItemEntity;
 import com.ongi.ongi_back.common.vo.MyBuyingVO;
@@ -24,9 +25,21 @@ public interface OrderItemRepository extends JpaRepository<OrderItemEntity, Inte
   "JOIN payment_order po ON p.orderId = po.orderId " +
   "JOIN product pr ON o.productSequence = pr.sequence " +
   "WHERE po.userId = :userId")
-List<MyBuyingVO> findMyBuyingList(@Param("userId") String userId);
+  List<MyBuyingVO> findMyBuyingList(@Param("userId") String userId);
 
-
+  @Query("""
+        SELECT new com.ongi.ongi_back.common.dto.request.payment.PostCancelRequestDto(
+          oi.paymentKey,
+          "상품 삭제",
+          oi.quantity * p.price,
+          p.sequence,
+          oi.orderItemSequence
+        )
+        FROM order_item oi
+        JOIN product p ON oi.productSequence = p.sequence
+        WHERE p.sequence = :sequence
+    """)
+  List<PostCancelRequestDto> findByCancelInfo(Integer sequence);
 
   @Transactional
   void deleteByPaymentKeyAndOrderItemSequence(String paymentKey, Integer orderItemSequence);
