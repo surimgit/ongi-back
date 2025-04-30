@@ -13,6 +13,8 @@ import com.ongi.ongi_back.common.dto.response.community.GetCommunityResponseDto;
 import com.ongi.ongi_back.common.dto.response.group.GetProductListResponseDto;
 import com.ongi.ongi_back.common.dto.response.user.GetLikeKeywordListResponseDto;
 import com.ongi.ongi_back.common.dto.response.user.GetMyBuyingResponseDto;
+import com.ongi.ongi_back.common.dto.response.user.GetMySalesResponseDto;
+import com.ongi.ongi_back.common.dto.response.user.GetOrderItemResponseDto;
 import com.ongi.ongi_back.common.dto.response.user.GetUserAccountResponseDto;
 import com.ongi.ongi_back.common.dto.response.user.GetUserIntroductionResponseDto;
 
@@ -32,8 +34,8 @@ public interface MypageService {
   ResponseEntity<? super GetCommunityResponseDto> getMyCommunityLikedPostComment(String userId);
 
   ResponseEntity<? super GetMyBuyingResponseDto> getMyPurchaseList(String userId);
-  ResponseEntity<? super GetProductListResponseDto> getMySelledList(String userId);
-  ResponseEntity<? super GetProductListResponseDto> getMyWishList(String userId);
+  ResponseEntity<? super GetMySalesResponseDto> getMySalesList(String userId);
+  ResponseEntity<? super GetOrderItemResponseDto> getOrderItemByProductSequence(Integer sequence);
 
   ResponseEntity<ResponseDto> postProductReview(PostProductReviewRequestDto dto, String userId);
 }

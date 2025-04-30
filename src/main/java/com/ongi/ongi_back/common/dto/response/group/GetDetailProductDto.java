@@ -19,7 +19,7 @@ public class GetDetailProductDto extends ResponseDto {
   private Integer boughtAmount;
   private Integer purchasedPeople;
   private String deadline;
-  private boolean isSoldOut;
+  private Boolean isSoldOut;
   private String content;
   private String openDate;
 

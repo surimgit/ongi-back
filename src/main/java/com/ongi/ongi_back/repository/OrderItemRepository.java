@@ -11,12 +11,15 @@ import com.ongi.ongi_back.common.dto.request.payment.PostCancelRequestDto;
 import com.ongi.ongi_back.common.dto.response.user.GetMyBuyingResponseDto;
 import com.ongi.ongi_back.common.entity.OrderItemEntity;
 import com.ongi.ongi_back.common.vo.MyBuyingVO;
+import com.ongi.ongi_back.common.vo.OrderItemVO;
 
 import jakarta.transaction.Transactional;
 
 @Repository
 public interface OrderItemRepository extends JpaRepository<OrderItemEntity, Integer> {
   OrderItemEntity findByPaymentKeyAndOrderItemSequence(String paymentKey, Integer productSequence);
+
+  List<OrderItemEntity> findByProductSequence(Integer productSequence);
   
   @Query(
   "SELECT new com.ongi.ongi_back.common.vo.MyBuyingVO(o.paymentKey, o.orderItemSequence, o.productSequence, pr.name, pr.image, o.quantity, pr.price, p.approvedTime) " +

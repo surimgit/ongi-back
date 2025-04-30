@@ -236,6 +236,7 @@ public class TossPaymentServiceImplement implements TossPaymentService {
       if(productEntity == null) return ResponseDto.noExistProduct();
 
       Integer newBought = productEntity.getBoughtAmount() + quantity;
+      if(newBought == productEntity.getProductQuantity()) productEntity.setIsSoldOut(true);
       productEntity.setBoughtAmount(newBought);
 
       productRepository.save(productEntity);

@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import com.ongi.ongi_back.common.entity.ProductEntity;
+import com.ongi.ongi_back.common.vo.MySalesVO;
 
 @Repository
 public interface ProductRepository extends JpaRepository<ProductEntity, Integer> {
@@ -22,5 +23,6 @@ public interface ProductRepository extends JpaRepository<ProductEntity, Integer>
   List<ProductEntity> findBySequences(List<Integer> sequences);
 
   List<ProductEntity> findAllByUserIdOrderBySequenceDesc(String userId);
+  List<ProductEntity> findByUserId(String userId);
 
 }

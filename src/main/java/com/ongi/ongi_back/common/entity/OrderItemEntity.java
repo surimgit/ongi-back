@@ -23,6 +23,7 @@ public class OrderItemEntity {
   private String paymentKey;
   private Integer productSequence;
   private Integer quantity;
+  private String waybillNumber;
 
   public OrderItemEntity(PostOrderItemRequestDto requestDto){
     this.paymentKey = requestDto.getPaymentKey();
