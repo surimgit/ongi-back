@@ -18,6 +18,7 @@ import com.ongi.ongi_back.common.dto.request.calendar.PatchCalendarRequestDto;
 import com.ongi.ongi_back.common.dto.request.calendar.PostScheduleRequestDto;
 import com.ongi.ongi_back.common.dto.response.ResponseDto;
 import com.ongi.ongi_back.common.dto.response.calendar.GetAllScheduleResponseDto;
+import com.ongi.ongi_back.common.dto.response.calendar.PostScheduleResponseDto;
 import com.ongi.ongi_back.service.CalendarService;
 
 import jakarta.validation.Valid;
@@ -40,11 +41,11 @@ public class CalendarController {
     }
 
     @PostMapping
-    public ResponseEntity<ResponseDto> postSchedule(
+    public ResponseEntity<? super PostScheduleResponseDto> postSchedule(
         @RequestBody @Valid PostScheduleRequestDto requestBody,
         @AuthenticationPrincipal String userId
     ) {
-        ResponseEntity<ResponseDto> response = calendarService.postSchedule(requestBody, userId);
+        ResponseEntity<? super PostScheduleResponseDto> response = calendarService.postSchedule(requestBody, userId);
         return response;
     }
 
