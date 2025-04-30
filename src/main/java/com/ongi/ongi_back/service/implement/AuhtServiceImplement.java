@@ -2,6 +2,7 @@ package com.ongi.ongi_back.service.implement;
 
 import java.security.SecureRandom;
 import java.time.LocalDateTime;
+import java.util.Optional;
 import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +25,7 @@ import com.ongi.ongi_back.common.dto.response.ResponseDto;
 import com.ongi.ongi_back.common.dto.response.auth.FindIdResponseDto;
 import com.ongi.ongi_back.common.dto.response.auth.SignInResponseDto;
 import com.ongi.ongi_back.common.entity.UserEntity;
+import com.ongi.ongi_back.common.entity.VerificationCodeEntity;
 import com.ongi.ongi_back.common.util.RedisUtil;
 import com.ongi.ongi_back.provider.JwtProvider;
 import com.ongi.ongi_back.repository.UserRepository;
@@ -95,38 +97,38 @@ public class AuhtServiceImplement implements AuthService {
         }
     }
 
-    // @Override
-    // public ResponseEntity<? super ResponseDto> sendVerificationCode(String telNumber) {
-    //     String code = createSmsKey();
+    @Override
+    public ResponseEntity<? super ResponseDto> sendVerificationCode(String telNumber) {
+        String code = createSmsKey();
 
-    //     LocalDateTime expiryTime = LocalDateTime.now().plusMinutes(3);
+        LocalDateTime expiryTime = LocalDateTime.now().plusMinutes(3);
 
-    //     VerificationCodeEntity verificationCodeEntity = new VerificationCodeEntity();
-    //     verificationCodeEntity.setTelNumber(telNumber);
-    //     verificationCodeEntity.setCode(code);
-    //     verificationCodeEntity.setExpiryTime(expiryTime);
-    //     verificationCodeRepository.save(verificationCodeEntity);
+        VerificationCodeEntity verificationCodeEntity = new VerificationCodeEntity();
+        verificationCodeEntity.setTelNumber(telNumber);
+        verificationCodeEntity.setCode(code);
+        verificationCodeEntity.setExpiryTime(expiryTime);
+        verificationCodeRepository.save(verificationCodeEntity);
 
-    //     String message = "[온기] 인증번호 [" + code + "] 를 입력해주세요.";
-    //     return solapiSendSms(telNumber, message);
-    // }
+        String message = "[온기] 인증번호 [" + code + "] 를 입력해주세요.";
+        return solapiSendSms(telNumber, message);
+    }
 
-    // @Override
-    // public boolean validateVerificationCode(String telNumber, String code) {
-    //     Optional<VerificationCodeEntity> verificationCodeOptional = verificationCodeRepository.findByTelNumberAndCode(telNumber, code);
+    @Override
+    public boolean validateVerificationCode(String telNumber, String code) {
+        Optional<VerificationCodeEntity> verificationCodeOptional = verificationCodeRepository.findByTelNumberAndCode(telNumber, code);
 
-    //     if (verificationCodeOptional.isPresent()) {
-    //         VerificationCodeEntity verificationCode = verificationCodeOptional.get();
+        if (verificationCodeOptional.isPresent()) {
+            VerificationCodeEntity verificationCode = verificationCodeOptional.get();
 
-    //         if (LocalDateTime.now().isBefore(verificationCode.getExpiryTime())) {
-    //             return true;
-    //         } else {
-    //             return false;
-    //         }
-    //     } else {
-    //         return false;
-    //     }
-    // }
+            if (LocalDateTime.now().isBefore(verificationCode.getExpiryTime())) {
+                return true;
+            } else {
+                return false;
+            }
+        } else {
+            return false;
+        }
+    }
 
     @Scheduled(fixedRate=3600000) //1시간마다  실행
     @Transactional
@@ -205,11 +207,7 @@ public class AuhtServiceImplement implements AuthService {
         return ResponseDto.success(HttpStatus.CREATED);
     }
 
-    // @Override
-    // public boolean validateVerificationCode(String telNumber, String code) {
-    //     // TODO Auto-generated method stub
-    //     throw new UnsupportedOperationException("Unimplemented method 'validateVerificationCode'");
-    // }
+    
 
 
     @Override
