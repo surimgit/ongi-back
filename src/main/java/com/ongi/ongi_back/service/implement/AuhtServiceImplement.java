@@ -207,8 +207,6 @@ public class AuhtServiceImplement implements AuthService {
         return ResponseDto.success(HttpStatus.CREATED);
     }
 
-    
-
 
     @Override
     public ResponseEntity<? super ResponseDto> findId(FindIdRequestDto dto) {
