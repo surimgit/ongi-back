@@ -1,17 +1,17 @@
 package com.ongi.ongi_back.service.implement;
 
-import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Service;
-
 import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
 
 import com.ongi.ongi_back.common.dto.request.calendar.PatchCalendarRequestDto;
+import com.ongi.ongi_back.common.dto.request.calendar.PostScheduleRequestDto;
 import com.ongi.ongi_back.common.dto.response.ResponseDto;
 import com.ongi.ongi_back.common.dto.response.calendar.GetAllScheduleResponseDto;
-import com.ongi.ongi_back.common.dto.request.calendar.PostScheduleRequestDto;
+import com.ongi.ongi_back.common.dto.response.calendar.PostScheduleResponseDto;
 import com.ongi.ongi_back.common.entity.CalendarEntity;
 import com.ongi.ongi_back.repository.CalendarRepository;
 import com.ongi.ongi_back.service.CalendarService;
@@ -39,17 +39,17 @@ public class CalendarServiceImplement implements CalendarService {
     }
 
     @Override
-    public ResponseEntity<ResponseDto> postSchedule(PostScheduleRequestDto dto, String userId) {
+    public ResponseEntity<? super PostScheduleResponseDto> postSchedule(PostScheduleRequestDto dto, String userId) {
         try {
             CalendarEntity calendarEntity = new CalendarEntity(dto, userId);
             calendarRepository.save(calendarEntity);
 
+            return PostScheduleResponseDto.success(calendarEntity.getCalendarSequence());
+            
         } catch (Exception exception) {
             exception.printStackTrace();
-            return ResponseDto.databaseError();
+            return PostScheduleResponseDto.databaseError();
         }
-
-        return ResponseDto.success(HttpStatus.CREATED);
     }
 
     @Override
