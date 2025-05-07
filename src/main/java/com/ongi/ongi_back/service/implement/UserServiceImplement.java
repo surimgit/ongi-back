@@ -27,7 +27,7 @@ public class UserServiceImplement implements UserService{
         UserEntity userEntity = null;
 
         try {
-
+            
             userEntity = userRepository.findByUserId(userId);
             if (userEntity == null) return ResponseDto.noExistUser();
             if (userEntity.getIsResigned()) return ResponseDto.alreadyResigned();
