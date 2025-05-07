@@ -10,7 +10,7 @@ import com.ongi.ongi_back.common.entity.WishListEntity;
 import com.ongi.ongi_back.common.entity.pk.WishListPk;
 import com.ongi.ongi_back.common.vo.WishVO;
 
-import io.lettuce.core.dynamic.annotation.Param;
+import org.springframework.data.repository.query.Param;
 
 @Repository
 public interface WishListRepository extends JpaRepository<WishListEntity, WishListPk> {
@@ -18,7 +18,7 @@ public interface WishListRepository extends JpaRepository<WishListEntity, WishLi
 
   @Query("SELECT new com.ongi.ongi_back.common.vo.WishVO( " +
   "p.name, p.price, p.sequence, " +
-  "(p.productQuantity - p.boughtAmount), p.deadline, p.isSoldOut, p.openDate, p.image) " +
+  "(p.productQuantity - p.boughtAmount), p.deadline, p.status, p.openDate, p.image) " +
   "FROM wish_list w JOIN product p " +
   "ON w.productSequence = p.sequence " +
   "WHERE w.userId = :userId")

@@ -7,6 +7,8 @@ import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URI;
 import java.net.URL;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Base64;
 import java.util.List;
@@ -213,6 +215,7 @@ public class TossPaymentServiceImplement implements TossPaymentService {
     // 5-4. metadata의 productSequence, productQuantities 읽기
     String productSequences = (String) metadata.get("productSequences");
     String productQuantities = (String) metadata.get("productQuantity");
+    String deliveryAddresses = (String) metadata.get("address");
     
     if (productSequences == null || productQuantities == null) {
       return ResponseDto.tossFailure("INVALID_METADATA", "상품 정보가 없습니다.", HttpStatus.BAD_REQUEST);
@@ -220,12 +223,15 @@ public class TossPaymentServiceImplement implements TossPaymentService {
 
     List<Integer> productSequencesArr = parseIntegerListFromMetadata(productSequences);
     List<Integer> productQuantitiesArr = parseIntegerListFromMetadata(productQuantities);
-    
+    List<String> productDeliveryAddressArr = parseStringListFromMetadata(deliveryAddresses);
+
     // 5-5. 결제 성공한 결제건 상품 각각의 정보 저장하기
     for(int i = 0; i < productSequencesArr.size(); i++){
       int productSequence = productSequencesArr.get(i);
       int quantity = productQuantitiesArr.get(i);
-      PostOrderItemRequestDto requestDto = new PostOrderItemRequestDto(paymentKey, productSequence, quantity);
+      String deliveryAddress = productDeliveryAddressArr.get(i);
+
+      PostOrderItemRequestDto requestDto = new PostOrderItemRequestDto(paymentKey, productSequence, quantity, deliveryAddress);
       OrderItemEntity orderItemEntity = new OrderItemEntity(requestDto);
       orderItemRepository.save(orderItemEntity);
 
@@ -236,7 +242,7 @@ public class TossPaymentServiceImplement implements TossPaymentService {
       if(productEntity == null) return ResponseDto.noExistProduct();
 
       Integer newBought = productEntity.getBoughtAmount() + quantity;
-      if(newBought == productEntity.getProductQuantity()) productEntity.setIsSoldOut(true);
+      if(newBought == productEntity.getProductQuantity()) productEntity.setStatus("CLOSE");
       productEntity.setBoughtAmount(newBought);
 
       productRepository.save(productEntity);
@@ -250,6 +256,15 @@ public class TossPaymentServiceImplement implements TossPaymentService {
     List<Integer> result = new ArrayList<>();
     for (String str : arrStr) {
         result.add(Integer.parseInt(str.trim()));
+    }
+    return result;
+  }
+
+  private List<String> parseStringListFromMetadata(String metadataValue) {
+    String[] arrStr = metadataValue.split(",");
+    List<String> result = new ArrayList<>();
+    for (String str : arrStr) {
+        result.add(str);
     }
     return result;
   }
@@ -309,9 +324,24 @@ public class TossPaymentServiceImplement implements TossPaymentService {
       for(TossCancel cancel: cancels){
         PaymentCancelEntity paymentCancelEntity = new PaymentCancelEntity(cancel, paymentKey, cancelReason, productSequence);
         paymentCancelRepository.save(paymentCancelEntity);
+
+        ProductEntity productEntity = productRepository.findBySequence(productSequence);
+        productEntity.setBoughtAmount(productEntity.getBoughtAmount() - orderItemEntity.getQuantity());
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+
+        LocalDateTime openDateTime = LocalDateTime.parse(productEntity.getOpenDate(), formatter);
+        LocalDateTime deadlineTime = LocalDateTime.parse(productEntity.getDeadline(), formatter);
+        
+        String productStatus = productEntity.getStatus(deadlineTime, openDateTime);
+        
+        productEntity.setStatus(productStatus);
+        productRepository.save(productEntity);
+        
         orderItemRepository.deleteByPaymentKeyAndOrderItemSequence(paymentKey, orderItemSequence);
       }
     } catch(Exception exception) {
+      exception.printStackTrace();
       return ResponseDto.databaseError();
     }
     

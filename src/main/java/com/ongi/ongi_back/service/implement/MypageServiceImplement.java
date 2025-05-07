@@ -15,6 +15,7 @@ import com.ongi.ongi_back.common.dto.request.user.PatchUserAccountRequestDto;
 import com.ongi.ongi_back.common.dto.request.user.PatchUserIntroductionRequestDto;
 import com.ongi.ongi_back.common.dto.request.user.PostProductReviewRequestDto;
 import com.ongi.ongi_back.common.dto.request.user.PostReviewImagesRequestDto;
+import com.ongi.ongi_back.common.dto.request.user.PostWaybillRequestDto;
 import com.ongi.ongi_back.common.dto.response.ResponseDto;
 import com.ongi.ongi_back.common.dto.response.community.GetCommunityCommentResponseDto;
 import com.ongi.ongi_back.common.dto.response.community.GetCommunityCommentsResponseDto;
@@ -320,12 +321,7 @@ public class MypageServiceImplement implements MypageService{
 
     try{
 
-      List<OrderItemEntity> orderItemEntities = orderItemRepository.findByProductSequence(sequence);
-
-      for(OrderItemEntity orderItemEntity: orderItemEntities) {
-        OrderItemVO orderItemVO = new OrderItemVO(orderItemEntity);
-        orderItems.add(orderItemVO);
-      }
+      orderItems = orderItemRepository.findByProductSequence(sequence);
 
     } catch(Exception exception) {
       exception.printStackTrace();
@@ -333,6 +329,28 @@ public class MypageServiceImplement implements MypageService{
     }
     
     return GetOrderItemResponseDto.success(orderItems);
+  }
+
+  @Override
+  public ResponseEntity<ResponseDto> postWaybillNumber(PostWaybillRequestDto dto, String userId) {
+
+    try{
+      Integer sequence = dto.getOrderItemSequence();
+      String waybillNumber = dto.getWaybillNumber();
+
+      OrderItemEntity orderItemEntity = orderItemRepository.findByOrderItemSequence(sequence);
+
+      if(orderItemEntity == null) return ResponseDto.validationFail();
+      orderItemEntity.setWaybillNumber(waybillNumber);
+
+      orderItemRepository.save(orderItemEntity);
+      
+    } catch(Exception exception) {
+      exception.printStackTrace();
+      return ResponseDto.databaseError();
+    }
+
+    return ResponseDto.success(HttpStatus.OK);
   }
 
   

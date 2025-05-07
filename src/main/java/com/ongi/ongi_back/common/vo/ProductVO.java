@@ -16,11 +16,11 @@ public class ProductVO {
   private double rating;
   private Integer purchasedPeople;
   private String deadline;
-  private Integer productRound;
   private Integer boughtAmount;
   private Integer productQuantity;
   private String image;
   private String openDate;
+  private String status;
 
   public ProductVO(ProductEntity productEntity) {
     this.sequence = productEntity.getSequence();
@@ -33,6 +33,7 @@ public class ProductVO {
     this.productQuantity = productEntity.getProductQuantity();
     this.image = productEntity.getImage();
     this.openDate = productEntity.getOpenDate();
+    this.status = productEntity.getStatus();
   }
 
   public static List<ProductVO> getList(List<ProductEntity> productEntities){

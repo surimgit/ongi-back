@@ -15,7 +15,7 @@ public class MySalesVO {
   private String deadline;
   private String openDate;
   private String image;
-  private Boolean isSoldOut;
+  private String status;
 
   public MySalesVO(ProductEntity productEntity){
     this.sequence = productEntity.getSequence();
@@ -27,6 +27,6 @@ public class MySalesVO {
     this.deadline = productEntity.getDeadline();
     this.openDate = productEntity.getOpenDate();
     this.image = productEntity.getImage();
-    this.isSoldOut = productEntity.getIsSoldOut();
+    this.status = productEntity.getStatus();
   }
 }

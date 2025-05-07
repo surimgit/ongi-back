@@ -43,6 +43,9 @@ public class AlertServiceimplement implements AlertService {
             else if (alertEntity.getAlertType().equals("report_alerted")) {
                 alertEntity.setAlertContent("신고가 접수되어 경고를 받았습니다.(사유:"+alertEntity.getReason()+")");
             }
+            else if (alertEntity.getAlertType().equals("wish_open")){
+                alertEntity.setAlertContent("찜해놓은 상품이 오픈했습니다!");
+            }
 
             alertRespository.save(alertEntity);
             

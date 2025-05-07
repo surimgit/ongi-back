@@ -32,7 +32,9 @@ import com.ongi.ongi_back.service.GroupPurchaseService;
 import com.ongi.ongi_back.service.TossPaymentService;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class GroupPurchaseServiceImplements implements GroupPurchaseService{
@@ -53,10 +55,11 @@ public class GroupPurchaseServiceImplements implements GroupPurchaseService{
       ProductEntity productEntity = new ProductEntity(dto, userId);
       productRepository.save(productEntity);
     } catch(Exception exception) {
-      exception.printStackTrace();
+      log.error("데이터베이스 에러", exception.getMessage(), exception);
       return ResponseDto.databaseError();
     }
 
+    log.debug(userId + "가 상품을 등록했습니다.");
     return ResponseDto.success(HttpStatus.OK);
   }
 
@@ -71,10 +74,11 @@ public class GroupPurchaseServiceImplements implements GroupPurchaseService{
       productRepository.save(productEntity);
 
     } catch(Exception exception) {
-      exception.printStackTrace();
+      log.error("데이터베이스 에러", exception.getMessage());
       return ResponseDto.databaseError();
     }
 
+    log.debug(sequence + "번 상품의 정보가 변경되었습니다.");
     return ResponseDto.success(HttpStatus.OK);
 
   }
@@ -112,10 +116,11 @@ public class GroupPurchaseServiceImplements implements GroupPurchaseService{
       }
 
     } catch(Exception exception) {
-      exception.printStackTrace();
+      log.error("데이터베이스 에러", exception.getMessage());
       return ResponseDto.databaseError();
     }
 
+    log.info(category + " 카테고리의 공동구매 상품 리스트를 불러옵니다.");
     return GetProductListResponseDto.success(productEntities, filterType);
   }
 
@@ -123,13 +128,14 @@ public class GroupPurchaseServiceImplements implements GroupPurchaseService{
   public ResponseEntity<? super GetDetailProductDto> getDetailProduct(String userId, Integer sequence) {
 
     ProductEntity productEntity;
+
     try {
       
       productEntity = productRepository.findBySequence(sequence);
       if(productEntity == null) return ResponseDto.noExistProduct();
 
     } catch(Exception exception) {
-      exception.printStackTrace();
+      log.error("데이터베이스 에러", exception.getMessage());
       return ResponseDto.databaseError();
     }
 
@@ -154,9 +160,11 @@ public class GroupPurchaseServiceImplements implements GroupPurchaseService{
       productRepository.save(productEntity);
 
     } catch (Exception exception){
+      log.error("데이터베이스 에러", exception.getMessage());
       return ResponseDto.databaseError();
     }
 
+    log.debug(sequence + "번 상품의 정보를 변경했습니다.");
     return ResponseDto.success(HttpStatus.OK);
   }
 
@@ -201,6 +209,7 @@ public class GroupPurchaseServiceImplements implements GroupPurchaseService{
       quantity = stockReservationRepository.sumQuantityByProductSequence(sequence);
 
     }catch(Exception exception) {
+      log.error("데이터베이스 에러", exception.getMessage());
       return ResponseDto.databaseError();
     }
 
@@ -217,7 +226,7 @@ public class GroupPurchaseServiceImplements implements GroupPurchaseService{
       productReviewEntities = productReviewRepository.findByProductSequence(sequence);
 
     }catch(Exception exception) {
-      exception.printStackTrace();
+      log.error("데이터베이스 에러", exception.getMessage());
       return ResponseDto.databaseError();
     }
 
@@ -234,7 +243,7 @@ public class GroupPurchaseServiceImplements implements GroupPurchaseService{
       reviewImagesEntities = reviewImagesRepository.findReviewImages(sequence);
 
     }catch(Exception exception) {
-      exception.printStackTrace();
+      log.error("데이터베이스 에러", exception.getMessage());
       return ResponseDto.databaseError();
     }
 
@@ -262,9 +271,11 @@ public class GroupPurchaseServiceImplements implements GroupPurchaseService{
       productRepository.delete(productEntity);
 
     } catch(Exception exception){
-      exception.printStackTrace();
+      log.error("데이터베이스 에러", exception.getMessage());
       return ResponseDto.databaseError();
     }
+
+    log.debug(sequence + "번 상품이 삭제되었습니다.");
 
     return ResponseDto.success(HttpStatus.OK);
   }

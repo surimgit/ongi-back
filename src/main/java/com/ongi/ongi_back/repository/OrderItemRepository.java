@@ -18,11 +18,18 @@ import jakarta.transaction.Transactional;
 @Repository
 public interface OrderItemRepository extends JpaRepository<OrderItemEntity, Integer> {
   OrderItemEntity findByPaymentKeyAndOrderItemSequence(String paymentKey, Integer productSequence);
+  OrderItemEntity findByOrderItemSequence(Integer sequence);
 
-  List<OrderItemEntity> findByProductSequence(Integer productSequence);
+  @Query(
+    "SELECT new com.ongi.ongi_back.common.vo.OrderItemVO(o.orderItemSequence, o.productSequence, o.quantity, o.waybillNumber, o.deliveryAddressSnapshot, p.approvedTime) " +
+    "FROM order_item o " +
+    "JOIN payment_confirm p ON o.paymentKey = p.paymentKey " +
+    "WHERE o.productSequence = :productSequence"
+  )
+  List<OrderItemVO> findByProductSequence(Integer productSequence);
   
   @Query(
-  "SELECT new com.ongi.ongi_back.common.vo.MyBuyingVO(o.paymentKey, o.orderItemSequence, o.productSequence, pr.name, pr.image, o.quantity, pr.price, p.approvedTime) " +
+  "SELECT new com.ongi.ongi_back.common.vo.MyBuyingVO(o.paymentKey, o.orderItemSequence, o.productSequence, pr.name, pr.image, o.quantity, pr.price, p.approvedTime, o.waybillNumber, o.deliveryAddressSnapshot) " +
   "FROM order_item o " +
   "JOIN payment_confirm p ON o.paymentKey = p.paymentKey " +
   "JOIN payment_order po ON p.orderId = po.orderId " +

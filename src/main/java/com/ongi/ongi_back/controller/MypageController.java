@@ -17,6 +17,7 @@ import com.ongi.ongi_back.common.dto.request.user.DeleteLikeKeywordRequestDto;
 import com.ongi.ongi_back.common.dto.request.user.PatchUserAccountRequestDto;
 import com.ongi.ongi_back.common.dto.request.user.PatchUserIntroductionRequestDto;
 import com.ongi.ongi_back.common.dto.request.user.PostProductReviewRequestDto;
+import com.ongi.ongi_back.common.dto.request.user.PostWaybillRequestDto;
 import com.ongi.ongi_back.common.dto.response.ResponseDto;
 import com.ongi.ongi_back.common.dto.response.community.GetCommunityCommentsResponseDto;
 import com.ongi.ongi_back.common.dto.response.community.GetCommunityResponseDto;
@@ -138,7 +139,6 @@ public class MypageController {
   public ResponseEntity<? super GetMyBuyingResponseDto> getMyPurchaseList(
     @AuthenticationPrincipal String userId
   ){
-    System.out.println(userId);
     ResponseEntity<? super GetMyBuyingResponseDto> response = mypageService.getMyPurchaseList(userId);
     return response;
   }
@@ -164,7 +164,16 @@ public class MypageController {
   public ResponseEntity<? super GetOrderItemResponseDto> getOrderItemsByProductSequence (
     @RequestParam("productSequence") Integer productSequence
   ){
-    ResponseEntity<? super GetOrderItemResponseDto>  response = mypageService.getOrderItemByProductSequence(productSequence);
+    ResponseEntity<? super GetOrderItemResponseDto> response = mypageService.getOrderItemByProductSequence(productSequence);
+    return response;
+  }
+
+  @PostMapping("/waybill")
+  public ResponseEntity<ResponseDto> postWaybillNumber(
+    @RequestBody @Valid PostWaybillRequestDto requestBody,
+    @AuthenticationPrincipal String userId
+  ){
+    ResponseEntity<ResponseDto> response = mypageService.postWaybillNumber(requestBody, userId);
     return response;
   }
 }

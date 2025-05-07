@@ -1,6 +1,7 @@
 package com.ongi.ongi_back.controller;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.jmx.export.annotation.ManagedOperation;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -27,7 +28,8 @@ import com.ongi.ongi_back.service.GroupPurchaseService;
 
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-
+import lombok.extern.slf4j.Slf4j;
+@Slf4j
 @RestController
 @RequestMapping("/api/v1/product")
 @RequiredArgsConstructor
@@ -40,6 +42,7 @@ public class GroupPurchaseController {
     @RequestBody @Valid PostProductRequestDto dto,
     @AuthenticationPrincipal String userId
   ) {
+    log.debug("상품을 등록했습니다.");
     ResponseEntity<ResponseDto> response = groupPurchaseService.postProduct(dto, userId);
     return response;
   }
@@ -80,6 +83,7 @@ public class GroupPurchaseController {
     @AuthenticationPrincipal String userId
   ){
     ResponseEntity<? super GetDetailProductDto> response = groupPurchaseService.getDetailProduct(userId, sequence);
+    log.info(sequence + "번 상품의 정보를 가져옵니다.");
     return response;
   }
 
@@ -105,6 +109,7 @@ public class GroupPurchaseController {
     @PathVariable("sequence") Integer sequence
   ){
     ResponseEntity<? super GetProductReviewResponseDto> response = groupPurchaseService.getProductReview(sequence);
+    log.info(sequence + "번 상품의 리뷰 리스트를 불러옵니다.");
     return response;
   }
 
@@ -113,6 +118,7 @@ public class GroupPurchaseController {
     @PathVariable("sequence") Integer sequence
   ){
     ResponseEntity<? super GetReviewImagesResponseDto> response = groupPurchaseService.getReviewImages(sequence);
+    log.info(sequence + "번 상품의 리뷰 이미지 리스트를 불러옵니다.");
     return response;
   }
 

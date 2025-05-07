@@ -22,6 +22,7 @@ public class GetDetailProductDto extends ResponseDto {
   private Boolean isSoldOut;
   private String content;
   private String openDate;
+  private String status;
 
   private GetDetailProductDto(ProductEntity productEntity) {
     this.image = productEntity.getImage();
@@ -36,6 +37,7 @@ public class GetDetailProductDto extends ResponseDto {
     this.isSoldOut = productEntity.getIsSoldOut();
     this.content = productEntity.getContent();
     this.openDate = productEntity.getOpenDate();
+    this.status = productEntity.getStatus();
   }
 
   public static ResponseEntity<GetDetailProductDto> success(ProductEntity productEntity){

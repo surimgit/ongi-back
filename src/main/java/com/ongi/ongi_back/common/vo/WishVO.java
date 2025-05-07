@@ -11,7 +11,7 @@ public class WishVO {
   private Integer sequence;
   private Integer remainingProducts;
   private String deadline;
-  private boolean isSoldOut;
+  private String status;
   private String openDate;
   private String image;
 }

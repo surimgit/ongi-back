@@ -7,6 +7,7 @@ import com.ongi.ongi_back.common.dto.request.user.DeleteLikeKeywordRequestDto;
 import com.ongi.ongi_back.common.dto.request.user.PatchUserAccountRequestDto;
 import com.ongi.ongi_back.common.dto.request.user.PatchUserIntroductionRequestDto;
 import com.ongi.ongi_back.common.dto.request.user.PostProductReviewRequestDto;
+import com.ongi.ongi_back.common.dto.request.user.PostWaybillRequestDto;
 import com.ongi.ongi_back.common.dto.response.ResponseDto;
 import com.ongi.ongi_back.common.dto.response.community.GetCommunityCommentsResponseDto;
 import com.ongi.ongi_back.common.dto.response.community.GetCommunityResponseDto;
@@ -38,5 +39,6 @@ public interface MypageService {
   ResponseEntity<? super GetOrderItemResponseDto> getOrderItemByProductSequence(Integer sequence);
 
   ResponseEntity<ResponseDto> postProductReview(PostProductReviewRequestDto dto, String userId);
+  ResponseEntity<ResponseDto> postWaybillNumber(PostWaybillRequestDto dto, String userId);
 }
 
