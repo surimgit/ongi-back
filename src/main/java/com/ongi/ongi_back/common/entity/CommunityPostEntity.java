@@ -2,14 +2,18 @@ package com.ongi.ongi_back.common.entity;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.ongi.ongi_back.common.dto.request.community.PatchCommunityPostRequestDto;
 import com.ongi.ongi_back.common.dto.request.community.PostCommunityRequestDto;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -33,6 +37,9 @@ public class CommunityPostEntity {
     private String category;
     private String title;
     private String content;
+    
+    @OneToMany(mappedBy = "post", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<PostImageEntity> postImages = new ArrayList<>();
     private Integer liked;
     private Integer viewCount;
     private boolean hotPost;
@@ -59,5 +66,10 @@ public class CommunityPostEntity {
         this.category = dto.getCategory();
         this.title = dto.getTitle();
         this.content = dto.getContent();
+    }
+
+    public void addImage(PostImageEntity postImageEntity) {
+        postImages.add(postImageEntity);
+        postImageEntity.setPost_sequence(this);
     }
 }

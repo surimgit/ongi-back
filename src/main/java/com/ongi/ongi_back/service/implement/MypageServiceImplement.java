@@ -7,7 +7,6 @@ import java.util.stream.Collectors;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
 
 import com.ongi.ongi_back.common.dto.request.user.AddLikeKeywordRequestDto;
 import com.ongi.ongi_back.common.dto.request.user.DeleteLikeKeywordRequestDto;
@@ -16,7 +15,6 @@ import com.ongi.ongi_back.common.dto.request.user.PatchUserIntroductionRequestDt
 import com.ongi.ongi_back.common.dto.request.user.PostProductReviewRequestDto;
 import com.ongi.ongi_back.common.dto.request.user.PostReviewImagesRequestDto;
 import com.ongi.ongi_back.common.dto.response.ResponseDto;
-import com.ongi.ongi_back.common.dto.response.community.GetCommunityCommentResponseDto;
 import com.ongi.ongi_back.common.dto.response.community.GetCommunityCommentsResponseDto;
 import com.ongi.ongi_back.common.dto.response.community.GetCommunityResponseDto;
 import com.ongi.ongi_back.common.dto.response.group.GetProductListResponseDto;

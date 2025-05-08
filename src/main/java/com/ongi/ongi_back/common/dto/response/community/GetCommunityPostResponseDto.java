@@ -1,10 +1,14 @@
 package com.ongi.ongi_back.common.dto.response.community;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
 import com.ongi.ongi_back.common.dto.response.ResponseDto;
 import com.ongi.ongi_back.common.entity.CommunityPostEntity;
+import com.ongi.ongi_back.common.entity.PostImageEntity;
 
 import lombok.Getter;
 
@@ -20,6 +24,7 @@ public class GetCommunityPostResponseDto extends ResponseDto {
     private String content;
     private Integer liked;
     private Integer viewCount;
+    private List<String> imageUrls;
 
     private GetCommunityPostResponseDto(CommunityPostEntity communityPostEntity) {
         this.postSequence = communityPostEntity.getPostSequence();
@@ -32,6 +37,7 @@ public class GetCommunityPostResponseDto extends ResponseDto {
         this.content = communityPostEntity.getContent();
         this.liked = communityPostEntity.getLiked();
         this.viewCount = communityPostEntity.getViewCount();
+        this.imageUrls = communityPostEntity.getPostImages().stream().map(PostImageEntity::getImageUrl).collect(Collectors.toList());
     }
 
     public static ResponseEntity<GetCommunityPostResponseDto> success(CommunityPostEntity communityPostEntity) {

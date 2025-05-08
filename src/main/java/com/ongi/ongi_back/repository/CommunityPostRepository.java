@@ -40,6 +40,7 @@ public interface CommunityPostRepository extends JpaRepository<CommunityPostEnti
     @Query(value = "SELECT * FROM community_post " +
                    "WHERE board IN ('정보 게시판', '우리 동네 게시판') " +
                    "AND post_date >= NOW() - INTERVAL 1 DAY " +
+                   "AND liked >= 1 " +
                    "ORDER BY liked DESC, view_count DESC " +
                    "LIMIT 10", nativeQuery = true)
     List<CommunityPostEntity> findTop10RecentPopularPosts();
