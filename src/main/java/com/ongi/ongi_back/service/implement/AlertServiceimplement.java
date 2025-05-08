@@ -54,6 +54,29 @@ public class AlertServiceimplement implements AlertService {
         return ResponseDto.success(HttpStatus.CREATED);
     }
 
+    // @Override
+    // public ResponseEntity<ResponseDto> postHotSelectedAlert(PostAlertRequestDto dto) {
+        
+    //     try {
+
+    //         AlertEntity alertEntity = new AlertEntity(dto);
+    //         UserEntity receiverEntity = userRepository.findByUserId(alertEntity.getReceiverId());
+    //         if (receiverEntity.getIsResigned()) return ResponseDto.alreadyResigned(); 
+
+    //         if (alertEntity.getAlertType().equals("hot_post_selected")) {
+    //             alertEntity.setAlertContent("회원님의 게시글이 인기글로 선정되었습니다.");
+    //         }
+
+    //         alertRespository.save(alertEntity);
+            
+    //     } catch (Exception exception) {
+    //         exception.printStackTrace();
+    //         return ResponseDto.databaseError();
+    //     }
+
+    //     return ResponseDto.success(HttpStatus.CREATED);
+    // }
+
     @Override
     public ResponseEntity<? super GetAlertResponseDto> getAlert(String userId) {
 
@@ -89,22 +112,17 @@ public class AlertServiceimplement implements AlertService {
     }
 
     @Override
-    public ResponseEntity<ResponseDto> deleteAlert(Integer alertSequence, String userId) {
+    public ResponseEntity<ResponseDto> patchAllAlertRead(String userId) {
+
+        List<AlertEntity> alertEntities = new ArrayList<>();
         
         try {
 
-            if (alertSequence == null) {
-                alertRespository.deleteByReceiverId(userId);
+            alertEntities = alertRespository.findNotReadAlerts(userId);
+            for (AlertEntity alertEntity: alertEntities) {
+                alertEntity.setReadPara(true);
             }
-            else {
-                AlertEntity alertEntity = alertRespository.findByAlertSequence(alertSequence);
-                
-                String receiverId = alertEntity.getReceiverId();
-                boolean isReceiver = receiverId.equals(userId);
-                if (!isReceiver) return ResponseDto.noPermission();
-
-                alertRespository.deleteByAlertSequence(alertSequence);
-            }
+            alertRespository.saveAll(alertEntities);
             
         } catch (Exception exception) {
             exception.printStackTrace();
@@ -113,5 +131,27 @@ public class AlertServiceimplement implements AlertService {
 
         return ResponseDto.success(HttpStatus.OK);
     }
+
+    @Override
+    public ResponseEntity<ResponseDto> deleteAlert(Integer alertSequence, String userId) {
+        
+        try {
+
+            AlertEntity alertEntity = alertRespository.findByAlertSequence(alertSequence);
+            System.out.println(alertEntity);
+            
+            String receiverId = alertEntity.getReceiverId();
+            boolean isReceiver = receiverId.equals(userId);
+            if (!isReceiver) return ResponseDto.noPermission();
+
+            alertRespository.deleteByAlertSequence(alertSequence);
+            
+        } catch (Exception exception) {
+            exception.printStackTrace();
+            return ResponseDto.databaseError();
+        }
+
+        return ResponseDto.success(HttpStatus.OK);
+    }   
     
 }

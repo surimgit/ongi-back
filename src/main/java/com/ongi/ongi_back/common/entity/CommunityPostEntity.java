@@ -36,8 +36,9 @@ public class CommunityPostEntity {
     private Integer liked;
     private Integer viewCount;
     private boolean hotPost;
+    private String county;
 
-    public CommunityPostEntity(PostCommunityRequestDto dto, String userId, String nickname) {
+    public CommunityPostEntity(PostCommunityRequestDto dto, String userId, String nickname, String county) {
         LocalDateTime now = LocalDateTime.now();
         DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         this.userId = userId;
@@ -50,6 +51,7 @@ public class CommunityPostEntity {
         this.liked = 0;
         this.viewCount = 0;
         this.hotPost = false;
+        this.county = county;
     }
 
     public void patch(PatchCommunityPostRequestDto dto) {

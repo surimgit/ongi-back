@@ -1,7 +1,5 @@
 package com.ongi.ongi_back.service.implement;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -46,10 +44,20 @@ public class CommunityServiceImplement implements CommunityService {
     public ResponseEntity<ResponseDto> postCommunityPost(PostCommunityRequestDto dto, String userId) {
 
         String nickname = null;
+        String county = null;
         
         try {
             nickname = userRepository.findByUserId(userId).getNickname();
-            CommunityPostEntity communityPostEntity = new CommunityPostEntity(dto, userId, nickname);
+
+            if (dto.getBoard().equals("우리 동네 게시판")) {
+                county = userRepository.findByUserId(userId).getAddress();
+
+                String[] parts = county.split(" ");
+                county = (parts.length >= 2) ? parts[0] + " " + parts[1] : county;
+                if (parts[0].equals("세종특별자치시")) county = "세종특별자치시";
+            }
+
+            CommunityPostEntity communityPostEntity = new CommunityPostEntity(dto, userId, nickname, county);
             communityPostRepository.save(communityPostEntity);
             
         } catch (Exception exception) {
@@ -197,6 +205,23 @@ public class CommunityServiceImplement implements CommunityService {
         } catch (Exception exception) {
            exception.printStackTrace();
            return ResponseDto.databaseError();
+        }
+
+        return GetCommunityResponseDto.success(communityPostEntities);
+    }
+
+    @Override
+    public ResponseEntity<? super GetCommunityResponseDto> getCounty(String county, String category) {
+
+        List<CommunityPostEntity> communityPostEntities = new ArrayList<>();
+        
+        try {
+            if (category == null) communityPostEntities = communityPostRepository.findCountyPosts(county);
+            else communityPostEntities = communityPostRepository.findCountyCategoryPosts(county, category);
+            
+        } catch (Exception exception) {
+            exception.printStackTrace();
+            return ResponseDto.databaseError();
         }
 
         return GetCommunityResponseDto.success(communityPostEntities);

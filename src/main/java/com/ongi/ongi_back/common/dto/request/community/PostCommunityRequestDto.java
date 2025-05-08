@@ -22,4 +22,5 @@ public class PostCommunityRequestDto {
     private String title;
     @NotBlank
     private String content;
+    private String county;
 }

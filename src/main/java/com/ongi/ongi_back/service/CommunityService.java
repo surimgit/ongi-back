@@ -25,6 +25,7 @@ public interface CommunityService {
     ResponseEntity<? super GetCommunityResponseDto> getCommunity();
     ResponseEntity<? super GetCommunityResponseDto> getBoard(String board);
     ResponseEntity<? super GetCommunityResponseDto> getCategory(String category);
+    ResponseEntity<? super GetCommunityResponseDto> getCounty(String county, String category);
 
     // 게시글 검색 기능 (작성자, 제목, 내용)
     ResponseEntity<? super GetCommunityResponseDto> getCommunityPostByWriter(String keyword);
