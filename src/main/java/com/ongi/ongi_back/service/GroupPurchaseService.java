@@ -15,9 +15,7 @@ import com.ongi.ongi_back.common.dto.response.group.GetReviewImagesResponseDto;
 
 public interface GroupPurchaseService {
   ResponseEntity<ResponseDto> postProduct(PostProductRequestDto dto, String userId);
-  // 제품 정보 수정시 실행할 함수
   ResponseEntity<ResponseDto> patchProduct(PatchProductRequestDto dto, Integer sequence, String userId); 
-  // 제품 개수 변경시 실행할 함수
   ResponseEntity<ResponseDto> patchProduct(PatchProductQuantityRequestDto dto, Integer sequence, String userId);
 
   ResponseEntity<? super GetProductListResponseDto> getProductList(String userId, String category, String name);

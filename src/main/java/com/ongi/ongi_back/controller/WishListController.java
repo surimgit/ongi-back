@@ -50,6 +50,14 @@ public class WishListController {
     return response;
   }
 
+  @GetMapping("/count")
+  public long getCountWishLen(
+    @AuthenticationPrincipal String userId
+  ){
+    long response = wishListService.getCountWish(userId);
+    return response;
+  }
+
   @DeleteMapping("/{productSequence}")
   public ResponseEntity<ResponseDto> deleteWish(
     @PathVariable("productSequence") Integer productSequence,

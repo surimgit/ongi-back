@@ -119,4 +119,9 @@ public class ShoppingCartServiceImplement implements ShoppingCartService {
 
     return ResponseDto.success(HttpStatus.OK);
   }
+
+  @Override
+  public long getCountByUserId(String userId) {
+    return shoppingCartRepository.countByUserId(userId);
+  }
 }

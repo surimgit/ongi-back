@@ -231,7 +231,7 @@ public class TossPaymentServiceImplement implements TossPaymentService {
       int quantity = productQuantitiesArr.get(i);
       String deliveryAddress = productDeliveryAddressArr.get(i);
 
-      PostOrderItemRequestDto requestDto = new PostOrderItemRequestDto(paymentKey, productSequence, quantity, deliveryAddress);
+      PostOrderItemRequestDto requestDto = new PostOrderItemRequestDto(paymentKey, productSequence, quantity, deliveryAddress, userId);
       OrderItemEntity orderItemEntity = new OrderItemEntity(requestDto);
       orderItemRepository.save(orderItemEntity);
 

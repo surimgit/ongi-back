@@ -24,6 +24,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ProductEntity {
+  
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Integer sequence;

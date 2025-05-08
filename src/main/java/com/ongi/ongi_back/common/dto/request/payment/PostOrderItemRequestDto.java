@@ -19,4 +19,6 @@ public class PostOrderItemRequestDto {
   private Integer quantity;
   
   private String deliveryAddressSnapshot;
+
+  private String userId;
 }

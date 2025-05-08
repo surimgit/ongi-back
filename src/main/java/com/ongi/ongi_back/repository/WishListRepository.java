@@ -15,6 +15,8 @@ import org.springframework.data.repository.query.Param;
 @Repository
 public interface WishListRepository extends JpaRepository<WishListEntity, WishListPk> {
   WishListEntity findByUserIdAndProductSequence(String userId, Integer productSequence);
+  List<String> findUserIdByProductSequence(Integer productSequence);
+  long countByUserId(String userId);
 
   @Query("SELECT new com.ongi.ongi_back.common.vo.WishVO( " +
   "p.name, p.price, p.sequence, " +

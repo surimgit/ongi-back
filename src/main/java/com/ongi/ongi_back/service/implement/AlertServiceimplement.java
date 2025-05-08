@@ -31,9 +31,10 @@ public class AlertServiceimplement implements AlertService {
         try {
 
             AlertEntity alertEntity = new AlertEntity(dto);
+        
             UserEntity senderEntity = userRepository.findByUserId(alertEntity.getSenderId());
             String senderNickname = senderEntity.getNickname();
-
+            
             UserEntity receiverEntity = userRepository.findByUserId(alertEntity.getReceiverId());
             if (receiverEntity.getIsResigned()) return ResponseDto.alreadyResigned();
 
@@ -45,6 +46,12 @@ public class AlertServiceimplement implements AlertService {
             }
             else if (alertEntity.getAlertType().equals("wish_open")){
                 alertEntity.setAlertContent("찜해놓은 상품이 오픈했습니다!");
+            }
+            else if (alertEntity.getAlertType().equals("waybill")){
+                alertEntity.setAlertContent("주문하신 상품을 판매자가 배송 시작했습니다!");
+            }
+            else if (alertEntity.getAlertType().equals("payment_cancel")){
+                alertEntity.setAlertContent("선택하신 상품의 결제가 취소되었습니다!");
             }
 
             alertRespository.save(alertEntity);

@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import com.ongi.ongi_back.common.entity.ProductEntity;
 import com.ongi.ongi_back.common.vo.MySalesVO;
+import com.ongi.ongi_back.common.vo.ProductVO;
 
 @Repository
 public interface ProductRepository extends JpaRepository<ProductEntity, Integer> {

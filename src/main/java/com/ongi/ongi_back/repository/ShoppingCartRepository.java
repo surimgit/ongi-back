@@ -16,6 +16,7 @@ public interface ShoppingCartRepository extends JpaRepository<ShoppingCartEntity
   ShoppingCartEntity findByUserIdAndProductSequence(String userId, Integer productSequence);
   // List<ShoppingCartEntity> findByUserId(String userId);
   ShoppingCartEntity findByUserIdAndShoppingCartSequence(String userId, Integer shoppingCartSequence);
+  Integer countByUserId(String userId);
 
   @Query(
     "SELECT new com.ongi.ongi_back.common.vo.ShoppingCartVO(s.shoppingCartSequence, s.productSequence, s.quantity, p.name, p.price, p.image) " +

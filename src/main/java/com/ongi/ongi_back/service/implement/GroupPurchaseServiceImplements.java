@@ -25,6 +25,7 @@ import com.ongi.ongi_back.common.entity.ProductReviewEntity;
 import com.ongi.ongi_back.common.entity.ReviewImagesEntity;
 import com.ongi.ongi_back.common.entity.StockReservationEntity;
 import com.ongi.ongi_back.common.entity.UserEntity;
+import com.ongi.ongi_back.common.vo.ProductVO;
 import com.ongi.ongi_back.common.vo.ReviewImagesVO;
 import com.ongi.ongi_back.common.vo.StockReservationVO;
 import com.ongi.ongi_back.repository.*;
@@ -120,7 +121,7 @@ public class GroupPurchaseServiceImplements implements GroupPurchaseService{
       return ResponseDto.databaseError();
     }
 
-    log.info(category + " 카테고리의 공동구매 상품 리스트를 불러옵니다.");
+    log.info(category + " 카테고리의 이름이 " + name + "인 공동구매 상품 리스트를 불러옵니다.");
     return GetProductListResponseDto.success(productEntities, filterType);
   }
 
