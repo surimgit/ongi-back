@@ -77,15 +77,15 @@ public interface ProductRepository extends JpaRepository<ProductEntity, Integer>
   List<ProductVO> findByCategoryAndNameContainingOrderBySequenceDesc(String name, String category);
   
   @Query("SELECT p FROM product p WHERE p.sequence IN :sequences ORDER BY sequence DESC")
-  List<ProductEntity> findBySequences(List<Integer> sequences);
+  List<ProductVO> findBySequences(List<Integer> sequences);
 
-  List<ProductEntity> findAllByUserIdOrderBySequenceDesc(String userId);
+  List<ProductVO> findAllByUserIdOrderBySequenceDesc(String userId);
   List<ProductEntity> findByUserId(String userId);
 
   @Query("SELECT p FROM product p WHERE p.userId = :userId AND p.deadline > :today ORDER BY p.sequence DESC")
-  List<ProductEntity> findByUserIdAndDeadlineAfterNow(String userId, String today);
+  List<ProductVO> findByUserIdAndDeadlineAfterNow(String userId, String today);
 
   @Query("SELECT p FROM product p WHERE p.userId = :userId AND p.deadline < :today ORDER BY p.sequence DESC")
-  List<ProductEntity> findByUserIdAndDeadlineBeforeNow(String userId, String today);
+  List<ProductVO> findByUserIdAndDeadlineBeforeNow(String userId, String today);
 
 }
