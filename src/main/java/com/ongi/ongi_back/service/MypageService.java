@@ -4,16 +4,20 @@ import org.springframework.http.ResponseEntity;
 
 import com.ongi.ongi_back.common.dto.request.user.AddLikeKeywordRequestDto;
 import com.ongi.ongi_back.common.dto.request.user.DeleteLikeKeywordRequestDto;
+import com.ongi.ongi_back.common.dto.request.user.PatchBadgeRequestDto;
 import com.ongi.ongi_back.common.dto.request.user.PatchUserAddressRequestDto;
 import com.ongi.ongi_back.common.dto.request.user.PatchUserIntroductionRequestDto;
 import com.ongi.ongi_back.common.dto.request.user.PatchUserPasswordRequestDto;
 import com.ongi.ongi_back.common.dto.request.user.PostProductReviewRequestDto;
 import com.ongi.ongi_back.common.dto.response.ResponseDto;
 import com.ongi.ongi_back.common.dto.response.badge.GetBadgeListResponseDto;
+import com.ongi.ongi_back.common.dto.response.badge.GetBadgeResponseDto;
 import com.ongi.ongi_back.common.dto.response.community.GetCommunityCommentsResponseDto;
 import com.ongi.ongi_back.common.dto.response.community.GetCommunityResponseDto;
 import com.ongi.ongi_back.common.dto.response.group.GetProductListResponseDto;
+import com.ongi.ongi_back.common.dto.response.group.GetProductReviewResponseDto;
 import com.ongi.ongi_back.common.dto.response.user.GetLikeKeywordListResponseDto;
+import com.ongi.ongi_back.common.dto.response.user.GetMyActivityCountResponseDto;
 import com.ongi.ongi_back.common.dto.response.user.GetMyBuyingResponseDto;
 import com.ongi.ongi_back.common.dto.response.user.GetUserAccountResponseDto;
 import com.ongi.ongi_back.common.dto.response.user.GetUserIntroductionResponseDto;
@@ -33,16 +37,24 @@ public interface MypageService {
   ResponseEntity<? super GetCommunityResponseDto> getMyCommunityPost(String userId);
   ResponseEntity<? super GetCommunityCommentsResponseDto> getMyCommunityComment(String userId);
   ResponseEntity<? super GetCommunityResponseDto> getMyCommunityLikedPostComment(String userId);
+  ResponseEntity<? super GetMyActivityCountResponseDto> getMyActivityCount(String userId);
 
   ResponseEntity<? super GetMyBuyingResponseDto> getMyPurchaseList(String userId);
   ResponseEntity<? super GetProductListResponseDto> getMySelledList(String userId);
   ResponseEntity<? super GetProductListResponseDto> getMyWishList(String userId);
-
-  ResponseEntity<? super GetUserIntroductionResponseDto> getOtherUserIntroduction(String userId);
-
+  
   ResponseEntity<ResponseDto> postProductReview(PostProductReviewRequestDto dto, String userId);
-
+  
+  // 뱃지
   ResponseEntity<ResponseDto> addBadge(String userId);
   ResponseEntity<? super GetBadgeListResponseDto> getBadgeList(String userId);
+  ResponseEntity<ResponseDto> chooseBadge(String userId, PatchBadgeRequestDto dto);
+
+  // 다른 사용자
+  ResponseEntity<? super GetUserIntroductionResponseDto> getOtherUserIntroduction(String userId);
+  ResponseEntity<? super GetBadgeResponseDto> getOtherUserBadge(String userId);
+  ResponseEntity<? super GetProductListResponseDto> getOtherUserSellingProduct(String userId, String today);
+  ResponseEntity<? super GetProductListResponseDto> getOtherUserSelledProduct(String userId, String today);
+  // ResponseEntity<? super GetProductReviewResponseDto> getOtherUserProductReviewed(String userId);
 
 }

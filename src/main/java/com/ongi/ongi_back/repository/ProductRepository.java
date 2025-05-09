@@ -23,4 +23,10 @@ public interface ProductRepository extends JpaRepository<ProductEntity, Integer>
 
   List<ProductEntity> findAllByUserIdOrderBySequenceDesc(String userId);
 
+  @Query("SELECT p FROM product p WHERE p.userId = :userId AND p.deadline > :today ORDER BY p.sequence DESC")
+  List<ProductEntity> findByUserIdAndDeadlineAfterNow(String userId, String today);
+
+  @Query("SELECT p FROM product p WHERE p.userId = :userId AND p.deadline < :today ORDER BY p.sequence DESC")
+  List<ProductEntity> findByUserIdAndDeadlineBeforeNow(String userId, String today);
+
 }

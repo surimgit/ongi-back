@@ -1,5 +1,6 @@
 package com.ongi.ongi_back.service.implement;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -12,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import com.ongi.ongi_back.common.dto.request.user.AddLikeKeywordRequestDto;
 import com.ongi.ongi_back.common.dto.request.user.DeleteLikeKeywordRequestDto;
+import com.ongi.ongi_back.common.dto.request.user.PatchBadgeRequestDto;
 import com.ongi.ongi_back.common.dto.request.user.PatchUserAddressRequestDto;
 import com.ongi.ongi_back.common.dto.request.user.PatchUserIntroductionRequestDto;
 import com.ongi.ongi_back.common.dto.request.user.PatchUserPasswordRequestDto;
@@ -19,10 +21,13 @@ import com.ongi.ongi_back.common.dto.request.user.PostProductReviewRequestDto;
 import com.ongi.ongi_back.common.dto.request.user.PostReviewImagesRequestDto;
 import com.ongi.ongi_back.common.dto.response.ResponseDto;
 import com.ongi.ongi_back.common.dto.response.badge.GetBadgeListResponseDto;
+import com.ongi.ongi_back.common.dto.response.badge.GetBadgeResponseDto;
 import com.ongi.ongi_back.common.dto.response.community.GetCommunityCommentsResponseDto;
 import com.ongi.ongi_back.common.dto.response.community.GetCommunityResponseDto;
 import com.ongi.ongi_back.common.dto.response.group.GetProductListResponseDto;
+import com.ongi.ongi_back.common.dto.response.group.GetProductReviewResponseDto;
 import com.ongi.ongi_back.common.dto.response.user.GetLikeKeywordListResponseDto;
+import com.ongi.ongi_back.common.dto.response.user.GetMyActivityCountResponseDto;
 import com.ongi.ongi_back.common.dto.response.user.GetMyBuyingResponseDto;
 import com.ongi.ongi_back.common.dto.response.user.GetUserAccountResponseDto;
 import com.ongi.ongi_back.common.dto.response.user.GetUserIntroductionResponseDto;
@@ -31,6 +36,7 @@ import com.ongi.ongi_back.common.entity.CommunityCommentEntity;
 import com.ongi.ongi_back.common.entity.CommunityPostEntity;
 import com.ongi.ongi_back.common.entity.LikeKeywordEntity;
 import com.ongi.ongi_back.common.entity.LikedEntity;
+import com.ongi.ongi_back.common.entity.ProductEntity;
 import com.ongi.ongi_back.common.entity.ProductReviewEntity;
 import com.ongi.ongi_back.common.entity.ReviewImagesEntity;
 import com.ongi.ongi_back.common.entity.UserEntity;
@@ -41,9 +47,12 @@ import com.ongi.ongi_back.repository.CommunityPostRepository;
 import com.ongi.ongi_back.repository.LikeKeywordRepository;
 import com.ongi.ongi_back.repository.LikedRepository;
 import com.ongi.ongi_back.repository.OrderItemRepository;
+import com.ongi.ongi_back.repository.ProductRepository;
 import com.ongi.ongi_back.repository.ProductReviewRepository;
 import com.ongi.ongi_back.repository.ReviewImagesRepository;
+import com.ongi.ongi_back.repository.ShoppingCartRepository;
 import com.ongi.ongi_back.repository.UserRepository;
+import com.ongi.ongi_back.repository.WishListRepository;
 import com.ongi.ongi_back.service.MypageService;
 
 import lombok.RequiredArgsConstructor;
@@ -58,6 +67,9 @@ public class MypageServiceImplement implements MypageService{
   private final CommunityCommentRepository communityCommentRepository;
   private final LikedRepository likedRepository;
   private final ProductReviewRepository productReviewRepository;
+  private final ProductRepository productRepository;
+  private final ShoppingCartRepository shoppingCartRepository;
+  private final WishListRepository wishListRepository;
   private final OrderItemRepository orderItemRepository;
   private final ReviewImagesRepository reviewImagesRepository;
   private final BadgeRespository badgeRespository;
@@ -290,24 +302,6 @@ public class MypageServiceImplement implements MypageService{
   }
 
   @Override
-  public ResponseEntity<? super GetUserIntroductionResponseDto> getOtherUserIntroduction(String userId) {
-    
-    List<LikeKeywordEntity> likeKeywordEntities = new ArrayList<>();
-    UserEntity userEntity = userRepository.findByUserId(userId);
-    
-
-    try {
-      likeKeywordEntities = likeKeywordRepository.findAllByUserId(userEntity.getUserId());
-      if(likeKeywordEntities == null | userEntity == null) return ResponseDto.noExistUser();
-
-    } catch (Exception e) {
-      e.printStackTrace();
-    }
-
-    return GetUserIntroductionResponseDto.success(userEntity, likeKeywordEntities);
-  }
-  
-  @Override
   public ResponseEntity<ResponseDto> postProductReview(PostProductReviewRequestDto dto, String userId) {
     
     try {
@@ -359,21 +353,21 @@ public class MypageServiceImplement implements MypageService{
 
       if(userEntity.getBirth() != null && userEntity.getGender() != null && userEntity.getMbti() != null && userEntity.getJob() != null && userEntity.getSelfIntro() != null && keyword){
         if(badgeRespository.findByUserIdAndBadge(userId, "자기소개 작성 완료!") == null){
-          BadgeEntity badgeEntity = new BadgeEntity(userId, "자기소개 작성 완료!");
+          BadgeEntity badgeEntity = new BadgeEntity(userId, "자기소개 작성 완료!", false);
           badgeRespository.save(badgeEntity);
         }
       }
 
       if(communityPostRepository.findByNicknameOrderByPostSequenceDesc(nickname).size() >= 10){
         if(badgeRespository.findByUserIdAndBadge(userId, "게시글 10개 작성!") == null){
-          BadgeEntity badgeEntity = new BadgeEntity(userId, "게시글 10개 작성!");
+          BadgeEntity badgeEntity = new BadgeEntity(userId, "게시글 10개 작성!", false);
           badgeRespository.save(badgeEntity);
         }
       }
 
       if(communityCommentRepository.findByNicknameOrderByCommentSequenceDesc(nickname).size() >= 10){
-        if(badgeRespository.findByUserIdAndBadge(userId, "댓글 10개 작성!") == null){
-          BadgeEntity badgeEntity = new BadgeEntity(userId,"댓글 10개 작성!");
+        if(badgeRespository.findByUserIdAndBadge(userId, "댓글 10개 작성!") == null)  {
+          BadgeEntity badgeEntity = new BadgeEntity(userId,"댓글 10개 작성!", false);
           badgeRespository.save(badgeEntity);
         }
       }
@@ -395,10 +389,160 @@ public class MypageServiceImplement implements MypageService{
 
     } catch (Exception e) {
       e.printStackTrace();
+      return ResponseDto.databaseError();
     }
 
     return GetBadgeListResponseDto.success(badgeEntities); 
 
   }
+
+  @Override
+  public ResponseEntity<ResponseDto> chooseBadge(String userId, PatchBadgeRequestDto dto) {
+    BadgeEntity selectBadgeEntity = null;
+    try {
+      selectBadgeEntity = badgeRespository.findByUserIdAndBadge(userId, dto.getBadge());
+      if(selectBadgeEntity == null) return ResponseDto.invalidRequest();
+
+      BadgeEntity beforeBadge = null;
+      List<BadgeEntity> badgeEntities = new ArrayList<>();
+      badgeEntities = badgeRespository.findAllByUserId(userId);
+      for (BadgeEntity badge : badgeEntities) {
+          if (badge.getIsSelected()) {
+            beforeBadge = badge;
+          }
+      }
+
+      if(beforeBadge != null && !selectBadgeEntity.getBadge().equals(beforeBadge.getBadge())){
+        beforeBadge.setIsSelected(false);
+        selectBadgeEntity.patchBadge(dto, userId);
+        badgeRespository.save(selectBadgeEntity);
+      }
+      selectBadgeEntity.patchBadge(dto, userId);
+      badgeRespository.save(selectBadgeEntity);
+      
+    } catch (Exception e) {
+      e.printStackTrace();
+      return ResponseDto.databaseError();
+    }
+    return ResponseDto.success(HttpStatus.OK);
+  }
+
+  @Override
+  public ResponseEntity<? super GetBadgeResponseDto> getOtherUserBadge(String userId) {
+    List<BadgeEntity> badgeEntities = new ArrayList<>();
+    badgeEntities = badgeRespository.findAllByUserId(userId);
+    BadgeEntity badgeEntity = null;
+
+    try {
+      for (BadgeEntity badge : badgeEntities) {
+        if (badge.getIsSelected()) {
+          badgeEntity = badge;
+        }
+      }
+      if (badgeEntity == null) {
+        return ResponseDto.success(HttpStatus.OK);
+    }
+    
+
+    } catch (Exception e) {
+      e.printStackTrace();
+      return ResponseDto.databaseError();
+    }
+
+    return GetBadgeResponseDto.success(badgeEntity);
+  }
+
+  
+  @Override
+  public ResponseEntity<? super GetUserIntroductionResponseDto> getOtherUserIntroduction(String userId) {
+    
+    List<LikeKeywordEntity> likeKeywordEntities = new ArrayList<>();
+    UserEntity userEntity = userRepository.findByUserId(userId);
+    
+
+    try {
+      likeKeywordEntities = likeKeywordRepository.findAllByUserId(userEntity.getUserId());
+      if(likeKeywordEntities == null | userEntity == null) return ResponseDto.noExistUser();
+
+    } catch (Exception e) {
+      e.printStackTrace();
+      return ResponseDto.databaseError();
+    }
+
+    return GetUserIntroductionResponseDto.success(userEntity, likeKeywordEntities);
+  }
+
+  @Override
+  public ResponseEntity<? super GetMyActivityCountResponseDto> getMyActivityCount(String userId){
+    UserEntity userEntity = userRepository.findByUserId(userId);
+    if(userEntity == null) return ResponseDto.noExistUser();
+    Integer communityCommentCount = 0;
+    Integer communityPostCount = 0;
+    Integer reviewCount = 0;
+    Integer reviewedCount = 0;
+    Integer shoppingCartCount = 0;
+    Integer wishListCount = 0;
+    try {
+      reviewCount = 0;
+      reviewedCount = 0;
+      communityCommentCount = communityCommentRepository.countByUserId(userId);
+      communityPostCount = communityPostRepository.countByUserId(userId);
+      shoppingCartCount = shoppingCartRepository.countByUserId(userId);
+      wishListCount = wishListRepository.countByUserId(userId);
+    } catch (Exception e) {
+      e.printStackTrace();
+      return ResponseDto.databaseError();
+    }
+
+    return GetMyActivityCountResponseDto.success(communityCommentCount, communityPostCount, reviewCount, reviewedCount, shoppingCartCount, wishListCount);
+  }
+
+  @Override
+  public ResponseEntity<? super GetProductListResponseDto> getOtherUserSellingProduct(String userId, String today) {
+    List<ProductEntity> productEntities = new ArrayList<>();
+    UserEntity userEntity = userRepository.findByUserId(userId);
+    today = LocalDate.now().toString();
+    try {
+      if(userEntity == null) return ResponseDto.noExistUser();
+      productEntities = productRepository.findByUserIdAndDeadlineAfterNow(userId, today);
+    } catch (Exception e) {
+      e.printStackTrace();
+      return ResponseDto.databaseError();
+    }
+
+    return GetProductListResponseDto.success(productEntities,"all");
+  }
+
+  @Override
+  public ResponseEntity<? super GetProductListResponseDto> getOtherUserSelledProduct(String userId, String today) {
+    List<ProductEntity> productEntities = new ArrayList<>();
+    UserEntity userEntity = userRepository.findByUserId(userId);
+    today = LocalDate.now().toString();
+    try {
+      if(userEntity == null) return ResponseDto.noExistUser();
+      productEntities = productRepository.findByUserIdAndDeadlineBeforeNow(userId, today);
+    } catch (Exception e) {
+      e.printStackTrace();
+      return ResponseDto.databaseError();
+    }
+
+    return GetProductListResponseDto.success(productEntities,"all");
+  }
+
+  // @Override
+  // public ResponseEntity<? super GetProductReviewResponseDto> getOtherUserProductReviewed(String userId) {
+  //   List<ProductReviewEntity> productReviewEntities = new ArrayList<>();
+  //   UserEntity userEntity = userRepository.findByUserId(userId);
+  //   try {
+  //     if(userEntity == null) return ResponseDto.noExistUser();
+  //     productReviewEntities = productReviewRepository.findAllByProductOwner(userId);
+  //   } catch (Exception e) {
+  //     e.printStackTrace();
+  //     return ResponseDto.databaseError();
+  //   }
+
+  //   return GetProductReviewResponseDto.success(productReviewEntities);
+  // }
+
   
 }
