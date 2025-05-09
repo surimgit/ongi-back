@@ -18,8 +18,10 @@ import com.ongi.ongi_back.repository.ShoppingCartRepository;
 import com.ongi.ongi_back.service.ShoppingCartService;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
 @Service
+@Slf4j
 @RequiredArgsConstructor
 public class ShoppingCartServiceImplement implements ShoppingCartService {
 
@@ -44,7 +46,7 @@ public class ShoppingCartServiceImplement implements ShoppingCartService {
       shoppingCartRepository.save(cartEntity);
 
     } catch(Exception exception) {
-      exception.printStackTrace();
+      log.error("에러 발생", exception);
       return ResponseDto.databaseError();
     }
 
@@ -116,5 +118,10 @@ public class ShoppingCartServiceImplement implements ShoppingCartService {
     }
 
     return ResponseDto.success(HttpStatus.OK);
+  }
+
+  @Override
+  public long getCountByUserId(String userId) {
+    return shoppingCartRepository.countByUserId(userId);
   }
 }

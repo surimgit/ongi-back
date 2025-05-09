@@ -15,14 +15,18 @@ import org.springframework.web.filter.OncePerRequestFilter;
 import com.ongi.ongi_back.provider.JwtProvider;
 import com.ongi.ongi_back.repository.UserRepository;
 
+import io.jsonwebtoken.ExpiredJwtException;
+import io.jsonwebtoken.JwtException;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
 // class: Request에서 Bearer Token 인증 처리를 위한 필터 //
 // description: 필터 처리로 인증이 완료되면 접근 주체의 값에는 userId가 주입 //
+@Slf4j
 @Component
 @RequiredArgsConstructor
 public class JwtAuthenticationFilter extends OncePerRequestFilter{
@@ -54,10 +58,22 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter{
             }
             
             setContext(userId, request);
-        }catch(Exception exception){
-            exception.printStackTrace();
-            return;
-        } 
+        }catch (ExpiredJwtException e) {
+            log.error("JWT expired at {}. Current time: {}. Error: {}",
+                        e.getClaims().getExpiration(),
+                        System.currentTimeMillis(),
+                        e.getMessage());
+            response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "JWT token expired");
+            return; 
+        } catch (JwtException e) {
+            log.error("JWT validation failed. Error: {}", e.getMessage());
+            response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "JWT validation failed");
+            return;  
+        } catch (Exception e) {
+            log.error("Unexpected error: {}", e.getMessage());
+            response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Internal Server Error");
+            return; 
+        }
 
         filterChain.doFilter(request, response);
     }

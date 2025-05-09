@@ -1,5 +1,9 @@
 package com.ongi.ongi_back.common.entity;
 
+import java.time.DateTimeException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 import com.ongi.ongi_back.common.dto.request.group.PatchProductRequestDto;
 import com.ongi.ongi_back.common.dto.request.group.PostProductRequestDto;
 
@@ -20,6 +24,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ProductEntity {
+  
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Integer sequence;
@@ -36,8 +41,15 @@ public class ProductEntity {
   private String image;
   private Integer adPayment;
   private String openDate;
+  private String status;
 
   public ProductEntity(PostProductRequestDto dto, String userId) {
+    LocalDateTime deadlineDateTime = LocalDateTime.parse(dto.getDeadline(), DateTimeFormatter.ISO_LOCAL_DATE_TIME);
+    LocalDateTime openDateTime = LocalDateTime.parse(dto.getOpenDate(), DateTimeFormatter.ISO_LOCAL_DATE_TIME);
+    LocalDateTime now = LocalDateTime.now();
+    DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+
+
     this.name = dto.getName();
     this.userId = userId;
     this.price = dto.getPrice();
@@ -46,11 +58,12 @@ public class ProductEntity {
     this.productQuantity = dto.getProductQuantity();
     this.boughtAmount = dto.getBoughtAmount();
     this.purchasedPeople = dto.getPurchasedPeople();
-    this.deadline = dto.getDeadline();
+    this.deadline = deadlineDateTime.format(dateTimeFormatter);
     this.isSoldOut = dto.getIsSoldOut();
     this.image = dto.getImage();
     this.adPayment = dto.getAdPayment();
-    this.openDate = dto.getOpenDate();
+    this.openDate = openDateTime.format(dateTimeFormatter);
+    this.status = getStatus(deadlineDateTime, openDateTime);
   }
 
   public void patch(PatchProductRequestDto dto) {
@@ -61,5 +74,17 @@ public class ProductEntity {
     this.productQuantity = dto.getProductQuantity();
     this.deadline = dto.getDeadline();
     this.image = dto.getImage();
+  }
+
+  public String getStatus(LocalDateTime deadlineDateTime, LocalDateTime openDateTime){
+    LocalDateTime now = LocalDateTime.now();
+
+    if(now.isBefore(openDateTime)){
+      return "WAIT";
+    } else if(now.isAfter(deadlineDateTime)){
+      return "CLOSE";
+    } else {
+      return "OPEN";
+    }
   }
 }

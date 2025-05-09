@@ -1,0 +1,1 @@
+[30m2025-05-08 17:17:38,318[m [1;31mERROR[m [[1;34mhttp-nio-4000-exec-1[m] [1;33morg.hibernate.engine.jdbc.spi.SqlExceptionHelper[m: Column 'sender_id' cannot be null

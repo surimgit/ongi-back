@@ -19,6 +19,7 @@ import com.ongi.ongi_back.common.dto.request.user.PatchUserIntroductionRequestDt
 import com.ongi.ongi_back.common.dto.request.user.PatchUserPasswordRequestDto;
 import com.ongi.ongi_back.common.dto.request.user.PostProductReviewRequestDto;
 import com.ongi.ongi_back.common.dto.request.user.PostReviewImagesRequestDto;
+import com.ongi.ongi_back.common.dto.request.user.PostWaybillRequestDto;
 import com.ongi.ongi_back.common.dto.response.ResponseDto;
 import com.ongi.ongi_back.common.dto.response.badge.GetBadgeListResponseDto;
 import com.ongi.ongi_back.common.dto.response.badge.GetBadgeResponseDto;
@@ -29,6 +30,8 @@ import com.ongi.ongi_back.common.dto.response.group.GetProductReviewResponseDto;
 import com.ongi.ongi_back.common.dto.response.user.GetLikeKeywordListResponseDto;
 import com.ongi.ongi_back.common.dto.response.user.GetMyActivityCountResponseDto;
 import com.ongi.ongi_back.common.dto.response.user.GetMyBuyingResponseDto;
+import com.ongi.ongi_back.common.dto.response.user.GetMySalesResponseDto;
+import com.ongi.ongi_back.common.dto.response.user.GetOrderItemResponseDto;
 import com.ongi.ongi_back.common.dto.response.user.GetUserAccountResponseDto;
 import com.ongi.ongi_back.common.dto.response.user.GetUserIntroductionResponseDto;
 import com.ongi.ongi_back.common.entity.BadgeEntity;
@@ -36,11 +39,14 @@ import com.ongi.ongi_back.common.entity.CommunityCommentEntity;
 import com.ongi.ongi_back.common.entity.CommunityPostEntity;
 import com.ongi.ongi_back.common.entity.LikeKeywordEntity;
 import com.ongi.ongi_back.common.entity.LikedEntity;
+import com.ongi.ongi_back.common.entity.OrderItemEntity;
 import com.ongi.ongi_back.common.entity.ProductEntity;
 import com.ongi.ongi_back.common.entity.ProductReviewEntity;
 import com.ongi.ongi_back.common.entity.ReviewImagesEntity;
 import com.ongi.ongi_back.common.entity.UserEntity;
 import com.ongi.ongi_back.common.vo.MyBuyingVO;
+import com.ongi.ongi_back.common.vo.MySalesVO;
+import com.ongi.ongi_back.common.vo.OrderItemVO;
 import com.ongi.ongi_back.repository.BadgeRespository;
 import com.ongi.ongi_back.repository.CommunityCommentRepository;
 import com.ongi.ongi_back.repository.CommunityPostRepository;
@@ -72,6 +78,7 @@ public class MypageServiceImplement implements MypageService{
   private final WishListRepository wishListRepository;
   private final OrderItemRepository orderItemRepository;
   private final ReviewImagesRepository reviewImagesRepository;
+  private final FileService fileService;
   private final BadgeRespository badgeRespository;
   private final PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
@@ -290,6 +297,7 @@ public class MypageServiceImplement implements MypageService{
   }
 
   @Override
+
   public ResponseEntity<? super GetProductListResponseDto> getMySelledList(String userId) {
     // TODO Auto-generated method stub
     throw new UnsupportedOperationException("Unimplemented method 'getMySelledList'");
@@ -339,6 +347,66 @@ public class MypageServiceImplement implements MypageService{
   }
 
   @Override
+
+  public ResponseEntity<? super GetMySalesResponseDto> getMySalesList(String userId) {
+    
+    List<MySalesVO> mySales = new ArrayList<>();
+
+    try {
+
+      List<ProductEntity> productEntities = productRepository.findByUserId(userId);
+      
+      for(ProductEntity productEntity: productEntities){
+        MySalesVO mySalesVO = new MySalesVO(productEntity);
+        mySales.add(mySalesVO);
+      }
+
+    } catch(Exception exception) {
+      exception.printStackTrace();
+      return ResponseDto.databaseError();
+    }
+
+    return GetMySalesResponseDto.success(mySales);
+  }
+
+  @Override
+  public ResponseEntity<? super GetOrderItemResponseDto> getOrderItemByProductSequence(Integer sequence) {
+    List<OrderItemVO> orderItems = new ArrayList<>();
+
+    try{
+
+      orderItems = orderItemRepository.findByProductSequence(sequence);
+
+    } catch(Exception exception) {
+      exception.printStackTrace();
+      return ResponseDto.databaseError();
+    }
+    
+    return GetOrderItemResponseDto.success(orderItems);
+  }
+
+  @Override
+  public ResponseEntity<ResponseDto> postWaybillNumber(PostWaybillRequestDto dto, String userId) {
+
+    try{
+      Integer sequence = dto.getOrderItemSequence();
+      String waybillNumber = dto.getWaybillNumber();
+
+      OrderItemEntity orderItemEntity = orderItemRepository.findByOrderItemSequence(sequence);
+
+      if(orderItemEntity == null) return ResponseDto.validationFail();
+      orderItemEntity.setWaybillNumber(waybillNumber);
+
+      orderItemRepository.save(orderItemEntity);
+      
+    } catch(Exception exception) {
+      exception.printStackTrace();
+      return ResponseDto.databaseError();
+    }
+
+    return ResponseDto.success(HttpStatus.OK);
+  }
+
   public ResponseEntity<ResponseDto> addBadge(String userId) {
         
     UserEntity userEntity = userRepository.findByUserId(userId);
@@ -543,6 +611,5 @@ public class MypageServiceImplement implements MypageService{
 
   //   return GetProductReviewResponseDto.success(productReviewEntities);
   // }
-
-  
+ 
 }

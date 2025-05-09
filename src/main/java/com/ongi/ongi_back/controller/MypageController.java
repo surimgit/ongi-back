@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ongi.ongi_back.common.dto.request.user.AddLikeKeywordRequestDto;
@@ -20,6 +21,7 @@ import com.ongi.ongi_back.common.dto.request.user.PatchUserAddressRequestDto;
 import com.ongi.ongi_back.common.dto.request.user.PatchUserIntroductionRequestDto;
 import com.ongi.ongi_back.common.dto.request.user.PatchUserPasswordRequestDto;
 import com.ongi.ongi_back.common.dto.request.user.PostProductReviewRequestDto;
+import com.ongi.ongi_back.common.dto.request.user.PostWaybillRequestDto;
 import com.ongi.ongi_back.common.dto.response.ResponseDto;
 import com.ongi.ongi_back.common.dto.response.badge.GetBadgeListResponseDto;
 import com.ongi.ongi_back.common.dto.response.badge.GetBadgeResponseDto;
@@ -29,6 +31,8 @@ import com.ongi.ongi_back.common.dto.response.group.GetProductListResponseDto;
 import com.ongi.ongi_back.common.dto.response.group.GetProductReviewResponseDto;
 import com.ongi.ongi_back.common.dto.response.user.GetMyActivityCountResponseDto;
 import com.ongi.ongi_back.common.dto.response.user.GetMyBuyingResponseDto;
+import com.ongi.ongi_back.common.dto.response.user.GetMySalesResponseDto;
+import com.ongi.ongi_back.common.dto.response.user.GetOrderItemResponseDto;
 import com.ongi.ongi_back.common.dto.response.user.GetUserAccountResponseDto;
 import com.ongi.ongi_back.common.dto.response.user.GetUserIntroductionResponseDto;
 import com.ongi.ongi_back.service.MypageService;
@@ -147,6 +151,14 @@ public class MypageController {
     return response;
   }
 
+  @GetMapping("/sales")
+  public ResponseEntity<? super GetMySalesResponseDto> getMySales(
+    @AuthenticationPrincipal String userId
+  ){
+    ResponseEntity<? super GetMySalesResponseDto> response = mypageService.getMySalesList(userId);
+    return response;
+  }
+
   @PostMapping("buy/my/review")
   public ResponseEntity<ResponseDto> postPurchaseReview(
     @RequestBody @Valid PostProductReviewRequestDto requestBody,
@@ -155,6 +167,22 @@ public class MypageController {
     ResponseEntity<ResponseDto> response = mypageService.postProductReview(requestBody, userId);
     return response;
   }
+
+
+  @GetMapping("/product-sequence")
+  public ResponseEntity<? super GetOrderItemResponseDto> getOrderItemsByProductSequence (
+    @RequestParam("productSequence") Integer productSequence
+  ){
+    ResponseEntity<? super GetOrderItemResponseDto> response = mypageService.getOrderItemByProductSequence(productSequence);
+    return response;
+  }
+
+  @PostMapping("/waybill")
+  public ResponseEntity<ResponseDto> postWaybillNumber(
+    @RequestBody @Valid PostWaybillRequestDto requestBody,
+    @AuthenticationPrincipal String userId
+  ){
+    ResponseEntity<ResponseDto> response = mypageService.postWaybillNumber(requestBody, userId);
 
   @PostMapping("/badge")
   public ResponseEntity<ResponseDto> addBadge(
@@ -169,6 +197,7 @@ public class MypageController {
     @AuthenticationPrincipal String userId
   ){
     ResponseEntity<? super GetBadgeListResponseDto> response = mypageService.getBadgeList(userId);
+ 
     return response;
   }
 

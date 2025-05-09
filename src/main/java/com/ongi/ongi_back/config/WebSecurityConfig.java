@@ -24,11 +24,13 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
 // class: Spring Web 보안 설정 클래스 //
 // description: Bearer 인증 방식을 사용하기 위해 Basic 인증 미사용 //
 // description: REST API 서버로 Session 유지하지 않음 //
 // description: CORS 정책은 모든 출처 및 리소스에 대해서 허용 //
+@Slf4j
 @Configurable
 @Configuration
 @EnableWebSecurity
@@ -70,6 +72,8 @@ public class WebSecurityConfig {
       )
       // description: Jwt Authentication Filter 등록 //
       .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
+    
+    log.debug("[+] WebConfig Start !!");
 
     return security.build();
   }
@@ -92,12 +96,14 @@ public class WebSecurityConfig {
   
 }
 
+@Slf4j
 class AuthenticationFailEntryPoint implements AuthenticationEntryPoint {
 
   @Override
   public void commence(HttpServletRequest request, HttpServletResponse response, AuthenticationException authException) throws IOException, ServletException {
     
-    authException.printStackTrace();
+    // 로깅: 인증 실패 시 에러 메시지와 예외를 로그 파일에 기록
+    log.error("Authentication failed: {}", authException.getMessage());
 
     response.setContentType("application/json");
     response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);

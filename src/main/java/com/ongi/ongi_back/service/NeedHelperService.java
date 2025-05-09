@@ -29,4 +29,10 @@ public interface NeedHelperService {
     ResponseEntity<ResponseDto> putHelperLiked(Integer postSequence, String userId);
     ResponseEntity<? super GetHelperLikedResponseDto> getHelperLiked(Integer postSequence);
 
+    // 도우미 신청, 취소, 신청여부 확인
+    ResponseEntity<ResponseDto> postHelperApply(Integer postSequence, String applicantId);
+    ResponseEntity<ResponseDto> deleteHelperApply(Integer postSequence, String applicantId);
+    ResponseEntity<ResponseDto> getIsApplied(Integer postSequence, String applicantId);
+
+
 }

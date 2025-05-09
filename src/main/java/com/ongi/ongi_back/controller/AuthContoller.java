@@ -21,7 +21,9 @@ import com.ongi.ongi_back.service.AuthService;
 
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 @RestController
 @RequestMapping("api/v1/auth")
 @RequiredArgsConstructor
@@ -73,6 +75,8 @@ public class AuthContoller {
     public ResponseEntity<? super SignInResponseDto> signIn(
         @RequestBody @Valid SignInRequestDto requestBody
     ) {
+        log.info(requestBody.getUserId());
+        log.info("로그인 했습니다.");
         ResponseEntity<? super SignInResponseDto> response = authService.signIn(requestBody);
         return response;
     }

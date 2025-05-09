@@ -1,5 +1,4 @@
-package com.ongi.ongi_back.common.entity;
-
+import com.ongi.ongi_back.common.dto.request.chat.PostChatRoomRequestDto;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -17,12 +16,20 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ChatEntity {
-  @Id
-  @GeneratedValue(strategy=GenerationType.IDENTITY)
-  private Integer chatSequnece;
-  private String helperId;
-  private Integer needHelperSequence;
-  private Boolean chatAvaiable;
 
-  
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer chatSequence;
+    private String requesterId;
+    private String applicantId;
+    private Integer needHelperSequence;
+    private Boolean chatAvailable;
+
+    public ChatEntity (PostChatRoomRequestDto dto){
+        this.requesterId = dto.getRequesterId();
+        this.applicantId = dto.getApplicnatId();
+        this.needHelperSequence = dto.getNeedHelperSequence();
+        this.chatAvailable = true;
+    }
+    
 }

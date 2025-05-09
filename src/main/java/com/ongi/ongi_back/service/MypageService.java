@@ -9,6 +9,7 @@ import com.ongi.ongi_back.common.dto.request.user.PatchUserAddressRequestDto;
 import com.ongi.ongi_back.common.dto.request.user.PatchUserIntroductionRequestDto;
 import com.ongi.ongi_back.common.dto.request.user.PatchUserPasswordRequestDto;
 import com.ongi.ongi_back.common.dto.request.user.PostProductReviewRequestDto;
+import com.ongi.ongi_back.common.dto.request.user.PostWaybillRequestDto;
 import com.ongi.ongi_back.common.dto.response.ResponseDto;
 import com.ongi.ongi_back.common.dto.response.badge.GetBadgeListResponseDto;
 import com.ongi.ongi_back.common.dto.response.badge.GetBadgeResponseDto;
@@ -19,6 +20,8 @@ import com.ongi.ongi_back.common.dto.response.group.GetProductReviewResponseDto;
 import com.ongi.ongi_back.common.dto.response.user.GetLikeKeywordListResponseDto;
 import com.ongi.ongi_back.common.dto.response.user.GetMyActivityCountResponseDto;
 import com.ongi.ongi_back.common.dto.response.user.GetMyBuyingResponseDto;
+import com.ongi.ongi_back.common.dto.response.user.GetMySalesResponseDto;
+import com.ongi.ongi_back.common.dto.response.user.GetOrderItemResponseDto;
 import com.ongi.ongi_back.common.dto.response.user.GetUserAccountResponseDto;
 import com.ongi.ongi_back.common.dto.response.user.GetUserIntroductionResponseDto;
 
@@ -44,7 +47,10 @@ public interface MypageService {
   ResponseEntity<? super GetProductListResponseDto> getMyWishList(String userId);
   
   ResponseEntity<ResponseDto> postProductReview(PostProductReviewRequestDto dto, String userId);
-  
+  ResponseEntity<? super GetMySalesResponseDto> getMySalesList(String userId);
+  ResponseEntity<? super GetOrderItemResponseDto> getOrderItemByProductSequence(Integer sequence);
+  ResponseEntity<ResponseDto> postWaybillNumber(PostWaybillRequestDto dto, String userId);
+
   // 뱃지
   ResponseEntity<ResponseDto> addBadge(String userId);
   ResponseEntity<? super GetBadgeListResponseDto> getBadgeList(String userId);

@@ -11,6 +11,7 @@ import lombok.Getter;
 @Getter
 @AllArgsConstructor
 public class ProductReviewVO {
+  private Integer reviewSequence;
   private Integer productSequence;
   private String userId;
   private String postDate;
@@ -18,6 +19,7 @@ public class ProductReviewVO {
   private String content;
 
   public ProductReviewVO(ProductReviewEntity productReviewEntity) {
+    this.reviewSequence = productReviewEntity.getReviewSequence();
     this.productSequence = productReviewEntity.getProductSequence();
     this.userId = productReviewEntity.getUserId();
     this.postDate = productReviewEntity.getPostDate();
