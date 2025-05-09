@@ -87,7 +87,7 @@ public class GroupPurchaseServiceImplements implements GroupPurchaseService{
   @Override
   public ResponseEntity<? super GetProductListResponseDto> getProductList(String userId, String category, String name) {
     
-    List<ProductEntity> productEntities = new ArrayList<>();
+    List<ProductVO> productEntities = new ArrayList<>();
     String filterType;
 
     try {
@@ -99,21 +99,25 @@ public class GroupPurchaseServiceImplements implements GroupPurchaseService{
       if (hasCategory && hasName) {
         productEntities = productRepository.findByCategoryAndNameContainingOrderBySequenceDesc(category, name);
         filterType = "categoryAndName";
+        log.info("조회된 상품 리스트: " + productEntities.size());
       }
       // 카테고리만 있는 경우
       else if (hasCategory) {
         productEntities = productRepository.findByCategoryOrderBySequenceDesc(category);
         filterType = "category";
+        log.info("조회된 상품 리스트: " + productEntities.size());
       }
       // 이름만 있는 경우
       else if (hasName) {
         productEntities = productRepository.findByNameContainingOrderBySequenceDesc(name);
         filterType = "name";
+        log.info("조회된 상품 리스트: " + productEntities.size());
       }
       // 아무 필터도 없는 경우 (전체 조회)
       else {
-        productEntities = productRepository.findByOrderBySequenceDesc();
+        productEntities = productRepository.findProducts();
         filterType = "all";
+        log.info("조회된 상품 리스트: " + productEntities.size());
       }
 
     } catch(Exception exception) {

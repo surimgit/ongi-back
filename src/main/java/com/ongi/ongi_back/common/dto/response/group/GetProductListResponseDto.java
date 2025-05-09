@@ -17,12 +17,12 @@ public class GetProductListResponseDto extends ResponseDto {
   private List<ProductVO> products;
   private String filterType;
 
-  public GetProductListResponseDto(List<ProductEntity> productEntities, String filterType){
-    this.products = ProductVO.getList(productEntities);
+  public GetProductListResponseDto(List<ProductVO> productEntities, String filterType){
+    this.products = productEntities;
     this.filterType = filterType;
   }
   
-  public static ResponseEntity<GetProductListResponseDto> success(List<ProductEntity> productEntities, String filterType) {
+  public static ResponseEntity<GetProductListResponseDto> success(List<ProductVO> productEntities, String filterType) {
     GetProductListResponseDto body = new GetProductListResponseDto(productEntities, filterType);
     return ResponseEntity.status(HttpStatus.OK).body(body);
   }
