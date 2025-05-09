@@ -9,10 +9,6 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class PatchUserAccountRequestDto {
-  private String userPassword;
-
-  private String address;
-
-  private String detailAddress;
+public class PatchBadgeRequestDto {
+  private String badge;
 }

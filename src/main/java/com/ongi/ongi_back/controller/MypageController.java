@@ -1,5 +1,7 @@
 package com.ongi.ongi_back.controller;
 
+import java.time.LocalDate;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -14,14 +16,20 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.ongi.ongi_back.common.dto.request.user.AddLikeKeywordRequestDto;
 import com.ongi.ongi_back.common.dto.request.user.DeleteLikeKeywordRequestDto;
-import com.ongi.ongi_back.common.dto.request.user.PatchUserAccountRequestDto;
+import com.ongi.ongi_back.common.dto.request.user.PatchBadgeRequestDto;
+import com.ongi.ongi_back.common.dto.request.user.PatchUserAddressRequestDto;
 import com.ongi.ongi_back.common.dto.request.user.PatchUserIntroductionRequestDto;
+import com.ongi.ongi_back.common.dto.request.user.PatchUserPasswordRequestDto;
 import com.ongi.ongi_back.common.dto.request.user.PostProductReviewRequestDto;
 import com.ongi.ongi_back.common.dto.request.user.PostWaybillRequestDto;
 import com.ongi.ongi_back.common.dto.response.ResponseDto;
+import com.ongi.ongi_back.common.dto.response.badge.GetBadgeListResponseDto;
+import com.ongi.ongi_back.common.dto.response.badge.GetBadgeResponseDto;
 import com.ongi.ongi_back.common.dto.response.community.GetCommunityCommentsResponseDto;
 import com.ongi.ongi_back.common.dto.response.community.GetCommunityResponseDto;
-import com.ongi.ongi_back.common.dto.response.user.GetLikeKeywordListResponseDto;
+import com.ongi.ongi_back.common.dto.response.group.GetProductListResponseDto;
+import com.ongi.ongi_back.common.dto.response.group.GetProductReviewResponseDto;
+import com.ongi.ongi_back.common.dto.response.user.GetMyActivityCountResponseDto;
 import com.ongi.ongi_back.common.dto.response.user.GetMyBuyingResponseDto;
 import com.ongi.ongi_back.common.dto.response.user.GetMySalesResponseDto;
 import com.ongi.ongi_back.common.dto.response.user.GetOrderItemResponseDto;
@@ -56,23 +64,13 @@ public class MypageController {
     return response;
   }
 
-  @GetMapping("/other/{userId}")
-  public ResponseEntity<? super GetUserIntroductionResponseDto> getOtherUserIntroduction(
-    @PathVariable("userId") String userId
-  ){
-    ResponseEntity<? super GetUserIntroductionResponseDto> response = mypageService.getUserIntroduction(userId);
-    return response;
-  }
-
-
-  @GetMapping("/keyword")
-  public ResponseEntity<? super GetLikeKeywordListResponseDto> getLikeKeywordList(
+  @GetMapping("/activity")
+  public ResponseEntity<? super GetMyActivityCountResponseDto> getMyActivityCount(
     @AuthenticationPrincipal String userId
   ){
-    ResponseEntity<? super GetLikeKeywordListResponseDto> response = mypageService.getLikeKeywordList(userId);
+    ResponseEntity<? super GetMyActivityCountResponseDto> response = mypageService.getMyActivityCount(userId);
     return response;
   }
-
   
   @PostMapping("/keyword")
   public ResponseEntity<ResponseDto> addLikeKeyword(
@@ -93,14 +91,24 @@ public class MypageController {
   }
   
 
-  @PatchMapping("/account")
-  public ResponseEntity<ResponseDto> patchUserAccount(
-    @RequestBody @Valid PatchUserAccountRequestDto requestBody,
+  @PatchMapping("/account/patch")
+  public ResponseEntity<ResponseDto> patchUserPassword(
+    @RequestBody @Valid PatchUserPasswordRequestDto requestBody,
     @AuthenticationPrincipal String userId
   ){
-    ResponseEntity<ResponseDto> response = mypageService.patchUserAccount(requestBody, userId);
+    ResponseEntity<ResponseDto> response = mypageService.patchUserPassword(requestBody, userId);
     return response;
   }
+
+  @PatchMapping("/account")
+  public ResponseEntity<ResponseDto> patchUserAddress(
+    @RequestBody @Valid PatchUserAddressRequestDto requestBody,
+    @AuthenticationPrincipal String userId
+  ){
+    ResponseEntity<ResponseDto> response = mypageService.patchUserAddress(requestBody, userId);
+    return response;
+  }
+
 
   @GetMapping("/account")
   public ResponseEntity<? super GetUserAccountResponseDto> getUserAccount(
@@ -160,6 +168,7 @@ public class MypageController {
     return response;
   }
 
+
   @GetMapping("/product-sequence")
   public ResponseEntity<? super GetOrderItemResponseDto> getOrderItemsByProductSequence (
     @RequestParam("productSequence") Integer productSequence
@@ -174,6 +183,82 @@ public class MypageController {
     @AuthenticationPrincipal String userId
   ){
     ResponseEntity<ResponseDto> response = mypageService.postWaybillNumber(requestBody, userId);
+
+  @PostMapping("/badge")
+  public ResponseEntity<ResponseDto> addBadge(
+    @AuthenticationPrincipal String userId
+  ){
+    ResponseEntity<ResponseDto> response = mypageService.addBadge(userId);
     return response;
   }
+
+  @GetMapping("/badge")
+  public ResponseEntity<? super GetBadgeListResponseDto> getBadgeList(
+    @AuthenticationPrincipal String userId
+  ){
+    ResponseEntity<? super GetBadgeListResponseDto> response = mypageService.getBadgeList(userId);
+ 
+    return response;
+  }
+
+  @PatchMapping("/badge")
+  public ResponseEntity<ResponseDto> chooseBadge(
+    @AuthenticationPrincipal String userId,
+    @RequestBody @Valid PatchBadgeRequestDto requestBody
+  ){
+    ResponseEntity<ResponseDto> response = mypageService.chooseBadge(userId, requestBody);
+    return response;
+  }
+
+  
+  @GetMapping("/other/{userId}")
+  public ResponseEntity<? super GetUserIntroductionResponseDto> getOtherUserIntroduction(
+    @PathVariable("userId") String userId
+  ){
+    ResponseEntity<? super GetUserIntroductionResponseDto> response = mypageService.getOtherUserIntroduction(userId);
+    return response;
+  }
+
+  @GetMapping("other/{userId}/community/post")
+  public ResponseEntity<? super GetCommunityResponseDto> getOtherUserCommunityPost(
+    @PathVariable("userId") String userId
+  ) {
+    ResponseEntity<? super GetCommunityResponseDto> response = mypageService.getMyCommunityPost(userId);
+    return response;
+  }
+
+  @GetMapping("/other/{userId}/badge")
+  public ResponseEntity<? super GetBadgeResponseDto> getOtherUserBadge(
+    @PathVariable("userId") String userId
+  ){
+    ResponseEntity<? super GetBadgeResponseDto> response = mypageService.getOtherUserBadge(userId);
+    return response;
+  }
+
+  @GetMapping("/other/{userId}/group-buying/selling")
+  public ResponseEntity<? super GetProductListResponseDto> getOtherUserSellingProduct(
+    @PathVariable("userId") String userId
+  ){
+    String today = LocalDate.now().toString();
+    ResponseEntity<? super GetProductListResponseDto> response = mypageService.getOtherUserSellingProduct(userId, today);
+    return response;
+  }
+
+  @GetMapping("/other/{userId}/group-buying/selled")
+  public ResponseEntity<? super GetProductListResponseDto> getOtherUserSelledProduct(
+    @PathVariable("userId") String userId
+  ){
+    String today = LocalDate.now().toString();
+    ResponseEntity<? super GetProductListResponseDto> response = mypageService.getOtherUserSelledProduct(userId, today);
+    return response;
+  }
+  
+  // @GetMapping("/other/{userId}/group-buying/review")
+  // public ResponseEntity<? super GetProductReviewResponseDto> getOtherUserProductReviewed(
+  //   @PathVariable("userId") String userId
+  // ){
+  //   ResponseEntity<? super GetProductReviewResponseDto> response = mypageService.getOtherUserProductReviewed(userId);
+  //   return response;
+  // }
+
 }

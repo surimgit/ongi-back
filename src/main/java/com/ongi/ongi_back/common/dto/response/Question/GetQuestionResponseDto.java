@@ -10,20 +10,24 @@ import lombok.Getter;
 
 @Getter
 public class GetQuestionResponseDto extends ResponseDto{
+  private Integer questionSequence;
+  private String userId;
   private String postDate;
-  private String category;
   private String title;
+  private String category;
   private String content;
   private String answer;
-  private String userId;
+  private boolean isAnswered;
 
   private GetQuestionResponseDto(QuestionEntity questionEntity){
+    this.questionSequence = questionEntity.getQuestionSequence();
+    this.userId = questionEntity.getUserId();
     this.postDate = questionEntity.getPostDate();
-    this.category = questionEntity.getCategory();
     this.title = questionEntity.getTitle();
+    this.category = questionEntity.getCategory();
     this.content = questionEntity.getContent();
     this.answer = questionEntity.getAnswer();
-    this.userId = questionEntity.getUserId();
+    this.isAnswered = questionEntity.isAnswered();
   }
 
   public static ResponseEntity<GetQuestionResponseDto> success(QuestionEntity questionEntity){

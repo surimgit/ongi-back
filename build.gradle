@@ -42,9 +42,9 @@ dependencies {
 	implementation 'org.json:json:20230227'
 	implementation 'com.googlecode.json-simple:json-simple:1.1.1'
 
-
 	implementation "org.springframework.boot:spring-boot-starter-log4j2"	    // Spring Boot Log4j2
 	runtimeOnly 'com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:2.18.0'
+	
 	
 
 	compileOnly 'org.projectlombok:lombok:1.18.38'

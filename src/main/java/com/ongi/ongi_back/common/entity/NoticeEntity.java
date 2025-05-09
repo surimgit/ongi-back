@@ -3,7 +3,9 @@ package com.ongi.ongi_back.common.entity;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+import com.ongi.ongi_back.common.dto.request.admin.PatchNoticeRequestDto;
 import com.ongi.ongi_back.common.dto.request.admin.PostNoticeRequestDto;
+import com.ongi.ongi_back.common.dto.request.question.PatchQuestionRequestDto;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -43,6 +45,11 @@ public class NoticeEntity {
     this.title = dto.getTitle();
     this.content = dto.getTitle();
     this.postDate = now.format(dateTimeFormatter);
+  }
+
+  public void patchNotice(PatchNoticeRequestDto dto){
+    this.title = dto.getTitle();
+    this.content = dto.getContent();
   }
 
 }

@@ -1,8 +1,9 @@
 package com.ongi.ongi_back.common.entity;
 
 import com.ongi.ongi_back.common.dto.request.auth.SignUpRequestDto;
-import com.ongi.ongi_back.common.dto.request.user.PatchUserAccountRequestDto;
+import com.ongi.ongi_back.common.dto.request.user.PatchUserAddressRequestDto;
 import com.ongi.ongi_back.common.dto.request.user.PatchUserIntroductionRequestDto;
+import com.ongi.ongi_back.common.dto.request.user.PatchUserPasswordRequestDto;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -60,10 +61,13 @@ public class UserEntity {
         if (dto.getProfileImage() != null) this.profileImage = dto.getProfileImage();
     }
 
-    public void patchUserAccount(PatchUserAccountRequestDto dto){
-        if (dto.getUserPassword() != null) this.userPassword = dto.getUserPassword();
-        if (dto.getAddress() != null) this.address = dto.getAddress();
-        if (dto.getDetailAddress() != null) this.detailAddress = dto.getDetailAddress();
+    public void patchUserPassword(PatchUserPasswordRequestDto dto){
+        if (dto.getNewPassword() != null) this.userPassword = dto.getNewPassword();
+    }
+
+    public void patchUserAddress(PatchUserAddressRequestDto dto){
+        this.address = dto.getAddress();
+        this.detailAddress = dto.getDetailAddress();
     }
 
 }

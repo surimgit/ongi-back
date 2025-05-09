@@ -5,6 +5,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.ongi.ongi_back.common.dto.request.admin.PatchAnswerRequestDto;
+import com.ongi.ongi_back.common.dto.request.admin.PatchNoticeRequestDto;
 import com.ongi.ongi_back.common.dto.request.admin.PostNoticeRequestDto;
 import com.ongi.ongi_back.common.dto.response.ResponseDto;
 import com.ongi.ongi_back.common.dto.response.admin.GetIsAdminResponseDto;
@@ -65,4 +66,46 @@ public class AdminServiceImplement implements AdminService {
     return ResponseDto.success(HttpStatus.CREATED);
 
   }
+
+  @Override
+  public ResponseEntity<ResponseDto> patchNotice(PatchNoticeRequestDto dto, Integer sequence, String userId) {
+    
+    NoticeEntity noticeEntity = null;
+    try {
+      noticeEntity = noticeRepository.findBySequence(sequence);
+      if(noticeEntity == null) return ResponseDto.noExistPost();
+
+      UserEntity userEntity = userRepository.findByIsAdminTrue();
+      if(!userEntity.getUserId().equals(userId)) return ResponseDto.noPermission();
+
+      noticeEntity.patchNotice(dto);
+      noticeRepository.save(noticeEntity);
+
+    } catch (Exception e) {
+      e.printStackTrace();
+      return ResponseDto.databaseError();
+    }
+
+    return ResponseDto.success(HttpStatus.OK);
+  }
+
+  @Override
+  public ResponseEntity<ResponseDto> deleteNotice(Integer sequence, String userId) {
+    try{
+      NoticeEntity noticeEntity = noticeRepository.findBySequence(sequence);
+      if(noticeEntity == null) return ResponseDto.noExistPost();
+
+      UserEntity userEntity = userRepository.findByIsAdminTrue();
+      if(!userEntity.getUserId().equals(userId)) return ResponseDto.noPermission();
+
+      noticeRepository.delete(noticeEntity);
+
+    } catch (Exception e){
+      e.printStackTrace();
+      return ResponseDto.databaseError();
+    }
+
+    return ResponseDto.success(HttpStatus.OK);
+  }
+
 }
