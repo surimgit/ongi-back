@@ -1,1 +1,2 @@
-2025-05-09 17:17:00,017 ERROR [scheduling-1] org.hibernate.engine.jdbc.spi.SqlExceptionHelper: Table 'ongi.product' doesn't exist
+2025-05-09 17:44:33,642 ERROR [http-nio-4000-exec-8] org.hibernate.engine.jdbc.spi.SqlExceptionHelper: Unknown column 'nhe1_0.liked' in 'field list'
+2025-05-09 17:44:33,674 ERROR [http-nio-4000-exec-5] org.hibernate.engine.jdbc.spi.SqlExceptionHelper: Unknown column 'nhe1_0.liked' in 'field list'
