@@ -25,6 +25,4 @@ public interface WishListRepository extends JpaRepository<WishListEntity, WishLi
   "ON w.productSequence = p.sequence " +
   "WHERE w.userId = :userId")
   List<WishVO> findByUserId(@Param("userId") String userId);
-
-  Integer countByUserId(String userId);
 }

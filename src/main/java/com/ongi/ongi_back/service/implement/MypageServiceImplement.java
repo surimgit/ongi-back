@@ -59,6 +59,7 @@ import com.ongi.ongi_back.repository.ReviewImagesRepository;
 import com.ongi.ongi_back.repository.ShoppingCartRepository;
 import com.ongi.ongi_back.repository.UserRepository;
 import com.ongi.ongi_back.repository.WishListRepository;
+import com.ongi.ongi_back.service.FileService;
 import com.ongi.ongi_back.service.MypageService;
 
 import lombok.RequiredArgsConstructor;
@@ -549,7 +550,7 @@ public class MypageServiceImplement implements MypageService{
     Integer reviewCount = 0;
     Integer reviewedCount = 0;
     Integer shoppingCartCount = 0;
-    Integer wishListCount = 0;
+    long wishListCount = 0;
     try {
       reviewCount = 0;
       reviewedCount = 0;

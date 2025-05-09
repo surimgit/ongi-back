@@ -27,6 +27,4 @@ public interface ShoppingCartRepository extends JpaRepository<ShoppingCartEntity
 
 
   ShoppingCartEntity findByShoppingCartSequenceAndUserId(Integer shoppingCartSequence, String userId);
-
-  Integer countByUserId(String userId);
 }
