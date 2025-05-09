@@ -6,18 +6,20 @@ import java.util.stream.Collectors;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
 
 import com.ongi.ongi_back.common.dto.request.user.AddLikeKeywordRequestDto;
 import com.ongi.ongi_back.common.dto.request.user.DeleteLikeKeywordRequestDto;
-import com.ongi.ongi_back.common.dto.request.user.PatchUserAccountRequestDto;
+import com.ongi.ongi_back.common.dto.request.user.PatchUserAddressRequestDto;
 import com.ongi.ongi_back.common.dto.request.user.PatchUserIntroductionRequestDto;
+import com.ongi.ongi_back.common.dto.request.user.PatchUserPasswordRequestDto;
 import com.ongi.ongi_back.common.dto.request.user.PostProductReviewRequestDto;
 import com.ongi.ongi_back.common.dto.request.user.PostReviewImagesRequestDto;
 import com.ongi.ongi_back.common.dto.request.user.PostWaybillRequestDto;
 import com.ongi.ongi_back.common.dto.response.ResponseDto;
-import com.ongi.ongi_back.common.dto.response.community.GetCommunityCommentResponseDto;
+import com.ongi.ongi_back.common.dto.response.badge.GetBadgeListResponseDto;
 import com.ongi.ongi_back.common.dto.response.community.GetCommunityCommentsResponseDto;
 import com.ongi.ongi_back.common.dto.response.community.GetCommunityResponseDto;
 import com.ongi.ongi_back.common.dto.response.group.GetProductListResponseDto;
@@ -27,6 +29,7 @@ import com.ongi.ongi_back.common.dto.response.user.GetMySalesResponseDto;
 import com.ongi.ongi_back.common.dto.response.user.GetOrderItemResponseDto;
 import com.ongi.ongi_back.common.dto.response.user.GetUserAccountResponseDto;
 import com.ongi.ongi_back.common.dto.response.user.GetUserIntroductionResponseDto;
+import com.ongi.ongi_back.common.entity.BadgeEntity;
 import com.ongi.ongi_back.common.entity.CommunityCommentEntity;
 import com.ongi.ongi_back.common.entity.CommunityPostEntity;
 import com.ongi.ongi_back.common.entity.LikeKeywordEntity;
@@ -37,18 +40,19 @@ import com.ongi.ongi_back.common.entity.ProductReviewEntity;
 import com.ongi.ongi_back.common.entity.ReviewImagesEntity;
 import com.ongi.ongi_back.common.entity.UserEntity;
 import com.ongi.ongi_back.common.vo.MyBuyingVO;
+
 import com.ongi.ongi_back.common.vo.MySalesVO;
 import com.ongi.ongi_back.common.vo.OrderItemVO;
+
+import com.ongi.ongi_back.repository.BadgeRespository;
 import com.ongi.ongi_back.repository.CommunityCommentRepository;
 import com.ongi.ongi_back.repository.CommunityPostRepository;
 import com.ongi.ongi_back.repository.LikeKeywordRepository;
 import com.ongi.ongi_back.repository.LikedRepository;
 import com.ongi.ongi_back.repository.OrderItemRepository;
-import com.ongi.ongi_back.repository.ProductRepository;
 import com.ongi.ongi_back.repository.ProductReviewRepository;
 import com.ongi.ongi_back.repository.ReviewImagesRepository;
 import com.ongi.ongi_back.repository.UserRepository;
-import com.ongi.ongi_back.service.FileService;
 import com.ongi.ongi_back.service.MypageService;
 
 import lombok.RequiredArgsConstructor;
@@ -62,12 +66,12 @@ public class MypageServiceImplement implements MypageService{
   private final CommunityPostRepository communityPostRepository;
   private final CommunityCommentRepository communityCommentRepository;
   private final LikedRepository likedRepository;
-  private final ProductRepository productRepository;
   private final ProductReviewRepository productReviewRepository;
   private final OrderItemRepository orderItemRepository;
   private final ReviewImagesRepository reviewImagesRepository;
-  
   private final FileService fileService;
+  private final BadgeRespository badgeRespository;
+  private final PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
   @Override
   public ResponseEntity<ResponseDto> patchIntroduction(PatchUserIntroductionRequestDto dto, String userId) {
@@ -88,23 +92,50 @@ public class MypageServiceImplement implements MypageService{
     return ResponseDto.success(HttpStatus.OK);
   }
 
-    @Override
-    public ResponseEntity<ResponseDto> patchUserAccount(PatchUserAccountRequestDto dto, String userId) {
+  @Override
+  public ResponseEntity<ResponseDto> patchUserPassword(PatchUserPasswordRequestDto dto, String userId) {
 
-      try {
-        UserEntity userEntity = userRepository.findByUserId(userId);
-        if(userEntity == null) return ResponseDto.noExistUser();
+    try {
 
-        userEntity.patchUserAccount(dto);
-        userRepository.save(userEntity);
-        
-      } catch (Exception e) {
-        e.printStackTrace();
-        return ResponseDto.databaseError();
-      }
+      UserEntity userEntity = userRepository.findByUserId(userId);
+      if(userEntity == null) return ResponseDto.noExistUser();
+      
+      boolean isPasswordVaild = passwordEncoder.matches(dto.getCurrentPassword(), userEntity.getUserPassword());
+      if(!isPasswordVaild) return ResponseDto.noPermission();
+      boolean equalCheck = dto.getCurrentPassword().equals(dto.getNewPassword());
+      if(equalCheck) return ResponseDto.invalidRequest();
 
-      return ResponseDto.success(HttpStatus.OK);
+      String encoded = passwordEncoder.encode(dto.getNewPassword());
+      dto.setNewPassword(encoded);
+      userEntity.patchUserPassword(dto);
+      userRepository.save(userEntity);
+      
+    } catch (Exception e) {
+      e.printStackTrace();
+      return ResponseDto.databaseError();
     }
+
+    return ResponseDto.success(HttpStatus.OK);
+  }
+
+  @Override
+  public ResponseEntity<ResponseDto> patchUserAddress(PatchUserAddressRequestDto dto, String userId) {
+
+    try {
+      UserEntity userEntity = userRepository.findByUserId(userId);
+      if(userEntity == null) return ResponseDto.noExistUser();
+
+      userEntity.patchUserAddress(dto);
+      userRepository.save(userEntity);
+      
+    } catch (Exception e) {
+      e.printStackTrace();
+      return ResponseDto.databaseError();
+    }
+
+    return ResponseDto.success(HttpStatus.OK);
+  }
+
 
   @Override
   public ResponseEntity<ResponseDto> addLikeKeyword(AddLikeKeywordRequestDto dto, String userId) {
@@ -195,7 +226,7 @@ public class MypageServiceImplement implements MypageService{
       userEntity = userRepository.findByUserId(userId);
       String nickname = userEntity.getNickname();
       communityPostEntities = communityPostRepository.findByNicknameOrderByPostSequenceDesc(nickname);
-
+      
     } catch (Exception e) {
       e.printStackTrace();
     }
@@ -257,6 +288,37 @@ public class MypageServiceImplement implements MypageService{
   }
 
   @Override
+
+  public ResponseEntity<? super GetProductListResponseDto> getMySelledList(String userId) {
+    // TODO Auto-generated method stub
+    throw new UnsupportedOperationException("Unimplemented method 'getMySelledList'");
+  }
+
+  @Override
+  public ResponseEntity<? super GetProductListResponseDto> getMyWishList(String userId) {
+    // TODO Auto-generated method stub
+    throw new UnsupportedOperationException("Unimplemented method 'getMyWishList'");
+  }
+
+  @Override
+  public ResponseEntity<? super GetUserIntroductionResponseDto> getOtherUserIntroduction(String userId) {
+    
+    List<LikeKeywordEntity> likeKeywordEntities = new ArrayList<>();
+    UserEntity userEntity = userRepository.findByUserId(userId);
+    
+
+    try {
+      likeKeywordEntities = likeKeywordRepository.findAllByUserId(userEntity.getUserId());
+      if(likeKeywordEntities == null | userEntity == null) return ResponseDto.noExistUser();
+
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+
+    return GetUserIntroductionResponseDto.success(userEntity, likeKeywordEntities);
+  }
+  
+  @Override
   public ResponseEntity<ResponseDto> postProductReview(PostProductReviewRequestDto dto, String userId) {
     
     try {
@@ -294,6 +356,7 @@ public class MypageServiceImplement implements MypageService{
   }
 
   @Override
+
   public ResponseEntity<? super GetMySalesResponseDto> getMySalesList(String userId) {
     
     List<MySalesVO> mySales = new ArrayList<>();
@@ -351,6 +414,63 @@ public class MypageServiceImplement implements MypageService{
     }
 
     return ResponseDto.success(HttpStatus.OK);
+  }
+
+=======
+  public ResponseEntity<ResponseDto> addBadge(String userId) {
+        
+    UserEntity userEntity = userRepository.findByUserId(userId);
+    if (userEntity == null) {
+      return ResponseDto.noExistUser();
+    }
+    String nickname = userEntity.getNickname();
+
+    try {
+      List<LikeKeywordEntity> likeKeywordEntities = likeKeywordRepository.findAllByUserId(userId);
+      Boolean keyword = likeKeywordEntities != null;
+
+      if(userEntity.getBirth() != null && userEntity.getGender() != null && userEntity.getMbti() != null && userEntity.getJob() != null && userEntity.getSelfIntro() != null && keyword){
+        if(badgeRespository.findByUserIdAndBadge(userId, "자기소개 작성 완료!") == null){
+          BadgeEntity badgeEntity = new BadgeEntity(userId, "자기소개 작성 완료!");
+          badgeRespository.save(badgeEntity);
+        }
+      }
+
+      if(communityPostRepository.findByNicknameOrderByPostSequenceDesc(nickname).size() >= 10){
+        if(badgeRespository.findByUserIdAndBadge(userId, "게시글 10개 작성!") == null){
+          BadgeEntity badgeEntity = new BadgeEntity(userId, "게시글 10개 작성!");
+          badgeRespository.save(badgeEntity);
+        }
+      }
+
+      if(communityCommentRepository.findByNicknameOrderByCommentSequenceDesc(nickname).size() >= 10){
+        if(badgeRespository.findByUserIdAndBadge(userId, "댓글 10개 작성!") == null){
+          BadgeEntity badgeEntity = new BadgeEntity(userId,"댓글 10개 작성!");
+          badgeRespository.save(badgeEntity);
+        }
+      }
+
+    } catch (Exception e) {
+      e.printStackTrace();
+      return ResponseDto.databaseError();
+    }
+    return ResponseDto.success(HttpStatus.OK);
+
+  }
+
+  @Override
+  public ResponseEntity<? super GetBadgeListResponseDto> getBadgeList(String userId) {
+    List<BadgeEntity> badgeEntities = new ArrayList<>();
+
+    try {
+      badgeEntities = badgeRespository.findAllByUserId(userId);
+
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+
+    return GetBadgeListResponseDto.success(badgeEntities); 
+
   }
 
   

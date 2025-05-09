@@ -12,7 +12,7 @@ import lombok.Getter;
 public class GetSignInUserResponseDto extends ResponseDto {
     private String userId;
     private String nickname;
-    private boolean isAdmin;
+    private Boolean isAdmin;
     private String profileImage;
 
     private GetSignInUserResponseDto(UserEntity userEntity) {

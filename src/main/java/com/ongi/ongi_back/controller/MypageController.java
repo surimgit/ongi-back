@@ -14,11 +14,13 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.ongi.ongi_back.common.dto.request.user.AddLikeKeywordRequestDto;
 import com.ongi.ongi_back.common.dto.request.user.DeleteLikeKeywordRequestDto;
-import com.ongi.ongi_back.common.dto.request.user.PatchUserAccountRequestDto;
+import com.ongi.ongi_back.common.dto.request.user.PatchUserAddressRequestDto;
+import com.ongi.ongi_back.common.dto.request.user.PatchUserPasswordRequestDto;
 import com.ongi.ongi_back.common.dto.request.user.PatchUserIntroductionRequestDto;
 import com.ongi.ongi_back.common.dto.request.user.PostProductReviewRequestDto;
 import com.ongi.ongi_back.common.dto.request.user.PostWaybillRequestDto;
 import com.ongi.ongi_back.common.dto.response.ResponseDto;
+import com.ongi.ongi_back.common.dto.response.badge.GetBadgeListResponseDto;
 import com.ongi.ongi_back.common.dto.response.community.GetCommunityCommentsResponseDto;
 import com.ongi.ongi_back.common.dto.response.community.GetCommunityResponseDto;
 import com.ongi.ongi_back.common.dto.response.user.GetLikeKeywordListResponseDto;
@@ -60,7 +62,7 @@ public class MypageController {
   public ResponseEntity<? super GetUserIntroductionResponseDto> getOtherUserIntroduction(
     @PathVariable("userId") String userId
   ){
-    ResponseEntity<? super GetUserIntroductionResponseDto> response = mypageService.getUserIntroduction(userId);
+    ResponseEntity<? super GetUserIntroductionResponseDto> response = mypageService.getOtherUserIntroduction(userId);
     return response;
   }
 
@@ -93,14 +95,24 @@ public class MypageController {
   }
   
 
-  @PatchMapping("/account")
-  public ResponseEntity<ResponseDto> patchUserAccount(
-    @RequestBody @Valid PatchUserAccountRequestDto requestBody,
+  @PatchMapping("/account/patch")
+  public ResponseEntity<ResponseDto> patchUserPassword(
+    @RequestBody @Valid PatchUserPasswordRequestDto requestBody,
     @AuthenticationPrincipal String userId
   ){
-    ResponseEntity<ResponseDto> response = mypageService.patchUserAccount(requestBody, userId);
+    ResponseEntity<ResponseDto> response = mypageService.patchUserPassword(requestBody, userId);
     return response;
   }
+
+  @PatchMapping("/account")
+  public ResponseEntity<ResponseDto> patchUserAddress(
+    @RequestBody @Valid PatchUserAddressRequestDto requestBody,
+    @AuthenticationPrincipal String userId
+  ){
+    ResponseEntity<ResponseDto> response = mypageService.patchUserAddress(requestBody, userId);
+    return response;
+  }
+
 
   @GetMapping("/account")
   public ResponseEntity<? super GetUserAccountResponseDto> getUserAccount(
@@ -160,6 +172,7 @@ public class MypageController {
     return response;
   }
 
+
   @GetMapping("/product-sequence")
   public ResponseEntity<? super GetOrderItemResponseDto> getOrderItemsByProductSequence (
     @RequestParam("productSequence") Integer productSequence
@@ -174,6 +187,21 @@ public class MypageController {
     @AuthenticationPrincipal String userId
   ){
     ResponseEntity<ResponseDto> response = mypageService.postWaybillNumber(requestBody, userId);
+
+  @PostMapping("/badge")
+  public ResponseEntity<ResponseDto> addBadge(
+    @AuthenticationPrincipal String userId
+  ){
+    ResponseEntity<ResponseDto> response = mypageService.addBadge(userId);
+    return response;
+  }
+
+  @GetMapping("/badge")
+  public ResponseEntity<? super GetBadgeListResponseDto> getBadgeList(
+    @AuthenticationPrincipal String userId
+  ){
+    ResponseEntity<? super GetBadgeListResponseDto> response = mypageService.getBadgeList(userId);
+ 
     return response;
   }
 }

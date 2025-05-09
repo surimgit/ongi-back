@@ -207,8 +207,8 @@ public class AuhtServiceImplement implements AuthService {
         return ResponseDto.success(HttpStatus.CREATED);
     }
 
-    @Override
 
+    @Override
     public ResponseEntity<? super ResponseDto> findId(FindIdRequestDto dto) {
         try {
             UserEntity userEntity = userRepository.findByNicknameAndTelNumber(dto.getNickname(), dto.getTelNumber());
@@ -254,4 +254,3 @@ public class AuhtServiceImplement implements AuthService {
         return sb.toString();
     }
 }
-
