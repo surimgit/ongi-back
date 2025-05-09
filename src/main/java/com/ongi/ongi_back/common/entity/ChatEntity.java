@@ -1,7 +1,4 @@
-package com.ongi.ongi_back.common.entity;
-
 import com.ongi.ongi_back.common.dto.request.chat.PostChatRoomRequestDto;
-
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -19,6 +16,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ChatEntity {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer chatSequence;

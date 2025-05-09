@@ -24,4 +24,6 @@ public interface HelperCommentRepository extends JpaRepository<NeedHelperComment
     List<NeedHelperCommentEntity> findByNicknameOrderByCommentSequenceDesc(String nickname);
 
     Integer countByPostSequence(Integer postSequence);
+
+    Integer countByUserId(String userId);
 }

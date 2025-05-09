@@ -11,10 +11,12 @@ import lombok.Getter;
 public class BadgeVO {
   private String userId;
   private String badge;
+  private Boolean isSelected;
 
   private BadgeVO(BadgeEntity badgeEntity){
     this.userId = badgeEntity.getUserId();
     this.badge = badgeEntity.getBadge();
+    this.isSelected = badgeEntity.getIsSelected();
   }
 
   public static List<BadgeVO> getBadgeList(List<BadgeEntity> badgeEntities){
