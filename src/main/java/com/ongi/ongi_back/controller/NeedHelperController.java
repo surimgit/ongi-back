@@ -130,5 +130,29 @@ public class NeedHelperController {
         return response;
     }
     
+    @PostMapping("/{postSequence}/apply")
+    public ResponseEntity<ResponseDto> postHelperApply(
+        @PathVariable("postSequence") Integer postSequence,
+        @AuthenticationPrincipal String applicantId
+    ) {
+        ResponseEntity<ResponseDto> response = needHelperService.postHelperApply(postSequence, applicantId);
+        return response;
+    }
+
+    @DeleteMapping("/{postSequence}/apply")
+    public ResponseEntity<ResponseDto> deleteHelperApply(
+        @PathVariable("postSequence") Integer postSequence,
+        @AuthenticationPrincipal String applicantId
+    ) {
+        return needHelperService.deleteHelperApply(postSequence, applicantId);
+    }
+
+    @GetMapping("/{postSequence}/apply")
+    public ResponseEntity<ResponseDto> getIsApplied(
+        @PathVariable("postSequence") Integer postSequence,
+        @AuthenticationPrincipal String applicantId
+    ) {
+        return needHelperService.getIsApplied(postSequence, applicantId);
+    }
     
 }

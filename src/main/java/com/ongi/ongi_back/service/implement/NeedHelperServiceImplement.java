@@ -13,12 +13,17 @@ import com.ongi.ongi_back.common.dto.request.needHelper.PostHelperRequestDto;
 import com.ongi.ongi_back.common.dto.response.ResponseDto;
 import com.ongi.ongi_back.common.dto.response.needHelper.GetHelperCommentResponseDto;
 import com.ongi.ongi_back.common.dto.response.needHelper.GetHelperCommentsResponseDto;
+import com.ongi.ongi_back.common.dto.response.needHelper.GetHelperIsAppliedResponse;
 import com.ongi.ongi_back.common.dto.response.needHelper.GetHelperLikedResponseDto;
 import com.ongi.ongi_back.common.dto.response.needHelper.GetHelperPostListResponseDto;
 import com.ongi.ongi_back.common.dto.response.needHelper.GetHelperPostResponseDto;
+import com.ongi.ongi_back.common.entity.ChatEntity;
+import com.ongi.ongi_back.common.entity.HelperApplyEntity;
 import com.ongi.ongi_back.common.entity.LikedEntity;
 import com.ongi.ongi_back.common.entity.NeedHelperCommentEntity;
 import com.ongi.ongi_back.common.entity.NeedHelperEntity;
+import com.ongi.ongi_back.repository.ChatRepository;
+import com.ongi.ongi_back.repository.HelperApplyRepository;
 import com.ongi.ongi_back.repository.HelperCommentRepository;
 import com.ongi.ongi_back.repository.HelperPostRepository;
 import com.ongi.ongi_back.repository.LikedRepository;
@@ -35,6 +40,8 @@ public class NeedHelperServiceImplement implements NeedHelperService{
     private final UserRepository userRepository;
     private final HelperCommentRepository helperCommentRepository;
     private final LikedRepository likedRepository;
+    private final HelperApplyRepository helperApplyRepository;
+    private final ChatRepository chatRepository;
 
     @Override
     public ResponseEntity<ResponseDto> postHelper(PostHelperRequestDto dto, String userId) {
@@ -255,5 +262,60 @@ public class NeedHelperServiceImplement implements NeedHelperService{
         return GetHelperLikedResponseDto.success(likedEntities);
     }
 
+    @Override
+    public ResponseEntity<ResponseDto> postHelperApply(Integer postSequence, String applicantId) {
+        try {      
+            NeedHelperEntity post = helperPostRepository.findById(postSequence).orElseThrow();
+            String requesterId = post.getUserId();      
+
+            ChatEntity chat = new ChatEntity();
+            chat.setApplicantId(applicantId);       
+            chat.setRequesterId(requesterId);      
+            chat.setNeedHelperSequence(postSequence);
+            chat.setChatAvailable(true);
+            chatRepository.save(chat);
+
+            HelperApplyEntity apply = new HelperApplyEntity(postSequence, post, requesterId, applicantId, chat.getChatSequence());
+            apply.setIsApplied(true);
+            helperApplyRepository.save(apply);
+
+        } catch (Exception exception) {
+            exception.printStackTrace();
+            return ResponseDto.databaseError();
+        }
+
+        return ResponseDto.success(HttpStatus.CREATED);
+    }
+
+
+    @Override
+    public ResponseEntity<ResponseDto> deleteHelperApply(Integer postSequence, String applicantId) {
+        try {
+            boolean exists = helperApplyRepository.existsByPostSequenceAndApplicantId(postSequence, applicantId);
+            if (!exists) return ResponseDto.noExistNeedhelperPost();
+    
+            helperApplyRepository.deleteByPostSequenceAndApplicantId(postSequence, applicantId);
+        } catch (Exception exception) {
+            exception.printStackTrace();
+            return ResponseDto.databaseError();
+        }
+    
+        return ResponseDto.success(HttpStatus.OK);
+    }
+
+    @Override
+    public ResponseEntity<ResponseDto> getIsApplied(Integer postSequence, String applicantId) {
+        try {
+            HelperApplyEntity apply = helperApplyRepository.findByPostSequenceAndApplicantId(postSequence, applicantId);
+            if (apply != null) {
+                return ResponseEntity.ok(new GetHelperIsAppliedResponse(apply));
+            }
+        } catch (Exception exception) {
+            exception.printStackTrace();
+            return ResponseDto.databaseError();
+        }
+
+        return ResponseDto.success(HttpStatus.OK);
+    }
     
 }
