@@ -8,6 +8,7 @@ import com.ongi.ongi_back.common.dto.request.user.PatchUserAddressRequestDto;
 import com.ongi.ongi_back.common.dto.request.user.PatchUserIntroductionRequestDto;
 import com.ongi.ongi_back.common.dto.request.user.PatchUserPasswordRequestDto;
 import com.ongi.ongi_back.common.dto.request.user.PostProductReviewRequestDto;
+import com.ongi.ongi_back.common.dto.request.user.PostWaybillRequestDto;
 import com.ongi.ongi_back.common.dto.response.ResponseDto;
 import com.ongi.ongi_back.common.dto.response.badge.GetBadgeListResponseDto;
 import com.ongi.ongi_back.common.dto.response.community.GetCommunityCommentsResponseDto;
@@ -15,6 +16,8 @@ import com.ongi.ongi_back.common.dto.response.community.GetCommunityResponseDto;
 import com.ongi.ongi_back.common.dto.response.group.GetProductListResponseDto;
 import com.ongi.ongi_back.common.dto.response.user.GetLikeKeywordListResponseDto;
 import com.ongi.ongi_back.common.dto.response.user.GetMyBuyingResponseDto;
+import com.ongi.ongi_back.common.dto.response.user.GetMySalesResponseDto;
+import com.ongi.ongi_back.common.dto.response.user.GetOrderItemResponseDto;
 import com.ongi.ongi_back.common.dto.response.user.GetUserAccountResponseDto;
 import com.ongi.ongi_back.common.dto.response.user.GetUserIntroductionResponseDto;
 
@@ -35,12 +38,14 @@ public interface MypageService {
   ResponseEntity<? super GetCommunityResponseDto> getMyCommunityLikedPostComment(String userId);
 
   ResponseEntity<? super GetMyBuyingResponseDto> getMyPurchaseList(String userId);
-  ResponseEntity<? super GetProductListResponseDto> getMySelledList(String userId);
-  ResponseEntity<? super GetProductListResponseDto> getMyWishList(String userId);
+  ResponseEntity<? super GetMySalesResponseDto> getMySalesList(String userId);
+  ResponseEntity<? super GetOrderItemResponseDto> getOrderItemByProductSequence(Integer sequence);
 
   ResponseEntity<? super GetUserIntroductionResponseDto> getOtherUserIntroduction(String userId);
 
   ResponseEntity<ResponseDto> postProductReview(PostProductReviewRequestDto dto, String userId);
+  ResponseEntity<ResponseDto> postWaybillNumber(PostWaybillRequestDto dto, String userId);
+}
 
   ResponseEntity<ResponseDto> addBadge(String userId);
   ResponseEntity<? super GetBadgeListResponseDto> getBadgeList(String userId);

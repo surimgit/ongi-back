@@ -8,7 +8,10 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import com.ongi.ongi_back.common.dto.response.ResponseDto;
 
+import lombok.extern.slf4j.Slf4j;
 
+
+@Slf4j
 @RestControllerAdvice
 public class CustomExceptionHandler {
     
@@ -19,7 +22,8 @@ public class CustomExceptionHandler {
         HttpMessageNotReadableException.class
     })
     public ResponseEntity<ResponseDto> validExceptionHandler(Exception exception) {
-        exception.printStackTrace();
+        log.error("유효성 검사 실패: {}", exception.getMessage());
         return ResponseDto.validationFail();
     }
+
 }
