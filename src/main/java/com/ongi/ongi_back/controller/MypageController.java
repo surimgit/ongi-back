@@ -183,6 +183,8 @@ public class MypageController {
     @AuthenticationPrincipal String userId
   ){
     ResponseEntity<ResponseDto> response = mypageService.postWaybillNumber(requestBody, userId);
+    return response;
+  }
 
   @PostMapping("/badge")
   public ResponseEntity<ResponseDto> addBadge(

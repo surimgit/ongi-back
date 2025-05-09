@@ -14,14 +14,14 @@ public class GetMyActivityCountResponseDto extends ResponseDto {
   private Integer reviewCount;
   private Integer reviewedCount;
   private Integer shoppingCartCount;
-  private Integer wishListCount;
+  private long wishListCount;
 
   private GetMyActivityCountResponseDto(Integer communityCommentCount, 
   Integer communityPostCount,
   Integer reviewCount,
   Integer reviewedCount,
   Integer shoppingCartCount,
-  Integer wishListCount){
+  long wishListCount){
     this.communityCommentCount = communityCommentCount;
     this.communityPostCount = communityPostCount;
     this.reviewCount = reviewCount;
@@ -35,7 +35,7 @@ public class GetMyActivityCountResponseDto extends ResponseDto {
   Integer reviewCount,
   Integer reviewedCount,
   Integer shoppingCartCount,
-  Integer wishListCount
+  long wishListCount
   ){
     GetMyActivityCountResponseDto body = new GetMyActivityCountResponseDto(communityCommentCount, 
     communityPostCount,

@@ -1,3 +1,5 @@
+package com.ongi.ongi_back.common.entity;
+
 import com.ongi.ongi_back.common.dto.request.chat.PostChatRoomRequestDto;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;

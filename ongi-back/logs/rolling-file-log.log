@@ -1,0 +1,1 @@
+2025-05-09 17:17:00,017 ERROR [scheduling-1] org.hibernate.engine.jdbc.spi.SqlExceptionHelper: Table 'ongi.product' doesn't exist
