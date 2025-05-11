@@ -1,1 +1,4 @@
-2025-05-09 17:17:00,017 ERROR [scheduling-1] org.hibernate.engine.jdbc.spi.SqlExceptionHelper: Table 'ongi.product' doesn't exist
+2025-05-11 20:21:52,238 ERROR [http-nio-4000-exec-1] org.hibernate.engine.jdbc.spi.SqlExceptionHelper: Unknown column 'nhce1_0.nickname' in 'field list'
+2025-05-11 20:21:52,293 ERROR [http-nio-4000-exec-10] org.hibernate.engine.jdbc.spi.SqlExceptionHelper: Unknown column 'nhce1_0.nickname' in 'field list'
+2025-05-11 20:21:54,798 ERROR [http-nio-4000-exec-6] org.hibernate.engine.jdbc.spi.SqlExceptionHelper: Unknown column 'nhce1_0.nickname' in 'field list'
+2025-05-11 20:21:54,824 ERROR [http-nio-4000-exec-5] org.hibernate.engine.jdbc.spi.SqlExceptionHelper: Unknown column 'nhce1_0.nickname' in 'field list'
