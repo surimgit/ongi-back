@@ -19,14 +19,14 @@ import com.ongi.ongi_back.common.dto.response.needHelper.GetHelperPostListRespon
 import com.ongi.ongi_back.common.dto.response.needHelper.GetHelperPostResponseDto;
 import com.ongi.ongi_back.common.entity.ChatEntity;
 import com.ongi.ongi_back.common.entity.HelperApplyEntity;
-import com.ongi.ongi_back.common.entity.LikedEntity;
+import com.ongi.ongi_back.common.entity.HelperLikedEntity;
 import com.ongi.ongi_back.common.entity.NeedHelperCommentEntity;
 import com.ongi.ongi_back.common.entity.NeedHelperEntity;
 import com.ongi.ongi_back.repository.ChatRepository;
 import com.ongi.ongi_back.repository.HelperApplyRepository;
 import com.ongi.ongi_back.repository.HelperCommentRepository;
+import com.ongi.ongi_back.repository.HelperLikedRepository;
 import com.ongi.ongi_back.repository.HelperPostRepository;
-import com.ongi.ongi_back.repository.LikedRepository;
 import com.ongi.ongi_back.repository.UserRepository;
 import com.ongi.ongi_back.service.NeedHelperService;
 
@@ -39,7 +39,7 @@ public class NeedHelperServiceImplement implements NeedHelperService{
     private final HelperPostRepository helperPostRepository;
     private final UserRepository userRepository;
     private final HelperCommentRepository helperCommentRepository;
-    private final LikedRepository likedRepository;
+    private final HelperLikedRepository likedRepository;
     private final HelperApplyRepository helperApplyRepository;
     private final ChatRepository chatRepository;
 
@@ -220,9 +220,9 @@ public class NeedHelperServiceImplement implements NeedHelperService{
             NeedHelperEntity needHelperEntity = helperPostRepository.findBySequence(postSequence);
             if (needHelperEntity == null) return ResponseDto.noExistPost();
 
-            LikedEntity likedEntity = likedRepository.findByUserIdAndLikedPostSequence(userId, postSequence);
+            HelperLikedEntity likedEntity = likedRepository.findByUserIdAndLikedPostSequence(userId, postSequence);
             if (likedEntity == null) {
-                likedEntity = new LikedEntity(userId, postSequence);
+                likedEntity = new HelperLikedEntity(userId, postSequence);
                 likedRepository.save(likedEntity);
 
                 Integer liked_count = needHelperEntity.getLiked();
@@ -248,7 +248,7 @@ public class NeedHelperServiceImplement implements NeedHelperService{
     @Override
     public ResponseEntity<? super GetHelperLikedResponseDto> getHelperLiked(Integer postSequence) {
 
-        List<LikedEntity> likedEntities = new ArrayList<>();
+        List<HelperLikedEntity> likedEntities = new ArrayList<>();
         
         try {
 

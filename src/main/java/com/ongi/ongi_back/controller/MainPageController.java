@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.ongi.ongi_back.common.dto.response.main.UserRankDto;
 import com.ongi.ongi_back.common.dto.response.needHelper.GetHelperPostListResponseDto;
 import com.ongi.ongi_back.service.MainPageService;
 import com.ongi.ongi_back.service.NeedHelperService;
@@ -30,6 +31,16 @@ public class MainPageController {
     public ResponseEntity<? super GetHelperPostListResponseDto> comparisonTag(
         @PathVariable String userId) {
         return mainPageService.comparisonTag(userId);
+    }
+
+    @GetMapping("/user-rank/community")
+    public ResponseEntity<? super UserRankDto> getCommunityUserRanking() {
+        return mainPageService.getCommunityUserRanking();
+    }
+
+    @GetMapping("/user-rank/helper")
+    public ResponseEntity<? super UserRankDto> getHelperUserRanking() {
+        return mainPageService.getHelperUserRanking();
     }
 
 }
