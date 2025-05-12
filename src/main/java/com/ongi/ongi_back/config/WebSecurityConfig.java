@@ -59,7 +59,6 @@ public class WebSecurityConfig {
         .requestMatchers("/api/v1/product/**","/api/v1/auth/**", "/api/v1/payments/**", "/api/v1/mypage/**", "/api/v1/wish", "/api/v1/wish/**").permitAll()
         .requestMatchers("/api/v1/auth", "/api/v1/auth/**").permitAll()
         .requestMatchers("/api/v1/main", "/api/v1/main/**").permitAll()
-
         .requestMatchers("/api/v1/community", "/api/v1/community/**").permitAll()
         .requestMatchers("/api/v1/alert/**").authenticated()
         .requestMatchers("/api/v1/user/nickname").permitAll()

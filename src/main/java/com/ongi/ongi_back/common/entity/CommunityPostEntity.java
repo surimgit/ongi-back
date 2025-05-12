@@ -2,14 +2,18 @@ package com.ongi.ongi_back.common.entity;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.ongi.ongi_back.common.dto.request.community.PatchCommunityPostRequestDto;
 import com.ongi.ongi_back.common.dto.request.community.PostCommunityRequestDto;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -33,11 +37,15 @@ public class CommunityPostEntity {
     private String category;
     private String title;
     private String content;
+    
+    @OneToMany(mappedBy = "post_sequence", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<PostImageEntity> postImages = new ArrayList<>();
     private Integer liked;
     private Integer viewCount;
     private boolean hotPost;
+    private String county;
 
-    public CommunityPostEntity(PostCommunityRequestDto dto, String userId, String nickname) {
+    public CommunityPostEntity(PostCommunityRequestDto dto, String userId, String nickname, String county) {
         LocalDateTime now = LocalDateTime.now();
         DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         this.userId = userId;
@@ -47,9 +55,11 @@ public class CommunityPostEntity {
         this.category = dto.getCategory();
         this.title = dto.getTitle();
         this.content = dto.getContent();
+        this.postImages = dto.getImages();
         this.liked = 0;
         this.viewCount = 0;
         this.hotPost = false;
+        this.county = county;
     }
 
     public void patch(PatchCommunityPostRequestDto dto) {

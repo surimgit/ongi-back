@@ -1,15 +1,22 @@
 package com.ongi.ongi_back.service.implement;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
+
+import org.springframework.beans.factory.annotation.Value;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.ongi.ongi_back.common.dto.request.community.PatchCommunityCommentRequestDto;
 import com.ongi.ongi_back.common.dto.request.community.PatchCommunityPostRequestDto;
@@ -27,6 +34,7 @@ import com.ongi.ongi_back.common.entity.LikedEntity;
 import com.ongi.ongi_back.repository.CommunityCommentRepository;
 import com.ongi.ongi_back.repository.CommunityPostRepository;
 import com.ongi.ongi_back.repository.LikedRepository;
+import com.ongi.ongi_back.repository.PostImageRepository;
 import com.ongi.ongi_back.repository.UserRepository;
 import com.ongi.ongi_back.service.CommunityService;
 
@@ -40,16 +48,33 @@ public class CommunityServiceImplement implements CommunityService {
     private final UserRepository userRepository;
     private final CommunityCommentRepository communityCommentRepository;
     private final LikedRepository likedRepository;
+    private final PostImageRepository postImageRepository;
+
+    // 업로드 경로
+    @Value("${file.path}")
+    private String uploadDirectory;
+    @Value("${file.url}")
+    private String fileUrl;
 
     // 게시글 작성
     @Override
     public ResponseEntity<ResponseDto> postCommunityPost(PostCommunityRequestDto dto, String userId) {
 
         String nickname = null;
+        String county = null;
         
         try {
             nickname = userRepository.findByUserId(userId).getNickname();
-            CommunityPostEntity communityPostEntity = new CommunityPostEntity(dto, userId, nickname);
+
+            if (dto.getBoard().equals("우리 동네 게시판")) {
+                county = userRepository.findByUserId(userId).getAddress();
+
+                String[] parts = county.split(" ");
+                county = (parts.length >= 2) ? parts[0] + " " + parts[1] : county;
+                if (parts[0].equals("세종특별자치시")) county = "세종특별자치시";
+            }
+
+            CommunityPostEntity communityPostEntity = new CommunityPostEntity(dto, userId, nickname, county);
             communityPostRepository.save(communityPostEntity);
             
         } catch (Exception exception) {
@@ -197,6 +222,23 @@ public class CommunityServiceImplement implements CommunityService {
         } catch (Exception exception) {
            exception.printStackTrace();
            return ResponseDto.databaseError();
+        }
+
+        return GetCommunityResponseDto.success(communityPostEntities);
+    }
+
+    @Override
+    public ResponseEntity<? super GetCommunityResponseDto> getCounty(String county, String category) {
+
+        List<CommunityPostEntity> communityPostEntities = new ArrayList<>();
+        
+        try {
+            if (category == null) communityPostEntities = communityPostRepository.findCountyPosts(county);
+            else communityPostEntities = communityPostRepository.findCountyCategoryPosts(county, category);
+            
+        } catch (Exception exception) {
+            exception.printStackTrace();
+            return ResponseDto.databaseError();
         }
 
         return GetCommunityResponseDto.success(communityPostEntities);
