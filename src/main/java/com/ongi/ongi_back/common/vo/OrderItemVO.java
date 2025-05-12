@@ -17,6 +17,7 @@ public class OrderItemVO {
   private String deliveryAddressSnapshot;
   private String approvedTime;
   private String buyerId;
+  private Integer addressId;
 
   public OrderItemVO(OrderItemEntity orderItemEntity){
     this.orderItemSequence = orderItemEntity.getOrderItemSequence();
@@ -25,5 +26,6 @@ public class OrderItemVO {
     this.waybillNumber = orderItemEntity.getWaybillNumber();
     this.deliveryAddressSnapshot = orderItemEntity.getDeliveryAddressSnapshot();
     this.buyerId = orderItemEntity.getBuyerId();
+    this.addressId = orderItemEntity.getAddressId();
   }
 }
