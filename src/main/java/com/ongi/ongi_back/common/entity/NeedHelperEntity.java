@@ -1,7 +1,13 @@
 package com.ongi.ongi_back.common.entity;
 
 import java.time.LocalDateTime;
+import java.util.Collections;
+import java.util.List;
 
+import org.springframework.data.annotation.Transient;
+
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ongi.ongi_back.common.dto.request.needHelper.PatchHelperPostRequestDto;
 import com.ongi.ongi_back.common.dto.request.needHelper.PostHelperRequestDto;
 
@@ -38,6 +44,8 @@ public class NeedHelperEntity {
     private LocalDateTime date;
     private Integer liked;
 
+    private String keyword;
+
     public NeedHelperEntity(PostHelperRequestDto dto, String userId) {
         this.userId = userId;
         this.reward = dto.getReward();
@@ -50,6 +58,7 @@ public class NeedHelperEntity {
         this.date = LocalDateTime.now();
         this.isRequestSolved = false;
         this.liked = 0;
+        this.keyword = dto.getKeyword();
     }
 
     public void patch(PatchHelperPostRequestDto dto) {
@@ -60,5 +69,42 @@ public class NeedHelperEntity {
         this.city = dto.getCity();
         this.district = dto.getDistrict();
         this.meetingType = dto.getMeetingType(); 
+        this.keyword = dto.getKeyword();
     }
+
+    @Transient
+    private int matchScore;
+
+    public List<String> getTagsAsList() {
+        if (this.keyword == null || this.keyword.isBlank()) {
+            return Collections.emptyList();
+        }
+
+        ObjectMapper mapper = new ObjectMapper();
+        try {
+            return mapper.readValue(this.keyword, new TypeReference<List<String>>() {});
+        } catch (Exception e) {
+            return Collections.emptyList(); 
+        }
+    }
+
+    public int getMatchScore() {
+        return matchScore;
+    }
+
+    public void setMatchScore(int matchScore) {
+        this.matchScore = matchScore;
+    }
+
+    public boolean isScheduleAfterNow() {
+        if (this.schedule == null || this.schedule.isBlank()) return false;
+    
+        try {
+            return java.time.ZonedDateTime.parse(this.schedule)
+                .isAfter(java.time.ZonedDateTime.now(java.time.ZoneId.of("Asia/Seoul")));
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
 }
