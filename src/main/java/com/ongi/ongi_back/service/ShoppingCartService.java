@@ -13,4 +13,5 @@ public interface ShoppingCartService {
     ResponseEntity<ResponseDto> patchProduct(PatchShoppingCartRequestDto dto, String userId);
     ResponseEntity<? super GetShoppingCartResponseDto> getShoppingCart(String userId);
     ResponseEntity<ResponseDto> deleteProduct(DeleteShoppingCartRequestDto dto, String userId);
+    long getCountByUserId(String userId);
 }

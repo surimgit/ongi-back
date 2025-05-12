@@ -15,7 +15,7 @@ public class PostAlertRequestDto {
     @NotBlank
     private String alertType;
     @NotBlank
-    private String senderId;
+    private String senderId = "admin12345";
     @NotBlank
     private String receiverId;
     @NotNull

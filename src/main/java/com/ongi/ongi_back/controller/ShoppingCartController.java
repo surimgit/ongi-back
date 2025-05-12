@@ -46,6 +46,14 @@ public class ShoppingCartController {
     return response;
   }
 
+  @GetMapping("/count")
+  public long getCountByUserId(
+    @AuthenticationPrincipal String userId
+  ){
+    long response = shoppingCartService.getCountByUserId(userId);
+    return response;
+  }
+
   // 장바구니 상품 수량 변경
   @PatchMapping("/product")
   public ResponseEntity<ResponseDto> patchShoppingCart(

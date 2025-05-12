@@ -37,6 +37,8 @@ public interface CommunityPostRepository extends JpaRepository<CommunityPostEnti
 
     boolean existsByPostSequence(Integer postSequence);
 
+    Integer countByUserId(String userId);
+
     @Query(value = "SELECT * FROM community_post " +
                    "WHERE board IN ('정보 게시판', '우리 동네 게시판') " +
                    "AND post_date >= NOW() - INTERVAL 1 DAY " +

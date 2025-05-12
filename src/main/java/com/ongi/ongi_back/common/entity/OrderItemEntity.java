@@ -10,10 +10,12 @@ import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Table(name = "order_item")
 @Entity(name = "order_item")
 @Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 public class OrderItemEntity {
@@ -23,10 +25,23 @@ public class OrderItemEntity {
   private String paymentKey;
   private Integer productSequence;
   private Integer quantity;
+  private String waybillNumber;
+  private String deliveryAddressSnapshot;
+  private String buyerId;
 
   public OrderItemEntity(PostOrderItemRequestDto requestDto){
     this.paymentKey = requestDto.getPaymentKey();
     this.productSequence = requestDto.getProductSequence();
     this.quantity = requestDto.getQuantity();
+    this.deliveryAddressSnapshot = requestDto.getDeliveryAddressSnapshot();
+    this.buyerId = requestDto.getUserId();
+  }
+
+  public OrderItemEntity(PostOrderItemRequestDto requestDto, String buyerId){
+    this.paymentKey = requestDto.getPaymentKey();
+    this.productSequence = requestDto.getProductSequence();
+    this.quantity = requestDto.getQuantity();
+    this.deliveryAddressSnapshot = requestDto.getDeliveryAddressSnapshot();
+    this.buyerId = buyerId;
   }
 }
