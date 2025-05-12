@@ -28,6 +28,8 @@ import com.ongi.ongi_back.common.dto.response.community.GetCommunityResponseDto;
 import com.ongi.ongi_back.common.dto.response.group.GetProductListResponseDto;
 import com.ongi.ongi_back.common.dto.response.group.GetProductReviewResponseDto;
 import com.ongi.ongi_back.common.dto.response.needHelper.GetHelperPostListResponseDto;
+import com.ongi.ongi_back.common.dto.response.needHelper.GetHelperPostResponseDto;
+import com.ongi.ongi_back.common.dto.response.needHelper.GetMyHelperPostListResponseDto;
 import com.ongi.ongi_back.common.dto.response.user.GetLikeKeywordListResponseDto;
 import com.ongi.ongi_back.common.dto.response.user.GetMyActivityCountResponseDto;
 import com.ongi.ongi_back.common.dto.response.user.GetMyBuyingResponseDto;
@@ -52,6 +54,8 @@ import com.ongi.ongi_back.common.vo.OrderItemVO;
 import com.ongi.ongi_back.repository.BadgeRespository;
 import com.ongi.ongi_back.repository.CommunityCommentRepository;
 import com.ongi.ongi_back.repository.CommunityPostRepository;
+import com.ongi.ongi_back.repository.HelperApplyRepository;
+import com.ongi.ongi_back.repository.HelperPostRepository;
 import com.ongi.ongi_back.repository.LikeKeywordRepository;
 import com.ongi.ongi_back.repository.LikedRepository;
 import com.ongi.ongi_back.repository.OrderItemRepository;
@@ -82,6 +86,8 @@ public class MypageServiceImplement implements MypageService{
   private final OrderItemRepository orderItemRepository;
   private final ReviewImagesRepository reviewImagesRepository;
   private final BadgeRespository badgeRespository;
+  private final HelperPostRepository helperPostRepository;
+  private final HelperApplyRepository helperApplyRepository;
   private final PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
   @Override
@@ -599,48 +605,49 @@ public class MypageServiceImplement implements MypageService{
     return GetProductListResponseDto.success(productEntities,"all");
   }
 
-  // @Override
-  // public ResponseEntity<? super GetHelperPostListResponseDto> getMyHelperRequestPost(String userId) {
-  //     List<NeedHelperEntity> needHelperEntities = new ArrayList<>();
-  //     UserEntity userEntity = null;
+  @Override
+  public ResponseEntity<? super GetMyHelperPostListResponseDto> getMyHelperRequestPost(String userId) {
+      List<NeedHelperEntity> needHelperEntities = new ArrayList<>();
 
-  //     try {
-  //       userEntity = userRepository.findByUserId(userId);
-  //       String nickname = userEntity.getNickname();
-  //       needHelperEntities = helperPostRepository.findAllWithNickname(nickname);
+      try {
+        needHelperEntities = helperPostRepository.findAllByUserIdOrderBySequenceDesc(userId);
         
-  //     } catch (Exception e) {
-  //       e.printStackTrace();
-  //     }
+      } catch (Exception e) {
+        e.printStackTrace();
+        return ResponseDto.databaseError();
+      }
 
-  //     return GetHelperPostListResponseDto.success(needHelperEntities);
-  // }
+      return GetMyHelperPostListResponseDto.success(needHelperEntities);
+  }
+
+  @Override
+  public ResponseEntity<? super GetMyHelperPostListResponseDto> getMyHelperApplyPost(String userId) {
+    List<Integer> myApplyList = new ArrayList<>();
+    List<NeedHelperEntity> needHelperEntities = new ArrayList<>();
+    try {
+      myApplyList = helperApplyRepository.findPostSequenceByApplicantId(userId);
+      for (Integer postSequence : myApplyList) {
+        NeedHelperEntity needHelperEntity = helperPostRepository.findBySequence(postSequence);
+        if (needHelperEntity != null) {
+            needHelperEntities.add(needHelperEntity);
+        }
+      }
+    } catch (Exception e) {
+      e.printStackTrace();
+      return ResponseDto.databaseError();
+    }
+
+    return GetMyHelperPostListResponseDto.success(needHelperEntities);
+  }
+
+  @Override
+  public Integer getApplicantCount(Integer postSequence, String userId) {
+    return helperApplyRepository.countByPostSequence(postSequence);
+  }
 
   // @Override
-  // public ResponseEntity<? super GetHelperPostListResponseDto> getMyHelperRequestedPost(String userId) {
-  //   // TODO Auto-generated method stub
-  //   throw new UnsupportedOperationException("Unimplemented method 'getMyHelperRequestedPost'");
+  // public ResponseEntity<? super GetMyHelperPostListResponseDto> getMyHelperLikedPost(String userId) {
+    
   // }
 
-  // @Override
-  // public ResponseEntity<? super GetHelperPostListResponseDto> getMyHelperLikedPost(String userId) {
-  //   // TODO Auto-generated method stub
-  //   throw new UnsupportedOperationException("Unimplemented method 'getMyHelperLikedPost'");
-  // }
-
-  // @Override
-  // public ResponseEntity<? super GetProductReviewResponseDto> getOtherUserProductReviewed(String userId) {
-  //   List<ProductReviewEntity> productReviewEntities = new ArrayList<>();
-  //   UserEntity userEntity = userRepository.findByUserId(userId);
-  //   try {
-  //     if(userEntity == null) return ResponseDto.noExistUser();
-  //     productReviewEntities = productReviewRepository.findAllByProductOwner(userId);
-  //   } catch (Exception e) {
-  //     e.printStackTrace();
-  //     return ResponseDto.databaseError();
-  //   }
-
-  //   return GetProductReviewResponseDto.success(productReviewEntities);
-  // }
- 
 }
