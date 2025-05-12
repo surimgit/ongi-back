@@ -24,6 +24,7 @@ public class GetHelperPostResponseDto extends ResponseDto {
     private String district;
     private String date;
     private String reward;
+    private String keyword;
 
     public GetHelperPostResponseDto(NeedHelperEntity entity, String nickname) {
         this.sequence = entity.getSequence();
@@ -38,5 +39,22 @@ public class GetHelperPostResponseDto extends ResponseDto {
         this.district = entity.getDistrict();
         this.date = entity.getDate().toString();
         this.reward = entity.getReward();
+        this.keyword = entity.getKeyword();
+    }
+
+    public GetHelperPostResponseDto(NeedHelperEntity entity) {
+        this.sequence = entity.getSequence();
+        this.userId = entity.getUserId();
+        this.nickname = nickname;
+        this.title = entity.getTitle();
+        this.content = entity.getContent();
+        this.schedule = entity.getSchedule();
+        this.isRequestSolved = entity.getIsRequestSolved();
+        this.meetingType = entity.getMeetingType();
+        this.city = entity.getCity();
+        this.district = entity.getDistrict();
+        this.date = entity.getDate().toString();
+        this.reward = entity.getReward();
+        this.keyword = entity.getKeyword();
     }
 }
