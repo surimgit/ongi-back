@@ -23,4 +23,6 @@ public interface HelperPostRepository extends JpaRepository<NeedHelperEntity, In
         boolean existsBySequence(Integer sequence);
 
         Integer countByUserId(String userId); 
+
+        NeedHelperEntity findBySequenceAndUserId(Integer sequence, String userId);
 }

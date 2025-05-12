@@ -11,8 +11,8 @@ import jakarta.transaction.Transactional;
 public interface HelperApplyRepository extends JpaRepository<HelperApplyEntity, Integer>{
 
     HelperApplyEntity findByPostSequenceAndApplicantId(Integer postSequence, String applicantId);
+    
     boolean existsByPostSequenceAndApplicantId(Integer postSequence, String applicantId);
-
     @Transactional
     void deleteByPostSequenceAndApplicantId(Integer postSequence, String applicantId);
     

@@ -27,6 +27,7 @@ import com.ongi.ongi_back.common.dto.response.community.GetCommunityCommentsResp
 import com.ongi.ongi_back.common.dto.response.community.GetCommunityResponseDto;
 import com.ongi.ongi_back.common.dto.response.group.GetProductListResponseDto;
 import com.ongi.ongi_back.common.dto.response.group.GetProductReviewResponseDto;
+import com.ongi.ongi_back.common.dto.response.needHelper.GetHelperPostListResponseDto;
 import com.ongi.ongi_back.common.dto.response.user.GetLikeKeywordListResponseDto;
 import com.ongi.ongi_back.common.dto.response.user.GetMyActivityCountResponseDto;
 import com.ongi.ongi_back.common.dto.response.user.GetMyBuyingResponseDto;
@@ -39,6 +40,7 @@ import com.ongi.ongi_back.common.entity.CommunityCommentEntity;
 import com.ongi.ongi_back.common.entity.CommunityPostEntity;
 import com.ongi.ongi_back.common.entity.LikeKeywordEntity;
 import com.ongi.ongi_back.common.entity.LikedEntity;
+import com.ongi.ongi_back.common.entity.NeedHelperEntity;
 import com.ongi.ongi_back.common.entity.OrderItemEntity;
 import com.ongi.ongi_back.common.entity.ProductEntity;
 import com.ongi.ongi_back.common.entity.ProductReviewEntity;
@@ -79,7 +81,6 @@ public class MypageServiceImplement implements MypageService{
   private final WishListRepository wishListRepository;
   private final OrderItemRepository orderItemRepository;
   private final ReviewImagesRepository reviewImagesRepository;
-  private final FileService fileService;
   private final BadgeRespository badgeRespository;
   private final PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
@@ -597,6 +598,35 @@ public class MypageServiceImplement implements MypageService{
 
     return GetProductListResponseDto.success(productEntities,"all");
   }
+
+  // @Override
+  // public ResponseEntity<? super GetHelperPostListResponseDto> getMyHelperRequestPost(String userId) {
+  //     List<NeedHelperEntity> needHelperEntities = new ArrayList<>();
+  //     UserEntity userEntity = null;
+
+  //     try {
+  //       userEntity = userRepository.findByUserId(userId);
+  //       String nickname = userEntity.getNickname();
+  //       needHelperEntities = helperPostRepository.findAllWithNickname(nickname);
+        
+  //     } catch (Exception e) {
+  //       e.printStackTrace();
+  //     }
+
+  //     return GetHelperPostListResponseDto.success(needHelperEntities);
+  // }
+
+  // @Override
+  // public ResponseEntity<? super GetHelperPostListResponseDto> getMyHelperRequestedPost(String userId) {
+  //   // TODO Auto-generated method stub
+  //   throw new UnsupportedOperationException("Unimplemented method 'getMyHelperRequestedPost'");
+  // }
+
+  // @Override
+  // public ResponseEntity<? super GetHelperPostListResponseDto> getMyHelperLikedPost(String userId) {
+  //   // TODO Auto-generated method stub
+  //   throw new UnsupportedOperationException("Unimplemented method 'getMyHelperLikedPost'");
+  // }
 
   // @Override
   // public ResponseEntity<? super GetProductReviewResponseDto> getOtherUserProductReviewed(String userId) {
