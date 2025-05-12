@@ -1,14 +1,10 @@
 package com.ongi.ongi_back.common.dto.response.community;
 
-import java.util.List;
-import java.util.stream.Collectors;
-
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
 import com.ongi.ongi_back.common.dto.response.ResponseDto;
 import com.ongi.ongi_back.common.entity.CommunityPostEntity;
-import com.ongi.ongi_back.common.entity.PostImageEntity;
 
 import lombok.Getter;
 

@@ -5,14 +5,18 @@ import java.util.List;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.ongi.ongi_back.common.dto.request.alert.PostAlertRequestDto;
 import com.ongi.ongi_back.common.dto.response.ResponseDto;
 import com.ongi.ongi_back.common.dto.response.alert.GetAlertResponseDto;
 import com.ongi.ongi_back.common.entity.AlertEntity;
+import com.ongi.ongi_back.common.entity.CommunityPostEntity;
 import com.ongi.ongi_back.common.entity.UserEntity;
 import com.ongi.ongi_back.repository.AlertRespository;
+import com.ongi.ongi_back.repository.CommunityPostRepository;
 import com.ongi.ongi_back.repository.UserRepository;
 import com.ongi.ongi_back.service.AlertService;
 
@@ -24,6 +28,7 @@ public class AlertServiceimplement implements AlertService {
 
     private final AlertRespository alertRespository;
     private final UserRepository userRepository;
+    private final CommunityPostRepository communityPostRepository;
 
     @Override
     public ResponseEntity<ResponseDto> postAlert(PostAlertRequestDto dto) {
@@ -70,28 +75,40 @@ public class AlertServiceimplement implements AlertService {
         return ResponseDto.success(HttpStatus.CREATED);
     }
 
-    // @Override
-    // public ResponseEntity<ResponseDto> postHotSelectedAlert(PostAlertRequestDto dto) {
+    @Override
+    @Scheduled(cron = " 0 0 12 * * ? ")
+    @Transactional
+    public ResponseEntity<ResponseDto> postHotSelectedAlert() {
         
-    //     try {
+        try {
 
-    //         AlertEntity alertEntity = new AlertEntity(dto);
-    //         UserEntity receiverEntity = userRepository.findByUserId(alertEntity.getReceiverId());
-    //         if (receiverEntity.getIsResigned()) return ResponseDto.alreadyResigned(); 
+            List<CommunityPostEntity> hotPosts = new ArrayList<>();
+            hotPosts = communityPostRepository.findTop10RecentPopularPosts();
 
-    //         if (alertEntity.getAlertType().equals("hot_post_selected")) {
-    //             alertEntity.setAlertContent("회원님의 게시글이 인기글로 선정되었습니다.");
-    //         }
+            for (CommunityPostEntity communityPostEntity: hotPosts) {
+                PostAlertRequestDto dto = new PostAlertRequestDto();
+                dto.setAlertType("hot_post_selected");
+                dto.setSenderId("system");
+                dto.setReceiverId(communityPostEntity.getUserId());
+                dto.setAlertEntitySequence(communityPostEntity.getPostSequence());
 
-    //         alertRespository.save(alertEntity);
+                AlertEntity alertEntity = new AlertEntity(dto);
+                UserEntity receiverEntity = userRepository.findByUserId(alertEntity.getReceiverId());
+                if (receiverEntity.getIsResigned()) return ResponseDto.alreadyResigned(); 
+
+                if (alertEntity.getAlertType().equals("hot_post_selected")) {
+                    alertEntity.setAlertContent("회원님의 게시글이 인기글로 선정되었습니다.");
+                }
+                alertRespository.save(alertEntity);
+            }
             
-    //     } catch (Exception exception) {
-    //         exception.printStackTrace();
-    //         return ResponseDto.databaseError();
-    //     }
+        } catch (Exception exception) {
+            exception.printStackTrace();
+            return ResponseDto.databaseError();
+        }
 
-    //     return ResponseDto.success(HttpStatus.CREATED);
-    // }
+        return ResponseDto.success(HttpStatus.CREATED);
+    }
 
     @Override
     public ResponseEntity<? super GetAlertResponseDto> getAlert(String userId) {

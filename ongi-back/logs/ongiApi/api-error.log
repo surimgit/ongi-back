@@ -508,3 +508,33 @@ java.time.format.DateTimeParseException: Text '2025-05-09' could not be parsed a
 2025-05-12 12:35:46,336 ERROR c.o.o.c.AuthenticationFailEntryPoint [http-nio-4000-exec-3] Authentication failed: Full authentication is required to access this resource
 2025-05-12 12:35:46,352 ERROR c.o.o.p.JwtProvider [http-nio-4000-exec-6] JWT validation failed. Error: JWT strings must contain exactly 2 period characters. Found: 0
 2025-05-12 12:35:46,354 ERROR c.o.o.c.AuthenticationFailEntryPoint [http-nio-4000-exec-6] Authentication failed: Full authentication is required to access this resource
+2025-05-12 15:21:26,542 ERROR c.o.o.f.JwtAuthenticationFilter [http-nio-4000-exec-8] Unexpected error: Request processing failed: org.springframework.dao.InvalidDataAccessResourceUsageException: JDBC exception executing SQL [select nhe1_0.sequence,nhe1_0.city,nhe1_0.content,nhe1_0.date,nhe1_0.district,nhe1_0.is_request_solved,nhe1_0.keyword,nhe1_0.liked,nhe1_0.match_score,nhe1_0.meeting_type,nhe1_0.reward,nhe1_0.schedule,nhe1_0.title,nhe1_0.user_id from need_helper nhe1_0] [Unknown column 'nhe1_0.keyword' in 'field list'] [n/a]; SQL [n/a]
+2025-05-12 15:21:26,560 ERROR c.o.o.c.AuthenticationFailEntryPoint [http-nio-4000-exec-8] Authentication failed: Full authentication is required to access this resource
+2025-05-12 15:21:26,592 ERROR c.o.o.f.JwtAuthenticationFilter [http-nio-4000-exec-5] Unexpected error: Request processing failed: org.springframework.dao.InvalidDataAccessResourceUsageException: JDBC exception executing SQL [select nhe1_0.sequence,nhe1_0.city,nhe1_0.content,nhe1_0.date,nhe1_0.district,nhe1_0.is_request_solved,nhe1_0.keyword,nhe1_0.liked,nhe1_0.match_score,nhe1_0.meeting_type,nhe1_0.reward,nhe1_0.schedule,nhe1_0.title,nhe1_0.user_id from need_helper nhe1_0] [Unknown column 'nhe1_0.keyword' in 'field list'] [n/a]; SQL [n/a]
+2025-05-12 15:21:26,595 ERROR c.o.o.c.AuthenticationFailEntryPoint [http-nio-4000-exec-5] Authentication failed: Full authentication is required to access this resource
+2025-05-12 15:36:52,622 ERROR o.s.b.d.LoggingFailureAnalysisReporter [main] 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+Web server failed to start. Port 4000 was already in use.
+
+Action:
+
+Identify and stop the process that's listening on port 4000 or configure this application to listen on another port.
+
+2025-05-12 15:48:24,863 ERROR c.o.o.p.JwtProvider [http-nio-4000-exec-3] JWT validation failed. Error: JWT strings must contain exactly 2 period characters. Found: 0
+2025-05-12 15:48:24,865 ERROR c.o.o.c.AuthenticationFailEntryPoint [http-nio-4000-exec-3] Authentication failed: Full authentication is required to access this resource
+2025-05-12 15:48:24,877 ERROR c.o.o.p.JwtProvider [http-nio-4000-exec-1] JWT validation failed. Error: JWT strings must contain exactly 2 period characters. Found: 0
+2025-05-12 15:48:24,878 ERROR c.o.o.c.AuthenticationFailEntryPoint [http-nio-4000-exec-1] Authentication failed: Full authentication is required to access this resource
+2025-05-12 15:48:24,923 ERROR c.o.o.p.JwtProvider [http-nio-4000-exec-10] JWT validation failed. Error: JWT strings must contain exactly 2 period characters. Found: 0
+2025-05-12 15:48:24,924 ERROR c.o.o.c.AuthenticationFailEntryPoint [http-nio-4000-exec-10] Authentication failed: Full authentication is required to access this resource
+2025-05-12 15:48:26,318 ERROR c.o.o.p.JwtProvider [http-nio-4000-exec-4] JWT validation failed. Error: JWT strings must contain exactly 2 period characters. Found: 0
+2025-05-12 15:48:26,324 ERROR c.o.o.c.AuthenticationFailEntryPoint [http-nio-4000-exec-4] Authentication failed: Full authentication is required to access this resource
+2025-05-12 15:48:26,605 ERROR c.o.o.p.JwtProvider [http-nio-4000-exec-7] JWT validation failed. Error: JWT strings must contain exactly 2 period characters. Found: 0
+2025-05-12 15:48:26,606 ERROR c.o.o.c.AuthenticationFailEntryPoint [http-nio-4000-exec-7] Authentication failed: Full authentication is required to access this resource
+2025-05-12 15:48:28,061 ERROR c.o.o.p.JwtProvider [http-nio-4000-exec-6] JWT validation failed. Error: JWT strings must contain exactly 2 period characters. Found: 0
+2025-05-12 15:48:28,061 ERROR c.o.o.c.AuthenticationFailEntryPoint [http-nio-4000-exec-6] Authentication failed: Full authentication is required to access this resource

@@ -1,1 +1,2 @@
-2025-05-12 11:03:52,252 ERROR [http-nio-4000-exec-2] org.hibernate.engine.jdbc.spi.SqlExceptionHelper: Unknown column 'nhe1_0.match_score' in 'field list'
+2025-05-12 15:38:27,737 ERROR [http-nio-4000-exec-1] org.hibernate.engine.jdbc.spi.SqlExceptionHelper: Unknown column 'nhe1_0.liked' in 'field list'
+2025-05-12 15:38:27,814 ERROR [http-nio-4000-exec-4] org.hibernate.engine.jdbc.spi.SqlExceptionHelper: Unknown column 'nhe1_0.liked' in 'field list'
