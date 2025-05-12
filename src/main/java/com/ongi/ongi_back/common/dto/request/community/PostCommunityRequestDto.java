@@ -1,5 +1,9 @@
 package com.ongi.ongi_back.common.dto.request.community;
 
+import java.util.List;
+
+import com.ongi.ongi_back.common.entity.PostImageEntity;
+
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
 import lombok.AllArgsConstructor;
@@ -22,5 +26,6 @@ public class PostCommunityRequestDto {
     private String title;
     @NotBlank
     private String content;
+    private List<PostImageEntity> images;
     private String county;
 }
