@@ -24,7 +24,6 @@ public class GetCommunityPostResponseDto extends ResponseDto {
     private String content;
     private Integer liked;
     private Integer viewCount;
-    private List<String> imageUrls;
 
     private GetCommunityPostResponseDto(CommunityPostEntity communityPostEntity) {
         this.postSequence = communityPostEntity.getPostSequence();
@@ -37,7 +36,6 @@ public class GetCommunityPostResponseDto extends ResponseDto {
         this.content = communityPostEntity.getContent();
         this.liked = communityPostEntity.getLiked();
         this.viewCount = communityPostEntity.getViewCount();
-        this.imageUrls = communityPostEntity.getPostImages().stream().map(PostImageEntity::getImageUrl).collect(Collectors.toList());
     }
 
     public static ResponseEntity<GetCommunityPostResponseDto> success(CommunityPostEntity communityPostEntity) {

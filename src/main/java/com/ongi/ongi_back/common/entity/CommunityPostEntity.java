@@ -37,9 +37,6 @@ public class CommunityPostEntity {
     private String category;
     private String title;
     private String content;
-    
-    @OneToMany(mappedBy = "post_sequence", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<PostImageEntity> postImages = new ArrayList<>();
     private Integer liked;
     private Integer viewCount;
     private boolean hotPost;
@@ -55,7 +52,6 @@ public class CommunityPostEntity {
         this.category = dto.getCategory();
         this.title = dto.getTitle();
         this.content = dto.getContent();
-        this.postImages = dto.getImages();
         this.liked = 0;
         this.viewCount = 0;
         this.hotPost = false;

@@ -34,7 +34,6 @@ import com.ongi.ongi_back.common.entity.LikedEntity;
 import com.ongi.ongi_back.repository.CommunityCommentRepository;
 import com.ongi.ongi_back.repository.CommunityPostRepository;
 import com.ongi.ongi_back.repository.LikedRepository;
-import com.ongi.ongi_back.repository.PostImageRepository;
 import com.ongi.ongi_back.repository.UserRepository;
 import com.ongi.ongi_back.service.CommunityService;
 
@@ -48,7 +47,6 @@ public class CommunityServiceImplement implements CommunityService {
     private final UserRepository userRepository;
     private final CommunityCommentRepository communityCommentRepository;
     private final LikedRepository likedRepository;
-    private final PostImageRepository postImageRepository;
 
     // 업로드 경로
     @Value("${file.path}")
