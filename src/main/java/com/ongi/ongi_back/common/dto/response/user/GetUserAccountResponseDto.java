@@ -11,16 +11,13 @@ import lombok.Getter;
 @Getter
 public class GetUserAccountResponseDto extends ResponseDto{
   private String userId;
-  private String userPassword;
   private String telNumber;
   private String address;
   private String detailAddress;
 
 
-  private GetUserAccountResponseDto(String userId, String userPassword, String telNumber, String address,
-  String detailAddress){
+  private GetUserAccountResponseDto(String userId, String telNumber, String address, String detailAddress){
     this.userId = userId;
-    this.userPassword = userPassword;
     this.telNumber = telNumber;
     this.address = address;
     this.detailAddress = detailAddress;
@@ -29,7 +26,6 @@ public class GetUserAccountResponseDto extends ResponseDto{
     public static ResponseEntity<GetUserAccountResponseDto> success(UserEntity userEntity){
       GetUserAccountResponseDto body = new GetUserAccountResponseDto(
       userEntity.getUserId(),
-      userEntity.getUserPassword(),
       userEntity.getTelNumber(),
       userEntity.getAddress(),
       userEntity.getDetailAddress());

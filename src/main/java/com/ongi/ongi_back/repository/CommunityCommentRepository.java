@@ -24,4 +24,6 @@ public interface CommunityCommentRepository extends JpaRepository<CommunityComme
     List<CommunityCommentEntity> findByNicknameOrderByCommentSequenceDesc(String nickname);
 
     Integer countByPostSequence(Integer postSequence);
+
+    Integer countByUserId(String userId);
 }

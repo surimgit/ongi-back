@@ -99,6 +99,9 @@ public class WishListServiceImplement implements WishListService {
     return ResponseDto.success(HttpStatus.OK);
   }
 
+  @Override
+  public long getCountWish(String userId) {
+    return wishListRepository.countByUserId(userId);
+  }
 
-  
 }

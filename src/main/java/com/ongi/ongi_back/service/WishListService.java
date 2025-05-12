@@ -12,4 +12,5 @@ public interface WishListService {
   ResponseEntity<? super GetWishListResponseDto> getWishList(String userId);
   ResponseEntity<? super GetWishResponseDto > getWishByUserAndSequence(String userId, Integer productSequence);
   ResponseEntity<ResponseDto> deleteWishList(String userId, Integer productSequence);
+  long getCountWish(String userId);
 } 

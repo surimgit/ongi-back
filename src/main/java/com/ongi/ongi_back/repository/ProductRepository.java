@@ -7,6 +7,8 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import com.ongi.ongi_back.common.entity.ProductEntity;
+import com.ongi.ongi_back.common.vo.MySalesVO;
+import com.ongi.ongi_back.common.vo.ProductVO;
 
 @Repository
 public interface ProductRepository extends JpaRepository<ProductEntity, Integer> {
@@ -22,5 +24,12 @@ public interface ProductRepository extends JpaRepository<ProductEntity, Integer>
   List<ProductEntity> findBySequences(List<Integer> sequences);
 
   List<ProductEntity> findAllByUserIdOrderBySequenceDesc(String userId);
+  List<ProductEntity> findByUserId(String userId);
+
+  @Query("SELECT p FROM product p WHERE p.userId = :userId AND p.deadline > :today ORDER BY p.sequence DESC")
+  List<ProductEntity> findByUserIdAndDeadlineAfterNow(String userId, String today);
+
+  @Query("SELECT p FROM product p WHERE p.userId = :userId AND p.deadline < :today ORDER BY p.sequence DESC")
+  List<ProductEntity> findByUserIdAndDeadlineBeforeNow(String userId, String today);
 
 }

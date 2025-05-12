@@ -8,7 +8,6 @@ import org.springframework.http.ResponseEntity;
 import com.ongi.ongi_back.common.dto.response.ResponseDto;
 import com.ongi.ongi_back.common.vo.MyBuyingVO;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 

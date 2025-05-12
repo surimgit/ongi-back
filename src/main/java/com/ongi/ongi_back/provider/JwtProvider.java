@@ -9,15 +9,20 @@ import java.util.Date;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
+import io.jsonwebtoken.ExpiredJwtException;
+import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
+import jakarta.servlet.http.HttpServletResponse;
+import lombok.extern.slf4j.Slf4j;
 
 // class: Jwt 생성 및 검증 기능 제공자 //
 // description: JWT 암호화 알고리즘 HS256 //
 // description: 암호화에 사용되는 Secret Key는 환경변수에 jwt.secret으로 사용 //
 // description: JWT 만료 기간 9시간 //
 
+@Slf4j
 @Component
 public class JwtProvider {
     
@@ -66,8 +71,19 @@ public class JwtProvider {
               .parseClaimsJws(jwt)
               .getBody()
               .getSubject();
-        } catch(Exception exception){
-            exception.printStackTrace();
+        } catch (ExpiredJwtException e) {
+            log.error("JWT expired at {}. Current time: {}. Error: {}",
+                        e.getClaims().getExpiration(),
+                        System.currentTimeMillis(),
+                        e.getMessage());
+            
+            return null;  
+        } catch (JwtException e) {
+            log.error("JWT validation failed. Error: {}", e.getMessage());
+            return null;
+        } catch (Exception e) {
+            log.error("Unexpected error: {}", e.getMessage());
+            return null;
         }
 
         return userId;
