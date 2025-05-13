@@ -1,2 +1,6 @@
-2025-05-12 15:16:09,966 ERROR [http-nio-4000-exec-6] org.hibernate.engine.jdbc.spi.SqlExceptionHelper: Unknown column 'be1_0.is_selected' in 'field list'
-2025-05-12 15:16:09,993 ERROR [http-nio-4000-exec-5] org.hibernate.engine.jdbc.spi.SqlExceptionHelper: Unknown column 'be1_0.is_selected' in 'field list'
+2025-05-13 09:06:27,800 ERROR [http-nio-4000-exec-7] org.hibernate.engine.jdbc.spi.SqlExceptionHelper: Unknown column 'cpe1_0.county' in 'field list'
+2025-05-13 09:06:27,800 ERROR [http-nio-4000-exec-8] org.hibernate.engine.jdbc.spi.SqlExceptionHelper: Unknown column 'cpe1_0.county' in 'field list'
+2025-05-13 09:06:27,800 ERROR [http-nio-4000-exec-5] org.hibernate.engine.jdbc.spi.SqlExceptionHelper: Unknown column 'cpe1_0.county' in 'field list'
+2025-05-13 09:06:27,873 ERROR [http-nio-4000-exec-3] org.hibernate.engine.jdbc.spi.SqlExceptionHelper: Unknown column 'cpe1_0.county' in 'field list'
+2025-05-13 09:06:27,892 ERROR [http-nio-4000-exec-1] org.hibernate.engine.jdbc.spi.SqlExceptionHelper: Unknown column 'cpe1_0.county' in 'field list'
+2025-05-13 09:06:27,908 ERROR [http-nio-4000-exec-7] org.hibernate.engine.jdbc.spi.SqlExceptionHelper: Unknown column 'cpe1_0.county' in 'field list'

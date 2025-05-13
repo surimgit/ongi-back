@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ongi.ongi_back.common.dto.request.needHelper.PatchHelperPostRequestDto;
@@ -153,6 +154,16 @@ public class NeedHelperController {
         @AuthenticationPrincipal String applicantId
     ) {
         return needHelperService.getIsApplied(postSequence, applicantId);
+    }
+
+    
+    @PatchMapping("/{postSequence}/apply")
+    public void accpetApply(
+        @PathVariable("postSequence") Integer postSequence,
+        @AuthenticationPrincipal String userId,
+        @RequestParam("applicantId") String applicantId
+    ) {
+        needHelperService.accpetApply(postSequence, applicantId, userId);
     }
     
 }

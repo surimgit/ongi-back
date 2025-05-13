@@ -11,6 +11,7 @@ import com.ongi.ongi_back.common.dto.response.needHelper.GetHelperCommentsRespon
 import com.ongi.ongi_back.common.dto.response.needHelper.GetHelperLikedResponseDto;
 import com.ongi.ongi_back.common.dto.response.needHelper.GetHelperPostListResponseDto;
 import com.ongi.ongi_back.common.dto.response.needHelper.GetHelperPostResponseDto;
+import com.ongi.ongi_back.common.entity.HelperApplyEntity;
 
 public interface NeedHelperService {
     ResponseEntity<ResponseDto> postHelper(PostHelperRequestDto dto, String userId);
@@ -33,6 +34,6 @@ public interface NeedHelperService {
     ResponseEntity<ResponseDto> postHelperApply(Integer postSequence, String applicantId);
     ResponseEntity<ResponseDto> deleteHelperApply(Integer postSequence, String applicantId);
     ResponseEntity<ResponseDto> getIsApplied(Integer postSequence, String applicantId);
-
+    ResponseEntity<ResponseDto> accpetApply(Integer postSequence, String applicantId, String userId);
 
 }

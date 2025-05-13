@@ -8,7 +8,6 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import com.ongi.ongi_back.common.dto.request.payment.PostCancelRequestDto;
-import com.ongi.ongi_back.common.dto.response.user.GetMyBuyingResponseDto;
 import com.ongi.ongi_back.common.entity.OrderItemEntity;
 import com.ongi.ongi_back.common.vo.MyBuyingVO;
 import com.ongi.ongi_back.common.vo.OrderItemVO;
