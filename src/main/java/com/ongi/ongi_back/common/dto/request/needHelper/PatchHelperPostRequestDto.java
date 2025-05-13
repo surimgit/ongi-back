@@ -30,4 +30,6 @@ public class PatchHelperPostRequestDto {
     private String reward;    
     @NotNull
     private LocalDateTime date;
+    @NotBlank
+    private String keyword;
 }

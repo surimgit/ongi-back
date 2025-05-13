@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.ongi.ongi_back.common.dto.request.community.PatchCommunityCommentRequestDto;
 import com.ongi.ongi_back.common.dto.request.community.PatchCommunityPostRequestDto;
@@ -83,9 +84,12 @@ public class CommunityController {
     @GetMapping({"", "/"})
     public ResponseEntity<? super GetCommunityResponseDto> getCommunity(
         @RequestParam(value="board", required=false) String board,
-        @RequestParam(value="category", required=false) String category
+        @RequestParam(value="category", required=false) String category,
+        @RequestParam(value="region", required=false) String region,
+        @RequestParam(value="county", required=false) String county
     ) {
         ResponseEntity<? super GetCommunityResponseDto> response = null;
+        String address = null;
         if (board.equals("전체 글")) {
             response = communityService.getCommunity();
         }
@@ -95,6 +99,12 @@ public class CommunityController {
 
         if (category != null) {
             response = communityService.getCategory(category);
+        }
+
+        if (region != null) {
+            if (county != null) address = region + " " + county;
+            else address = region;
+            response = communityService.getCounty(address, category);
         }
 
         return response;

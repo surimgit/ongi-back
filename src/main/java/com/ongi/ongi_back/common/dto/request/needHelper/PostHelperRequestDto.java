@@ -30,4 +30,6 @@ public class PostHelperRequestDto {
     private String reward;
     @NotNull
     private LocalDateTime date;
+    @NotBlank
+    private String keyword;
 }

@@ -552,7 +552,7 @@ public class MypageServiceImplement implements MypageService{
     Integer reviewedCount = 0;
     Integer shoppingCartCount = 0;
     Integer wishListCount = 0;
-
+    
     try {
       reviewCount = 0;
       reviewedCount = 0;

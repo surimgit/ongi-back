@@ -52,6 +52,14 @@ public class AlertController {
         return response;
     }
 
+    @PatchMapping({"/read-all-alert"})
+    public ResponseEntity<ResponseDto> patchAllAlertRead(
+        @AuthenticationPrincipal String userId
+    )   {
+        ResponseEntity<ResponseDto> response = alertService.patchAllAlertRead(userId);
+        return response;
+    }
+
     @DeleteMapping({"/{alertSequence}"})
     public ResponseEntity<ResponseDto> deleteAlert(
         @PathVariable("alertSequence") Integer alertSequence,

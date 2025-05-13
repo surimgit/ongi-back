@@ -12,12 +12,14 @@ import lombok.Getter;
 public class GetSignInUserResponseDto extends ResponseDto {
     private String userId;
     private String nickname;
+    private String address;
     private Boolean isAdmin;
     private String profileImage;
 
     private GetSignInUserResponseDto(UserEntity userEntity) {
         this.userId = userEntity.getUserId();
         this.nickname = userEntity.getNickname();
+        this.address = userEntity.getAddress();
         this.isAdmin = userEntity.getIsAdmin();
         this.profileImage = userEntity.getProfileImage();
     }
