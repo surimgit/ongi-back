@@ -5396,3 +5396,97 @@ Caused by: org.hibernate.query.SemanticException: Missing constructor for type '
 	at org.springframework.beans.factory.support.ConstructorResolver.resolveAutowiredArgument(ConstructorResolver.java:913) ~[spring-beans-6.2.5.jar:6.2.5]
 	at org.springframework.beans.factory.support.ConstructorResolver.createArgumentArray(ConstructorResolver.java:791) ~[spring-beans-6.2.5.jar:6.2.5]
 	... 21 more
+2025-05-13 09:09:10,710 ERROR c.o.o.c.AuthenticationFailEntryPoint [http-nio-4000-exec-2] Authentication failed: Full authentication is required to access this resource
+2025-05-13 09:09:10,709 ERROR c.o.o.c.AuthenticationFailEntryPoint [http-nio-4000-exec-3] Authentication failed: Full authentication is required to access this resource
+2025-05-13 09:09:10,709 ERROR c.o.o.c.AuthenticationFailEntryPoint [http-nio-4000-exec-1] Authentication failed: Full authentication is required to access this resource
+2025-05-13 09:09:10,841 ERROR c.o.o.c.AuthenticationFailEntryPoint [http-nio-4000-exec-3] Authentication failed: Full authentication is required to access this resource
+2025-05-13 09:09:10,904 ERROR c.o.o.c.AuthenticationFailEntryPoint [http-nio-4000-exec-3] Authentication failed: Full authentication is required to access this resource
+2025-05-13 09:09:10,929 ERROR c.o.o.c.AuthenticationFailEntryPoint [http-nio-4000-exec-1] Authentication failed: Full authentication is required to access this resource
+2025-05-13 09:09:10,973 ERROR c.o.o.c.AuthenticationFailEntryPoint [http-nio-4000-exec-2] Authentication failed: Full authentication is required to access this resource
+2025-05-13 09:09:11,026 ERROR c.o.o.p.JwtProvider [http-nio-4000-exec-9] JWT validation failed. Error: JWT strings must contain exactly 2 period characters. Found: 0
+2025-05-13 09:09:11,026 ERROR c.o.o.p.JwtProvider [http-nio-4000-exec-10] JWT validation failed. Error: JWT strings must contain exactly 2 period characters. Found: 0
+2025-05-13 09:09:11,026 ERROR c.o.o.p.JwtProvider [http-nio-4000-exec-8] JWT validation failed. Error: JWT strings must contain exactly 2 period characters. Found: 0
+2025-05-13 09:09:11,028 ERROR c.o.o.c.AuthenticationFailEntryPoint [http-nio-4000-exec-8] Authentication failed: Full authentication is required to access this resource
+2025-05-13 09:09:11,028 ERROR c.o.o.c.AuthenticationFailEntryPoint [http-nio-4000-exec-10] Authentication failed: Full authentication is required to access this resource
+2025-05-13 09:09:11,060 ERROR c.o.o.p.JwtProvider [http-nio-4000-exec-3] JWT validation failed. Error: JWT strings must contain exactly 2 period characters. Found: 0
+2025-05-13 09:09:11,078 ERROR c.o.o.c.AuthenticationFailEntryPoint [http-nio-4000-exec-3] Authentication failed: Full authentication is required to access this resource
+2025-05-13 09:09:11,097 ERROR c.o.o.c.AuthenticationFailEntryPoint [http-nio-4000-exec-7] Authentication failed: Full authentication is required to access this resource
+2025-05-13 09:09:11,102 ERROR c.o.o.p.JwtProvider [http-nio-4000-exec-3] JWT validation failed. Error: JWT strings must contain exactly 2 period characters. Found: 0
+2025-05-13 09:09:11,104 ERROR c.o.o.c.AuthenticationFailEntryPoint [http-nio-4000-exec-3] Authentication failed: Full authentication is required to access this resource
+2025-05-13 09:09:11,339 ERROR c.o.o.p.JwtProvider [http-nio-4000-exec-10] JWT validation failed. Error: JWT strings must contain exactly 2 period characters. Found: 0
+2025-05-13 09:09:11,486 ERROR c.o.o.p.JwtProvider [http-nio-4000-exec-8] JWT validation failed. Error: JWT strings must contain exactly 2 period characters. Found: 0
+2025-05-13 09:09:11,487 ERROR c.o.o.c.AuthenticationFailEntryPoint [http-nio-4000-exec-8] Authentication failed: Full authentication is required to access this resource
+2025-05-13 09:09:13,537 ERROR c.o.o.p.JwtProvider [http-nio-4000-exec-7] JWT validation failed. Error: JWT strings must contain exactly 2 period characters. Found: 0
+2025-05-13 09:09:13,541 ERROR c.o.o.c.AuthenticationFailEntryPoint [http-nio-4000-exec-7] Authentication failed: Full authentication is required to access this resource
+2025-05-13 09:09:16,465 ERROR c.o.o.p.JwtProvider [http-nio-4000-exec-3] JWT validation failed. Error: JWT strings must contain exactly 2 period characters. Found: 0
+2025-05-13 09:09:16,470 ERROR c.o.o.c.AuthenticationFailEntryPoint [http-nio-4000-exec-3] Authentication failed: Full authentication is required to access this resource
+2025-05-13 09:09:16,585 ERROR c.o.o.c.AuthenticationFailEntryPoint [http-nio-4000-exec-2] Authentication failed: Full authentication is required to access this resource
+2025-05-13 09:09:16,587 ERROR c.o.o.c.AuthenticationFailEntryPoint [http-nio-4000-exec-8] Authentication failed: Full authentication is required to access this resource
+2025-05-13 09:09:16,599 ERROR c.o.o.c.AuthenticationFailEntryPoint [http-nio-4000-exec-1] Authentication failed: Full authentication is required to access this resource
+2025-05-13 09:09:16,628 ERROR c.o.o.p.JwtProvider [http-nio-4000-exec-4] JWT validation failed. Error: JWT strings must contain exactly 2 period characters. Found: 0
+2025-05-13 09:09:16,628 ERROR c.o.o.p.JwtProvider [http-nio-4000-exec-3] JWT validation failed. Error: JWT strings must contain exactly 2 period characters. Found: 0
+2025-05-13 09:09:16,636 ERROR c.o.o.c.AuthenticationFailEntryPoint [http-nio-4000-exec-4] Authentication failed: Full authentication is required to access this resource
+2025-05-13 09:09:16,656 ERROR c.o.o.c.AuthenticationFailEntryPoint [http-nio-4000-exec-10] Authentication failed: Full authentication is required to access this resource
+2025-05-13 09:09:16,677 ERROR c.o.o.c.AuthenticationFailEntryPoint [http-nio-4000-exec-9] Authentication failed: Full authentication is required to access this resource
+2025-05-13 09:09:16,677 ERROR c.o.o.c.AuthenticationFailEntryPoint [http-nio-4000-exec-6] Authentication failed: Full authentication is required to access this resource
+2025-05-13 09:09:16,683 ERROR c.o.o.p.JwtProvider [http-nio-4000-exec-8] JWT validation failed. Error: JWT strings must contain exactly 2 period characters. Found: 0
+2025-05-13 09:09:16,685 ERROR c.o.o.c.AuthenticationFailEntryPoint [http-nio-4000-exec-8] Authentication failed: Full authentication is required to access this resource
+2025-05-13 09:09:16,696 ERROR c.o.o.c.AuthenticationFailEntryPoint [http-nio-4000-exec-2] Authentication failed: Full authentication is required to access this resource
+2025-05-13 09:09:16,719 ERROR c.o.o.c.AuthenticationFailEntryPoint [http-nio-4000-exec-8] Authentication failed: Full authentication is required to access this resource
+2025-05-13 09:09:16,723 ERROR c.o.o.p.JwtProvider [http-nio-4000-exec-3] JWT validation failed. Error: JWT strings must contain exactly 2 period characters. Found: 0
+2025-05-13 09:09:16,726 ERROR c.o.o.p.JwtProvider [http-nio-4000-exec-2] JWT validation failed. Error: JWT strings must contain exactly 2 period characters. Found: 0
+2025-05-13 09:09:16,726 ERROR c.o.o.c.AuthenticationFailEntryPoint [http-nio-4000-exec-2] Authentication failed: Full authentication is required to access this resource
+2025-05-13 09:09:17,742 ERROR c.o.o.p.JwtProvider [http-nio-4000-exec-7] JWT validation failed. Error: JWT strings must contain exactly 2 period characters. Found: 0
+2025-05-13 09:09:17,745 ERROR c.o.o.c.AuthenticationFailEntryPoint [http-nio-4000-exec-7] Authentication failed: Full authentication is required to access this resource
+2025-05-13 09:09:18,090 ERROR c.o.o.p.JwtProvider [http-nio-4000-exec-6] JWT validation failed. Error: JWT strings must contain exactly 2 period characters. Found: 0
+2025-05-13 09:09:18,092 ERROR c.o.o.c.AuthenticationFailEntryPoint [http-nio-4000-exec-6] Authentication failed: Full authentication is required to access this resource
+2025-05-13 09:10:34,652 ERROR c.o.o.p.JwtProvider [http-nio-4000-exec-4] JWT validation failed. Error: JWT strings must contain exactly 2 period characters. Found: 0
+2025-05-13 09:10:34,659 ERROR c.o.o.c.AuthenticationFailEntryPoint [http-nio-4000-exec-4] Authentication failed: Full authentication is required to access this resource
+2025-05-13 09:10:34,735 ERROR c.o.o.c.AuthenticationFailEntryPoint [http-nio-4000-exec-6] Authentication failed: Full authentication is required to access this resource
+2025-05-13 09:10:34,736 ERROR c.o.o.c.AuthenticationFailEntryPoint [http-nio-4000-exec-3] Authentication failed: Full authentication is required to access this resource
+2025-05-13 09:10:34,821 ERROR c.o.o.c.AuthenticationFailEntryPoint [http-nio-4000-exec-4] Authentication failed: Full authentication is required to access this resource
+2025-05-13 09:10:34,824 ERROR c.o.o.c.AuthenticationFailEntryPoint [http-nio-4000-exec-6] Authentication failed: Full authentication is required to access this resource
+2025-05-13 09:10:34,874 ERROR c.o.o.c.AuthenticationFailEntryPoint [http-nio-4000-exec-1] Authentication failed: Full authentication is required to access this resource
+2025-05-13 09:10:34,874 ERROR c.o.o.c.AuthenticationFailEntryPoint [http-nio-4000-exec-10] Authentication failed: Full authentication is required to access this resource
+2025-05-13 09:10:34,873 ERROR c.o.o.c.AuthenticationFailEntryPoint [http-nio-4000-exec-6] Authentication failed: Full authentication is required to access this resource
+2025-05-13 09:10:34,878 ERROR c.o.o.p.JwtProvider [http-nio-4000-exec-9] JWT validation failed. Error: JWT strings must contain exactly 2 period characters. Found: 0
+2025-05-13 09:10:34,879 ERROR c.o.o.p.JwtProvider [http-nio-4000-exec-2] JWT validation failed. Error: JWT strings must contain exactly 2 period characters. Found: 0
+2025-05-13 09:10:34,880 ERROR c.o.o.c.AuthenticationFailEntryPoint [http-nio-4000-exec-9] Authentication failed: Full authentication is required to access this resource
+2025-05-13 09:10:34,892 ERROR c.o.o.c.AuthenticationFailEntryPoint [http-nio-4000-exec-7] Authentication failed: Full authentication is required to access this resource
+2025-05-13 09:10:34,898 ERROR c.o.o.p.JwtProvider [http-nio-4000-exec-10] JWT validation failed. Error: JWT strings must contain exactly 2 period characters. Found: 0
+2025-05-13 09:10:34,899 ERROR c.o.o.c.AuthenticationFailEntryPoint [http-nio-4000-exec-10] Authentication failed: Full authentication is required to access this resource
+2025-05-13 09:10:34,925 ERROR c.o.o.p.JwtProvider [http-nio-4000-exec-3] JWT validation failed. Error: JWT strings must contain exactly 2 period characters. Found: 0
+2025-05-13 09:10:34,926 ERROR c.o.o.c.AuthenticationFailEntryPoint [http-nio-4000-exec-3] Authentication failed: Full authentication is required to access this resource
+2025-05-13 09:10:34,937 ERROR c.o.o.p.JwtProvider [http-nio-4000-exec-4] JWT validation failed. Error: JWT strings must contain exactly 2 period characters. Found: 0
+2025-05-13 09:10:35,243 ERROR c.o.o.p.JwtProvider [http-nio-4000-exec-1] JWT validation failed. Error: JWT strings must contain exactly 2 period characters. Found: 0
+2025-05-13 09:10:35,245 ERROR c.o.o.c.AuthenticationFailEntryPoint [http-nio-4000-exec-1] Authentication failed: Full authentication is required to access this resource
+2025-05-13 09:10:36,573 ERROR c.o.o.p.JwtProvider [http-nio-4000-exec-9] JWT validation failed. Error: JWT strings must contain exactly 2 period characters. Found: 0
+2025-05-13 09:10:36,577 ERROR c.o.o.c.AuthenticationFailEntryPoint [http-nio-4000-exec-9] Authentication failed: Full authentication is required to access this resource
+2025-05-13 09:11:14,824 ERROR c.o.o.c.AuthenticationFailEntryPoint [http-nio-4000-exec-4] Authentication failed: Full authentication is required to access this resource
+2025-05-13 09:11:14,824 ERROR c.o.o.c.AuthenticationFailEntryPoint [http-nio-4000-exec-8] Authentication failed: Full authentication is required to access this resource
+2025-05-13 09:11:14,854 ERROR c.o.o.c.AuthenticationFailEntryPoint [http-nio-4000-exec-4] Authentication failed: Full authentication is required to access this resource
+2025-05-13 09:11:14,881 ERROR c.o.o.c.AuthenticationFailEntryPoint [http-nio-4000-exec-8] Authentication failed: Full authentication is required to access this resource
+2025-05-13 09:11:14,915 ERROR c.o.o.c.AuthenticationFailEntryPoint [http-nio-4000-exec-9] Authentication failed: Full authentication is required to access this resource
+2025-05-13 09:11:14,916 ERROR c.o.o.c.AuthenticationFailEntryPoint [http-nio-4000-exec-2] Authentication failed: Full authentication is required to access this resource
+2025-05-13 09:11:14,937 ERROR c.o.o.c.AuthenticationFailEntryPoint [http-nio-4000-exec-8] Authentication failed: Full authentication is required to access this resource
+2025-05-13 09:11:14,955 ERROR c.o.o.c.AuthenticationFailEntryPoint [http-nio-4000-exec-6] Authentication failed: Full authentication is required to access this resource
+2025-05-13 09:11:21,607 ERROR c.o.o.c.AuthenticationFailEntryPoint [http-nio-4000-exec-6] Authentication failed: Full authentication is required to access this resource
+2025-05-13 09:11:21,607 ERROR c.o.o.c.AuthenticationFailEntryPoint [http-nio-4000-exec-2] Authentication failed: Full authentication is required to access this resource
+2025-05-13 09:11:21,607 ERROR c.o.o.c.AuthenticationFailEntryPoint [http-nio-4000-exec-8] Authentication failed: Full authentication is required to access this resource
+2025-05-13 09:11:21,732 ERROR c.o.o.c.AuthenticationFailEntryPoint [http-nio-4000-exec-7] Authentication failed: Full authentication is required to access this resource
+2025-05-13 09:11:21,754 ERROR c.o.o.c.AuthenticationFailEntryPoint [http-nio-4000-exec-9] Authentication failed: Full authentication is required to access this resource
+2025-05-13 09:11:21,765 ERROR c.o.o.c.AuthenticationFailEntryPoint [http-nio-4000-exec-7] Authentication failed: Full authentication is required to access this resource
+2025-05-13 09:11:21,772 ERROR c.o.o.c.AuthenticationFailEntryPoint [http-nio-4000-exec-5] Authentication failed: Full authentication is required to access this resource
+2025-05-13 09:11:21,796 ERROR c.o.o.c.AuthenticationFailEntryPoint [http-nio-4000-exec-8] Authentication failed: Full authentication is required to access this resource
+2025-05-13 09:22:21,401 ERROR c.o.o.f.JwtAuthenticationFilter [http-nio-4000-exec-2] Unexpected error: Request processing failed: org.springframework.dao.InvalidDataAccessResourceUsageException: JDBC exception executing SQL [select nhe1_0.sequence,nhe1_0.city,nhe1_0.content,nhe1_0.date,nhe1_0.district,nhe1_0.is_request_solved,nhe1_0.keyword,nhe1_0.liked,nhe1_0.match_score,nhe1_0.meeting_type,nhe1_0.reward,nhe1_0.schedule,nhe1_0.title,nhe1_0.user_id from need_helper nhe1_0] [Unknown column 'nhe1_0.keyword' in 'field list'] [n/a]; SQL [n/a]
+2025-05-13 09:22:21,424 ERROR c.o.o.c.AuthenticationFailEntryPoint [http-nio-4000-exec-2] Authentication failed: Full authentication is required to access this resource
+2025-05-13 09:22:21,517 ERROR c.o.o.f.JwtAuthenticationFilter [http-nio-4000-exec-2] Unexpected error: Request processing failed: org.springframework.dao.InvalidDataAccessResourceUsageException: JDBC exception executing SQL [select nhe1_0.sequence,nhe1_0.city,nhe1_0.content,nhe1_0.date,nhe1_0.district,nhe1_0.is_request_solved,nhe1_0.keyword,nhe1_0.liked,nhe1_0.match_score,nhe1_0.meeting_type,nhe1_0.reward,nhe1_0.schedule,nhe1_0.title,nhe1_0.user_id from need_helper nhe1_0] [Unknown column 'nhe1_0.keyword' in 'field list'] [n/a]; SQL [n/a]
+2025-05-13 09:22:21,535 ERROR c.o.o.c.AuthenticationFailEntryPoint [http-nio-4000-exec-2] Authentication failed: Full authentication is required to access this resource
+2025-05-13 09:22:27,515 ERROR c.o.o.f.JwtAuthenticationFilter [http-nio-4000-exec-7] Unexpected error: Request processing failed: org.springframework.dao.InvalidDataAccessResourceUsageException: JDBC exception executing SQL [select nhe1_0.sequence,nhe1_0.city,nhe1_0.content,nhe1_0.date,nhe1_0.district,nhe1_0.is_request_solved,nhe1_0.keyword,nhe1_0.liked,nhe1_0.match_score,nhe1_0.meeting_type,nhe1_0.reward,nhe1_0.schedule,nhe1_0.title,nhe1_0.user_id from need_helper nhe1_0] [Unknown column 'nhe1_0.keyword' in 'field list'] [n/a]; SQL [n/a]
+2025-05-13 09:22:27,534 ERROR c.o.o.c.AuthenticationFailEntryPoint [http-nio-4000-exec-7] Authentication failed: Full authentication is required to access this resource
+2025-05-13 09:22:27,608 ERROR c.o.o.f.JwtAuthenticationFilter [http-nio-4000-exec-9] Unexpected error: Request processing failed: org.springframework.dao.InvalidDataAccessResourceUsageException: JDBC exception executing SQL [select nhe1_0.sequence,nhe1_0.city,nhe1_0.content,nhe1_0.date,nhe1_0.district,nhe1_0.is_request_solved,nhe1_0.keyword,nhe1_0.liked,nhe1_0.match_score,nhe1_0.meeting_type,nhe1_0.reward,nhe1_0.schedule,nhe1_0.title,nhe1_0.user_id from need_helper nhe1_0] [Unknown column 'nhe1_0.keyword' in 'field list'] [n/a]; SQL [n/a]
+2025-05-13 09:22:27,618 ERROR c.o.o.c.AuthenticationFailEntryPoint [http-nio-4000-exec-9] Authentication failed: Full authentication is required to access this resource
+2025-05-13 09:24:23,058 ERROR c.o.o.f.JwtAuthenticationFilter [http-nio-4000-exec-9] Unexpected error: Request processing failed: org.springframework.dao.InvalidDataAccessResourceUsageException: JDBC exception executing SQL [select nhe1_0.sequence,nhe1_0.city,nhe1_0.content,nhe1_0.date,nhe1_0.district,nhe1_0.is_request_solved,nhe1_0.keyword,nhe1_0.liked,nhe1_0.match_score,nhe1_0.meeting_type,nhe1_0.reward,nhe1_0.schedule,nhe1_0.title,nhe1_0.user_id from need_helper nhe1_0] [Unknown column 'nhe1_0.liked' in 'field list'] [n/a]; SQL [n/a]
+2025-05-13 09:24:23,114 ERROR c.o.o.c.AuthenticationFailEntryPoint [http-nio-4000-exec-9] Authentication failed: Full authentication is required to access this resource
+2025-05-13 09:24:23,269 ERROR c.o.o.f.JwtAuthenticationFilter [http-nio-4000-exec-8] Unexpected error: Request processing failed: org.springframework.dao.InvalidDataAccessResourceUsageException: JDBC exception executing SQL [select nhe1_0.sequence,nhe1_0.city,nhe1_0.content,nhe1_0.date,nhe1_0.district,nhe1_0.is_request_solved,nhe1_0.keyword,nhe1_0.liked,nhe1_0.match_score,nhe1_0.meeting_type,nhe1_0.reward,nhe1_0.schedule,nhe1_0.title,nhe1_0.user_id from need_helper nhe1_0] [Unknown column 'nhe1_0.liked' in 'field list'] [n/a]; SQL [n/a]
+2025-05-13 09:24:23,274 ERROR c.o.o.c.AuthenticationFailEntryPoint [http-nio-4000-exec-8] Authentication failed: Full authentication is required to access this resource
