@@ -14,16 +14,16 @@ public class OrderItemVO {
   private Integer productSequence;
   private Integer quantity;
   private String waybillNumber;
-  private String deliveryAddressSnapshot;
   private String approvedTime;
   private String buyerId;
+  private Integer addressId;
 
   public OrderItemVO(OrderItemEntity orderItemEntity){
     this.orderItemSequence = orderItemEntity.getOrderItemSequence();
     this.productSequence = orderItemEntity.getProductSequence();
     this.quantity = orderItemEntity.getQuantity();
     this.waybillNumber = orderItemEntity.getWaybillNumber();
-    this.deliveryAddressSnapshot = orderItemEntity.getDeliveryAddressSnapshot();
     this.buyerId = orderItemEntity.getBuyerId();
+    this.addressId = orderItemEntity.getAddressId();
   }
 }

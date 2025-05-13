@@ -43,7 +43,6 @@ public class NoticeServiceImplement implements NoticeService{
 
     try {
       noticeEntities = noticeRepository.findAllByOrderBySequenceDesc();
-      
 
     } catch (Exception e) {
       e.printStackTrace();

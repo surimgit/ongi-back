@@ -24,4 +24,7 @@ public class PostOrderRequestDto {
 
   @NotBlank
   private String userName;
+
+  @NotNull
+  private Integer addressId;
 }

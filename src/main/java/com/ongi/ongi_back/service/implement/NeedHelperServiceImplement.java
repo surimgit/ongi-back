@@ -267,16 +267,16 @@ public class NeedHelperServiceImplement implements NeedHelperService{
         try {      
             NeedHelperEntity post = helperPostRepository.findById(postSequence).orElseThrow();
             String requesterId = post.getUserId();      
-
+            if(helperApplyRepository.existsByPostSequenceAndApplicantId(postSequence, applicantId)) return ResponseDto.existUser();
             ChatEntity chat = new ChatEntity();
             chat.setApplicantId(applicantId);       
             chat.setRequesterId(requesterId);      
             chat.setNeedHelperSequence(postSequence);
-            chat.setChatAvailable(true);
+            chat.setChatAvailable(false);
             chatRepository.save(chat);
 
             HelperApplyEntity apply = new HelperApplyEntity(postSequence, post, requesterId, applicantId, chat.getChatSequence());
-            apply.setIsApplied(true);
+            apply.setIsApplied(false);
             helperApplyRepository.save(apply);
 
         } catch (Exception exception) {
@@ -315,6 +315,23 @@ public class NeedHelperServiceImplement implements NeedHelperService{
             return ResponseDto.databaseError();
         }
 
+        return ResponseDto.success(HttpStatus.OK);
+    }
+
+    @Override
+    public ResponseEntity<ResponseDto> accpetApply(Integer postSequence, String applicantId, String userId) {
+        HelperApplyEntity apply = null;
+        try {
+            apply = helperApplyRepository.findByPostSequenceAndApplicantId(postSequence, applicantId);
+            if(apply == null){
+                return ResponseDto.noExistChatRoom();
+            }
+            apply.accpetApply(apply);
+            helperApplyRepository.save(apply);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseDto.databaseError();
+        }
         return ResponseDto.success(HttpStatus.OK);
     }
     

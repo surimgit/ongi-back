@@ -30,6 +30,7 @@ public class PaymentOrderEntity {
   private String phoneNumber;
   private String userName;
   private String createdAt;
+  private Integer addressId;
 
   public PaymentOrderEntity(PostOrderRequestDto dto, String userId){
     LocalDateTime now = LocalDateTime.now();
@@ -42,5 +43,6 @@ public class PaymentOrderEntity {
     this.phoneNumber = dto.getPhoneNumber();
     this.userName = dto.getUserName();
     this.createdAt = now.format(dateTimeFormatter);
+    this.addressId = dto.getAddressId();
   }
 }

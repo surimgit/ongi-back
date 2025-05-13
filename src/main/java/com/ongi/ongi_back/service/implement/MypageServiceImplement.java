@@ -26,7 +26,8 @@ import com.ongi.ongi_back.common.dto.response.badge.GetBadgeResponseDto;
 import com.ongi.ongi_back.common.dto.response.community.GetCommunityCommentsResponseDto;
 import com.ongi.ongi_back.common.dto.response.community.GetCommunityResponseDto;
 import com.ongi.ongi_back.common.dto.response.group.GetProductListResponseDto;
-import com.ongi.ongi_back.common.dto.response.group.GetProductReviewResponseDto;
+import com.ongi.ongi_back.common.dto.response.needHelper.GetHelperApplyListRespeonseDto;
+import com.ongi.ongi_back.common.dto.response.needHelper.GetMyHelperPostListResponseDto;
 import com.ongi.ongi_back.common.dto.response.user.GetLikeKeywordListResponseDto;
 import com.ongi.ongi_back.common.dto.response.user.GetMyActivityCountResponseDto;
 import com.ongi.ongi_back.common.dto.response.user.GetMyBuyingResponseDto;
@@ -37,19 +38,27 @@ import com.ongi.ongi_back.common.dto.response.user.GetUserIntroductionResponseDt
 import com.ongi.ongi_back.common.entity.BadgeEntity;
 import com.ongi.ongi_back.common.entity.CommunityCommentEntity;
 import com.ongi.ongi_back.common.entity.CommunityPostEntity;
+import com.ongi.ongi_back.common.entity.HelperApplyEntity;
+import com.ongi.ongi_back.common.entity.HelperLikedEntity;
 import com.ongi.ongi_back.common.entity.LikeKeywordEntity;
 import com.ongi.ongi_back.common.entity.LikedEntity;
+import com.ongi.ongi_back.common.entity.NeedHelperEntity;
 import com.ongi.ongi_back.common.entity.OrderItemEntity;
 import com.ongi.ongi_back.common.entity.ProductEntity;
 import com.ongi.ongi_back.common.entity.ProductReviewEntity;
 import com.ongi.ongi_back.common.entity.ReviewImagesEntity;
 import com.ongi.ongi_back.common.entity.UserEntity;
+import com.ongi.ongi_back.common.vo.HelperApplyVO;
 import com.ongi.ongi_back.common.vo.MyBuyingVO;
 import com.ongi.ongi_back.common.vo.MySalesVO;
 import com.ongi.ongi_back.common.vo.OrderItemVO;
+import com.ongi.ongi_back.common.vo.ProductVO;
 import com.ongi.ongi_back.repository.BadgeRepository;
 import com.ongi.ongi_back.repository.CommunityCommentRepository;
 import com.ongi.ongi_back.repository.CommunityPostRepository;
+import com.ongi.ongi_back.repository.HelperApplyRepository;
+import com.ongi.ongi_back.repository.HelperLikedRepository;
+import com.ongi.ongi_back.repository.HelperPostRepository;
 import com.ongi.ongi_back.repository.LikeKeywordRepository;
 import com.ongi.ongi_back.repository.LikedRepository;
 import com.ongi.ongi_back.repository.OrderItemRepository;
@@ -79,8 +88,11 @@ public class MypageServiceImplement implements MypageService{
   private final WishListRepository wishListRepository;
   private final OrderItemRepository orderItemRepository;
   private final ReviewImagesRepository reviewImagesRepository;
+  private final BadgeRepository badgeRepository;
+  private final HelperPostRepository helperPostRepository;
+  private final HelperApplyRepository helperApplyRepository;
+  private final HelperLikedRepository helperLikedRepository;
   private final FileService fileService;
-  private final BadgeRepository badgeRespository;
   private final PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
   @Override
@@ -421,23 +433,23 @@ public class MypageServiceImplement implements MypageService{
       Boolean keyword = likeKeywordEntities != null;
 
       if(userEntity.getBirth() != null && userEntity.getGender() != null && userEntity.getMbti() != null && userEntity.getJob() != null && userEntity.getSelfIntro() != null && keyword){
-        if(badgeRespository.findByUserIdAndBadge(userId, "자기소개 작성 완료!") == null){
+        if(badgeRepository.findByUserIdAndBadge(userId, "자기소개 작성 완료!") == null){
           BadgeEntity badgeEntity = new BadgeEntity(userId, "자기소개 작성 완료!", false);
-          badgeRespository.save(badgeEntity);
+          badgeRepository.save(badgeEntity);
         }
       }
 
       if(communityPostRepository.findByNicknameOrderByPostSequenceDesc(nickname).size() >= 10){
-        if(badgeRespository.findByUserIdAndBadge(userId, "게시글 10개 작성!") == null){
+        if(badgeRepository.findByUserIdAndBadge(userId, "게시글 10개 작성!") == null){
           BadgeEntity badgeEntity = new BadgeEntity(userId, "게시글 10개 작성!", false);
-          badgeRespository.save(badgeEntity);
+          badgeRepository.save(badgeEntity);
         }
       }
 
       if(communityCommentRepository.findByNicknameOrderByCommentSequenceDesc(nickname).size() >= 10){
-        if(badgeRespository.findByUserIdAndBadge(userId, "댓글 10개 작성!") == null)  {
+        if(badgeRepository.findByUserIdAndBadge(userId, "댓글 10개 작성!") == null)  {
           BadgeEntity badgeEntity = new BadgeEntity(userId,"댓글 10개 작성!", false);
-          badgeRespository.save(badgeEntity);
+          badgeRepository.save(badgeEntity);
         }
       }
 
@@ -454,7 +466,7 @@ public class MypageServiceImplement implements MypageService{
     List<BadgeEntity> badgeEntities = new ArrayList<>();
 
     try {
-      badgeEntities = badgeRespository.findAllByUserId(userId);
+      badgeEntities = badgeRepository.findAllByUserId(userId);
 
     } catch (Exception e) {
       e.printStackTrace();
@@ -469,12 +481,12 @@ public class MypageServiceImplement implements MypageService{
   public ResponseEntity<ResponseDto> chooseBadge(String userId, PatchBadgeRequestDto dto) {
     BadgeEntity selectBadgeEntity = null;
     try {
-      selectBadgeEntity = badgeRespository.findByUserIdAndBadge(userId, dto.getBadge());
+      selectBadgeEntity = badgeRepository.findByUserIdAndBadge(userId, dto.getBadge());
       if(selectBadgeEntity == null) return ResponseDto.invalidRequest();
 
       BadgeEntity beforeBadge = null;
       List<BadgeEntity> badgeEntities = new ArrayList<>();
-      badgeEntities = badgeRespository.findAllByUserId(userId);
+      badgeEntities = badgeRepository.findAllByUserId(userId);
       for (BadgeEntity badge : badgeEntities) {
           if (badge.getIsSelected()) {
             beforeBadge = badge;
@@ -484,10 +496,10 @@ public class MypageServiceImplement implements MypageService{
       if(beforeBadge != null && !selectBadgeEntity.getBadge().equals(beforeBadge.getBadge())){
         beforeBadge.setIsSelected(false);
         selectBadgeEntity.patchBadge(dto, userId);
-        badgeRespository.save(selectBadgeEntity);
+        badgeRepository.save(selectBadgeEntity);
       }
       selectBadgeEntity.patchBadge(dto, userId);
-      badgeRespository.save(selectBadgeEntity);
+      badgeRepository.save(selectBadgeEntity);
       
     } catch (Exception e) {
       e.printStackTrace();
@@ -499,7 +511,7 @@ public class MypageServiceImplement implements MypageService{
   @Override
   public ResponseEntity<? super GetBadgeResponseDto> getOtherUserBadge(String userId) {
     List<BadgeEntity> badgeEntities = new ArrayList<>();
-    badgeEntities = badgeRespository.findAllByUserId(userId);
+    badgeEntities = badgeRepository.findAllByUserId(userId);
     BadgeEntity badgeEntity = null;
 
     try {
@@ -550,7 +562,8 @@ public class MypageServiceImplement implements MypageService{
     Integer reviewCount = 0;
     Integer reviewedCount = 0;
     Integer shoppingCartCount = 0;
-    long wishListCount = 0;
+    Integer wishListCount = 0;
+    
     try {
       reviewCount = 0;
       reviewedCount = 0;
@@ -568,7 +581,7 @@ public class MypageServiceImplement implements MypageService{
 
   @Override
   public ResponseEntity<? super GetProductListResponseDto> getOtherUserSellingProduct(String userId, String today) {
-    List<ProductEntity> productEntities = new ArrayList<>();
+    List<ProductVO> productEntities = new ArrayList<>();
     UserEntity userEntity = userRepository.findByUserId(userId);
     today = LocalDate.now().toString();
     try {
@@ -584,7 +597,7 @@ public class MypageServiceImplement implements MypageService{
 
   @Override
   public ResponseEntity<? super GetProductListResponseDto> getOtherUserSelledProduct(String userId, String today) {
-    List<ProductEntity> productEntities = new ArrayList<>();
+    List<ProductVO> productEntities = new ArrayList<>();
     UserEntity userEntity = userRepository.findByUserId(userId);
     today = LocalDate.now().toString();
     try {
@@ -598,19 +611,88 @@ public class MypageServiceImplement implements MypageService{
     return GetProductListResponseDto.success(productEntities,"all");
   }
 
-  // @Override
-  // public ResponseEntity<? super GetProductReviewResponseDto> getOtherUserProductReviewed(String userId) {
-  //   List<ProductReviewEntity> productReviewEntities = new ArrayList<>();
-  //   UserEntity userEntity = userRepository.findByUserId(userId);
-  //   try {
-  //     if(userEntity == null) return ResponseDto.noExistUser();
-  //     productReviewEntities = productReviewRepository.findAllByProductOwner(userId);
-  //   } catch (Exception e) {
-  //     e.printStackTrace();
-  //     return ResponseDto.databaseError();
-  //   }
+  @Override
+  public ResponseEntity<? super GetMyHelperPostListResponseDto> getMyHelperRequestPost(String userId) {
+      List<NeedHelperEntity> needHelperEntities = new ArrayList<>();
 
-  //   return GetProductReviewResponseDto.success(productReviewEntities);
-  // }
- 
+      try {
+        needHelperEntities = helperPostRepository.findAllByUserIdOrderBySequenceDesc(userId);
+        
+      } catch (Exception e) {
+        e.printStackTrace();
+        return ResponseDto.databaseError();
+      }
+
+      return GetMyHelperPostListResponseDto.success(needHelperEntities);
+  }
+
+  @Override
+  public ResponseEntity<? super GetMyHelperPostListResponseDto> getMyHelperApplyPost(String userId) {
+    List<Integer> myApplyList = new ArrayList<>();
+    List<NeedHelperEntity> needHelperEntities = new ArrayList<>();
+    try {
+      myApplyList = helperApplyRepository.findPostSequenceByApplicantId(userId);
+      for (Integer postSequence : myApplyList) {
+        NeedHelperEntity needHelperEntity = helperPostRepository.findBySequence(postSequence);
+        if (needHelperEntity != null) {
+            needHelperEntities.add(needHelperEntity);
+        }
+      }
+    } catch (Exception e) {
+      e.printStackTrace();
+      return ResponseDto.databaseError();
+    }
+
+    return GetMyHelperPostListResponseDto.success(needHelperEntities);
+  }
+
+  
+  @Override
+  public ResponseEntity<? super GetMyHelperPostListResponseDto> getMyHelperLikedPost(String userId) {
+    List<HelperLikedEntity> myLikeList = new ArrayList<>();
+    List<NeedHelperEntity> needHelperEntities = new ArrayList<>();
+
+      try {
+        myLikeList = helperLikedRepository.findByUserId(userId);
+        for (HelperLikedEntity likedEntity : myLikeList) {
+          Integer postSequence = likedEntity.getLikedPostSequence();
+          NeedHelperEntity needHelperEntity = helperPostRepository.findBySequence(postSequence);
+          if (needHelperEntity != null) {
+              needHelperEntities.add(needHelperEntity);
+          }
+      }
+        
+      } catch (Exception e) {
+        e.printStackTrace();
+        return ResponseDto.databaseError();
+      }
+
+      return GetMyHelperPostListResponseDto.success(needHelperEntities);
+  }
+  
+  @Override
+  public Integer getApplicantCount(Integer postSequence, String userId) {
+    return helperApplyRepository.countByPostSequence(postSequence);
+  }
+
+  @Override
+  public ResponseEntity<? super GetHelperApplyListRespeonseDto> getHelperApplyList(String userId,
+    Integer postSequence) {
+    List<HelperApplyEntity> helperApplyEntities = new ArrayList<>();
+
+    try {
+      helperApplyEntities = helperApplyRepository.findByPostSequenceAndRequesterId(postSequence, userId);
+    } catch (Exception e) {
+      e.printStackTrace();
+      return ResponseDto.databaseError();
+    }
+
+    return GetHelperApplyListRespeonseDto.success(helperApplyEntities);
+
+      
+  }
+
+
+
+
 }

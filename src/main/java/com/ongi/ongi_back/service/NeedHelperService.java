@@ -33,6 +33,6 @@ public interface NeedHelperService {
     ResponseEntity<ResponseDto> postHelperApply(Integer postSequence, String applicantId);
     ResponseEntity<ResponseDto> deleteHelperApply(Integer postSequence, String applicantId);
     ResponseEntity<ResponseDto> getIsApplied(Integer postSequence, String applicantId);
-
+    ResponseEntity<ResponseDto> accpetApply(Integer postSequence, String applicantId, String userId);
 
 }
