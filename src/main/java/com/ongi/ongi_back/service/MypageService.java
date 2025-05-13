@@ -16,6 +16,7 @@ import com.ongi.ongi_back.common.dto.response.badge.GetBadgeResponseDto;
 import com.ongi.ongi_back.common.dto.response.community.GetCommunityCommentsResponseDto;
 import com.ongi.ongi_back.common.dto.response.community.GetCommunityResponseDto;
 import com.ongi.ongi_back.common.dto.response.group.GetProductListResponseDto;
+import com.ongi.ongi_back.common.dto.response.needHelper.GetHelperApplyListRespeonseDto;
 import com.ongi.ongi_back.common.dto.response.needHelper.GetMyHelperPostListResponseDto;
 import com.ongi.ongi_back.common.dto.response.user.GetLikeKeywordListResponseDto;
 import com.ongi.ongi_back.common.dto.response.user.GetMyActivityCountResponseDto;
@@ -48,8 +49,9 @@ public interface MypageService {
   
   ResponseEntity<? super GetMyHelperPostListResponseDto> getMyHelperRequestPost(String userId);
   ResponseEntity<? super GetMyHelperPostListResponseDto> getMyHelperApplyPost(String userId);
+  ResponseEntity<? super GetMyHelperPostListResponseDto> getMyHelperLikedPost(String userId);
   Integer getApplicantCount(Integer postSequence, String userId);
-  // ResponseEntity<? super GetMyHelperPostListResponseDto> getMyHelperLikedPost(String userId);
+  ResponseEntity<? super GetHelperApplyListRespeonseDto> getHelperApplyList(String userId, Integer postSequence);
 
   ResponseEntity<ResponseDto> postProductReview(PostProductReviewRequestDto dto, String userId);
   ResponseEntity<? super GetMySalesResponseDto> getMySalesList(String userId);

@@ -158,12 +158,13 @@ public class NeedHelperController {
 
     
     @PatchMapping("/{postSequence}/apply")
-    public void accpetApply(
+    public ResponseEntity<ResponseDto> accpetApply(
         @PathVariable("postSequence") Integer postSequence,
         @AuthenticationPrincipal String userId,
         @RequestParam("applicantId") String applicantId
     ) {
-        needHelperService.accpetApply(postSequence, applicantId, userId);
+        ResponseEntity<ResponseDto> response = needHelperService.accpetApply(postSequence, applicantId, userId);
+        return response;
     }
     
 }

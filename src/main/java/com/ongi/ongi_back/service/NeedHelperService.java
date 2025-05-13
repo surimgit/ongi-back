@@ -11,7 +11,6 @@ import com.ongi.ongi_back.common.dto.response.needHelper.GetHelperCommentsRespon
 import com.ongi.ongi_back.common.dto.response.needHelper.GetHelperLikedResponseDto;
 import com.ongi.ongi_back.common.dto.response.needHelper.GetHelperPostListResponseDto;
 import com.ongi.ongi_back.common.dto.response.needHelper.GetHelperPostResponseDto;
-import com.ongi.ongi_back.common.entity.HelperApplyEntity;
 
 public interface NeedHelperService {
     ResponseEntity<ResponseDto> postHelper(PostHelperRequestDto dto, String userId);

@@ -26,9 +26,7 @@ import com.ongi.ongi_back.common.dto.response.badge.GetBadgeResponseDto;
 import com.ongi.ongi_back.common.dto.response.community.GetCommunityCommentsResponseDto;
 import com.ongi.ongi_back.common.dto.response.community.GetCommunityResponseDto;
 import com.ongi.ongi_back.common.dto.response.group.GetProductListResponseDto;
-import com.ongi.ongi_back.common.dto.response.group.GetProductReviewResponseDto;
-import com.ongi.ongi_back.common.dto.response.needHelper.GetHelperPostListResponseDto;
-import com.ongi.ongi_back.common.dto.response.needHelper.GetHelperPostResponseDto;
+import com.ongi.ongi_back.common.dto.response.needHelper.GetHelperApplyListRespeonseDto;
 import com.ongi.ongi_back.common.dto.response.needHelper.GetMyHelperPostListResponseDto;
 import com.ongi.ongi_back.common.dto.response.user.GetLikeKeywordListResponseDto;
 import com.ongi.ongi_back.common.dto.response.user.GetMyActivityCountResponseDto;
@@ -40,6 +38,8 @@ import com.ongi.ongi_back.common.dto.response.user.GetUserIntroductionResponseDt
 import com.ongi.ongi_back.common.entity.BadgeEntity;
 import com.ongi.ongi_back.common.entity.CommunityCommentEntity;
 import com.ongi.ongi_back.common.entity.CommunityPostEntity;
+import com.ongi.ongi_back.common.entity.HelperApplyEntity;
+import com.ongi.ongi_back.common.entity.HelperLikedEntity;
 import com.ongi.ongi_back.common.entity.LikeKeywordEntity;
 import com.ongi.ongi_back.common.entity.LikedEntity;
 import com.ongi.ongi_back.common.entity.NeedHelperEntity;
@@ -48,6 +48,7 @@ import com.ongi.ongi_back.common.entity.ProductEntity;
 import com.ongi.ongi_back.common.entity.ProductReviewEntity;
 import com.ongi.ongi_back.common.entity.ReviewImagesEntity;
 import com.ongi.ongi_back.common.entity.UserEntity;
+import com.ongi.ongi_back.common.vo.HelperApplyVO;
 import com.ongi.ongi_back.common.vo.MyBuyingVO;
 import com.ongi.ongi_back.common.vo.MySalesVO;
 import com.ongi.ongi_back.common.vo.OrderItemVO;
@@ -56,6 +57,7 @@ import com.ongi.ongi_back.repository.BadgeRespository;
 import com.ongi.ongi_back.repository.CommunityCommentRepository;
 import com.ongi.ongi_back.repository.CommunityPostRepository;
 import com.ongi.ongi_back.repository.HelperApplyRepository;
+import com.ongi.ongi_back.repository.HelperLikedRepository;
 import com.ongi.ongi_back.repository.HelperPostRepository;
 import com.ongi.ongi_back.repository.LikeKeywordRepository;
 import com.ongi.ongi_back.repository.LikedRepository;
@@ -66,7 +68,6 @@ import com.ongi.ongi_back.repository.ReviewImagesRepository;
 import com.ongi.ongi_back.repository.ShoppingCartRepository;
 import com.ongi.ongi_back.repository.UserRepository;
 import com.ongi.ongi_back.repository.WishListRepository;
-import com.ongi.ongi_back.service.FileService;
 import com.ongi.ongi_back.service.MypageService;
 
 import lombok.RequiredArgsConstructor;
@@ -89,6 +90,7 @@ public class MypageServiceImplement implements MypageService{
   private final BadgeRespository badgeRespository;
   private final HelperPostRepository helperPostRepository;
   private final HelperApplyRepository helperApplyRepository;
+  private final HelperLikedRepository helperLikedRepository;
   private final PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
   @Override
@@ -642,14 +644,53 @@ public class MypageServiceImplement implements MypageService{
     return GetMyHelperPostListResponseDto.success(needHelperEntities);
   }
 
+  
+  @Override
+  public ResponseEntity<? super GetMyHelperPostListResponseDto> getMyHelperLikedPost(String userId) {
+    List<HelperLikedEntity> myLikeList = new ArrayList<>();
+    List<NeedHelperEntity> needHelperEntities = new ArrayList<>();
+
+      try {
+        myLikeList = helperLikedRepository.findByUserId(userId);
+        for (HelperLikedEntity likedEntity : myLikeList) {
+          Integer postSequence = likedEntity.getLikedPostSequence();
+          NeedHelperEntity needHelperEntity = helperPostRepository.findBySequence(postSequence);
+          if (needHelperEntity != null) {
+              needHelperEntities.add(needHelperEntity);
+          }
+      }
+        
+      } catch (Exception e) {
+        e.printStackTrace();
+        return ResponseDto.databaseError();
+      }
+
+      return GetMyHelperPostListResponseDto.success(needHelperEntities);
+  }
+  
   @Override
   public Integer getApplicantCount(Integer postSequence, String userId) {
     return helperApplyRepository.countByPostSequence(postSequence);
   }
 
-  // @Override
-  // public ResponseEntity<? super GetMyHelperPostListResponseDto> getMyHelperLikedPost(String userId) {
-    
-  // }
+  @Override
+  public ResponseEntity<? super GetHelperApplyListRespeonseDto> getHelperApplyList(String userId,
+    Integer postSequence) {
+    List<HelperApplyEntity> helperApplyEntities = new ArrayList<>();
+
+    try {
+      helperApplyEntities = helperApplyRepository.findByPostSequenceAndRequesterId(postSequence, userId);
+    } catch (Exception e) {
+      e.printStackTrace();
+      return ResponseDto.databaseError();
+    }
+
+    return GetHelperApplyListRespeonseDto.success(helperApplyEntities);
+
+      
+  }
+
+
+
 
 }

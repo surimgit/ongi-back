@@ -24,4 +24,6 @@ public interface HelperApplyRepository extends JpaRepository<HelperApplyEntity, 
     List<Integer> findPostSequenceByApplicantId(@Param("applicantId") String applicantId);
 
     Integer countByPostSequence(Integer postSequence);
+
+    List<HelperApplyEntity> findByPostSequenceAndRequesterId(Integer postSequence, String requesterId);
 }
