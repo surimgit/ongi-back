@@ -50,11 +50,11 @@ public class ChatServiceImplement implements ChatService{
   }
 
   @Override
-  public ResponseEntity<ResponseDto> acceptChat(String requesterId, Integer needHelperSequence, String applicantId) {
+  public ResponseEntity<ResponseDto> acceptChat(Integer chatSequence, String requesterId, String applicantId) {
     
     ChatEntity chatEntity = null;
     try {
-      chatEntity = chatRepository.findByRequesterIdAndApplicantId(requesterId, applicantId);
+      chatEntity = chatRepository.findByChatSequenceAndRequesterIdAndApplicantId(chatSequence, requesterId, applicantId);
       
       if(chatEntity == null) return ResponseDto.noExistChatRoom();
 

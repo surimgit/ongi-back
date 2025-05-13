@@ -20,7 +20,7 @@ public interface OrderItemRepository extends JpaRepository<OrderItemEntity, Inte
   OrderItemEntity findByOrderItemSequence(Integer sequence);
 
   @Query(
-    "SELECT new com.ongi.ongi_back.common.vo.OrderItemVO(o.orderItemSequence, o.productSequence, o.quantity, o.waybillNumber, o.deliveryAddressSnapshot, p.approvedTime, o.buyerId, o.addressId) " +
+    "SELECT new com.ongi.ongi_back.common.vo.OrderItemVO(o.orderItemSequence, o.productSequence, o.quantity, o.waybillNumber, p.approvedTime, o.buyerId, o.addressId) " +
     "FROM order_item o " +
     "JOIN payment_confirm p ON o.paymentKey = p.paymentKey " +
     "WHERE o.productSequence = :productSequence"

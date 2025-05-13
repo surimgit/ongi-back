@@ -8,6 +8,6 @@ import com.ongi.ongi_back.common.dto.response.chat.GetChatRoomResponseDto;
 
 public interface ChatService {
   void saveMessage(SaveMessageRequestDto sendMessageRequestDto);
-  ResponseEntity<ResponseDto> acceptChat(String userId, Integer needHelperSequence, String applicantId);
+  ResponseEntity<ResponseDto> acceptChat(Integer chatSequence, String requesterId, String applicantId);
   ResponseEntity<? super GetChatRoomResponseDto> getChatRoom(String requesterId, Integer chatSequence);
 }

@@ -1,6 +1,2 @@
-2025-05-13 09:06:27,800 ERROR [http-nio-4000-exec-7] org.hibernate.engine.jdbc.spi.SqlExceptionHelper: Unknown column 'cpe1_0.county' in 'field list'
-2025-05-13 09:06:27,800 ERROR [http-nio-4000-exec-8] org.hibernate.engine.jdbc.spi.SqlExceptionHelper: Unknown column 'cpe1_0.county' in 'field list'
-2025-05-13 09:06:27,800 ERROR [http-nio-4000-exec-5] org.hibernate.engine.jdbc.spi.SqlExceptionHelper: Unknown column 'cpe1_0.county' in 'field list'
-2025-05-13 09:06:27,873 ERROR [http-nio-4000-exec-3] org.hibernate.engine.jdbc.spi.SqlExceptionHelper: Unknown column 'cpe1_0.county' in 'field list'
-2025-05-13 09:06:27,892 ERROR [http-nio-4000-exec-1] org.hibernate.engine.jdbc.spi.SqlExceptionHelper: Unknown column 'cpe1_0.county' in 'field list'
-2025-05-13 09:06:27,908 ERROR [http-nio-4000-exec-7] org.hibernate.engine.jdbc.spi.SqlExceptionHelper: Unknown column 'cpe1_0.county' in 'field list'
+2025-05-13 16:59:42,770 ERROR [http-nio-4000-exec-10] org.hibernate.engine.jdbc.spi.SqlExceptionHelper: Unknown column 'oie1_0.waybill_number' in 'field list'
+2025-05-13 16:59:42,770 ERROR [http-nio-4000-exec-7] org.hibernate.engine.jdbc.spi.SqlExceptionHelper: Unknown column 'oie1_0.waybill_number' in 'field list'

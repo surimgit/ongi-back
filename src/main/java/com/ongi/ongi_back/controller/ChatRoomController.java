@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.ongi.ongi_back.common.dto.response.ResponseDto;
 import com.ongi.ongi_back.common.dto.response.chat.GetChatRoomResponseDto;
 import com.ongi.ongi_back.service.ChatService;
 
@@ -31,12 +32,13 @@ public class ChatRoomController {
   }
 
   @PatchMapping("/{chatSequence}")
-  public void acceptChat(
+  public ResponseEntity<ResponseDto> acceptChat(
     @PathVariable("chatSequence") Integer chatSequence,
     @AuthenticationPrincipal String userId,
     @RequestParam("applicantId") String applicantId
   ){
-    chatService.acceptChat(userId, chatSequence, applicantId);
+    ResponseEntity<ResponseDto> response = chatService.acceptChat(chatSequence, userId, applicantId);
+    return response;
   }
 
 }

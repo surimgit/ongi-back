@@ -28,6 +28,7 @@ import com.ongi.ongi_back.common.dto.response.badge.GetBadgeResponseDto;
 import com.ongi.ongi_back.common.dto.response.community.GetCommunityCommentsResponseDto;
 import com.ongi.ongi_back.common.dto.response.community.GetCommunityResponseDto;
 import com.ongi.ongi_back.common.dto.response.group.GetProductListResponseDto;
+import com.ongi.ongi_back.common.dto.response.needHelper.GetHelperApplyListRespeonseDto;
 import com.ongi.ongi_back.common.dto.response.needHelper.GetMyHelperPostListResponseDto;
 import com.ongi.ongi_back.common.dto.response.user.GetMyActivityCountResponseDto;
 import com.ongi.ongi_back.common.dto.response.user.GetMyBuyingResponseDto;
@@ -279,6 +280,14 @@ public class MypageController {
     return response;
   }
 
+  @GetMapping("/need-helper/liked")
+  public ResponseEntity<? super GetMyHelperPostListResponseDto> getMyHelperLikedPost(
+    @AuthenticationPrincipal String userId
+  ) {
+    ResponseEntity<? super GetMyHelperPostListResponseDto> response = mypageService.getMyHelperLikedPost(userId);
+    return response;
+  }
+
   @GetMapping("/need-helper/{postSequence}/count")
   public ResponseEntity<Integer> getApplicantCount(
     @PathVariable("postSequence") Integer postSequence,
@@ -286,5 +295,14 @@ public class MypageController {
   ) {
     int count = mypageService.getApplicantCount(postSequence, userId);
     return ResponseEntity.ok(count);
+  }
+
+  @GetMapping("/need-helper/{postSequence}/apply")
+  public ResponseEntity<? super GetHelperApplyListRespeonseDto> getHelperApplyList(
+    @PathVariable("postSequence") Integer postSequence,
+    @AuthenticationPrincipal String userId
+  ) {
+    ResponseEntity<? super GetHelperApplyListRespeonseDto> response = mypageService.getHelperApplyList(userId, postSequence);
+    return response;
   }
 }
