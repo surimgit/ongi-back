@@ -27,12 +27,14 @@ public class OrderItemEntity {
   private Integer quantity;
   private String waybillNumber;
   private String buyerId;
+  private Integer addressId;
 
   public OrderItemEntity(PostOrderItemRequestDto requestDto){
     this.paymentKey = requestDto.getPaymentKey();
     this.productSequence = requestDto.getProductSequence();
     this.quantity = requestDto.getQuantity();
     this.buyerId = requestDto.getUserId();
+    this.addressId = requestDto.getAddressId();
   }
 
   public OrderItemEntity(PostOrderItemRequestDto requestDto, String buyerId){

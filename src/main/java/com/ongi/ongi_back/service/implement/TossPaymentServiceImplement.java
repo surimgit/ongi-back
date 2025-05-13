@@ -212,12 +212,14 @@ public class TossPaymentServiceImplement implements TossPaymentService {
 
     if(metadata == null) return ResponseDto.noMetadata();
 
+    System.out.println(metadata);
     // 5-4. metadata의 productSequence, productQuantities 읽기
     String productSequences = (String) metadata.get("productSequences");
     String productQuantities = (String) metadata.get("productQuantity");
     String deliveryAddresses = (String) metadata.get("address");
+    Integer addressId = Integer.parseInt(metadata.get("addressId"));
     
-    if (productSequences == null || productQuantities == null) {
+    if (productSequences == null || productQuantities == null || deliveryAddresses == null || addressId == null) {
       return ResponseDto.tossFailure("INVALID_METADATA", "상품 정보가 없습니다.", HttpStatus.BAD_REQUEST);
     }
 
@@ -231,7 +233,7 @@ public class TossPaymentServiceImplement implements TossPaymentService {
       int quantity = productQuantitiesArr.get(i);
       String deliveryAddress = productDeliveryAddressArr.get(i);
 
-      PostOrderItemRequestDto requestDto = new PostOrderItemRequestDto(paymentKey, productSequence, quantity, deliveryAddress, userId);
+      PostOrderItemRequestDto requestDto = new PostOrderItemRequestDto(paymentKey, productSequence, quantity, deliveryAddress, userId, addressId);
       OrderItemEntity orderItemEntity = new OrderItemEntity(requestDto);
       orderItemRepository.save(orderItemEntity);
 

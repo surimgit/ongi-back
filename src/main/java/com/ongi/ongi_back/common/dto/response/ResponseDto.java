@@ -57,6 +57,7 @@ public class ResponseDto {
         ResponseDto body = new ResponseDto(ResponseCode.SUCCESS, ResponseMessage.ALREADY_WITHDRAWNED);
         return ResponseEntity.status(status).body(body);
     }
+    
 
     public static ResponseEntity<ResponseDto> validationFail() {
         ResponseDto body = new ResponseDto(ResponseCode.VALIDATION_FAIL, ResponseMessage.VALIDATION_FAIL);
@@ -70,6 +71,16 @@ public class ResponseDto {
 
     public static ResponseEntity<ResponseDto> existUser() {
         ResponseDto body = new ResponseDto(ResponseCode.EXIST_USER, ResponseMessage.EXIST_USER);
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(body);
+    }
+
+    public static ResponseEntity<ResponseDto> existUserAddress() {
+        ResponseDto body = new ResponseDto(ResponseCode.EXIST_USER_ADDRESS, ResponseMessage.EXIST_USER_ADDRESS);
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(body);
+    }
+
+    public static ResponseEntity<ResponseDto> noExistUserAddress() {
+        ResponseDto body = new ResponseDto(ResponseCode.NO_EXIST_USER_ADDRESS, ResponseMessage.NO_EXIST_USER_ADDRESS);
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(body);
     }
 

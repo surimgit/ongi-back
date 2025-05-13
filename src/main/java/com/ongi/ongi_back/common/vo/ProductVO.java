@@ -5,15 +5,18 @@ import java.util.List;
 
 import com.ongi.ongi_back.common.entity.ProductEntity;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.Setter;
 
 @Getter
+@Setter
+@AllArgsConstructor
 public class ProductVO {
   private Integer sequence;
   private String name;
   private String category;
   private Integer price;
-  private double rating;
   private Integer purchasedPeople;
   private String deadline;
   private Integer boughtAmount;
@@ -21,6 +24,8 @@ public class ProductVO {
   private String image;
   private String openDate;
   private String status;
+  private Double rating;
+  private Long reviewCount;
 
   public ProductVO(ProductEntity productEntity) {
     this.sequence = productEntity.getSequence();
