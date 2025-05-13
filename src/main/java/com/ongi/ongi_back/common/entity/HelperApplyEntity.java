@@ -1,7 +1,6 @@
 package com.ongi.ongi_back.common.entity;
 
 import java.time.LocalDateTime;
-
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -41,5 +40,10 @@ public class HelperApplyEntity {
         this.acceptedAt = null;
         this.solutionRequestedAt = post.getSchedule();
         this.isApplied = false;
+    }
+
+    public void accpetApply(HelperApplyEntity helperApplyEntity){
+    this.acceptedAt = LocalDateTime.now();
+    this.isApplied = true;
     }
 }

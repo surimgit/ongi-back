@@ -8,12 +8,12 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import com.ongi.ongi_back.common.dto.request.payment.PostCancelRequestDto;
-import com.ongi.ongi_back.common.dto.response.user.GetMyBuyingResponseDto;
 import com.ongi.ongi_back.common.entity.OrderItemEntity;
 import com.ongi.ongi_back.common.vo.MyBuyingVO;
 import com.ongi.ongi_back.common.vo.OrderItemVO;
 
 import jakarta.transaction.Transactional;
+
 
 @Repository
 public interface OrderItemRepository extends JpaRepository<OrderItemEntity, Integer> {
@@ -21,7 +21,7 @@ public interface OrderItemRepository extends JpaRepository<OrderItemEntity, Inte
   OrderItemEntity findByOrderItemSequence(Integer sequence);
 
   @Query(
-    "SELECT new com.ongi.ongi_back.common.vo.OrderItemVO(o.orderItemSequence, o.productSequence, o.quantity, o.waybillNumber, o.deliveryAddressSnapshot, p.approvedTime, o.buyerId, o.addressId) " +
+    "SELECT new com.ongi.ongi_back.common.vo.OrderItemVO(o.orderItemSequence, o.productSequence, o.quantity, o.waybillNumber, p.approvedTime, o.buyerId, o.addressId) " +
     "FROM order_item o " +
     "JOIN payment_confirm p ON o.paymentKey = p.paymentKey " +
     "WHERE o.productSequence = :productSequence"
