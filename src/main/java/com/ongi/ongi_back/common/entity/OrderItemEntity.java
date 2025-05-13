@@ -26,14 +26,12 @@ public class OrderItemEntity {
   private Integer productSequence;
   private Integer quantity;
   private String waybillNumber;
-  private String deliveryAddressSnapshot;
   private String buyerId;
 
   public OrderItemEntity(PostOrderItemRequestDto requestDto){
     this.paymentKey = requestDto.getPaymentKey();
     this.productSequence = requestDto.getProductSequence();
     this.quantity = requestDto.getQuantity();
-    this.deliveryAddressSnapshot = requestDto.getDeliveryAddressSnapshot();
     this.buyerId = requestDto.getUserId();
   }
 
@@ -41,7 +39,6 @@ public class OrderItemEntity {
     this.paymentKey = requestDto.getPaymentKey();
     this.productSequence = requestDto.getProductSequence();
     this.quantity = requestDto.getQuantity();
-    this.deliveryAddressSnapshot = requestDto.getDeliveryAddressSnapshot();
     this.buyerId = buyerId;
   }
 }

@@ -19,6 +19,5 @@ public class MyBuyingVO {
   private Integer price;
   private String approvedTime;
   private String waybillNumber;
-  private String deliveryAddressSnapshot;
   private String userId;
 }
