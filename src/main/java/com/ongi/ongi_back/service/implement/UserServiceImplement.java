@@ -9,6 +9,7 @@ import com.ongi.ongi_back.common.dto.response.ResponseDto;
 import com.ongi.ongi_back.common.dto.response.admin.GetIsAdminResponseDto;
 import com.ongi.ongi_back.common.dto.response.user.GetSignInUserResponseDto;
 import com.ongi.ongi_back.common.dto.response.user.GetUserNicknameResponseDto;
+import com.ongi.ongi_back.common.dto.response.user.GetUserProfileImageResponseDto;
 import com.ongi.ongi_back.common.entity.UserEntity;
 import com.ongi.ongi_back.repository.UserRepository;
 import com.ongi.ongi_back.service.UserService;
@@ -113,5 +114,22 @@ public class UserServiceImplement implements UserService{
         }
 
         return GetIsAdminResponseDto.success(userEntity);
+    }
+
+    @Override
+    public ResponseEntity<? super GetUserProfileImageResponseDto> getUserProfileImage(String userId) {
+
+        UserEntity userEntity = null;
+        
+        try {
+
+            userEntity = userRepository.findByUserId(userId);
+            
+        } catch (Exception exception) {
+            exception.printStackTrace();
+            return ResponseDto.databaseError();
+        }
+
+        return GetUserProfileImageResponseDto.success(userEntity);
     }
 }

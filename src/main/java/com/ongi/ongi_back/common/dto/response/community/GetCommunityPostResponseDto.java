@@ -1,8 +1,5 @@
 package com.ongi.ongi_back.common.dto.response.community;
 
-import java.util.List;
-import java.util.stream.Collectors;
-
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
@@ -23,6 +20,7 @@ public class GetCommunityPostResponseDto extends ResponseDto {
     private String content;
     private Integer liked;
     private Integer viewCount;
+    private String county;
 
     private GetCommunityPostResponseDto(CommunityPostEntity communityPostEntity) {
         this.postSequence = communityPostEntity.getPostSequence();
@@ -35,6 +33,7 @@ public class GetCommunityPostResponseDto extends ResponseDto {
         this.content = communityPostEntity.getContent();
         this.liked = communityPostEntity.getLiked();
         this.viewCount = communityPostEntity.getViewCount();
+        this.county = communityPostEntity.getCounty();
     }
 
     public static ResponseEntity<GetCommunityPostResponseDto> success(CommunityPostEntity communityPostEntity) {

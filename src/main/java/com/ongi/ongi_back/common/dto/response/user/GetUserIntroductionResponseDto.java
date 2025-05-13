@@ -23,6 +23,7 @@ public class GetUserIntroductionResponseDto extends ResponseDto {
   private String mbti;
   private String job;
   private String selfIntro;
+  private Integer userPoint;
 
   private GetUserIntroductionResponseDto(UserEntity userEntity, List<LikeKeywordEntity> likeKeywordEntities){
     this.nickname = userEntity.getNickname();
@@ -33,6 +34,7 @@ public class GetUserIntroductionResponseDto extends ResponseDto {
     this.job = userEntity.getJob();
     this.selfIntro = userEntity.getSelfIntro();
     this.likeKeywords = LikeKeywordVO.getLikeKeywordList(likeKeywordEntities);
+    this.userPoint = userEntity.getUserPoint();
   }
 
   public static ResponseEntity<GetUserIntroductionResponseDto> success(UserEntity userEntity, List<LikeKeywordEntity> likeKeywordEntities){

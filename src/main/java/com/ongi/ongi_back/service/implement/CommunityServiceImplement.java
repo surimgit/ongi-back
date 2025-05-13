@@ -1,13 +1,7 @@
 package com.ongi.ongi_back.service.implement;
 
-import java.io.File;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Value;
 
@@ -16,7 +10,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.multipart.MultipartFile;
 
 import com.ongi.ongi_back.common.dto.request.community.PatchCommunityCommentRequestDto;
 import com.ongi.ongi_back.common.dto.request.community.PatchCommunityPostRequestDto;
@@ -31,6 +24,7 @@ import com.ongi.ongi_back.common.dto.response.community.GetCommunityResponseDto;
 import com.ongi.ongi_back.common.entity.CommunityCommentEntity;
 import com.ongi.ongi_back.common.entity.CommunityPostEntity;
 import com.ongi.ongi_back.common.entity.LikedEntity;
+import com.ongi.ongi_back.common.entity.UserEntity;
 import com.ongi.ongi_back.repository.CommunityCommentRepository;
 import com.ongi.ongi_back.repository.CommunityPostRepository;
 import com.ongi.ongi_back.repository.LikedRepository;
@@ -58,14 +52,16 @@ public class CommunityServiceImplement implements CommunityService {
     @Override
     public ResponseEntity<ResponseDto> postCommunityPost(PostCommunityRequestDto dto, String userId) {
 
+        UserEntity userEntity = null;
         String nickname = null;
         String county = null;
         
         try {
-            nickname = userRepository.findByUserId(userId).getNickname();
+            userEntity = userRepository.findByUserId(userId);
+            nickname = userEntity.getNickname();
 
             if (dto.getBoard().equals("우리 동네 게시판")) {
-                county = userRepository.findByUserId(userId).getAddress();
+                county = userEntity.getAddress();
 
                 String[] parts = county.split(" ");
                 county = (parts.length >= 2) ? parts[0] + " " + parts[1] : county;
@@ -74,6 +70,10 @@ public class CommunityServiceImplement implements CommunityService {
 
             CommunityPostEntity communityPostEntity = new CommunityPostEntity(dto, userId, nickname, county);
             communityPostRepository.save(communityPostEntity);
+
+            Integer point = userEntity.getUserPoint();
+            userEntity.setUserPoint(point + 3);
+            userRepository.save(userEntity);
             
         } catch (Exception exception) {
             exception.printStackTrace();
@@ -133,6 +133,8 @@ public class CommunityServiceImplement implements CommunityService {
 
         try {
 
+            UserEntity userEntity = userRepository.findByUserId(userId);
+
             CommunityPostEntity communityPostEntity = communityPostRepository.findByPostSequence(postSequence);
             if (communityPostEntity == null) return ResponseDto.noExistPost();
 
@@ -142,6 +144,13 @@ public class CommunityServiceImplement implements CommunityService {
 
             communityCommentRepository.deleteByPostSequence(postSequence);
             communityPostRepository.delete(communityPostEntity);
+
+            if (userEntity.getIsResigned()) {}
+            else {
+                Integer point = userEntity.getUserPoint();
+                userEntity.setUserPoint(point - 3);
+                userRepository.save(userEntity);
+            }
             
         } catch (Exception exception) {
             exception.printStackTrace();
@@ -295,19 +304,21 @@ public class CommunityServiceImplement implements CommunityService {
 
     @Override
     public ResponseEntity<ResponseDto> postComment(PostCommentRequestDto dto, Integer postSequence, String userId) {
-
-        String nickname = null;
-        String profileImage = null;
         
         try {
-            nickname = userRepository.findByUserId(userId).getNickname();
-            profileImage = userRepository.findByUserId(userId).getProfileImage();
+
+            UserEntity userEntity = userRepository.findByUserId(userId);
+            String nickname = userEntity.getNickname();
             
             boolean existPost = communityPostRepository.existsByPostSequence(postSequence);
             if (!existPost) return ResponseDto.noExistPost();
 
-            CommunityCommentEntity communityCommentEntity = new CommunityCommentEntity(dto, postSequence, userId, nickname, profileImage);
+            CommunityCommentEntity communityCommentEntity = new CommunityCommentEntity(dto, postSequence, userId, nickname);
             communityCommentRepository.save(communityCommentEntity);
+
+            Integer point = userEntity.getUserPoint();
+            userEntity.setUserPoint(point + 1);
+            userRepository.save(userEntity);
             
         } catch (Exception exception) {
             exception.printStackTrace();
@@ -322,6 +333,8 @@ public class CommunityServiceImplement implements CommunityService {
 
         try {
 
+            UserEntity userEntity = userRepository.findByUserId(userId);
+
             CommunityPostEntity communityPostEntity = communityPostRepository.findByPostSequence(postSequence);
             if (communityPostEntity == null) return ResponseDto.noExistPost();
 
@@ -333,6 +346,14 @@ public class CommunityServiceImplement implements CommunityService {
             if (!isWriter) return ResponseDto.noPermission();
 
             communityCommentRepository.deleteByCommentSequence(commentSequence);
+
+            if (userEntity.getIsResigned()) {}
+            else {
+                Integer point = userEntity.getUserPoint();
+                userEntity.setUserPoint(point - 1);
+                userRepository.save(userEntity);
+            }
+            
             
         } catch (Exception exception) {
             exception.printStackTrace();

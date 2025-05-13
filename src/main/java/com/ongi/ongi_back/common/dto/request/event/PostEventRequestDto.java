@@ -1,4 +1,4 @@
-package com.ongi.ongi_back.common.dto.request.alert;
+package com.ongi.ongi_back.common.dto.request.event;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -11,14 +11,14 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class PostAlertRequestDto {
+public class PostEventRequestDto {
     @NotBlank
-    private String alertType;
+    private String title;
     @NotBlank
-    private String senderId;
-    @NotBlank
-    private String receiverId;
+    private String deadline;
     @NotNull
-    private Integer alertEntitySequence;
-    private String reason;
+    private Integer neededPoint;
+    @NotBlank
+    private String content;
+    private String image;
 }
