@@ -21,4 +21,6 @@ public class PostOrderItemRequestDto {
   private String deliveryAddressSnapshot;
 
   private String userId;
+
+  private Integer addressId;
 }

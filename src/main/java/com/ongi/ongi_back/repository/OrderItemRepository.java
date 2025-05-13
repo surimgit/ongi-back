@@ -21,7 +21,7 @@ public interface OrderItemRepository extends JpaRepository<OrderItemEntity, Inte
   OrderItemEntity findByOrderItemSequence(Integer sequence);
 
   @Query(
-    "SELECT new com.ongi.ongi_back.common.vo.OrderItemVO(o.orderItemSequence, o.productSequence, o.quantity, o.waybillNumber, o.deliveryAddressSnapshot, p.approvedTime, o.buyerId) " +
+    "SELECT new com.ongi.ongi_back.common.vo.OrderItemVO(o.orderItemSequence, o.productSequence, o.quantity, o.waybillNumber, o.deliveryAddressSnapshot, p.approvedTime, o.buyerId, o.addressId) " +
     "FROM order_item o " +
     "JOIN payment_confirm p ON o.paymentKey = p.paymentKey " +
     "WHERE o.productSequence = :productSequence"
@@ -29,7 +29,7 @@ public interface OrderItemRepository extends JpaRepository<OrderItemEntity, Inte
   List<OrderItemVO> findByProductSequence(Integer productSequence);
   
   @Query(
-  "SELECT new com.ongi.ongi_back.common.vo.MyBuyingVO(o.paymentKey, o.orderItemSequence, o.productSequence, pr.name, pr.image, o.quantity, pr.price, p.approvedTime, o.waybillNumber, o.deliveryAddressSnapshot, po.userId) " +
+  "SELECT new com.ongi.ongi_back.common.vo.MyBuyingVO(o.paymentKey, o.orderItemSequence, o.productSequence, pr.name, pr.image, o.quantity, pr.price, p.approvedTime, o.waybillNumber, o.addressId, po.userId) " +
   "FROM order_item o " +
   "JOIN payment_confirm p ON o.paymentKey = p.paymentKey " +
   "JOIN payment_order po ON p.orderId = po.orderId " +

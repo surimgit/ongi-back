@@ -47,6 +47,7 @@ import com.ongi.ongi_back.common.entity.UserEntity;
 import com.ongi.ongi_back.common.vo.MyBuyingVO;
 import com.ongi.ongi_back.common.vo.MySalesVO;
 import com.ongi.ongi_back.common.vo.OrderItemVO;
+import com.ongi.ongi_back.common.vo.ProductVO;
 import com.ongi.ongi_back.repository.BadgeRespository;
 import com.ongi.ongi_back.repository.CommunityCommentRepository;
 import com.ongi.ongi_back.repository.CommunityPostRepository;
@@ -550,7 +551,8 @@ public class MypageServiceImplement implements MypageService{
     Integer reviewCount = 0;
     Integer reviewedCount = 0;
     Integer shoppingCartCount = 0;
-    long wishListCount = 0;
+    Integer wishListCount = 0;
+    
     try {
       reviewCount = 0;
       reviewedCount = 0;
@@ -568,7 +570,7 @@ public class MypageServiceImplement implements MypageService{
 
   @Override
   public ResponseEntity<? super GetProductListResponseDto> getOtherUserSellingProduct(String userId, String today) {
-    List<ProductEntity> productEntities = new ArrayList<>();
+    List<ProductVO> productEntities = new ArrayList<>();
     UserEntity userEntity = userRepository.findByUserId(userId);
     today = LocalDate.now().toString();
     try {
@@ -584,7 +586,7 @@ public class MypageServiceImplement implements MypageService{
 
   @Override
   public ResponseEntity<? super GetProductListResponseDto> getOtherUserSelledProduct(String userId, String today) {
-    List<ProductEntity> productEntities = new ArrayList<>();
+    List<ProductVO> productEntities = new ArrayList<>();
     UserEntity userEntity = userRepository.findByUserId(userId);
     today = LocalDate.now().toString();
     try {

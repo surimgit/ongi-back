@@ -16,6 +16,7 @@ public class GetOrderResponseDto extends ResponseDto {
   private String phoneNumber;
   private String userName;
   private String buyerAddress;
+  private Integer addressId;
 
   public GetOrderResponseDto(PaymentOrderEntity paymentOrderEntity){
     this.orderId = paymentOrderEntity.getOrderId();
@@ -23,6 +24,7 @@ public class GetOrderResponseDto extends ResponseDto {
     this.phoneNumber = paymentOrderEntity.getPhoneNumber();
     this.userName = paymentOrderEntity.getUserName();
     this.buyerAddress = paymentOrderEntity.getBuyerAddress();
+    this.addressId = paymentOrderEntity.getAddressId();
   }
 
   public static ResponseEntity<GetOrderResponseDto> success(PaymentOrderEntity paymentOrderEntity){

@@ -28,6 +28,7 @@ public class OrderItemEntity {
   private String waybillNumber;
   private String deliveryAddressSnapshot;
   private String buyerId;
+  private Integer addressId;
 
   public OrderItemEntity(PostOrderItemRequestDto requestDto){
     this.paymentKey = requestDto.getPaymentKey();
@@ -35,6 +36,7 @@ public class OrderItemEntity {
     this.quantity = requestDto.getQuantity();
     this.deliveryAddressSnapshot = requestDto.getDeliveryAddressSnapshot();
     this.buyerId = requestDto.getUserId();
+    this.addressId = requestDto.getAddressId();
   }
 
   public OrderItemEntity(PostOrderItemRequestDto requestDto, String buyerId){

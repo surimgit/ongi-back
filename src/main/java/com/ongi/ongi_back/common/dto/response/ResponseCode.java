@@ -7,6 +7,8 @@ public interface ResponseCode {
     // HTTP/1.1 400 Bad Request
     String VALIDATION_FAIL = "VF";
     String EXIST_USER = "EU";
+    String EXIST_USER_ADDRESS = "EUA";
+    String NO_EXIST_USER_ADDRESS = "NEUA";
     String RESIGNED_USER = "RU";
 
     String PRODUCT_NOT_FOUND = "RNF";

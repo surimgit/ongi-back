@@ -32,6 +32,7 @@ public class ProductStatusScheduler {
     log.info("상품들의 상태를 체크합니다.");
 
     List<ProductEntity> products = productRepository.findByOrderBySequenceDesc();
+    
     LocalDateTime now = LocalDateTime.now();
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"); 
     
@@ -57,8 +58,15 @@ public class ProductStatusScheduler {
 
       if("WAIT".equals(previousStatus) && "OPEN".equals(product.getStatus())){
         Integer productSequence = product.getSequence();
-        List<String> userIdList = wishListRepository.findUserIdByProductSequence(productSequence);
 
+        List<String> userIdList;
+
+        try{
+          userIdList = wishListRepository.findUserIdByProductSequence(productSequence);
+        } catch(Exception exception){
+          continue;
+        }
+        
         for(String userId: userIdList){
           PostAlertRequestDto alertRequestDto = new PostAlertRequestDto(
             "wish_open",
