@@ -1,6 +1,7 @@
 package com.ongi.ongi_back.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import com.ongi.ongi_back.common.entity.UserEntity;
@@ -20,4 +21,10 @@ public interface UserRepository extends JpaRepository<UserEntity, String>{
     UserEntity findByNicknameAndTelNumber(String nickname, String telNumber);
     UserEntity findByUserIdAndTelNumber(String userId, String telNumber);
     Integer countAllByIsResigned(boolean isResigned);
+
+    @Query(value = 
+            "SELECT * FROM user " +
+            "WHERE is_admin = true " +
+            "LIMIT 1", nativeQuery = true)
+    UserEntity findAdminAccount();
 }

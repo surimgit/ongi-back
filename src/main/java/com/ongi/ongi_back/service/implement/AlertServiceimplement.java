@@ -15,7 +15,7 @@ import com.ongi.ongi_back.common.dto.response.alert.GetAlertResponseDto;
 import com.ongi.ongi_back.common.entity.AlertEntity;
 import com.ongi.ongi_back.common.entity.CommunityPostEntity;
 import com.ongi.ongi_back.common.entity.UserEntity;
-import com.ongi.ongi_back.repository.AlertRespository;
+import com.ongi.ongi_back.repository.AlertRepository;
 import com.ongi.ongi_back.repository.CommunityPostRepository;
 import com.ongi.ongi_back.repository.UserRepository;
 import com.ongi.ongi_back.service.AlertService;
@@ -26,7 +26,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class AlertServiceimplement implements AlertService {
 
-    private final AlertRespository alertRespository;
+    private final AlertRepository alertRespository;
     private final UserRepository userRepository;
     private final CommunityPostRepository communityPostRepository;
 
@@ -88,7 +88,7 @@ public class AlertServiceimplement implements AlertService {
             for (CommunityPostEntity communityPostEntity: hotPosts) {
                 PostAlertRequestDto dto = new PostAlertRequestDto();
                 dto.setAlertType("hot_post_selected");
-                dto.setSenderId("system");
+                dto.setSenderId(userRepository.findAdminAccount().getUserId());
                 dto.setReceiverId(communityPostEntity.getUserId());
                 dto.setAlertEntitySequence(communityPostEntity.getPostSequence());
 

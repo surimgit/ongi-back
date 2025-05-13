@@ -243,7 +243,6 @@ public class ResponseDto {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(body);
     }
 
-
     public static ResponseEntity<ResponseDto> unauthorizedKey() {
         ResponseDto body = new ResponseDto(ResponseCode.UNAUTHORIZED_KEY, ResponseMessage.UNAUTHORIZED_KEY);
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(body);

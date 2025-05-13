@@ -47,7 +47,7 @@ import com.ongi.ongi_back.common.entity.UserEntity;
 import com.ongi.ongi_back.common.vo.MyBuyingVO;
 import com.ongi.ongi_back.common.vo.MySalesVO;
 import com.ongi.ongi_back.common.vo.OrderItemVO;
-import com.ongi.ongi_back.repository.BadgeRespository;
+import com.ongi.ongi_back.repository.BadgeRepository;
 import com.ongi.ongi_back.repository.CommunityCommentRepository;
 import com.ongi.ongi_back.repository.CommunityPostRepository;
 import com.ongi.ongi_back.repository.LikeKeywordRepository;
@@ -80,7 +80,7 @@ public class MypageServiceImplement implements MypageService{
   private final OrderItemRepository orderItemRepository;
   private final ReviewImagesRepository reviewImagesRepository;
   private final FileService fileService;
-  private final BadgeRespository badgeRespository;
+  private final BadgeRepository badgeRespository;
   private final PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
   @Override

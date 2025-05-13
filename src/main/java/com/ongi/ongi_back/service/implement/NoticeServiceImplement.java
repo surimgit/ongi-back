@@ -52,7 +52,4 @@ public class NoticeServiceImplement implements NoticeService{
 
     return GetNoticeListResponseDto.success(noticeEntities);
   }
-  
-
-  
 }
