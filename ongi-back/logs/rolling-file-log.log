@@ -1,1 +1,2 @@
 2025-05-13 17:14:45,776 ERROR [http-nio-4000-exec-4] org.hibernate.engine.jdbc.spi.SqlExceptionHelper: Column 'applied_event_sequence' cannot be null
+2025-05-12 17:26:11,484 ERROR [http-nio-4000-exec-6] org.hibernate.engine.jdbc.spi.SqlExceptionHelper: Data truncation: Data too long for column 'badge' at row 1
