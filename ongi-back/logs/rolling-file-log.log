@@ -1,2 +1,0 @@
-2025-05-13 16:59:42,770 ERROR [http-nio-4000-exec-10] org.hibernate.engine.jdbc.spi.SqlExceptionHelper: Unknown column 'oie1_0.waybill_number' in 'field list'
-2025-05-13 16:59:42,770 ERROR [http-nio-4000-exec-7] org.hibernate.engine.jdbc.spi.SqlExceptionHelper: Unknown column 'oie1_0.waybill_number' in 'field list'
