@@ -1,2 +1,0 @@
-2025-05-12 15:16:09,966 ERROR [http-nio-4000-exec-6] org.hibernate.engine.jdbc.spi.SqlExceptionHelper: Unknown column 'be1_0.is_selected' in 'field list'
-2025-05-12 15:16:09,993 ERROR [http-nio-4000-exec-5] org.hibernate.engine.jdbc.spi.SqlExceptionHelper: Unknown column 'be1_0.is_selected' in 'field list'
