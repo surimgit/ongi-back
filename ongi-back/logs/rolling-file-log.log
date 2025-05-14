@@ -1,1 +1,1 @@
-2025-05-13 17:14:45,776 ERROR [http-nio-4000-exec-4] org.hibernate.engine.jdbc.spi.SqlExceptionHelper: Column 'applied_event_sequence' cannot be null
+2025-05-14 15:40:38,618 ERROR [http-nio-4000-exec-8] org.hibernate.engine.jdbc.spi.SqlExceptionHelper: Column 'user_point' cannot be null
