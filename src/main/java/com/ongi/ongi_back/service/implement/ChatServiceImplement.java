@@ -38,7 +38,8 @@ public class ChatServiceImplement implements ChatService {
     List<ChatEntity> chatEntities;
     try {
       chatEntities = chatRepository.findByRequesterIdOrApplicantId(userId, userId);
-      if (chatEntities == null) return ResponseDto.noExistChatRoom();
+      if (chatEntities == null)
+        return ResponseDto.noExistChatRoom();
     } catch (Exception e) {
       e.printStackTrace();
       return ResponseDto.databaseError();
@@ -47,10 +48,11 @@ public class ChatServiceImplement implements ChatService {
   }
 
   @Override
-  public ResponseEntity<ResponseDto> acceptChat(String requesterId, Integer needHelperSequence, String applicantId) {
+  public ResponseEntity<ResponseDto> acceptChat(String requesterId, Integer chatSequence, String applicantId) {
     try {
-      ChatEntity chatEntity = chatRepository.findByRequesterIdAndApplicantIdAndNeedHelperSequence(needHelperSequence, requesterId, applicantId);
-      if (chatEntity == null) return ResponseDto.noExistChatRoom();
+      ChatEntity chatEntity = chatRepository.findByRequesterIdAndChatSequence(requesterId, chatSequence);
+      if (chatEntity == null)
+        return ResponseDto.noExistChatRoom();
       chatEntity.setChatAvailable(true);
       chatRepository.save(chatEntity);
     } catch (Exception e) {
@@ -65,7 +67,8 @@ public class ChatServiceImplement implements ChatService {
     ChatEntity chatEntity = null;
     try {
       chatEntity = chatRepository.findByRequesterIdAndChatSequence(userId, chatSequence);
-      if (chatEntity == null) return ResponseDto.noExistChatRoom();
+      if (chatEntity == null)
+        return ResponseDto.noExistChatRoom();
     } catch (Exception e) {
       e.printStackTrace();
       return ResponseDto.databaseError();
@@ -74,4 +77,3 @@ public class ChatServiceImplement implements ChatService {
   }
 
 }
-

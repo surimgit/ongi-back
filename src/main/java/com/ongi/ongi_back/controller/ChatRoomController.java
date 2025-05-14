@@ -27,40 +27,34 @@ public class ChatRoomController {
   private final ChatService chatService;
   private final MessageRepository messageRepository;
 
-  @GetMapping({""})
+  @GetMapping({ "" })
   public ResponseEntity<? super GetChatRoomListResponseDto> getChatRoomList(
-    @AuthenticationPrincipal String userId
-  )
-  {
+      @AuthenticationPrincipal String userId) {
     ResponseEntity<? super GetChatRoomListResponseDto> response = chatService.getChatRoomList(userId);
     return response;
   }
 
   @GetMapping("/{chatSequence}/message")
   public List<MessageEntity> getChatMessages(
-    @PathVariable Integer chatSequence,
-    @AuthenticationPrincipal String userId
-  ) {
+      @PathVariable Integer chatSequence,
+      @AuthenticationPrincipal String userId) {
     return messageRepository.findByChatSequenceOrderByChatDateAsc(chatSequence);
-  }  
+  }
+
+  @GetMapping("/{chatSequence}/latest")
+  public MessageEntity getLatestMessage(
+      @PathVariable Integer chatSequence,
+      @AuthenticationPrincipal String userId) {
+    return messageRepository.findFirstByChatSequenceOrderByChatDateDesc(chatSequence);
+  }
 
   @PatchMapping("/{chatSequence}")
   public ResponseEntity<ResponseDto> acceptChat(
-    @PathVariable("chatSequence") Integer chatSequence,
-    @AuthenticationPrincipal String userId,
-    @RequestParam("applicantId") String applicantId
-  ){
+      @PathVariable("chatSequence") Integer chatSequence,
+      @AuthenticationPrincipal String userId,
+      @RequestParam("applicantId") String applicantId) {
     ResponseEntity<ResponseDto> response = chatService.acceptChat(userId, chatSequence, applicantId);
     return response;
   }
-
-    @GetMapping("/{chatSequence}/message")
-  publicResponseEntity<? super GetChatRoomResponseDto> getChatMessages(
-    @PathVariable Integer chatSequence,
-    @AuthenticationPrincipal String userId
-  ) {
-    ResponseEntity<ResponseDto> response = chatService.acceptChat(userId, chatSequence, applicantId);
-    return response;
-  }  
 
 }

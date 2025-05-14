@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -62,10 +63,10 @@ import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
-public class MypageServiceImplement implements MypageService{
+public class MypageServiceImplement implements MypageService {
 
-    private final HelperCommentRepository helperCommentRepository;
-  
+  private final HelperCommentRepository helperCommentRepository;
+
   private final LikeKeywordRepository likeKeywordRepository;
   private final UserRepository userRepository;
   private final CommunityPostRepository communityPostRepository;
@@ -85,12 +86,13 @@ public class MypageServiceImplement implements MypageService{
 
   @Override
   public ResponseEntity<ResponseDto> patchIntroduction(PatchUserIntroductionRequestDto dto, String userId) {
-    
+
     try {
       UserEntity userEntity = userRepository.findByUserId(userId);
-      if(userEntity == null) return ResponseDto.noExistUser();
+      if (userEntity == null)
+        return ResponseDto.noExistUser();
       userEntity.patchIntroduction(dto);
-      if(dto.getProfileImage() != null && !dto.getProfileImage().isBlank()){
+      if (dto.getProfileImage() != null && !dto.getProfileImage().isBlank()) {
         userEntity.setProfileImage(dto.getProfileImage());
       }
       userRepository.save(userEntity);
@@ -108,18 +110,21 @@ public class MypageServiceImplement implements MypageService{
     try {
 
       UserEntity userEntity = userRepository.findByUserId(userId);
-      if(userEntity == null) return ResponseDto.noExistUser();
-      
+      if (userEntity == null)
+        return ResponseDto.noExistUser();
+
       boolean isPasswordVaild = passwordEncoder.matches(dto.getCurrentPassword(), userEntity.getUserPassword());
-      if(!isPasswordVaild) return ResponseDto.noPermission();
+      if (!isPasswordVaild)
+        return ResponseDto.noPermission();
       boolean equalCheck = dto.getCurrentPassword().equals(dto.getNewPassword());
-      if(equalCheck) return ResponseDto.invalidRequest();
+      if (equalCheck)
+        return ResponseDto.invalidRequest();
 
       String encoded = passwordEncoder.encode(dto.getNewPassword());
       dto.setNewPassword(encoded);
       userEntity.patchUserPassword(dto);
       userRepository.save(userEntity);
-      
+
     } catch (Exception e) {
       e.printStackTrace();
       return ResponseDto.databaseError();
@@ -133,11 +138,12 @@ public class MypageServiceImplement implements MypageService{
 
     try {
       UserEntity userEntity = userRepository.findByUserId(userId);
-      if(userEntity == null) return ResponseDto.noExistUser();
+      if (userEntity == null)
+        return ResponseDto.noExistUser();
 
       userEntity.patchUserAddress(dto);
       userRepository.save(userEntity);
-      
+
     } catch (Exception e) {
       e.printStackTrace();
       return ResponseDto.databaseError();
@@ -146,13 +152,13 @@ public class MypageServiceImplement implements MypageService{
     return ResponseDto.success(HttpStatus.OK);
   }
 
-
   @Override
   public ResponseEntity<ResponseDto> addLikeKeyword(AddLikeKeywordRequestDto dto, String userId) {
-    
+
     try {
       LikeKeywordEntity exists = likeKeywordRepository.findByUserIdAndKeyword(userId, dto.getKeyword());
-      if(exists != null) return ResponseDto.alreadyApplied();
+      if (exists != null)
+        return ResponseDto.alreadyApplied();
 
       LikeKeywordEntity likeKeywordEntity = new LikeKeywordEntity(dto, userId);
       likeKeywordRepository.save(likeKeywordEntity);
@@ -168,7 +174,8 @@ public class MypageServiceImplement implements MypageService{
   public ResponseEntity<ResponseDto> deleteLikeKeyword(DeleteLikeKeywordRequestDto dto, String userId) {
     try {
       LikeKeywordEntity likeKeywordEntity = likeKeywordRepository.findByUserIdAndKeyword(userId, dto.getKeyword());
-      if(likeKeywordEntity == null) return ResponseDto.alreadyApplied();
+      if (likeKeywordEntity == null)
+        return ResponseDto.alreadyApplied();
 
       likeKeywordRepository.delete(likeKeywordEntity);
     } catch (Exception e) {
@@ -177,7 +184,6 @@ public class MypageServiceImplement implements MypageService{
     }
     return ResponseDto.success(HttpStatus.OK);
   }
-
 
   @Override
   public ResponseEntity<? super GetUserAccountResponseDto> getUserAccount(String userId) {
@@ -217,7 +223,8 @@ public class MypageServiceImplement implements MypageService{
     try {
       likeKeywordEntities = likeKeywordRepository.findAllByUserId(userId);
       userEntity = userRepository.findByUserId(userId);
-      if(likeKeywordEntities == null | userEntity == null) return ResponseDto.noExistUser();
+      if (likeKeywordEntities == null | userEntity == null)
+        return ResponseDto.noExistUser();
 
     } catch (Exception e) {
       e.printStackTrace();
@@ -228,7 +235,7 @@ public class MypageServiceImplement implements MypageService{
 
   @Override
   public ResponseEntity<? super GetCommunityResponseDto> getMyCommunityPost(String userId) {
-    
+
     List<CommunityPostEntity> communityPostEntities = new ArrayList<>();
     UserEntity userEntity = null;
 
@@ -236,7 +243,7 @@ public class MypageServiceImplement implements MypageService{
       userEntity = userRepository.findByUserId(userId);
       String nickname = userEntity.getNickname();
       communityPostEntities = communityPostRepository.findByNicknameOrderByPostSequenceDesc(nickname);
-      
+
     } catch (Exception e) {
       e.printStackTrace();
     }
@@ -246,7 +253,7 @@ public class MypageServiceImplement implements MypageService{
 
   @Override
   public ResponseEntity<? super GetCommunityCommentsResponseDto> getMyCommunityComment(String userId) {
-    
+
     List<CommunityCommentEntity> communityCommentEntities = new ArrayList<>();
     UserEntity userEntity = null;
 
@@ -264,16 +271,16 @@ public class MypageServiceImplement implements MypageService{
 
   @Override
   public ResponseEntity<? super GetCommunityResponseDto> getMyCommunityLikedPostComment(String userId) {
-      List<LikedEntity> likedEntities = new ArrayList<>();
-      List<CommunityPostEntity> communityPostEntities = new ArrayList<>();
+    List<LikedEntity> likedEntities = new ArrayList<>();
+    List<CommunityPostEntity> communityPostEntities = new ArrayList<>();
     try {
       likedEntities = likedRepository.findByUserId(userId);
       List<Integer> postSequenceList = likedEntities.stream()
-        .map(LikedEntity::getLikedPostSequence)
-        .collect(Collectors.toList());
+          .map(LikedEntity::getLikedPostSequence)
+          .collect(Collectors.toList());
 
       communityPostEntities = communityPostRepository.findAllByPostSequenceInOrderByPostSequenceDesc(postSequenceList);
-      
+
     } catch (Exception e) {
       e.printStackTrace();
     }
@@ -285,11 +292,11 @@ public class MypageServiceImplement implements MypageService{
 
     List<MyBuyingVO> list = new ArrayList<>();
 
-    try{
-      
+    try {
+
       list = orderItemRepository.findMyBuyingList(userId);
-      
-    } catch(Exception exception) {
+
+    } catch (Exception exception) {
       exception.printStackTrace();
       return ResponseDto.databaseError();
     }
@@ -312,13 +319,15 @@ public class MypageServiceImplement implements MypageService{
 
   @Override
   public ResponseEntity<ResponseDto> postProductReview(PostProductReviewRequestDto dto, String userId) {
-    
+
     try {
 
       Integer productSequence = dto.getProductSequence();
 
-      ProductReviewEntity productReviewEntity = productReviewRepository.findByUserIdAndProductSequence(userId, productSequence);
-      if(productReviewEntity != null) return ResponseDto.alreadyPostReview();
+      ProductReviewEntity productReviewEntity = productReviewRepository.findByUserIdAndProductSequence(userId,
+          productSequence);
+      if (productReviewEntity != null)
+        return ResponseDto.alreadyPostReview();
 
       productReviewEntity = new ProductReviewEntity(dto, userId);
 
@@ -328,17 +337,17 @@ public class MypageServiceImplement implements MypageService{
 
       String[] reviewImages = dto.getReviewImages();
 
-      if(reviewImages != null) {
-        for(int i = 0; i < reviewImages.length; i++){
-          if(reviewImages[i] != null) {
-            PostReviewImagesRequestDto imageDto = new PostReviewImagesRequestDto(reviewSequence, i, reviewImages[i]); 
+      if (reviewImages != null) {
+        for (int i = 0; i < reviewImages.length; i++) {
+          if (reviewImages[i] != null) {
+            PostReviewImagesRequestDto imageDto = new PostReviewImagesRequestDto(reviewSequence, i, reviewImages[i]);
             ReviewImagesEntity reviewImagesEntity = new ReviewImagesEntity(imageDto);
             reviewImagesRepository.save(reviewImagesEntity);
           }
         }
       }
-      
-    } catch(Exception exception){
+
+    } catch (Exception exception) {
       exception.printStackTrace();
       return ResponseDto.databaseError();
     }
@@ -350,19 +359,19 @@ public class MypageServiceImplement implements MypageService{
   @Override
 
   public ResponseEntity<? super GetMySalesResponseDto> getMySalesList(String userId) {
-    
+
     List<MySalesVO> mySales = new ArrayList<>();
 
     try {
 
       List<ProductEntity> productEntities = productRepository.findByUserId(userId);
-      
-      for(ProductEntity productEntity: productEntities){
+
+      for (ProductEntity productEntity : productEntities) {
         MySalesVO mySalesVO = new MySalesVO(productEntity);
         mySales.add(mySalesVO);
       }
 
-    } catch(Exception exception) {
+    } catch (Exception exception) {
       exception.printStackTrace();
       return ResponseDto.databaseError();
     }
@@ -374,33 +383,34 @@ public class MypageServiceImplement implements MypageService{
   public ResponseEntity<? super GetOrderItemResponseDto> getOrderItemByProductSequence(Integer sequence) {
     List<OrderItemVO> orderItems = new ArrayList<>();
 
-    try{
+    try {
 
       orderItems = orderItemRepository.findByProductSequence(sequence);
 
-    } catch(Exception exception) {
+    } catch (Exception exception) {
       exception.printStackTrace();
       return ResponseDto.databaseError();
     }
-    
+
     return GetOrderItemResponseDto.success(orderItems);
   }
 
   @Override
   public ResponseEntity<ResponseDto> postWaybillNumber(PostWaybillRequestDto dto, String userId) {
 
-    try{
+    try {
       Integer sequence = dto.getOrderItemSequence();
       String waybillNumber = dto.getWaybillNumber();
 
       OrderItemEntity orderItemEntity = orderItemRepository.findByOrderItemSequence(sequence);
 
-      if(orderItemEntity == null) return ResponseDto.validationFail();
+      if (orderItemEntity == null)
+        return ResponseDto.validationFail();
       orderItemEntity.setWaybillNumber(waybillNumber);
 
       orderItemRepository.save(orderItemEntity);
-      
-    } catch(Exception exception) {
+
+    } catch (Exception exception) {
       exception.printStackTrace();
       return ResponseDto.databaseError();
     }
@@ -409,7 +419,7 @@ public class MypageServiceImplement implements MypageService{
   }
 
   public ResponseEntity<ResponseDto> addBadge(String userId) {
-        
+
     UserEntity userEntity = userRepository.findByUserId(userId);
     if (userEntity == null) {
       return ResponseDto.noExistUser();
@@ -420,30 +430,29 @@ public class MypageServiceImplement implements MypageService{
       List<LikeKeywordEntity> likeKeywordEntities = likeKeywordRepository.findAllByUserId(userId);
       Boolean keyword = likeKeywordEntities != null;
 
-      if(userEntity.getBirth() != null && userEntity.getGender() != null && userEntity.getMbti() != null && userEntity.getJob() != null && userEntity.getSelfIntro() != null && keyword){
-        if(badgeRepository.findByUserIdAndBadge(userId, "자기소개 작성 완료!") == null){
+      if (userEntity.getBirth() != null && userEntity.getGender() != null && userEntity.getMbti() != null
+          && userEntity.getJob() != null && userEntity.getSelfIntro() != null && keyword) {
+        if (badgeRepository.findByUserIdAndBadge(userId, "자기소개 작성 완료!") == null) {
           BadgeEntity badgeEntity = new BadgeEntity(userId, "자기소개 작성 완료!", false);
           badgeRepository.save(badgeEntity);
         }
       }
 
-      if(communityPostRepository.findByNicknameOrderByPostSequenceDesc(nickname).size() >= 10){
-        if(badgeRepository.findByUserIdAndBadge(userId, "게시글 10개 작성!") == null){
+      if (communityPostRepository.findByNicknameOrderByPostSequenceDesc(nickname).size() >= 10) {
+        if (badgeRepository.findByUserIdAndBadge(userId, "게시글 10개 작성!") == null) {
           BadgeEntity badgeEntity = new BadgeEntity(userId, "게시글 10개 작성!", false);
           badgeRepository.save(badgeEntity);
         }
       }
 
-      if(communityCommentRepository.findByNicknameOrderByCommentSequenceDesc(nickname).size() >= 10){
-        if(badgeRepository.findByUserIdAndBadge(userId, "댓글 10개 작성!") == null)  {
-          BadgeEntity badgeEntity = new BadgeEntity(userId,"댓글 10개 작성!", false);
+      if (communityCommentRepository.findByNicknameOrderByCommentSequenceDesc(nickname).size() >= 10) {
+        if (badgeRepository.findByUserIdAndBadge(userId, "댓글 10개 작성!") == null) {
+          BadgeEntity badgeEntity = new BadgeEntity(userId, "댓글 10개 작성!", false);
           badgeRepository.save(badgeEntity);
         }
       }
 
-    } catch (Exception e) {
-      e.printStackTrace();
-      return ResponseDto.databaseError();
+    } catch (DataIntegrityViolationException e) {
     }
     return ResponseDto.success(HttpStatus.OK);
 
@@ -461,7 +470,7 @@ public class MypageServiceImplement implements MypageService{
       return ResponseDto.databaseError();
     }
 
-    return GetBadgeListResponseDto.success(badgeEntities); 
+    return GetBadgeListResponseDto.success(badgeEntities);
 
   }
 
@@ -470,25 +479,26 @@ public class MypageServiceImplement implements MypageService{
     BadgeEntity selectBadgeEntity = null;
     try {
       selectBadgeEntity = badgeRepository.findByUserIdAndBadge(userId, dto.getBadge());
-      if(selectBadgeEntity == null) return ResponseDto.invalidRequest();
+      if (selectBadgeEntity == null)
+        return ResponseDto.invalidRequest();
 
       BadgeEntity beforeBadge = null;
       List<BadgeEntity> badgeEntities = new ArrayList<>();
       badgeEntities = badgeRepository.findAllByUserId(userId);
       for (BadgeEntity badge : badgeEntities) {
-          if (badge.getIsSelected()) {
-            beforeBadge = badge;
-          }
+        if (badge.getIsSelected()) {
+          beforeBadge = badge;
+        }
       }
 
-      if(beforeBadge != null && !selectBadgeEntity.getBadge().equals(beforeBadge.getBadge())){
+      if (beforeBadge != null && !selectBadgeEntity.getBadge().equals(beforeBadge.getBadge())) {
         beforeBadge.setIsSelected(false);
         selectBadgeEntity.patchBadge(dto, userId);
         badgeRepository.save(selectBadgeEntity);
       }
       selectBadgeEntity.patchBadge(dto, userId);
       badgeRepository.save(selectBadgeEntity);
-      
+
     } catch (Exception e) {
       e.printStackTrace();
       return ResponseDto.databaseError();
@@ -510,8 +520,7 @@ public class MypageServiceImplement implements MypageService{
       }
       if (badgeEntity == null) {
         return ResponseDto.success(HttpStatus.OK);
-    }
-    
+      }
 
     } catch (Exception e) {
       e.printStackTrace();
@@ -521,17 +530,16 @@ public class MypageServiceImplement implements MypageService{
     return GetBadgeResponseDto.success(badgeEntity);
   }
 
-  
   @Override
   public ResponseEntity<? super GetUserIntroductionResponseDto> getOtherUserIntroduction(String userId) {
-    
+
     List<LikeKeywordEntity> likeKeywordEntities = new ArrayList<>();
     UserEntity userEntity = userRepository.findByUserId(userId);
-    
 
     try {
       likeKeywordEntities = likeKeywordRepository.findAllByUserId(userEntity.getUserId());
-      if(likeKeywordEntities == null | userEntity == null) return ResponseDto.noExistUser();
+      if (likeKeywordEntities == null | userEntity == null)
+        return ResponseDto.noExistUser();
 
     } catch (Exception e) {
       e.printStackTrace();
@@ -542,16 +550,17 @@ public class MypageServiceImplement implements MypageService{
   }
 
   @Override
-  public ResponseEntity<? super GetMyActivityCountResponseDto> getMyActivityCount(String userId){
+  public ResponseEntity<? super GetMyActivityCountResponseDto> getMyActivityCount(String userId) {
     UserEntity userEntity = userRepository.findByUserId(userId);
-    if(userEntity == null) return ResponseDto.noExistUser();
+    if (userEntity == null)
+      return ResponseDto.noExistUser();
     Integer communityCommentCount = 0;
     Integer communityPostCount = 0;
     Integer applyCount = 0;
     Integer acceptCount = 0;
     Integer shoppingCartCount = 0;
     Integer wishListCount = 0;
-    
+
     try {
       applyCount = helperPostRepository.countByUserId(userId);
       acceptCount = helperApplyRepository.countByApplicantId(userId);
@@ -564,7 +573,8 @@ public class MypageServiceImplement implements MypageService{
       return ResponseDto.databaseError();
     }
 
-    return GetMyActivityCountResponseDto.success(communityCommentCount, communityPostCount, applyCount, acceptCount, shoppingCartCount, wishListCount);
+    return GetMyActivityCountResponseDto.success(communityCommentCount, communityPostCount, applyCount, acceptCount,
+        shoppingCartCount, wishListCount);
   }
 
   @Override
@@ -572,14 +582,15 @@ public class MypageServiceImplement implements MypageService{
     List<ProductVO> productEntities = new ArrayList<>();
     UserEntity userEntity = userRepository.findByUserId(userId);
     try {
-      if(userEntity == null) return ResponseDto.noExistUser();
+      if (userEntity == null)
+        return ResponseDto.noExistUser();
       productEntities = productRepository.findByStatus("OPEN");
     } catch (Exception e) {
       e.printStackTrace();
       return ResponseDto.databaseError();
     }
 
-    return GetProductListResponseDto.success(productEntities,"all");
+    return GetProductListResponseDto.success(productEntities, "all");
   }
 
   @Override
@@ -587,29 +598,30 @@ public class MypageServiceImplement implements MypageService{
     List<ProductVO> productEntities = new ArrayList<>();
     UserEntity userEntity = userRepository.findByUserId(userId);
     try {
-      if(userEntity == null) return ResponseDto.noExistUser();
+      if (userEntity == null)
+        return ResponseDto.noExistUser();
       productEntities = productRepository.findByStatus("CLOSE");
     } catch (Exception e) {
       e.printStackTrace();
       return ResponseDto.databaseError();
     }
 
-    return GetProductListResponseDto.success(productEntities,"all");
+    return GetProductListResponseDto.success(productEntities, "all");
   }
 
-  @Override 
+  @Override
   public ResponseEntity<? super GetMyHelperPostListResponseDto> getMyHelperRequestPost(String userId) {
-      List<NeedHelperEntity> needHelperEntities = new ArrayList<>();
+    List<NeedHelperEntity> needHelperEntities = new ArrayList<>();
 
-      try {
-        needHelperEntities = helperPostRepository.findAllByUserIdOrderBySequenceDesc(userId);
-        
-      } catch (Exception e) {
-        e.printStackTrace();
-        return ResponseDto.databaseError();
-      }
+    try {
+      needHelperEntities = helperPostRepository.findAllByUserIdOrderBySequenceDesc(userId);
 
-      return GetMyHelperPostListResponseDto.success(needHelperEntities);
+    } catch (Exception e) {
+      e.printStackTrace();
+      return ResponseDto.databaseError();
+    }
+
+    return GetMyHelperPostListResponseDto.success(needHelperEntities);
   }
 
   @Override
@@ -621,7 +633,7 @@ public class MypageServiceImplement implements MypageService{
       for (Integer postSequence : myApplyList) {
         NeedHelperEntity needHelperEntity = helperPostRepository.findBySequence(postSequence);
         if (needHelperEntity != null) {
-            needHelperEntities.add(needHelperEntity);
+          needHelperEntities.add(needHelperEntity);
         }
       }
     } catch (Exception e) {
@@ -632,30 +644,29 @@ public class MypageServiceImplement implements MypageService{
     return GetMyHelperPostListResponseDto.success(needHelperEntities);
   }
 
-  
   @Override
   public ResponseEntity<? super GetMyHelperPostListResponseDto> getMyHelperLikedPost(String userId) {
     List<HelperLikedEntity> myLikeList = new ArrayList<>();
     List<NeedHelperEntity> needHelperEntities = new ArrayList<>();
 
-      try {
-        myLikeList = helperLikedRepository.findByUserId(userId);
-        for (HelperLikedEntity likedEntity : myLikeList) {
-          Integer postSequence = likedEntity.getLikedPostSequence();
-          NeedHelperEntity needHelperEntity = helperPostRepository.findBySequence(postSequence);
-          if (needHelperEntity != null) {
-              needHelperEntities.add(needHelperEntity);
-          }
-      }
-        
-      } catch (Exception e) {
-        e.printStackTrace();
-        return ResponseDto.databaseError();
+    try {
+      myLikeList = helperLikedRepository.findByUserId(userId);
+      for (HelperLikedEntity likedEntity : myLikeList) {
+        Integer postSequence = likedEntity.getLikedPostSequence();
+        NeedHelperEntity needHelperEntity = helperPostRepository.findBySequence(postSequence);
+        if (needHelperEntity != null) {
+          needHelperEntities.add(needHelperEntity);
+        }
       }
 
-      return GetMyHelperPostListResponseDto.success(needHelperEntities);
+    } catch (Exception e) {
+      e.printStackTrace();
+      return ResponseDto.databaseError();
+    }
+
+    return GetMyHelperPostListResponseDto.success(needHelperEntities);
   }
-  
+
   @Override
   public Integer getApplicantCount(Integer postSequence, String userId) {
     return helperApplyRepository.countByPostSequence(postSequence);
@@ -663,7 +674,7 @@ public class MypageServiceImplement implements MypageService{
 
   @Override
   public ResponseEntity<? super GetHelperApplyListRespeonseDto> getHelperApplyList(String userId,
-    Integer postSequence) {
+      Integer postSequence) {
     List<HelperApplyEntity> helperApplyEntities = new ArrayList<>();
 
     try {
@@ -675,12 +686,11 @@ public class MypageServiceImplement implements MypageService{
 
     return GetHelperApplyListRespeonseDto.success(helperApplyEntities);
 
-      
   }
 
   @Override
   public ResponseEntity<? super GetCommunityCommentsResponseDto> getOtherUserCommunityComment(String userId) {
-    
+
     List<CommunityCommentEntity> communityCommentEntities = new ArrayList<>();
     UserEntity userEntity = null;
 
@@ -700,46 +710,45 @@ public class MypageServiceImplement implements MypageService{
   public ResponseEntity<? super GetCommunityResponseDto> getOtherUserCommunityPost(String userId) {
     List<CommunityPostEntity> communityPostEntities = new ArrayList<>();
     UserEntity userEntity = null;
-    
+
     try {
       userEntity = userRepository.findByUserId(userId);
       String nickname = userEntity.getNickname();
       communityPostEntities = communityPostRepository.findByNicknameOrderByPostSequenceDesc(nickname);
-      
+
     } catch (Exception e) {
       e.printStackTrace();
     }
 
-    return GetCommunityResponseDto.success(communityPostEntities);    
+    return GetCommunityResponseDto.success(communityPostEntities);
   }
 
   @Override
   public ResponseEntity<? super GetMyHelperPostListResponseDto> getOtherUserHelperPost(String userId) {
     try {
-        List<GetHelperPostResponseDto> posts = helperPostRepository.findAllWithNickname();
-        return ResponseEntity.ok(new GetHelperPostListResponseDto(posts));
+      List<GetHelperPostResponseDto> posts = helperPostRepository.findAllWithNickname();
+      return ResponseEntity.ok(new GetHelperPostListResponseDto(posts));
     } catch (Exception exception) {
-        exception.printStackTrace();
-        return ResponseDto.databaseError();
-    }  
+      exception.printStackTrace();
+      return ResponseDto.databaseError();
+    }
   }
 
   @Override
-  public ResponseEntity<? super GetHelperCommentsResponseDto> getOtherUserHelperComments(Integer postSequence, String userId) {
+  public ResponseEntity<? super GetHelperCommentsResponseDto> getOtherUserHelperComments(Integer postSequence,
+      String userId) {
     List<NeedHelperCommentEntity> helperCommentEntities = new ArrayList<>();
-        
+
     try {
 
-        helperCommentEntities = helperCommentRepository.findByPostSequence(postSequence);
-        
+      helperCommentEntities = helperCommentRepository.findByPostSequence(postSequence);
+
     } catch (Exception exception) {
-        exception.printStackTrace();
-        return ResponseDto.databaseError();
+      exception.printStackTrace();
+      return ResponseDto.databaseError();
     }
 
     return GetHelperCommentsResponseDto.success(helperCommentEntities);
   }
-
-  
 
 }

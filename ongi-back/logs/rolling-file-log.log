@@ -1,6 +1,1 @@
-2025-05-14 16:32:12,145 ERROR [http-nio-4000-exec-4] org.hibernate.engine.jdbc.spi.SqlExceptionHelper: Unknown column 'is_closed' in 'where clause'
-2025-05-14 16:32:12,145 ERROR [http-nio-4000-exec-5] org.hibernate.engine.jdbc.spi.SqlExceptionHelper: Unknown column 'is_closed' in 'where clause'
-2025-05-14 16:32:34,567 ERROR [http-nio-4000-exec-10] org.hibernate.engine.jdbc.spi.SqlExceptionHelper: Unknown column 'is_closed' in 'where clause'
-2025-05-14 16:32:34,567 ERROR [http-nio-4000-exec-1] org.hibernate.engine.jdbc.spi.SqlExceptionHelper: Unknown column 'is_closed' in 'where clause'
-2025-05-14 16:32:45,651 ERROR [http-nio-4000-exec-5] org.hibernate.engine.jdbc.spi.SqlExceptionHelper: Unknown column 'is_closed' in 'where clause'
-2025-05-14 16:32:45,652 ERROR [http-nio-4000-exec-10] org.hibernate.engine.jdbc.spi.SqlExceptionHelper: Unknown column 'is_closed' in 'where clause'
+2025-05-15 03:06:45,063 ERROR [http-nio-4000-exec-10] org.hibernate.engine.jdbc.spi.SqlExceptionHelper: Duplicate entry '01021445678' for key 'user.tel_number_UNIQUE'

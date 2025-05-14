@@ -284,5 +284,25 @@ public class GroupPurchaseServiceImplements implements GroupPurchaseService{
 
     return ResponseDto.success(HttpStatus.OK);
   }
+
+  @Override
+  public ResponseEntity<ResponseDto> deleteStockReservation(String userId) {
+
+    try{
+
+      List<StockReservationEntity> stockReservationEntities = stockReservationRepository.findByUserId(userId);
+      if(stockReservationEntities == null) return ResponseDto.noExistShoppingCart();
+      
+      for(StockReservationEntity entity: stockReservationEntities) {
+        stockReservationRepository.delete(entity);
+      }
+        
+    } catch(Exception exception){
+      log.error("데이터베이스 에러", exception.getMessage());
+      return ResponseDto.databaseError();
+    }
+
+    return ResponseDto.success(HttpStatus.OK);
+  }
   
 }
