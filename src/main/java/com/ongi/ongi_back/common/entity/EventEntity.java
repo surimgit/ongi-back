@@ -27,6 +27,7 @@ public class EventEntity {
     private Integer neededPoint;
     private String content;
     private String image;
+    private boolean isClosed;
 
     public EventEntity(PostEventRequestDto dto) {
         this.title = dto.getTitle();

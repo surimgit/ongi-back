@@ -4,7 +4,9 @@ import java.util.List;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.ongi.ongi_back.common.dto.request.event.PostEventApplyRequestDto;
 import com.ongi.ongi_back.common.dto.request.event.PostEventRequestDto;
@@ -29,11 +31,15 @@ public class EventServiceImplement implements EventService {
     private final UserRepository userRepository;
     
     @Override
-    public ResponseEntity<ResponseDto> postEvent(PostEventRequestDto dto) {
+    public ResponseEntity<ResponseDto> postEvent(PostEventRequestDto dto, String userId) {
 
         EventEntity eventEntity = null;
+        UserEntity userEntity = null;
         
         try {
+
+            userEntity = userRepository.findByUserId(userId);
+            if (!userEntity.getIsAdmin()) return ResponseDto.noPermission();
 
             eventEntity = new EventEntity(dto);
             eventRepository.save(eventEntity);
@@ -53,7 +59,7 @@ public class EventServiceImplement implements EventService {
         
         try {
 
-            eventEntities = eventRepository.findAllByOrderByEventSequenceDesc();
+            eventEntities = eventRepository.findActiveEvents();
             
         } catch (Exception exception) {
             exception.printStackTrace();
@@ -61,6 +67,24 @@ public class EventServiceImplement implements EventService {
         }
 
         return GetEventListResponseDto.success(eventEntities);
+    }
+
+    @Override
+    @Scheduled(cron = " 0 0 0 * * ? ")
+    @Transactional
+    public void closeExpiredEvents() {
+
+        List<EventEntity> eventEntities = eventRepository.findClosingEvents();
+        if (eventEntities == null) return;
+
+        for (EventEntity eventEntity: eventEntities) {
+            eventEntity.setClosed(true);
+        }
+
+        eventRepository.saveAll(eventEntities);
+
+        System.out.println(eventEntities.size() + " events has been closed.");
+        return;
     }
 
     @Override
