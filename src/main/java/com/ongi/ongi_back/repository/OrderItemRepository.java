@@ -14,6 +14,7 @@ import com.ongi.ongi_back.common.vo.OrderItemVO;
 
 import jakarta.transaction.Transactional;
 
+
 @Repository
 public interface OrderItemRepository extends JpaRepository<OrderItemEntity, Integer> {
   OrderItemEntity findByPaymentKeyAndOrderItemSequence(String paymentKey, Integer productSequence);
