@@ -30,8 +30,11 @@ import com.ongi.ongi_back.repository.HelperPostRepository;
 import com.ongi.ongi_back.repository.UserRepository;
 import com.ongi.ongi_back.service.NeedHelperService;
 
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class NeedHelperServiceImplement implements NeedHelperService{
@@ -263,6 +266,7 @@ public class NeedHelperServiceImplement implements NeedHelperService{
     }
 
     @Override
+    @Transactional
     public ResponseEntity<ResponseDto> postHelperApply(Integer postSequence, String applicantId) {
         try {      
             NeedHelperEntity post = helperPostRepository.findById(postSequence).orElseThrow();
@@ -274,9 +278,11 @@ public class NeedHelperServiceImplement implements NeedHelperService{
             chat.setNeedHelperSequence(postSequence);
             chat.setChatAvailable(false);
             chatRepository.save(chat);
+            chatRepository.flush(); // 강제 insert
+            log.info(">> ChatEntity Saved, id: {}", chat.getChatSequence());
 
             HelperApplyEntity apply = new HelperApplyEntity(postSequence, post, requesterId, applicantId, chat.getChatSequence());
-            apply.setIsApplied(false);
+            apply.setIsApplied(true);
             helperApplyRepository.save(apply);
 
         } catch (Exception exception) {
@@ -289,12 +295,14 @@ public class NeedHelperServiceImplement implements NeedHelperService{
 
 
     @Override
+    @Transactional
     public ResponseEntity<ResponseDto> deleteHelperApply(Integer postSequence, String applicantId) {
         try {
             boolean exists = helperApplyRepository.existsByPostSequenceAndApplicantId(postSequence, applicantId);
             if (!exists) return ResponseDto.noExistNeedhelperPost();
     
             helperApplyRepository.deleteByPostSequenceAndApplicantId(postSequence, applicantId);
+            chatRepository.deleteByNeedHelperSequenceAndApplicantId(postSequence, applicantId);
         } catch (Exception exception) {
             exception.printStackTrace();
             return ResponseDto.databaseError();

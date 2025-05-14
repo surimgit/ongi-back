@@ -14,6 +14,7 @@ import com.ongi.ongi_back.common.dto.response.ResponseDto;
 import com.ongi.ongi_back.common.dto.response.admin.GetIsAdminResponseDto;
 import com.ongi.ongi_back.common.dto.response.user.GetSignInUserResponseDto;
 import com.ongi.ongi_back.common.dto.response.user.GetUserNicknameResponseDto;
+import com.ongi.ongi_back.common.dto.response.user.GetUserProfileImageResponseDto;
 import com.ongi.ongi_back.service.UserService;
 
 import jakarta.validation.Valid;
@@ -59,6 +60,15 @@ public class UserController {
         @AuthenticationPrincipal String userId
     ) {
         ResponseEntity<? super GetIsAdminResponseDto> response = userService.getIsAdmin(userId);
+        return response;
+    }
+
+    @GetMapping("profile-image")
+    public ResponseEntity<? super GetUserProfileImageResponseDto> getProfileImage(
+        @RequestParam(value="comment-user", required=false) String comment_user,
+        @AuthenticationPrincipal String userId
+    )   {
+        ResponseEntity<? super GetUserProfileImageResponseDto> response = userService.getUserProfileImage(comment_user);
         return response;
     }
 }

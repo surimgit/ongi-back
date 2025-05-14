@@ -11,7 +11,7 @@ import com.ongi.ongi_back.common.entity.AlertEntity;
 import jakarta.transaction.Transactional;
 
 @Repository
-public interface AlertRespository extends JpaRepository<AlertEntity, Integer>{
+public interface AlertRepository extends JpaRepository<AlertEntity, Integer>{
     List<AlertEntity> findByReceiverIdOrderByAlertSequenceDesc(String userId);
     @Query(value = "SELECT * FROM alert " +
                     "WHERE receiver_id = :receiverId " +

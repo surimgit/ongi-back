@@ -15,7 +15,6 @@ public class CommunityCommentVO {
     private String nickname;
     private String commentPostDate;
     private String comment;
-    private String profileImage;
 
     private CommunityCommentVO(CommunityCommentEntity communityCommentEntity) {
         this.postSequence = communityCommentEntity.getPostSequence();
@@ -24,7 +23,6 @@ public class CommunityCommentVO {
         this.nickname = communityCommentEntity.getNickname();
         this.commentPostDate = communityCommentEntity.getPostDate();
         this.comment = communityCommentEntity.getContent();
-        this.profileImage = communityCommentEntity.getProfileImage();
     }
 
     public static List<CommunityCommentVO> getList(List<CommunityCommentEntity> communityCommentEntities) {

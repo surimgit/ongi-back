@@ -77,10 +77,11 @@ public class MypageServiceImplement implements MypageService{
   private final WishListRepository wishListRepository;
   private final OrderItemRepository orderItemRepository;
   private final ReviewImagesRepository reviewImagesRepository;
-  private final BadgeRespository badgeRespository;
+  private final BadgeRepository badgeRepository;
   private final HelperPostRepository helperPostRepository;
   private final HelperApplyRepository helperApplyRepository;
   private final HelperLikedRepository helperLikedRepository;
+  private final FileService fileService;
   private final PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
   @Override
@@ -421,23 +422,23 @@ public class MypageServiceImplement implements MypageService{
       Boolean keyword = likeKeywordEntities != null;
 
       if(userEntity.getBirth() != null && userEntity.getGender() != null && userEntity.getMbti() != null && userEntity.getJob() != null && userEntity.getSelfIntro() != null && keyword){
-        if(badgeRespository.findByUserIdAndBadge(userId, "자기소개 작성 완료!") == null){
+        if(badgeRepository.findByUserIdAndBadge(userId, "자기소개 작성 완료!") == null){
           BadgeEntity badgeEntity = new BadgeEntity(userId, "자기소개 작성 완료!", false);
-          badgeRespository.save(badgeEntity);
+          badgeRepository.save(badgeEntity);
         }
       }
 
       if(communityPostRepository.findByNicknameOrderByPostSequenceDesc(nickname).size() >= 10){
-        if(badgeRespository.findByUserIdAndBadge(userId, "게시글 10개 작성!") == null){
+        if(badgeRepository.findByUserIdAndBadge(userId, "게시글 10개 작성!") == null){
           BadgeEntity badgeEntity = new BadgeEntity(userId, "게시글 10개 작성!", false);
-          badgeRespository.save(badgeEntity);
+          badgeRepository.save(badgeEntity);
         }
       }
 
       if(communityCommentRepository.findByNicknameOrderByCommentSequenceDesc(nickname).size() >= 10){
-        if(badgeRespository.findByUserIdAndBadge(userId, "댓글 10개 작성!") == null)  {
+        if(badgeRepository.findByUserIdAndBadge(userId, "댓글 10개 작성!") == null)  {
           BadgeEntity badgeEntity = new BadgeEntity(userId,"댓글 10개 작성!", false);
-          badgeRespository.save(badgeEntity);
+          badgeRepository.save(badgeEntity);
         }
       }
 
@@ -454,7 +455,7 @@ public class MypageServiceImplement implements MypageService{
     List<BadgeEntity> badgeEntities = new ArrayList<>();
 
     try {
-      badgeEntities = badgeRespository.findAllByUserId(userId);
+      badgeEntities = badgeRepository.findAllByUserId(userId);
 
     } catch (Exception e) {
       e.printStackTrace();
@@ -469,12 +470,12 @@ public class MypageServiceImplement implements MypageService{
   public ResponseEntity<ResponseDto> chooseBadge(String userId, PatchBadgeRequestDto dto) {
     BadgeEntity selectBadgeEntity = null;
     try {
-      selectBadgeEntity = badgeRespository.findByUserIdAndBadge(userId, dto.getBadge());
+      selectBadgeEntity = badgeRepository.findByUserIdAndBadge(userId, dto.getBadge());
       if(selectBadgeEntity == null) return ResponseDto.invalidRequest();
 
       BadgeEntity beforeBadge = null;
       List<BadgeEntity> badgeEntities = new ArrayList<>();
-      badgeEntities = badgeRespository.findAllByUserId(userId);
+      badgeEntities = badgeRepository.findAllByUserId(userId);
       for (BadgeEntity badge : badgeEntities) {
           if (badge.getIsSelected()) {
             beforeBadge = badge;
@@ -484,10 +485,10 @@ public class MypageServiceImplement implements MypageService{
       if(beforeBadge != null && !selectBadgeEntity.getBadge().equals(beforeBadge.getBadge())){
         beforeBadge.setIsSelected(false);
         selectBadgeEntity.patchBadge(dto, userId);
-        badgeRespository.save(selectBadgeEntity);
+        badgeRepository.save(selectBadgeEntity);
       }
       selectBadgeEntity.patchBadge(dto, userId);
-      badgeRespository.save(selectBadgeEntity);
+      badgeRepository.save(selectBadgeEntity);
       
     } catch (Exception e) {
       e.printStackTrace();
@@ -499,7 +500,7 @@ public class MypageServiceImplement implements MypageService{
   @Override
   public ResponseEntity<? super GetBadgeResponseDto> getOtherUserBadge(String userId) {
     List<BadgeEntity> badgeEntities = new ArrayList<>();
-    badgeEntities = badgeRespository.findAllByUserId(userId);
+    badgeEntities = badgeRepository.findAllByUserId(userId);
     BadgeEntity badgeEntity = null;
 
     try {

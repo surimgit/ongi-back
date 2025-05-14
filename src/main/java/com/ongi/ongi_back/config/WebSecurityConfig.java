@@ -64,6 +64,7 @@ public class WebSecurityConfig {
         .requestMatchers("/api/v1/alert/**").authenticated()
         .requestMatchers("/api/v1/user/nickname").permitAll()
         .requestMatchers("/file/**").permitAll()
+        .requestMatchers("/api/v1/event", "/api/v1/event/**").permitAll()
         .anyRequest().authenticated()
       )
       // description: 인증 또는 인가 실패에대한 처리 //

@@ -32,7 +32,7 @@ public class CommunityCommentEntity {
     private String postDate;
     private String profileImage;
 
-    public CommunityCommentEntity(PostCommentRequestDto dto, Integer postSequence ,String userId, String nickname, String profileImage) {
+    public CommunityCommentEntity(PostCommentRequestDto dto, Integer postSequence ,String userId, String nickname) {
         LocalDateTime now = LocalDateTime.now();
         DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
         this.userId = userId;
@@ -40,6 +40,5 @@ public class CommunityCommentEntity {
         this.postSequence = postSequence;
         this.content = dto.getComment();
         this.postDate = now.format(dateTimeFormatter);
-        this.profileImage = profileImage;
     }
 }
