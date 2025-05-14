@@ -1,7 +1,5 @@
 package com.ongi.ongi_back.controller;
 
-import java.time.LocalDate;
-
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -29,6 +27,8 @@ import com.ongi.ongi_back.common.dto.response.community.GetCommunityCommentsResp
 import com.ongi.ongi_back.common.dto.response.community.GetCommunityResponseDto;
 import com.ongi.ongi_back.common.dto.response.group.GetProductListResponseDto;
 import com.ongi.ongi_back.common.dto.response.needHelper.GetHelperApplyListRespeonseDto;
+import com.ongi.ongi_back.common.dto.response.needHelper.GetHelperCommentsResponseDto;
+import com.ongi.ongi_back.common.dto.response.needHelper.GetHelperPostListResponseDto;
 import com.ongi.ongi_back.common.dto.response.needHelper.GetMyHelperPostListResponseDto;
 import com.ongi.ongi_back.common.dto.response.user.GetMyActivityCountResponseDto;
 import com.ongi.ongi_back.common.dto.response.user.GetMyBuyingResponseDto;
@@ -222,14 +222,6 @@ public class MypageController {
     return response;
   }
 
-  @GetMapping("other/{userId}/community/post")
-  public ResponseEntity<? super GetCommunityResponseDto> getOtherUserCommunityPost(
-    @PathVariable("userId") String userId
-  ) {
-    ResponseEntity<? super GetCommunityResponseDto> response = mypageService.getMyCommunityPost(userId);
-    return response;
-  }
-
   @GetMapping("/other/{userId}/badge")
   public ResponseEntity<? super GetBadgeResponseDto> getOtherUserBadge(
     @PathVariable("userId") String userId
@@ -242,8 +234,7 @@ public class MypageController {
   public ResponseEntity<? super GetProductListResponseDto> getOtherUserSellingProduct(
     @PathVariable("userId") String userId
   ){
-    String today = LocalDate.now().toString();
-    ResponseEntity<? super GetProductListResponseDto> response = mypageService.getOtherUserSellingProduct(userId, today);
+    ResponseEntity<? super GetProductListResponseDto> response = mypageService.getOtherUserSellingProduct(userId);
     return response;
   }
 
@@ -251,18 +242,9 @@ public class MypageController {
   public ResponseEntity<? super GetProductListResponseDto> getOtherUserSelledProduct(
     @PathVariable("userId") String userId
   ){
-    String today = LocalDate.now().toString();
-    ResponseEntity<? super GetProductListResponseDto> response = mypageService.getOtherUserSelledProduct(userId, today);
+    ResponseEntity<? super GetProductListResponseDto> response = mypageService.getOtherUserSelledProduct(userId);
     return response;
   }
-  
-  // @GetMapping("/other/{userId}/group-buying/review")
-  // public ResponseEntity<? super GetProductReviewResponseDto> getOtherUserProductReviewed(
-  //   @PathVariable("userId") String userId
-  // ){
-  //   ResponseEntity<? super GetProductReviewResponseDto> response = mypageService.getOtherUserProductReviewed(userId);
-  //   return response;
-  // }
 
   @GetMapping("/need-helper/ask")
   public ResponseEntity<? super GetMyHelperPostListResponseDto> getMyHelperRequestPost(
@@ -305,4 +287,47 @@ public class MypageController {
     ResponseEntity<? super GetHelperApplyListRespeonseDto> response = mypageService.getHelperApplyList(userId, postSequence);
     return response;
   }
+
+  @GetMapping("/other/{userId}/community/post")
+  public ResponseEntity<? super GetCommunityResponseDto> getOtherUserCommunityPost(
+    @PathVariable("userId") String userId  
+  ) {
+    ResponseEntity<? super GetCommunityResponseDto> response = mypageService.getOtherUserCommunityPost(userId);
+    return response;
+  }
+  
+  @GetMapping("/other/{userId}/need-helper")
+  public ResponseEntity<? super GetMyHelperPostListResponseDto> getOtherUserHelperPost(
+    @PathVariable("userId") String userId  
+  ) {
+    ResponseEntity<? super GetMyHelperPostListResponseDto> response = mypageService.getOtherUserHelperPost(userId);
+    return response;
+  }
+
+  @GetMapping("/other/{userId}/need-helper/{postSequence}/count")
+  public ResponseEntity<Integer> getOtherApplicantCount(
+    @PathVariable("postSequence") Integer postSequence,
+    @PathVariable("userId") String userId  
+  ) {
+    int count = mypageService.getApplicantCount(postSequence, userId);
+    return ResponseEntity.ok(count);
+  }
+
+  @GetMapping("/other/{userId}/need-helper/{postSequence}/comments")
+  public ResponseEntity<? super GetHelperCommentsResponseDto> getOtherUserHelperComments(
+    @PathVariable("postSequence") Integer postSequence,
+    @PathVariable("userId") String userId  
+  )  {
+    ResponseEntity<? super GetHelperCommentsResponseDto> response = mypageService.getOtherUserHelperComments(postSequence, userId);
+    return response;
+  }
+
+  @GetMapping("/other/{userId}/group-buying")
+  public ResponseEntity<? super GetMySalesResponseDto> getOtherUserSale(
+    @PathVariable("userId") String userId  
+  ){
+    ResponseEntity<? super GetMySalesResponseDto> response = mypageService.getMySalesList(userId);
+    return response;
+  }
+  
 }

@@ -1,6 +1,5 @@
 package com.ongi.ongi_back.service.implement;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -27,6 +26,9 @@ import com.ongi.ongi_back.common.dto.response.community.GetCommunityCommentsResp
 import com.ongi.ongi_back.common.dto.response.community.GetCommunityResponseDto;
 import com.ongi.ongi_back.common.dto.response.group.GetProductListResponseDto;
 import com.ongi.ongi_back.common.dto.response.needHelper.GetHelperApplyListRespeonseDto;
+import com.ongi.ongi_back.common.dto.response.needHelper.GetHelperCommentsResponseDto;
+import com.ongi.ongi_back.common.dto.response.needHelper.GetHelperPostListResponseDto;
+import com.ongi.ongi_back.common.dto.response.needHelper.GetHelperPostResponseDto;
 import com.ongi.ongi_back.common.dto.response.needHelper.GetMyHelperPostListResponseDto;
 import com.ongi.ongi_back.common.dto.response.user.GetLikeKeywordListResponseDto;
 import com.ongi.ongi_back.common.dto.response.user.GetMyActivityCountResponseDto;
@@ -42,33 +44,18 @@ import com.ongi.ongi_back.common.entity.HelperApplyEntity;
 import com.ongi.ongi_back.common.entity.HelperLikedEntity;
 import com.ongi.ongi_back.common.entity.LikeKeywordEntity;
 import com.ongi.ongi_back.common.entity.LikedEntity;
+import com.ongi.ongi_back.common.entity.NeedHelperCommentEntity;
 import com.ongi.ongi_back.common.entity.NeedHelperEntity;
 import com.ongi.ongi_back.common.entity.OrderItemEntity;
 import com.ongi.ongi_back.common.entity.ProductEntity;
 import com.ongi.ongi_back.common.entity.ProductReviewEntity;
 import com.ongi.ongi_back.common.entity.ReviewImagesEntity;
 import com.ongi.ongi_back.common.entity.UserEntity;
-import com.ongi.ongi_back.common.vo.HelperApplyVO;
 import com.ongi.ongi_back.common.vo.MyBuyingVO;
 import com.ongi.ongi_back.common.vo.MySalesVO;
 import com.ongi.ongi_back.common.vo.OrderItemVO;
 import com.ongi.ongi_back.common.vo.ProductVO;
-import com.ongi.ongi_back.repository.BadgeRepository;
-import com.ongi.ongi_back.repository.CommunityCommentRepository;
-import com.ongi.ongi_back.repository.CommunityPostRepository;
-import com.ongi.ongi_back.repository.HelperApplyRepository;
-import com.ongi.ongi_back.repository.HelperLikedRepository;
-import com.ongi.ongi_back.repository.HelperPostRepository;
-import com.ongi.ongi_back.repository.LikeKeywordRepository;
-import com.ongi.ongi_back.repository.LikedRepository;
-import com.ongi.ongi_back.repository.OrderItemRepository;
-import com.ongi.ongi_back.repository.ProductRepository;
-import com.ongi.ongi_back.repository.ProductReviewRepository;
-import com.ongi.ongi_back.repository.ReviewImagesRepository;
-import com.ongi.ongi_back.repository.ShoppingCartRepository;
-import com.ongi.ongi_back.repository.UserRepository;
-import com.ongi.ongi_back.repository.WishListRepository;
-import com.ongi.ongi_back.service.FileService;
+import com.ongi.ongi_back.repository.*;
 import com.ongi.ongi_back.service.MypageService;
 
 import lombok.RequiredArgsConstructor;
@@ -76,6 +63,8 @@ import lombok.RequiredArgsConstructor;
 @Service
 @RequiredArgsConstructor
 public class MypageServiceImplement implements MypageService{
+
+    private final HelperCommentRepository helperCommentRepository;
   
   private final LikeKeywordRepository likeKeywordRepository;
   private final UserRepository userRepository;
@@ -92,7 +81,6 @@ public class MypageServiceImplement implements MypageService{
   private final HelperPostRepository helperPostRepository;
   private final HelperApplyRepository helperApplyRepository;
   private final HelperLikedRepository helperLikedRepository;
-  private final FileService fileService;
   private final PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
   @Override
@@ -559,14 +547,14 @@ public class MypageServiceImplement implements MypageService{
     if(userEntity == null) return ResponseDto.noExistUser();
     Integer communityCommentCount = 0;
     Integer communityPostCount = 0;
-    Integer reviewCount = 0;
-    Integer reviewedCount = 0;
+    Integer applyCount = 0;
+    Integer acceptCount = 0;
     Integer shoppingCartCount = 0;
     Integer wishListCount = 0;
     
     try {
-      reviewCount = 0;
-      reviewedCount = 0;
+      applyCount = helperPostRepository.countByUserId(userId);
+      acceptCount = helperApplyRepository.countByApplicantId(userId);
       communityCommentCount = communityCommentRepository.countByUserId(userId);
       communityPostCount = communityPostRepository.countByUserId(userId);
       shoppingCartCount = shoppingCartRepository.countByUserId(userId);
@@ -576,17 +564,16 @@ public class MypageServiceImplement implements MypageService{
       return ResponseDto.databaseError();
     }
 
-    return GetMyActivityCountResponseDto.success(communityCommentCount, communityPostCount, reviewCount, reviewedCount, shoppingCartCount, wishListCount);
+    return GetMyActivityCountResponseDto.success(communityCommentCount, communityPostCount, applyCount, acceptCount, shoppingCartCount, wishListCount);
   }
 
   @Override
-  public ResponseEntity<? super GetProductListResponseDto> getOtherUserSellingProduct(String userId, String today) {
+  public ResponseEntity<? super GetProductListResponseDto> getOtherUserSellingProduct(String userId) {
     List<ProductVO> productEntities = new ArrayList<>();
     UserEntity userEntity = userRepository.findByUserId(userId);
-    today = LocalDate.now().toString();
     try {
       if(userEntity == null) return ResponseDto.noExistUser();
-      productEntities = productRepository.findByUserIdAndDeadlineAfterNow(userId, today);
+      productEntities = productRepository.findByStatus("OPEN");
     } catch (Exception e) {
       e.printStackTrace();
       return ResponseDto.databaseError();
@@ -596,13 +583,12 @@ public class MypageServiceImplement implements MypageService{
   }
 
   @Override
-  public ResponseEntity<? super GetProductListResponseDto> getOtherUserSelledProduct(String userId, String today) {
+  public ResponseEntity<? super GetProductListResponseDto> getOtherUserSelledProduct(String userId) {
     List<ProductVO> productEntities = new ArrayList<>();
     UserEntity userEntity = userRepository.findByUserId(userId);
-    today = LocalDate.now().toString();
     try {
       if(userEntity == null) return ResponseDto.noExistUser();
-      productEntities = productRepository.findByUserIdAndDeadlineBeforeNow(userId, today);
+      productEntities = productRepository.findByStatus("CLOSE");
     } catch (Exception e) {
       e.printStackTrace();
       return ResponseDto.databaseError();
@@ -611,7 +597,7 @@ public class MypageServiceImplement implements MypageService{
     return GetProductListResponseDto.success(productEntities,"all");
   }
 
-  @Override
+  @Override 
   public ResponseEntity<? super GetMyHelperPostListResponseDto> getMyHelperRequestPost(String userId) {
       List<NeedHelperEntity> needHelperEntities = new ArrayList<>();
 
@@ -692,7 +678,68 @@ public class MypageServiceImplement implements MypageService{
       
   }
 
+  @Override
+  public ResponseEntity<? super GetCommunityCommentsResponseDto> getOtherUserCommunityComment(String userId) {
+    
+    List<CommunityCommentEntity> communityCommentEntities = new ArrayList<>();
+    UserEntity userEntity = null;
 
+    try {
+      userEntity = userRepository.findByUserId(userId);
+      String nickname = userEntity.getNickname();
+      communityCommentEntities = communityCommentRepository.findByNicknameOrderByCommentSequenceDesc(nickname);
 
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+
+    return GetCommunityCommentsResponseDto.success(communityCommentEntities);
+  }
+
+  @Override
+  public ResponseEntity<? super GetCommunityResponseDto> getOtherUserCommunityPost(String userId) {
+    List<CommunityPostEntity> communityPostEntities = new ArrayList<>();
+    UserEntity userEntity = null;
+    
+    try {
+      userEntity = userRepository.findByUserId(userId);
+      String nickname = userEntity.getNickname();
+      communityPostEntities = communityPostRepository.findByNicknameOrderByPostSequenceDesc(nickname);
+      
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+
+    return GetCommunityResponseDto.success(communityPostEntities);    
+  }
+
+  @Override
+  public ResponseEntity<? super GetMyHelperPostListResponseDto> getOtherUserHelperPost(String userId) {
+    try {
+        List<GetHelperPostResponseDto> posts = helperPostRepository.findAllWithNickname();
+        return ResponseEntity.ok(new GetHelperPostListResponseDto(posts));
+    } catch (Exception exception) {
+        exception.printStackTrace();
+        return ResponseDto.databaseError();
+    }  
+  }
+
+  @Override
+  public ResponseEntity<? super GetHelperCommentsResponseDto> getOtherUserHelperComments(Integer postSequence, String userId) {
+    List<NeedHelperCommentEntity> helperCommentEntities = new ArrayList<>();
+        
+    try {
+
+        helperCommentEntities = helperCommentRepository.findByPostSequence(postSequence);
+        
+    } catch (Exception exception) {
+        exception.printStackTrace();
+        return ResponseDto.databaseError();
+    }
+
+    return GetHelperCommentsResponseDto.success(helperCommentEntities);
+  }
+
+  
 
 }

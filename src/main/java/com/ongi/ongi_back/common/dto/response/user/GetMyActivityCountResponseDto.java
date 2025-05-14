@@ -11,36 +11,37 @@ import lombok.Getter;
 public class GetMyActivityCountResponseDto extends ResponseDto {
   private Integer communityCommentCount;
   private Integer communityPostCount;
-  private Integer reviewCount;
-  private Integer reviewedCount;
+  private Integer applyCount;
+  private Integer acceptCount;
   private Integer shoppingCartCount;
   private long wishListCount;
 
-  private GetMyActivityCountResponseDto(Integer communityCommentCount, 
+  private GetMyActivityCountResponseDto(
+  Integer communityCommentCount,
   Integer communityPostCount,
-  Integer reviewCount,
-  Integer reviewedCount,
+  Integer applyCount,
+  Integer acceptCount,
   Integer shoppingCartCount,
   long wishListCount){
     this.communityCommentCount = communityCommentCount;
     this.communityPostCount = communityPostCount;
-    this.reviewCount = reviewCount;
-    this.reviewedCount = reviewedCount;
+    this.applyCount = applyCount;
+    this.acceptCount = acceptCount;
     this.shoppingCartCount = shoppingCartCount;
     this.wishListCount = wishListCount;
   }
 
   public static ResponseEntity<GetMyActivityCountResponseDto> success(Integer communityCommentCount, 
   Integer communityPostCount,
-  Integer reviewCount,
-  Integer reviewedCount,
+  Integer applyCount,
+  Integer acceptCount,
   Integer shoppingCartCount,
   long wishListCount
   ){
     GetMyActivityCountResponseDto body = new GetMyActivityCountResponseDto(communityCommentCount, 
     communityPostCount,
-    reviewCount,
-    reviewedCount,
+    applyCount,
+    acceptCount,
     shoppingCartCount,
     wishListCount);
     return ResponseEntity.status(HttpStatus.OK).body(body);
