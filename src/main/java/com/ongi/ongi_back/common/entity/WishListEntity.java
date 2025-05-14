@@ -3,6 +3,8 @@ package com.ongi.ongi_back.common.entity;
 import com.ongi.ongi_back.common.entity.pk.WishListPk;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.IdClass;
 import jakarta.persistence.Table;
