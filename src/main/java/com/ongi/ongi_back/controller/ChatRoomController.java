@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.ongi.ongi_back.common.dto.response.ResponseDto;
 import com.ongi.ongi_back.common.dto.response.chat.GetChatRoomListResponseDto;
 import com.ongi.ongi_back.common.entity.MessageEntity;
 import com.ongi.ongi_back.repository.MessageRepository;
@@ -48,7 +49,7 @@ public class ChatRoomController {
     @AuthenticationPrincipal String userId,
     @RequestParam("applicantId") String applicantId
   ){
-    ResponseEntity<ResponseDto> response = chatService.acceptChat(chatSequence, userId, applicantId);
+    ResponseEntity<ResponseDto> response = chatService.acceptChat(userId, chatSequence, applicantId);
     return response;
   }
 
