@@ -12,4 +12,6 @@ public interface ChatRepository extends JpaRepository<ChatEntity, Integer> {
     boolean existsByRequesterIdAndApplicantId(String requesterId, String applicantId);
     List<ChatEntity> findByRequesterIdOrApplicantId(String requesterId, String applicantId);
     ChatEntity findByRequesterIdAndApplicantId(String requesterId, String applicantId);
+    void  deleteByNeedHelperSequenceAndApplicantId(Integer postSequence, String applicantId);
+
 }

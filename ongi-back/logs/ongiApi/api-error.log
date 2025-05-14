@@ -5804,3 +5804,37 @@ Caused by: org.springframework.data.mapping.PropertyReferenceException: No prope
 2025-05-14 14:22:41,137 ERROR c.o.o.c.AuthenticationFailEntryPoint [http-nio-4000-exec-4] Authentication failed: Full authentication is required to access this resource
 2025-05-14 14:25:20,645 ERROR c.o.o.c.AuthenticationFailEntryPoint [http-nio-4000-exec-3] Authentication failed: Full authentication is required to access this resource
 2025-05-14 14:25:20,672 ERROR c.o.o.c.AuthenticationFailEntryPoint [http-nio-4000-exec-4] Authentication failed: Full authentication is required to access this resource
+2025-05-14 14:53:34,458 ERROR c.o.o.p.JwtProvider [http-nio-4000-exec-5] JWT validation failed. Error: JWT strings must contain exactly 2 period characters. Found: 0
+2025-05-14 14:53:34,459 ERROR c.o.o.c.AuthenticationFailEntryPoint [http-nio-4000-exec-5] Authentication failed: Full authentication is required to access this resource
+2025-05-14 14:53:34,463 ERROR c.o.o.p.JwtProvider [http-nio-4000-exec-2] JWT validation failed. Error: JWT strings must contain exactly 2 period characters. Found: 0
+2025-05-14 14:53:34,463 ERROR c.o.o.c.AuthenticationFailEntryPoint [http-nio-4000-exec-2] Authentication failed: Full authentication is required to access this resource
+2025-05-14 14:53:34,493 ERROR c.o.o.p.JwtProvider [http-nio-4000-exec-1] JWT validation failed. Error: JWT strings must contain exactly 2 period characters. Found: 0
+2025-05-14 14:53:34,494 ERROR c.o.o.c.AuthenticationFailEntryPoint [http-nio-4000-exec-1] Authentication failed: Full authentication is required to access this resource
+2025-05-14 15:11:37,881 ERROR o.s.b.d.LoggingFailureAnalysisReporter [main] 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+Web server failed to start. Port 4000 was already in use.
+
+Action:
+
+Identify and stop the process that's listening on port 4000 or configure this application to listen on another port.
+
+2025-05-14 15:19:53,655 ERROR o.s.b.d.LoggingFailureAnalysisReporter [main] 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+Web server failed to start. Port 4000 was already in use.
+
+Action:
+
+Identify and stop the process that's listening on port 4000 or configure this application to listen on another port.
+
