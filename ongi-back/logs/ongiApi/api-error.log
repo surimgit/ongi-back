@@ -3917,3 +3917,20 @@ Caused by: java.lang.IllegalArgumentException: This class [class com.ongi.ongi_b
 	at org.springframework.beans.factory.support.ConstructorResolver.resolveAutowiredArgument(ConstructorResolver.java:913) ~[spring-beans-6.2.5.jar:6.2.5]
 	at org.springframework.beans.factory.support.ConstructorResolver.createArgumentArray(ConstructorResolver.java:791) ~[spring-beans-6.2.5.jar:6.2.5]
 	... 21 more
+2025-05-14 09:05:04,867 ERROR c.o.o.p.JwtProvider [http-nio-4000-exec-4] JWT validation failed. Error: JWT strings must contain exactly 2 period characters. Found: 0
+2025-05-14 09:05:04,867 ERROR c.o.o.p.JwtProvider [http-nio-4000-exec-1] JWT validation failed. Error: JWT strings must contain exactly 2 period characters. Found: 0
+2025-05-14 09:05:04,867 ERROR c.o.o.p.JwtProvider [http-nio-4000-exec-9] JWT validation failed. Error: JWT strings must contain exactly 2 period characters. Found: 0
+2025-05-14 09:05:04,870 ERROR c.o.o.c.AuthenticationFailEntryPoint [http-nio-4000-exec-4] Authentication failed: Full authentication is required to access this resource
+2025-05-14 09:05:04,872 ERROR c.o.o.c.AuthenticationFailEntryPoint [http-nio-4000-exec-9] Authentication failed: Full authentication is required to access this resource
+2025-05-14 09:05:04,889 ERROR c.o.o.p.JwtProvider [http-nio-4000-exec-10] JWT validation failed. Error: JWT strings must contain exactly 2 period characters. Found: 0
+2025-05-14 09:05:04,897 ERROR c.o.o.p.JwtProvider [http-nio-4000-exec-8] JWT validation failed. Error: JWT strings must contain exactly 2 period characters. Found: 0
+2025-05-14 09:05:04,905 ERROR c.o.o.c.AuthenticationFailEntryPoint [http-nio-4000-exec-10] Authentication failed: Full authentication is required to access this resource
+2025-05-14 09:05:04,910 ERROR c.o.o.c.AuthenticationFailEntryPoint [http-nio-4000-exec-8] Authentication failed: Full authentication is required to access this resource
+2025-05-14 09:05:04,923 ERROR c.o.o.p.JwtProvider [http-nio-4000-exec-5] JWT validation failed. Error: JWT strings must contain exactly 2 period characters. Found: 0
+2025-05-14 09:05:04,929 ERROR c.o.o.c.AuthenticationFailEntryPoint [http-nio-4000-exec-5] Authentication failed: Full authentication is required to access this resource
+2025-05-14 09:05:04,951 ERROR c.o.o.p.JwtProvider [http-nio-4000-exec-7] JWT validation failed. Error: JWT strings must contain exactly 2 period characters. Found: 0
+2025-05-14 09:05:04,964 ERROR c.o.o.c.AuthenticationFailEntryPoint [http-nio-4000-exec-7] Authentication failed: Full authentication is required to access this resource
+2025-05-14 09:05:04,984 ERROR c.o.o.p.JwtProvider [http-nio-4000-exec-6] JWT validation failed. Error: JWT strings must contain exactly 2 period characters. Found: 0
+2025-05-14 11:57:35,993 ERROR c.o.o.c.AuthenticationFailEntryPoint [http-nio-4000-exec-10] Authentication failed: Full authentication is required to access this resource
+2025-05-14 11:59:48,461 ERROR c.o.o.c.AuthenticationFailEntryPoint [http-nio-4000-exec-6] Authentication failed: Full authentication is required to access this resource
+2025-05-14 12:01:38,961 ERROR c.o.o.c.AuthenticationFailEntryPoint [http-nio-4000-exec-3] Authentication failed: Full authentication is required to access this resource

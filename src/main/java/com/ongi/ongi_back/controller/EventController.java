@@ -29,7 +29,7 @@ public class EventController {
         @RequestBody @Valid PostEventRequestDto requestBody,
         @AuthenticationPrincipal String userId
     )   {
-        ResponseEntity<ResponseDto> response = eventService.postEvent(requestBody);
+        ResponseEntity<ResponseDto> response = eventService.postEvent(requestBody, userId);
         return response;
     }
 
