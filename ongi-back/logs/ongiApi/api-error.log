@@ -5838,3 +5838,9 @@ Action:
 
 Identify and stop the process that's listening on port 4000 or configure this application to listen on another port.
 
+2025-05-14 16:50:33,870 ERROR c.o.o.p.JwtProvider [http-nio-4000-exec-10] JWT validation failed. Error: JWT strings must contain exactly 2 period characters. Found: 0
+2025-05-14 16:50:33,872 ERROR c.o.o.c.AuthenticationFailEntryPoint [http-nio-4000-exec-10] Authentication failed: Full authentication is required to access this resource
+2025-05-14 16:50:33,879 ERROR c.o.o.p.JwtProvider [http-nio-4000-exec-2] JWT validation failed. Error: JWT strings must contain exactly 2 period characters. Found: 0
+2025-05-14 16:50:33,880 ERROR c.o.o.c.AuthenticationFailEntryPoint [http-nio-4000-exec-2] Authentication failed: Full authentication is required to access this resource
+2025-05-14 16:50:33,903 ERROR c.o.o.p.JwtProvider [http-nio-4000-exec-6] JWT validation failed. Error: JWT strings must contain exactly 2 period characters. Found: 0
+2025-05-14 16:50:33,904 ERROR c.o.o.c.AuthenticationFailEntryPoint [http-nio-4000-exec-6] Authentication failed: Full authentication is required to access this resource

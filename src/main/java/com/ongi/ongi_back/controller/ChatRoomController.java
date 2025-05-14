@@ -43,6 +43,14 @@ public class ChatRoomController {
     return messageRepository.findByChatSequenceOrderByChatDateAsc(chatSequence);
   }  
 
+  @GetMapping("/{chatSequence}/latest")
+  public MessageEntity getLatestMessage(
+    @PathVariable Integer chatSequence,
+    @AuthenticationPrincipal String userId
+  ) {
+    return messageRepository.findFirstByChatSequenceOrderByChatDateDesc(chatSequence);
+  }
+
   @PatchMapping("/{chatSequence}")
   public ResponseEntity<ResponseDto> acceptChat(
     @PathVariable("chatSequence") Integer chatSequence,

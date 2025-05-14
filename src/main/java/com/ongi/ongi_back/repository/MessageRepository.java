@@ -10,4 +10,6 @@ import com.ongi.ongi_back.common.entity.MessageEntity;
 @Repository
 public interface MessageRepository extends JpaRepository<MessageEntity, Integer>{
     List<MessageEntity> findByChatSequenceOrderByChatDateAsc(Integer chatSequence);
+    MessageEntity findFirstByChatSequenceOrderByChatDateDesc(Integer chatSequence);
+
 }
