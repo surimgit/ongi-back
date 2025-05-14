@@ -17,6 +17,7 @@ import com.ongi.ongi_back.common.dto.response.community.GetCommunityCommentsResp
 import com.ongi.ongi_back.common.dto.response.community.GetCommunityResponseDto;
 import com.ongi.ongi_back.common.dto.response.group.GetProductListResponseDto;
 import com.ongi.ongi_back.common.dto.response.needHelper.GetHelperApplyListRespeonseDto;
+import com.ongi.ongi_back.common.dto.response.needHelper.GetHelperCommentsResponseDto;
 import com.ongi.ongi_back.common.dto.response.needHelper.GetMyHelperPostListResponseDto;
 import com.ongi.ongi_back.common.dto.response.user.GetLikeKeywordListResponseDto;
 import com.ongi.ongi_back.common.dto.response.user.GetMyActivityCountResponseDto;
@@ -66,8 +67,12 @@ public interface MypageService {
   // 다른 사용자
   ResponseEntity<? super GetUserIntroductionResponseDto> getOtherUserIntroduction(String userId);
   ResponseEntity<? super GetBadgeResponseDto> getOtherUserBadge(String userId);
-  ResponseEntity<? super GetProductListResponseDto> getOtherUserSellingProduct(String userId, String today);
-  ResponseEntity<? super GetProductListResponseDto> getOtherUserSelledProduct(String userId, String today);
+  ResponseEntity<? super GetCommunityCommentsResponseDto> getOtherUserCommunityComment(String userId);
+  ResponseEntity<? super GetCommunityResponseDto> getOtherUserCommunityPost(String userId);
+  ResponseEntity<? super GetMyHelperPostListResponseDto> getOtherUserHelperPost(String userId);
+  ResponseEntity<? super GetHelperCommentsResponseDto> getOtherUserHelperComments(Integer postSequence, String userId);
+  ResponseEntity<? super GetProductListResponseDto> getOtherUserSellingProduct(String userId);
+  ResponseEntity<? super GetProductListResponseDto> getOtherUserSelledProduct(String userId);
   // ResponseEntity<? super GetProductReviewResponseDto> getOtherUserProductReviewed(String userId);
 
 }

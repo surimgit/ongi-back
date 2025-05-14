@@ -1,0 +1,1 @@
+[30m2025-05-13 15:10:41,106[m [1;31mERROR[m [[1;34mhttp-nio-4000-exec-1[m] [1;33morg.hibernate.engine.jdbc.spi.SqlExceptionHelper[m: Unknown column 'reported_id' in 'field list'

@@ -28,7 +28,7 @@ public class UserEntity {
     private String address;
     private String detailAddress;
     private Integer zipCode;
-    private String birth;
+    private Integer birth;
     private String telNumber;
     private Boolean isSeller;
     private String gender;

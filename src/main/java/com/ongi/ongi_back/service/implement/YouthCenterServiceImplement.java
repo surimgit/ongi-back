@@ -42,7 +42,7 @@ public class YouthCenterServiceImplement implements YouthCenterService{
             String url = UriComponentsBuilder.fromHttpUrl(apiUrl)
                 .queryParam("apiKeyNm", apiKeyNm)
                 .queryParam("pageNum", 1)
-                .queryParam("pageSize", 5000)
+                .queryParam("pageSize", 1000)
                 .queryParam("rtnType", "json")
                 .queryParam("plcyNm", keyword)
                 .build()

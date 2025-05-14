@@ -18,6 +18,7 @@ public interface StockReservationRepository extends JpaRepository<StockReservati
   Integer sumQuantityByProductSequence(Integer productSequence);
   StockReservationEntity findByUserIdAndProductSequence(String userId, Integer productSequence);
   List<StockReservationVO> findByProductSequence(Integer productSequence);
+  List<StockReservationEntity> findByUserId(String userId);
   
   @Transactional
   void deleteByUserIdAndProductSequence(String userId, Integer productSequence);

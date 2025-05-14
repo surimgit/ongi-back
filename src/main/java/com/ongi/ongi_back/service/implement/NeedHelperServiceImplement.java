@@ -1,5 +1,6 @@
 package com.ongi.ongi_back.service.implement;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,6 +21,7 @@ import com.ongi.ongi_back.common.dto.response.needHelper.GetHelperPostResponseDt
 import com.ongi.ongi_back.common.entity.ChatEntity;
 import com.ongi.ongi_back.common.entity.HelperApplyEntity;
 import com.ongi.ongi_back.common.entity.HelperLikedEntity;
+import com.ongi.ongi_back.common.entity.MessageEntity;
 import com.ongi.ongi_back.common.entity.NeedHelperCommentEntity;
 import com.ongi.ongi_back.common.entity.NeedHelperEntity;
 import com.ongi.ongi_back.repository.ChatRepository;
@@ -27,11 +29,15 @@ import com.ongi.ongi_back.repository.HelperApplyRepository;
 import com.ongi.ongi_back.repository.HelperCommentRepository;
 import com.ongi.ongi_back.repository.HelperLikedRepository;
 import com.ongi.ongi_back.repository.HelperPostRepository;
+import com.ongi.ongi_back.repository.MessageRepository;
 import com.ongi.ongi_back.repository.UserRepository;
 import com.ongi.ongi_back.service.NeedHelperService;
 
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class NeedHelperServiceImplement implements NeedHelperService{
@@ -42,6 +48,7 @@ public class NeedHelperServiceImplement implements NeedHelperService{
     private final HelperLikedRepository likedRepository;
     private final HelperApplyRepository helperApplyRepository;
     private final ChatRepository chatRepository;
+    private final MessageRepository messageRepository;
 
     @Override
     public ResponseEntity<ResponseDto> postHelper(PostHelperRequestDto dto, String userId) {
@@ -263,6 +270,7 @@ public class NeedHelperServiceImplement implements NeedHelperService{
     }
 
     @Override
+    @Transactional
     public ResponseEntity<ResponseDto> postHelperApply(Integer postSequence, String applicantId) {
         try {      
             NeedHelperEntity post = helperPostRepository.findById(postSequence).orElseThrow();
@@ -274,9 +282,18 @@ public class NeedHelperServiceImplement implements NeedHelperService{
             chat.setNeedHelperSequence(postSequence);
             chat.setChatAvailable(false);
             chatRepository.save(chat);
+            chatRepository.flush(); // 강제 insert
 
+            MessageEntity welcomeMessage = new MessageEntity();
+            welcomeMessage.setChatSequence(chat.getChatSequence());
+            welcomeMessage.setSenderId(applicantId);
+            welcomeMessage.setContent("도우미 신청 요청");
+            welcomeMessage.setIsHelper(false);
+            welcomeMessage.setChatDate(LocalDateTime.now());
+            messageRepository.save(welcomeMessage);
+            
             HelperApplyEntity apply = new HelperApplyEntity(postSequence, post, requesterId, applicantId, chat.getChatSequence());
-            apply.setIsApplied(false);
+            apply.setIsApplied(true);
             helperApplyRepository.save(apply);
 
         } catch (Exception exception) {
@@ -289,12 +306,14 @@ public class NeedHelperServiceImplement implements NeedHelperService{
 
 
     @Override
+    @Transactional
     public ResponseEntity<ResponseDto> deleteHelperApply(Integer postSequence, String applicantId) {
         try {
             boolean exists = helperApplyRepository.existsByPostSequenceAndApplicantId(postSequence, applicantId);
             if (!exists) return ResponseDto.noExistNeedhelperPost();
     
             helperApplyRepository.deleteByPostSequenceAndApplicantId(postSequence, applicantId);
+            chatRepository.deleteByNeedHelperSequenceAndApplicantId(postSequence, applicantId);
         } catch (Exception exception) {
             exception.printStackTrace();
             return ResponseDto.databaseError();

@@ -23,6 +23,7 @@ public interface GroupPurchaseService {
 
   ResponseEntity<ResponseDto> postStockReservation(PostStockReservationRequestDto dto, String userId);
   ResponseEntity<? super GetReservationResponseDto> getStockReservation(Integer sequence);
+  ResponseEntity<ResponseDto> deleteStockReservation(String userId);
 
   ResponseEntity<? super GetProductReviewResponseDto> getProductReview(Integer sequence);
   ResponseEntity<? super GetReviewImagesResponseDto> getReviewImages(Integer sequence);

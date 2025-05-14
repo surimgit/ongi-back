@@ -12,7 +12,7 @@ import lombok.Setter;
 @AllArgsConstructor
 public class PatchUserIntroductionRequestDto {
   private String nickname;
-  private String birth;
+  private Integer birth;
 
   @Pattern
   (regexp="^남|여$")
