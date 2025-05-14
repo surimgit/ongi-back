@@ -81,7 +81,6 @@ public class MypageServiceImplement implements MypageService{
   private final HelperPostRepository helperPostRepository;
   private final HelperApplyRepository helperApplyRepository;
   private final HelperLikedRepository helperLikedRepository;
-  private final FileService fileService;
   private final PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
   @Override
