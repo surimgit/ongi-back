@@ -1,3 +1,6 @@
+<<<<<<< HEAD
+2025-05-14 15:40:38,618 ERROR [http-nio-4000-exec-8] org.hibernate.engine.jdbc.spi.SqlExceptionHelper: Column 'user_point' cannot be null
+=======
 2025-05-14 14:25:20,617 ERROR [http-nio-4000-exec-3] org.hibernate.engine.jdbc.spi.SqlExceptionHelper: Unknown column 'me1_0.chat_date' in 'field list'
 2025-05-14 14:25:20,627 ERROR [http-nio-4000-exec-3] org.apache.juli.logging.DirectJDKLog: Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Request processing failed: org.springframework.dao.InvalidDataAccessResourceUsageException: JDBC exception executing SQL [select me1_0.message_sequence,me1_0.chat_date,me1_0.chat_sequence,me1_0.content,me1_0.file_url,me1_0.is_helper,me1_0.sender_id from message me1_0 where me1_0.chat_sequence=? order by me1_0.chat_date] [Unknown column 'me1_0.chat_date' in 'field list'] [n/a]; SQL [n/a]] with root cause
 java.sql.SQLSyntaxErrorException: Unknown column 'me1_0.chat_date' in 'field list'
@@ -288,3 +291,4 @@ java.sql.SQLSyntaxErrorException: Unknown column 'me1_0.chat_date' in 'field lis
 	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
 	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:63)
 	at java.base/java.lang.Thread.run(Thread.java:1583)
+>>>>>>> 58a3258a88d60dca4b88086ec1b424bd1f2efadb

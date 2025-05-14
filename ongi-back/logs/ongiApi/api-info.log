@@ -8175,6 +8175,541 @@ Caused by: java.lang.IllegalArgumentException: This class [class com.ongi.ongi_b
 2025-05-14 12:11:00,006 INFO c.o.o.h.ProductStatusScheduler [MessageBroker-6] 상품들의 상태를 체크합니다.
 2025-05-14 12:12:00,012 INFO c.o.o.h.ProductStatusScheduler [MessageBroker-7] 상품들의 상태를 체크합니다.
 2025-05-14 12:13:00,003 INFO c.o.o.h.ProductStatusScheduler [MessageBroker-8] 상품들의 상태를 체크합니다.
+<<<<<<< HEAD
+2025-05-14 13:58:32,276 INFO o.s.b.StartupInfoLogger [main] Starting OngiBackApplication using Java 21.0.6 with PID 14800 (C:\Users\dksoc\Documents\JAVA\ongi-project\ongi-back\build\classes\java\main started by dksoc in C:\Users\dksoc\Documents\JAVA\ongi-project\ongi-back)
+2025-05-14 13:58:32,292 DEBUG o.s.b.StartupInfoLogger [main] Running with Spring Boot v3.4.4, Spring v6.2.5
+2025-05-14 13:58:32,308 INFO o.s.b.SpringApplication [main] No active profile set, falling back to 1 default profile: "default"
+2025-05-14 13:58:35,654 INFO o.s.d.r.c.RepositoryConfigurationDelegate [main] Multiple Spring Data modules found, entering strict repository configuration mode
+2025-05-14 13:58:35,658 INFO o.s.d.r.c.RepositoryConfigurationDelegate [main] Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-05-14 13:58:36,470 INFO o.s.d.r.c.RepositoryConfigurationDelegate [main] Finished Spring Data repository scanning in 780 ms. Found 32 JPA repository interfaces.
+2025-05-14 13:58:36,547 INFO o.s.d.r.c.RepositoryConfigurationDelegate [main] Multiple Spring Data modules found, entering strict repository configuration mode
+2025-05-14 13:58:36,553 INFO o.s.d.r.c.RepositoryConfigurationDelegate [main] Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2025-05-14 13:58:36,649 INFO o.s.d.r.c.RepositoryConfigurationExtensionSupport [main] Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.ongi.ongi_back.repository.AlertRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2025-05-14 13:58:36,660 INFO o.s.d.r.c.RepositoryConfigurationExtensionSupport [main] Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.ongi.ongi_back.repository.BadgeRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2025-05-14 13:58:36,666 INFO o.s.d.r.c.RepositoryConfigurationExtensionSupport [main] Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.ongi.ongi_back.repository.CalendarRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2025-05-14 13:58:36,679 INFO o.s.d.r.c.RepositoryConfigurationExtensionSupport [main] Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.ongi.ongi_back.repository.ChatRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2025-05-14 13:58:36,687 INFO o.s.d.r.c.RepositoryConfigurationExtensionSupport [main] Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.ongi.ongi_back.repository.CommunityCommentRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2025-05-14 13:58:36,694 INFO o.s.d.r.c.RepositoryConfigurationExtensionSupport [main] Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.ongi.ongi_back.repository.CommunityPostRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2025-05-14 13:58:36,696 INFO o.s.d.r.c.RepositoryConfigurationExtensionSupport [main] Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.ongi.ongi_back.repository.EventApplyRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2025-05-14 13:58:36,699 INFO o.s.d.r.c.RepositoryConfigurationExtensionSupport [main] Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.ongi.ongi_back.repository.EventRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2025-05-14 13:58:36,702 INFO o.s.d.r.c.RepositoryConfigurationExtensionSupport [main] Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.ongi.ongi_back.repository.HelperApplyRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2025-05-14 13:58:36,704 INFO o.s.d.r.c.RepositoryConfigurationExtensionSupport [main] Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.ongi.ongi_back.repository.HelperCommentRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2025-05-14 13:58:36,713 INFO o.s.d.r.c.RepositoryConfigurationExtensionSupport [main] Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.ongi.ongi_back.repository.HelperLikedRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2025-05-14 13:58:36,717 INFO o.s.d.r.c.RepositoryConfigurationExtensionSupport [main] Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.ongi.ongi_back.repository.HelperPostRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2025-05-14 13:58:36,723 INFO o.s.d.r.c.RepositoryConfigurationExtensionSupport [main] Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.ongi.ongi_back.repository.LikedRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2025-05-14 13:58:36,728 INFO o.s.d.r.c.RepositoryConfigurationExtensionSupport [main] Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.ongi.ongi_back.repository.LikeKeywordRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2025-05-14 13:58:36,730 INFO o.s.d.r.c.RepositoryConfigurationExtensionSupport [main] Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.ongi.ongi_back.repository.MessageRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2025-05-14 13:58:36,734 INFO o.s.d.r.c.RepositoryConfigurationExtensionSupport [main] Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.ongi.ongi_back.repository.NoticeRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2025-05-14 13:58:36,744 INFO o.s.d.r.c.RepositoryConfigurationExtensionSupport [main] Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.ongi.ongi_back.repository.OrderItemRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2025-05-14 13:58:36,755 INFO o.s.d.r.c.RepositoryConfigurationExtensionSupport [main] Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.ongi.ongi_back.repository.OrderRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2025-05-14 13:58:36,759 INFO o.s.d.r.c.RepositoryConfigurationExtensionSupport [main] Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.ongi.ongi_back.repository.PaymentCancelRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2025-05-14 13:58:36,762 INFO o.s.d.r.c.RepositoryConfigurationExtensionSupport [main] Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.ongi.ongi_back.repository.PaymentConformRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2025-05-14 13:58:36,766 INFO o.s.d.r.c.RepositoryConfigurationExtensionSupport [main] Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.ongi.ongi_back.repository.ProductRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2025-05-14 13:58:36,772 INFO o.s.d.r.c.RepositoryConfigurationExtensionSupport [main] Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.ongi.ongi_back.repository.ProductReviewRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2025-05-14 13:58:36,777 INFO o.s.d.r.c.RepositoryConfigurationExtensionSupport [main] Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.ongi.ongi_back.repository.QuestionRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2025-05-14 13:58:36,782 INFO o.s.d.r.c.RepositoryConfigurationExtensionSupport [main] Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.ongi.ongi_back.repository.ReportRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2025-05-14 13:58:36,794 INFO o.s.d.r.c.RepositoryConfigurationExtensionSupport [main] Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.ongi.ongi_back.repository.ReviewImagesRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2025-05-14 13:58:36,795 INFO o.s.d.r.c.RepositoryConfigurationExtensionSupport [main] Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.ongi.ongi_back.repository.ShoppingCartRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2025-05-14 13:58:36,798 INFO o.s.d.r.c.RepositoryConfigurationExtensionSupport [main] Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.ongi.ongi_back.repository.StockReservationRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2025-05-14 13:58:36,800 INFO o.s.d.r.c.RepositoryConfigurationExtensionSupport [main] Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.ongi.ongi_back.repository.UserAddressRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2025-05-14 13:58:36,807 INFO o.s.d.r.c.RepositoryConfigurationExtensionSupport [main] Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.ongi.ongi_back.repository.UserRankRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2025-05-14 13:58:36,811 INFO o.s.d.r.c.RepositoryConfigurationExtensionSupport [main] Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.ongi.ongi_back.repository.UserRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2025-05-14 13:58:36,813 INFO o.s.d.r.c.RepositoryConfigurationExtensionSupport [main] Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.ongi.ongi_back.repository.VerificationCodeRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2025-05-14 13:58:36,815 INFO o.s.d.r.c.RepositoryConfigurationExtensionSupport [main] Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.ongi.ongi_back.repository.WishListRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2025-05-14 13:58:36,817 INFO o.s.d.r.c.RepositoryConfigurationDelegate [main] Finished Spring Data repository scanning in 225 ms. Found 0 Redis repository interfaces.
+2025-05-14 13:58:41,124 INFO o.s.b.w.e.t.TomcatWebServer [main] Tomcat initialized with port 4000 (http)
+2025-05-14 13:58:41,560 INFO o.s.b.w.s.c.ServletWebServerApplicationContext [main] Root WebApplicationContext: initialization completed in 9064 ms
+2025-05-14 13:58:45,916 INFO o.s.o.j.p.SpringPersistenceUnitInfo [main] No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-05-14 13:58:51,039 INFO o.s.o.j.AbstractEntityManagerFactoryBean [main] Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-05-14 13:58:52,060 INFO o.s.d.j.r.q.QueryEnhancerFactory [main] Hibernate is in classpath; If applicable, HQL parser will be used.
+2025-05-14 13:58:52,298 DEBUG o.s.w.f.GenericFilterBean [main] Filter 'jwtAuthenticationFilter' configured for use
+2025-05-14 13:59:04,471 WARN o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration [main] spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-05-14 13:59:07,513 DEBUG c.o.o.c.WebSecurityConfig [main] [+] WebConfig Start !!
+2025-05-14 13:59:09,026 INFO o.s.c.l.CompositeLog [main] Starting...
+2025-05-14 13:59:09,037 INFO o.s.c.l.CompositeLog [main] BrokerAvailabilityEvent[available=true, SimpleBrokerMessageHandler [org.springframework.messaging.simp.broker.DefaultSubscriptionRegistry@39ccab78]]
+2025-05-14 13:59:09,063 INFO o.s.c.l.CompositeLog [main] Started.
+2025-05-14 13:59:09,126 INFO o.s.b.w.e.t.TomcatWebServer [main] Tomcat started on port 4000 (http) with context path '/'
+2025-05-14 13:59:09,204 INFO o.s.b.StartupInfoLogger [main] Started OngiBackApplication in 38.259 seconds (process running for 40.296)
+2025-05-14 13:59:10,031 INFO o.s.w.s.FrameworkServlet [http-nio-4000-exec-1] Initializing Servlet 'dispatcherServlet'
+2025-05-14 13:59:10,037 INFO o.s.w.s.FrameworkServlet [http-nio-4000-exec-1] Completed initialization in 5 ms
+2025-05-14 13:59:10,947 ERROR c.o.o.p.JwtProvider [http-nio-4000-exec-3] JWT validation failed. Error: JWT strings must contain exactly 2 period characters. Found: 0
+2025-05-14 13:59:10,947 ERROR c.o.o.p.JwtProvider [http-nio-4000-exec-2] JWT validation failed. Error: JWT strings must contain exactly 2 period characters. Found: 0
+2025-05-14 13:59:10,947 ERROR c.o.o.p.JwtProvider [http-nio-4000-exec-1] JWT validation failed. Error: JWT strings must contain exactly 2 period characters. Found: 0
+2025-05-14 13:59:10,952 ERROR c.o.o.c.AuthenticationFailEntryPoint [http-nio-4000-exec-2] Authentication failed: Full authentication is required to access this resource
+2025-05-14 13:59:10,952 ERROR c.o.o.c.AuthenticationFailEntryPoint [http-nio-4000-exec-3] Authentication failed: Full authentication is required to access this resource
+2025-05-14 13:59:10,973 ERROR c.o.o.p.JwtProvider [http-nio-4000-exec-6] JWT validation failed. Error: JWT strings must contain exactly 2 period characters. Found: 0
+2025-05-14 13:59:10,975 ERROR c.o.o.p.JwtProvider [http-nio-4000-exec-7] JWT validation failed. Error: JWT strings must contain exactly 2 period characters. Found: 0
+2025-05-14 13:59:10,982 ERROR c.o.o.c.AuthenticationFailEntryPoint [http-nio-4000-exec-6] Authentication failed: Full authentication is required to access this resource
+2025-05-14 13:59:10,982 ERROR c.o.o.c.AuthenticationFailEntryPoint [http-nio-4000-exec-7] Authentication failed: Full authentication is required to access this resource
+2025-05-14 13:59:11,019 INFO c.o.o.s.i.GroupPurchaseServiceImplements [http-nio-4000-exec-1] 조회된 상품 리스트: 0
+2025-05-14 13:59:11,026 INFO c.o.o.s.i.GroupPurchaseServiceImplements [http-nio-4000-exec-1] null 카테고리의 이름이 null인 공동구매 상품 리스트를 불러옵니다.
+2025-05-14 13:59:11,026 ERROR c.o.o.p.JwtProvider [http-nio-4000-exec-10] JWT validation failed. Error: JWT strings must contain exactly 2 period characters. Found: 0
+2025-05-14 13:59:11,027 ERROR c.o.o.c.AuthenticationFailEntryPoint [http-nio-4000-exec-10] Authentication failed: Full authentication is required to access this resource
+2025-05-14 13:59:11,047 ERROR c.o.o.p.JwtProvider [http-nio-4000-exec-9] JWT validation failed. Error: JWT strings must contain exactly 2 period characters. Found: 0
+2025-05-14 13:59:11,053 INFO c.o.o.s.i.GroupPurchaseServiceImplements [http-nio-4000-exec-9] 조회된 상품 리스트: 0
+2025-05-14 13:59:11,054 INFO c.o.o.s.i.GroupPurchaseServiceImplements [http-nio-4000-exec-9] null 카테고리의 이름이 null인 공동구매 상품 리스트를 불러옵니다.
+2025-05-14 13:59:11,099 ERROR c.o.o.p.JwtProvider [http-nio-4000-exec-8] JWT validation failed. Error: JWT strings must contain exactly 2 period characters. Found: 0
+2025-05-14 13:59:11,101 ERROR c.o.o.c.AuthenticationFailEntryPoint [http-nio-4000-exec-8] Authentication failed: Full authentication is required to access this resource
+2025-05-14 14:00:00,015 INFO c.o.o.h.ProductStatusScheduler [MessageBroker-1] 상품들의 상태를 체크합니다.
+2025-05-14 14:00:09,030 INFO o.s.w.s.c.WebSocketMessageBrokerStats [MessageBroker-3] WebSocketSession[0 current WS(0)-HttpStream(0)-HttpPoll(0), 0 total, 0 closed abnormally (0 connect failure, 0 send limit, 0 transport error)], stompSubProtocol[processed CONNECT(0)-CONNECTED(0)-DISCONNECT(0)], stompBrokerRelay[null], inboundChannel[pool size = 0, active threads = 0, queued tasks = 0, completed tasks = 0], outboundChannel[pool size = 0, active threads = 0, queued tasks = 0, completed tasks = 0], sockJsScheduler[pool size = 8, active threads = 1, queued tasks = 5, completed tasks = 2]
+2025-05-14 14:01:00,013 INFO c.o.o.h.ProductStatusScheduler [MessageBroker-4] 상품들의 상태를 체크합니다.
+2025-05-14 14:02:00,007 INFO c.o.o.h.ProductStatusScheduler [MessageBroker-6] 상품들의 상태를 체크합니다.
+2025-05-14 14:03:00,011 INFO c.o.o.h.ProductStatusScheduler [MessageBroker-7] 상품들의 상태를 체크합니다.
+2025-05-14 14:04:00,002 INFO c.o.o.h.ProductStatusScheduler [MessageBroker-8] 상품들의 상태를 체크합니다.
+2025-05-14 14:05:00,008 INFO c.o.o.h.ProductStatusScheduler [MessageBroker-8] 상품들의 상태를 체크합니다.
+2025-05-14 14:06:00,009 INFO c.o.o.h.ProductStatusScheduler [MessageBroker-4] 상품들의 상태를 체크합니다.
+2025-05-14 14:07:00,013 INFO c.o.o.h.ProductStatusScheduler [MessageBroker-2] 상품들의 상태를 체크합니다.
+2025-05-14 14:07:09,624 INFO c.o.o.c.AuthContoller [http-nio-4000-exec-1] qwer1234
+2025-05-14 14:07:09,625 INFO c.o.o.c.AuthContoller [http-nio-4000-exec-1] 로그인 했습니다.
+2025-05-14 14:07:09,988 INFO c.o.o.s.i.GroupPurchaseServiceImplements [http-nio-4000-exec-4] 조회된 상품 리스트: 0
+2025-05-14 14:07:10,360 INFO c.o.o.s.i.GroupPurchaseServiceImplements [http-nio-4000-exec-4] null 카테고리의 이름이 null인 공동구매 상품 리스트를 불러옵니다.
+2025-05-14 14:07:10,616 INFO c.o.o.s.i.GroupPurchaseServiceImplements [http-nio-4000-exec-6] 조회된 상품 리스트: 0
+2025-05-14 14:07:10,809 INFO c.o.o.s.i.GroupPurchaseServiceImplements [http-nio-4000-exec-6] null 카테고리의 이름이 null인 공동구매 상품 리스트를 불러옵니다.
+2025-05-14 14:08:00,004 INFO c.o.o.h.ProductStatusScheduler [MessageBroker-11] 상품들의 상태를 체크합니다.
+2025-05-14 14:09:00,012 INFO c.o.o.h.ProductStatusScheduler [MessageBroker-7] 상품들의 상태를 체크합니다.
+2025-05-14 14:10:00,012 INFO c.o.o.h.ProductStatusScheduler [MessageBroker-3] 상품들의 상태를 체크합니다.
+2025-05-14 14:11:00,014 INFO c.o.o.h.ProductStatusScheduler [MessageBroker-5] 상품들의 상태를 체크합니다.
+2025-05-14 14:12:00,001 INFO c.o.o.h.ProductStatusScheduler [MessageBroker-5] 상품들의 상태를 체크합니다.
+2025-05-14 14:13:00,009 INFO c.o.o.h.ProductStatusScheduler [MessageBroker-5] 상품들의 상태를 체크합니다.
+2025-05-14 14:14:00,013 INFO c.o.o.h.ProductStatusScheduler [MessageBroker-1] 상품들의 상태를 체크합니다.
+2025-05-14 14:15:00,008 INFO c.o.o.h.ProductStatusScheduler [MessageBroker-12] 상품들의 상태를 체크합니다.
+2025-05-14 14:16:00,009 INFO c.o.o.h.ProductStatusScheduler [MessageBroker-9] 상품들의 상태를 체크합니다.
+2025-05-14 14:17:00,007 INFO c.o.o.h.ProductStatusScheduler [MessageBroker-9] 상품들의 상태를 체크합니다.
+2025-05-14 14:18:00,006 INFO c.o.o.h.ProductStatusScheduler [MessageBroker-4] 상품들의 상태를 체크합니다.
+2025-05-14 14:19:00,010 INFO c.o.o.h.ProductStatusScheduler [MessageBroker-2] 상품들의 상태를 체크합니다.
+2025-05-14 14:20:00,007 INFO c.o.o.h.ProductStatusScheduler [MessageBroker-11] 상품들의 상태를 체크합니다.
+2025-05-14 14:21:00,010 INFO c.o.o.h.ProductStatusScheduler [MessageBroker-7] 상품들의 상태를 체크합니다.
+2025-05-14 14:22:00,001 INFO c.o.o.h.ProductStatusScheduler [MessageBroker-7] 상품들의 상태를 체크합니다.
+2025-05-14 14:23:00,004 INFO c.o.o.h.ProductStatusScheduler [MessageBroker-10] 상품들의 상태를 체크합니다.
+2025-05-14 14:24:00,013 INFO c.o.o.h.ProductStatusScheduler [MessageBroker-6] 상품들의 상태를 체크합니다.
+2025-05-14 14:25:00,004 INFO c.o.o.h.ProductStatusScheduler [MessageBroker-5] 상품들의 상태를 체크합니다.
+2025-05-14 14:26:00,015 INFO c.o.o.h.ProductStatusScheduler [MessageBroker-1] 상품들의 상태를 체크합니다.
+2025-05-14 14:27:00,007 INFO c.o.o.h.ProductStatusScheduler [MessageBroker-1] 상품들의 상태를 체크합니다.
+2025-05-14 14:28:00,011 INFO c.o.o.h.ProductStatusScheduler [MessageBroker-8] 상품들의 상태를 체크합니다.
+2025-05-14 14:29:00,006 INFO c.o.o.h.ProductStatusScheduler [MessageBroker-8] 상품들의 상태를 체크합니다.
+2025-05-14 14:30:00,003 INFO c.o.o.h.ProductStatusScheduler [MessageBroker-4] 상품들의 상태를 체크합니다.
+2025-05-14 14:30:09,039 INFO o.s.w.s.c.WebSocketMessageBrokerStats [MessageBroker-2] WebSocketSession[0 current WS(0)-HttpStream(0)-HttpPoll(0), 0 total, 0 closed abnormally (0 connect failure, 0 send limit, 0 transport error)], stompSubProtocol[processed CONNECT(0)-CONNECTED(0)-DISCONNECT(0)], stompBrokerRelay[null], inboundChannel[pool size = 0, active threads = 0, queued tasks = 0, completed tasks = 0], outboundChannel[pool size = 0, active threads = 0, queued tasks = 0, completed tasks = 0], sockJsScheduler[pool size = 12, active threads = 1, queued tasks = 5, completed tasks = 33]
+2025-05-14 14:31:00,001 INFO c.o.o.h.ProductStatusScheduler [MessageBroker-6] 상품들의 상태를 체크합니다.
+2025-05-14 14:32:00,004 INFO c.o.o.h.ProductStatusScheduler [MessageBroker-6] 상품들의 상태를 체크합니다.
+2025-05-14 14:33:00,014 INFO c.o.o.h.ProductStatusScheduler [MessageBroker-9] 상품들의 상태를 체크합니다.
+2025-05-14 14:34:00,015 INFO c.o.o.h.ProductStatusScheduler [MessageBroker-4] 상품들의 상태를 체크합니다.
+2025-05-14 14:35:00,011 INFO c.o.o.h.ProductStatusScheduler [MessageBroker-11] 상품들의 상태를 체크합니다.
+2025-05-14 14:36:00,001 INFO c.o.o.h.ProductStatusScheduler [MessageBroker-10] 상품들의 상태를 체크합니다.
+2025-05-14 14:36:18,751 INFO c.o.o.c.AuthContoller [http-nio-4000-exec-1] asdf1234
+2025-05-14 14:36:18,751 INFO c.o.o.c.AuthContoller [http-nio-4000-exec-1] 로그인 했습니다.
+2025-05-14 14:36:19,021 INFO c.o.o.s.i.GroupPurchaseServiceImplements [http-nio-4000-exec-5] 조회된 상품 리스트: 0
+2025-05-14 14:36:19,024 INFO c.o.o.s.i.GroupPurchaseServiceImplements [http-nio-4000-exec-5] null 카테고리의 이름이 null인 공동구매 상품 리스트를 불러옵니다.
+2025-05-14 14:36:19,055 INFO c.o.o.s.i.GroupPurchaseServiceImplements [http-nio-4000-exec-1] 조회된 상품 리스트: 0
+2025-05-14 14:36:19,090 INFO c.o.o.s.i.GroupPurchaseServiceImplements [http-nio-4000-exec-1] null 카테고리의 이름이 null인 공동구매 상품 리스트를 불러옵니다.
+2025-05-14 14:37:00,011 INFO c.o.o.h.ProductStatusScheduler [MessageBroker-10] 상품들의 상태를 체크합니다.
+2025-05-14 14:38:00,003 INFO c.o.o.h.ProductStatusScheduler [MessageBroker-10] 상품들의 상태를 체크합니다.
+2025-05-14 14:39:00,014 INFO c.o.o.h.ProductStatusScheduler [MessageBroker-8] 상품들의 상태를 체크합니다.
+2025-05-14 14:40:00,001 INFO c.o.o.h.ProductStatusScheduler [MessageBroker-3] 상품들의 상태를 체크합니다.
+2025-05-14 14:40:30,505 INFO c.o.o.s.i.AuhtServiceImplement [http-nio-4000-exec-1] SMS 전송 성공: M4V20250514144029S9BGI73NGM94U9T
+2025-05-14 14:40:58,747 INFO c.o.o.c.AuthContoller [http-nio-4000-exec-5] qwer12345
+2025-05-14 14:40:58,747 INFO c.o.o.c.AuthContoller [http-nio-4000-exec-5] 로그인 했습니다.
+2025-05-14 14:40:59,017 INFO c.o.o.s.i.GroupPurchaseServiceImplements [http-nio-4000-exec-3] 조회된 상품 리스트: 0
+2025-05-14 14:40:59,020 INFO c.o.o.s.i.GroupPurchaseServiceImplements [http-nio-4000-exec-3] null 카테고리의 이름이 null인 공동구매 상품 리스트를 불러옵니다.
+2025-05-14 14:40:59,063 INFO c.o.o.s.i.GroupPurchaseServiceImplements [http-nio-4000-exec-1] 조회된 상품 리스트: 0
+2025-05-14 14:40:59,064 INFO c.o.o.s.i.GroupPurchaseServiceImplements [http-nio-4000-exec-1] null 카테고리의 이름이 null인 공동구매 상품 리스트를 불러옵니다.
+2025-05-14 14:41:00,007 INFO c.o.o.h.ProductStatusScheduler [MessageBroker-7] 상품들의 상태를 체크합니다.
+2025-05-14 14:42:00,002 INFO c.o.o.h.ProductStatusScheduler [MessageBroker-2] 상품들의 상태를 체크합니다.
+2025-05-14 14:43:00,006 INFO c.o.o.h.ProductStatusScheduler [MessageBroker-12] 상품들의 상태를 체크합니다.
+2025-05-14 14:44:00,005 INFO c.o.o.h.ProductStatusScheduler [MessageBroker-12] 상품들의 상태를 체크합니다.
+2025-05-14 14:45:00,002 INFO c.o.o.h.ProductStatusScheduler [MessageBroker-9] 상품들의 상태를 체크합니다.
+2025-05-14 14:46:00,016 INFO c.o.o.h.ProductStatusScheduler [MessageBroker-4] 상품들의 상태를 체크합니다.
+2025-05-14 14:47:00,011 INFO c.o.o.h.ProductStatusScheduler [MessageBroker-11] 상품들의 상태를 체크합니다.
+2025-05-14 14:47:17,659 INFO c.o.o.c.AuthContoller [http-nio-4000-exec-2] qwer1234
+2025-05-14 14:47:17,659 INFO c.o.o.c.AuthContoller [http-nio-4000-exec-2] 로그인 했습니다.
+2025-05-14 14:47:17,839 INFO c.o.o.s.i.GroupPurchaseServiceImplements [http-nio-4000-exec-6] 조회된 상품 리스트: 0
+2025-05-14 14:47:17,846 INFO c.o.o.s.i.GroupPurchaseServiceImplements [http-nio-4000-exec-6] null 카테고리의 이름이 null인 공동구매 상품 리스트를 불러옵니다.
+2025-05-14 14:47:17,870 INFO c.o.o.s.i.GroupPurchaseServiceImplements [http-nio-4000-exec-10] 조회된 상품 리스트: 0
+2025-05-14 14:47:17,881 INFO c.o.o.s.i.GroupPurchaseServiceImplements [http-nio-4000-exec-10] null 카테고리의 이름이 null인 공동구매 상품 리스트를 불러옵니다.
+2025-05-14 14:48:00,007 INFO c.o.o.h.ProductStatusScheduler [MessageBroker-5] 상품들의 상태를 체크합니다.
+2025-05-14 14:49:00,007 INFO c.o.o.h.ProductStatusScheduler [MessageBroker-1] 상품들의 상태를 체크합니다.
+2025-05-14 14:49:53,372 INFO c.o.o.c.AuthContoller [http-nio-4000-exec-6] qwer1234
+2025-05-14 14:49:53,372 INFO c.o.o.c.AuthContoller [http-nio-4000-exec-6] 로그인 했습니다.
+2025-05-14 14:49:53,553 INFO c.o.o.s.i.GroupPurchaseServiceImplements [http-nio-4000-exec-1] 조회된 상품 리스트: 0
+2025-05-14 14:49:53,553 INFO c.o.o.s.i.GroupPurchaseServiceImplements [http-nio-4000-exec-1] null 카테고리의 이름이 null인 공동구매 상품 리스트를 불러옵니다.
+2025-05-14 14:49:53,572 INFO c.o.o.s.i.GroupPurchaseServiceImplements [http-nio-4000-exec-8] 조회된 상품 리스트: 0
+2025-05-14 14:49:53,573 INFO c.o.o.s.i.GroupPurchaseServiceImplements [http-nio-4000-exec-8] null 카테고리의 이름이 null인 공동구매 상품 리스트를 불러옵니다.
+2025-05-14 14:50:00,011 INFO c.o.o.h.ProductStatusScheduler [MessageBroker-10] 상품들의 상태를 체크합니다.
+2025-05-14 14:51:00,008 INFO c.o.o.h.ProductStatusScheduler [MessageBroker-10] 상품들의 상태를 체크합니다.
+2025-05-14 14:52:00,006 INFO c.o.o.h.ProductStatusScheduler [MessageBroker-3] 상품들의 상태를 체크합니다.
+2025-05-14 14:53:00,011 INFO c.o.o.h.ProductStatusScheduler [MessageBroker-7] 상품들의 상태를 체크합니다.
+2025-05-14 14:53:22,081 INFO c.o.o.c.AuthContoller [http-nio-4000-exec-10] qwer12345
+2025-05-14 14:53:22,081 INFO c.o.o.c.AuthContoller [http-nio-4000-exec-10] 로그인 했습니다.
+2025-05-14 14:53:22,314 INFO c.o.o.s.i.GroupPurchaseServiceImplements [http-nio-4000-exec-8] 조회된 상품 리스트: 0
+2025-05-14 14:53:22,348 INFO c.o.o.s.i.GroupPurchaseServiceImplements [http-nio-4000-exec-8] null 카테고리의 이름이 null인 공동구매 상품 리스트를 불러옵니다.
+2025-05-14 14:53:22,365 INFO c.o.o.s.i.GroupPurchaseServiceImplements [http-nio-4000-exec-1] 조회된 상품 리스트: 0
+2025-05-14 14:53:22,366 INFO c.o.o.s.i.GroupPurchaseServiceImplements [http-nio-4000-exec-1] null 카테고리의 이름이 null인 공동구매 상품 리스트를 불러옵니다.
+2025-05-14 14:54:00,006 INFO c.o.o.h.ProductStatusScheduler [MessageBroker-2] 상품들의 상태를 체크합니다.
+2025-05-14 14:55:00,014 INFO c.o.o.h.ProductStatusScheduler [MessageBroker-6] 상품들의 상태를 체크합니다.
+2025-05-14 14:55:37,489 INFO c.o.o.s.i.AuhtServiceImplement [http-nio-4000-exec-9] SMS 전송 성공: M4V20250514145536K91MYZYS40R2NZP
+2025-05-14 14:56:00,000 INFO c.o.o.h.ProductStatusScheduler [MessageBroker-12] 상품들의 상태를 체크합니다.
+2025-05-14 14:57:00,011 INFO c.o.o.h.ProductStatusScheduler [MessageBroker-9] 상품들의 상태를 체크합니다.
+2025-05-14 14:58:00,011 INFO c.o.o.h.ProductStatusScheduler [MessageBroker-4] 상품들의 상태를 체크합니다.
+2025-05-14 14:59:00,006 INFO c.o.o.h.ProductStatusScheduler [MessageBroker-11] 상품들의 상태를 체크합니다.
+2025-05-14 15:00:00,013 INFO c.o.o.h.ProductStatusScheduler [MessageBroker-7] 상품들의 상태를 체크합니다.
+2025-05-14 15:00:09,053 INFO o.s.w.s.c.WebSocketMessageBrokerStats [MessageBroker-2] WebSocketSession[0 current WS(0)-HttpStream(0)-HttpPoll(0), 0 total, 0 closed abnormally (0 connect failure, 0 send limit, 0 transport error)], stompSubProtocol[processed CONNECT(0)-CONNECTED(0)-DISCONNECT(0)], stompBrokerRelay[null], inboundChannel[pool size = 0, active threads = 0, queued tasks = 0, completed tasks = 0], outboundChannel[pool size = 0, active threads = 0, queued tasks = 0, completed tasks = 0], sockJsScheduler[pool size = 12, active threads = 1, queued tasks = 5, completed tasks = 65]
+2025-05-14 15:01:00,008 INFO c.o.o.h.ProductStatusScheduler [MessageBroker-6] 상품들의 상태를 체크합니다.
+2025-05-14 15:02:00,016 INFO c.o.o.h.ProductStatusScheduler [MessageBroker-9] 상품들의 상태를 체크합니다.
+2025-05-14 15:03:00,014 INFO c.o.o.h.ProductStatusScheduler [MessageBroker-11] 상품들의 상태를 체크합니다.
+2025-05-14 15:03:42,755 ERROR c.o.o.p.JwtProvider [http-nio-4000-exec-5] JWT expired at 2025-05-13T23:15:51.000+0900. Current time: 1747202622755. Error: JWT expired at 2025-05-13T14:15:51Z. Current time: 2025-05-14T06:03:42Z, a difference of 56871741 milliseconds.  Allowed clock skew: 0 milliseconds.
+2025-05-14 15:03:55,209 INFO c.o.o.c.AuthContoller [http-nio-4000-exec-1] qpqpqp101010
+2025-05-14 15:03:55,209 INFO c.o.o.c.AuthContoller [http-nio-4000-exec-1] 로그인 했습니다.
+2025-05-14 15:03:55,462 INFO c.o.o.s.i.GroupPurchaseServiceImplements [http-nio-4000-exec-2] 조회된 상품 리스트: 0
+2025-05-14 15:03:55,499 INFO c.o.o.s.i.GroupPurchaseServiceImplements [http-nio-4000-exec-2] null 카테고리의 이름이 null인 공동구매 상품 리스트를 불러옵니다.
+2025-05-14 15:03:55,523 INFO c.o.o.s.i.GroupPurchaseServiceImplements [http-nio-4000-exec-6] 조회된 상품 리스트: 0
+2025-05-14 15:03:55,525 INFO c.o.o.s.i.GroupPurchaseServiceImplements [http-nio-4000-exec-6] null 카테고리의 이름이 null인 공동구매 상품 리스트를 불러옵니다.
+2025-05-14 15:04:00,002 INFO c.o.o.h.ProductStatusScheduler [MessageBroker-3] 상품들의 상태를 체크합니다.
+2025-05-14 15:05:00,004 INFO c.o.o.h.ProductStatusScheduler [MessageBroker-1] 상품들의 상태를 체크합니다.
+2025-05-14 15:06:00,008 INFO c.o.o.h.ProductStatusScheduler [MessageBroker-7] 상품들의 상태를 체크합니다.
+2025-05-14 15:06:05,760 INFO c.o.o.c.AuthContoller [http-nio-4000-exec-10] asdf1234
+2025-05-14 15:06:05,761 INFO c.o.o.c.AuthContoller [http-nio-4000-exec-10] 로그인 했습니다.
+2025-05-14 15:06:06,136 INFO c.o.o.s.i.GroupPurchaseServiceImplements [http-nio-4000-exec-9] 조회된 상품 리스트: 0
+2025-05-14 15:06:06,215 INFO c.o.o.s.i.GroupPurchaseServiceImplements [http-nio-4000-exec-9] null 카테고리의 이름이 null인 공동구매 상품 리스트를 불러옵니다.
+2025-05-14 15:06:06,244 INFO c.o.o.s.i.GroupPurchaseServiceImplements [http-nio-4000-exec-5] 조회된 상품 리스트: 0
+2025-05-14 15:06:06,253 INFO c.o.o.s.i.GroupPurchaseServiceImplements [http-nio-4000-exec-5] null 카테고리의 이름이 null인 공동구매 상품 리스트를 불러옵니다.
+2025-05-14 15:07:00,003 INFO c.o.o.h.ProductStatusScheduler [MessageBroker-12] 상품들의 상태를 체크합니다.
+2025-05-14 15:08:00,006 INFO c.o.o.h.ProductStatusScheduler [MessageBroker-4] 상품들의 상태를 체크합니다.
+2025-05-14 15:09:00,001 INFO c.o.o.h.ProductStatusScheduler [MessageBroker-4] 상품들의 상태를 체크합니다.
+2025-05-14 15:10:00,003 INFO c.o.o.h.ProductStatusScheduler [MessageBroker-5] 상품들의 상태를 체크합니다.
+2025-05-14 15:11:00,014 INFO c.o.o.h.ProductStatusScheduler [MessageBroker-10] 상품들의 상태를 체크합니다.
+2025-05-14 15:12:00,010 INFO c.o.o.h.ProductStatusScheduler [MessageBroker-2] 상품들의 상태를 체크합니다.
+2025-05-14 15:12:35,025 INFO c.o.o.c.AuthContoller [http-nio-4000-exec-8] qwer1234
+2025-05-14 15:12:35,026 INFO c.o.o.c.AuthContoller [http-nio-4000-exec-8] 로그인 했습니다.
+2025-05-14 15:12:35,208 INFO c.o.o.s.i.GroupPurchaseServiceImplements [http-nio-4000-exec-7] 조회된 상품 리스트: 0
+2025-05-14 15:12:35,214 INFO c.o.o.s.i.GroupPurchaseServiceImplements [http-nio-4000-exec-7] null 카테고리의 이름이 null인 공동구매 상품 리스트를 불러옵니다.
+2025-05-14 15:12:35,244 INFO c.o.o.s.i.GroupPurchaseServiceImplements [http-nio-4000-exec-3] 조회된 상품 리스트: 0
+2025-05-14 15:12:35,249 INFO c.o.o.s.i.GroupPurchaseServiceImplements [http-nio-4000-exec-3] null 카테고리의 이름이 null인 공동구매 상품 리스트를 불러옵니다.
+2025-05-14 15:13:00,007 INFO c.o.o.h.ProductStatusScheduler [MessageBroker-2] 상품들의 상태를 체크합니다.
+2025-05-14 15:13:45,387 INFO c.o.o.c.AuthContoller [http-nio-4000-exec-7] asdf1234
+2025-05-14 15:13:45,389 INFO c.o.o.c.AuthContoller [http-nio-4000-exec-7] 로그인 했습니다.
+2025-05-14 15:13:45,595 INFO c.o.o.s.i.GroupPurchaseServiceImplements [http-nio-4000-exec-1] 조회된 상품 리스트: 0
+2025-05-14 15:13:45,597 INFO c.o.o.s.i.GroupPurchaseServiceImplements [http-nio-4000-exec-1] null 카테고리의 이름이 null인 공동구매 상품 리스트를 불러옵니다.
+2025-05-14 15:13:45,635 INFO c.o.o.s.i.GroupPurchaseServiceImplements [http-nio-4000-exec-7] 조회된 상품 리스트: 0
+2025-05-14 15:13:45,636 INFO c.o.o.s.i.GroupPurchaseServiceImplements [http-nio-4000-exec-7] null 카테고리의 이름이 null인 공동구매 상품 리스트를 불러옵니다.
+2025-05-14 15:14:00,005 INFO c.o.o.h.ProductStatusScheduler [MessageBroker-9] 상품들의 상태를 체크합니다.
+2025-05-14 15:15:00,001 INFO c.o.o.h.ProductStatusScheduler [MessageBroker-11] 상품들의 상태를 체크합니다.
+2025-05-14 15:15:25,277 ERROR c.o.o.p.JwtProvider [http-nio-4000-exec-4] JWT expired at 2025-05-13T23:15:51.000+0900. Current time: 1747203325277. Error: JWT expired at 2025-05-13T14:15:51Z. Current time: 2025-05-14T06:15:25Z, a difference of 57574276 milliseconds.  Allowed clock skew: 0 milliseconds.
+2025-05-14 15:15:25,353 ERROR c.o.o.h.CustomExceptionHandler [http-nio-4000-exec-4] 유효성 검사 실패: Validation failed for argument [0] in public org.springframework.http.ResponseEntity<com.ongi.ongi_back.common.dto.response.ResponseDto> com.ongi.ongi_back.controller.AuthContoller.signUp(com.ongi.ongi_back.common.dto.request.auth.SignUpRequestDto): [Field error in object 'signUpRequestDto' on field 'gender': rejected value [null]; codes [NotBlank.signUpRequestDto.gender,NotBlank.gender,NotBlank.java.lang.String,NotBlank]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [signUpRequestDto.gender,gender]; arguments []; default message [gender]]; default message [공백일 수 없습니다]] 
+2025-05-14 15:15:42,970 ERROR c.o.o.p.JwtProvider [http-nio-4000-exec-6] JWT expired at 2025-05-13T23:15:51.000+0900. Current time: 1747203342970. Error: JWT expired at 2025-05-13T14:15:51Z. Current time: 2025-05-14T06:15:42Z, a difference of 57591970 milliseconds.  Allowed clock skew: 0 milliseconds.
+2025-05-14 15:15:55,636 INFO c.o.o.c.AuthContoller [http-nio-4000-exec-4] zmzmzm1234
+2025-05-14 15:15:55,637 INFO c.o.o.c.AuthContoller [http-nio-4000-exec-4] 로그인 했습니다.
+2025-05-14 15:15:55,889 INFO c.o.o.s.i.GroupPurchaseServiceImplements [http-nio-4000-exec-3] 조회된 상품 리스트: 0
+2025-05-14 15:15:55,914 INFO c.o.o.s.i.GroupPurchaseServiceImplements [http-nio-4000-exec-3] null 카테고리의 이름이 null인 공동구매 상품 리스트를 불러옵니다.
+2025-05-14 15:15:55,935 INFO c.o.o.s.i.GroupPurchaseServiceImplements [http-nio-4000-exec-4] 조회된 상품 리스트: 0
+2025-05-14 15:15:55,936 INFO c.o.o.s.i.GroupPurchaseServiceImplements [http-nio-4000-exec-4] null 카테고리의 이름이 null인 공동구매 상품 리스트를 불러옵니다.
+2025-05-14 15:16:00,012 INFO c.o.o.h.ProductStatusScheduler [MessageBroker-11] 상품들의 상태를 체크합니다.
+2025-05-14 15:16:55,755 INFO c.o.o.c.AuthContoller [http-nio-4000-exec-4] asdf1234
+2025-05-14 15:16:55,756 INFO c.o.o.c.AuthContoller [http-nio-4000-exec-4] 로그인 했습니다.
+2025-05-14 15:16:55,934 INFO c.o.o.s.i.GroupPurchaseServiceImplements [http-nio-4000-exec-7] 조회된 상품 리스트: 0
+2025-05-14 15:16:55,936 INFO c.o.o.s.i.GroupPurchaseServiceImplements [http-nio-4000-exec-7] null 카테고리의 이름이 null인 공동구매 상품 리스트를 불러옵니다.
+2025-05-14 15:16:55,967 INFO c.o.o.s.i.GroupPurchaseServiceImplements [http-nio-4000-exec-9] 조회된 상품 리스트: 0
+2025-05-14 15:16:55,977 INFO c.o.o.s.i.GroupPurchaseServiceImplements [http-nio-4000-exec-9] null 카테고리의 이름이 null인 공동구매 상품 리스트를 불러옵니다.
+2025-05-14 15:17:00,003 INFO c.o.o.h.ProductStatusScheduler [MessageBroker-1] 상품들의 상태를 체크합니다.
+2025-05-14 15:17:35,226 INFO c.o.o.c.AuthContoller [http-nio-4000-exec-7] qwer1234
+2025-05-14 15:17:35,227 INFO c.o.o.c.AuthContoller [http-nio-4000-exec-7] 로그인 했습니다.
+2025-05-14 15:17:35,403 INFO c.o.o.s.i.GroupPurchaseServiceImplements [http-nio-4000-exec-3] 조회된 상품 리스트: 0
+2025-05-14 15:17:35,403 INFO c.o.o.s.i.GroupPurchaseServiceImplements [http-nio-4000-exec-3] null 카테고리의 이름이 null인 공동구매 상품 리스트를 불러옵니다.
+2025-05-14 15:17:35,440 INFO c.o.o.s.i.GroupPurchaseServiceImplements [http-nio-4000-exec-8] 조회된 상품 리스트: 0
+2025-05-14 15:17:35,443 INFO c.o.o.s.i.GroupPurchaseServiceImplements [http-nio-4000-exec-8] null 카테고리의 이름이 null인 공동구매 상품 리스트를 불러옵니다.
+2025-05-14 15:18:00,011 INFO c.o.o.h.ProductStatusScheduler [MessageBroker-1] 상품들의 상태를 체크합니다.
+2025-05-14 15:18:48,832 ERROR c.o.o.p.JwtProvider [http-nio-4000-exec-3] JWT expired at 2025-05-13T23:15:51.000+0900. Current time: 1747203528832. Error: JWT expired at 2025-05-13T14:15:51Z. Current time: 2025-05-14T06:18:48Z, a difference of 57777832 milliseconds.  Allowed clock skew: 0 milliseconds.
+2025-05-14 15:18:57,772 INFO c.o.o.c.AuthContoller [http-nio-4000-exec-10] ghfkddl1234
+2025-05-14 15:18:57,773 INFO c.o.o.c.AuthContoller [http-nio-4000-exec-10] 로그인 했습니다.
+2025-05-14 15:19:00,004 INFO c.o.o.h.ProductStatusScheduler [MessageBroker-1] 상품들의 상태를 체크합니다.
+2025-05-14 15:19:00,951 INFO c.o.o.c.AuthContoller [http-nio-4000-exec-2] ghfkddl1234
+2025-05-14 15:19:00,951 INFO c.o.o.c.AuthContoller [http-nio-4000-exec-2] 로그인 했습니다.
+2025-05-14 15:19:07,406 INFO c.o.o.c.AuthContoller [http-nio-4000-exec-5] ghfkddl1234
+2025-05-14 15:19:07,406 INFO c.o.o.c.AuthContoller [http-nio-4000-exec-5] 로그인 했습니다.
+2025-05-14 15:19:16,664 INFO c.o.o.c.AuthContoller [http-nio-4000-exec-9] ghfkddk1234
+2025-05-14 15:19:16,664 INFO c.o.o.c.AuthContoller [http-nio-4000-exec-9] 로그인 했습니다.
+2025-05-14 15:19:16,898 INFO c.o.o.s.i.GroupPurchaseServiceImplements [http-nio-4000-exec-6] 조회된 상품 리스트: 0
+2025-05-14 15:19:16,899 INFO c.o.o.s.i.GroupPurchaseServiceImplements [http-nio-4000-exec-6] null 카테고리의 이름이 null인 공동구매 상품 리스트를 불러옵니다.
+2025-05-14 15:19:16,915 INFO c.o.o.s.i.GroupPurchaseServiceImplements [http-nio-4000-exec-2] 조회된 상품 리스트: 0
+2025-05-14 15:19:16,925 INFO c.o.o.s.i.GroupPurchaseServiceImplements [http-nio-4000-exec-2] null 카테고리의 이름이 null인 공동구매 상품 리스트를 불러옵니다.
+2025-05-14 15:20:00,016 INFO c.o.o.h.ProductStatusScheduler [MessageBroker-8] 상품들의 상태를 체크합니다.
+2025-05-14 15:21:00,012 INFO c.o.o.h.ProductStatusScheduler [MessageBroker-4] 상품들의 상태를 체크합니다.
+2025-05-14 15:22:00,010 INFO c.o.o.h.ProductStatusScheduler [MessageBroker-4] 상품들의 상태를 체크합니다.
+2025-05-14 15:23:00,003 INFO c.o.o.h.ProductStatusScheduler [MessageBroker-10] 상품들의 상태를 체크합니다.
+2025-05-14 15:24:00,004 INFO c.o.o.h.ProductStatusScheduler [MessageBroker-10] 상품들의 상태를 체크합니다.
+2025-05-14 15:25:00,002 INFO c.o.o.h.ProductStatusScheduler [MessageBroker-2] 상품들의 상태를 체크합니다.
+2025-05-14 15:26:00,012 INFO c.o.o.h.ProductStatusScheduler [MessageBroker-2] 상품들의 상태를 체크합니다.
+2025-05-14 15:27:00,001 INFO c.o.o.h.ProductStatusScheduler [MessageBroker-2] 상품들의 상태를 체크합니다.
+2025-05-14 15:28:00,009 INFO c.o.o.h.ProductStatusScheduler [MessageBroker-11] 상품들의 상태를 체크합니다.
+2025-05-14 15:29:00,002 INFO c.o.o.h.ProductStatusScheduler [MessageBroker-7] 상품들의 상태를 체크합니다.
+2025-05-14 15:30:00,011 INFO c.o.o.h.ProductStatusScheduler [MessageBroker-12] 상품들의 상태를 체크합니다.
+2025-05-14 15:30:09,063 INFO o.s.w.s.c.WebSocketMessageBrokerStats [MessageBroker-6] WebSocketSession[0 current WS(0)-HttpStream(0)-HttpPoll(0), 0 total, 0 closed abnormally (0 connect failure, 0 send limit, 0 transport error)], stompSubProtocol[processed CONNECT(0)-CONNECTED(0)-DISCONNECT(0)], stompBrokerRelay[null], inboundChannel[pool size = 0, active threads = 0, queued tasks = 0, completed tasks = 0], outboundChannel[pool size = 0, active threads = 0, queued tasks = 0, completed tasks = 0], sockJsScheduler[pool size = 12, active threads = 1, queued tasks = 5, completed tasks = 96]
+2025-05-14 15:31:00,005 INFO c.o.o.h.ProductStatusScheduler [MessageBroker-10] 상품들의 상태를 체크합니다.
+2025-05-14 15:32:00,011 INFO c.o.o.h.ProductStatusScheduler [MessageBroker-3] 상품들의 상태를 체크합니다.
+2025-05-14 15:33:00,009 INFO c.o.o.h.ProductStatusScheduler [MessageBroker-11] 상품들의 상태를 체크합니다.
+2025-05-14 15:34:00,006 INFO c.o.o.h.ProductStatusScheduler [MessageBroker-11] 상품들의 상태를 체크합니다.
+2025-05-14 15:35:00,000 INFO c.o.o.h.ProductStatusScheduler [MessageBroker-8] 상품들의 상태를 체크합니다.
+2025-05-14 15:36:00,008 INFO c.o.o.h.ProductStatusScheduler [MessageBroker-5] 상품들의 상태를 체크합니다.
+2025-05-14 15:37:00,006 INFO c.o.o.h.ProductStatusScheduler [MessageBroker-9] 상품들의 상태를 체크합니다.
+2025-05-14 15:37:55,880 INFO c.o.o.c.AuthContoller [http-nio-4000-exec-3] adminsystem
+2025-05-14 15:37:55,880 INFO c.o.o.c.AuthContoller [http-nio-4000-exec-3] 로그인 했습니다.
+2025-05-14 15:37:56,119 INFO c.o.o.s.i.GroupPurchaseServiceImplements [http-nio-4000-exec-8] 조회된 상품 리스트: 0
+2025-05-14 15:37:56,121 INFO c.o.o.s.i.GroupPurchaseServiceImplements [http-nio-4000-exec-8] null 카테고리의 이름이 null인 공동구매 상품 리스트를 불러옵니다.
+2025-05-14 15:37:56,146 INFO c.o.o.s.i.GroupPurchaseServiceImplements [http-nio-4000-exec-2] 조회된 상품 리스트: 0
+2025-05-14 15:37:56,148 INFO c.o.o.s.i.GroupPurchaseServiceImplements [http-nio-4000-exec-2] null 카테고리의 이름이 null인 공동구매 상품 리스트를 불러옵니다.
+2025-05-14 15:38:00,001 INFO c.o.o.h.ProductStatusScheduler [MessageBroker-9] 상품들의 상태를 체크합니다.
+2025-05-14 15:38:16,963 INFO c.o.o.c.AuthContoller [http-nio-4000-exec-4] qwer1234
+2025-05-14 15:38:16,963 INFO c.o.o.c.AuthContoller [http-nio-4000-exec-4] 로그인 했습니다.
+2025-05-14 15:38:17,123 INFO c.o.o.s.i.GroupPurchaseServiceImplements [http-nio-4000-exec-4] 조회된 상품 리스트: 0
+2025-05-14 15:38:17,123 INFO c.o.o.s.i.GroupPurchaseServiceImplements [http-nio-4000-exec-4] null 카테고리의 이름이 null인 공동구매 상품 리스트를 불러옵니다.
+2025-05-14 15:38:17,152 INFO c.o.o.s.i.GroupPurchaseServiceImplements [http-nio-4000-exec-5] 조회된 상품 리스트: 0
+2025-05-14 15:38:17,163 INFO c.o.o.s.i.GroupPurchaseServiceImplements [http-nio-4000-exec-5] null 카테고리의 이름이 null인 공동구매 상품 리스트를 불러옵니다.
+2025-05-14 15:39:00,015 INFO c.o.o.h.ProductStatusScheduler [MessageBroker-7] 상품들의 상태를 체크합니다.
+2025-05-14 15:39:10,331 INFO c.o.o.c.AuthContoller [http-nio-4000-exec-9] qpqpqp101010
+2025-05-14 15:39:10,332 INFO c.o.o.c.AuthContoller [http-nio-4000-exec-9] 로그인 했습니다.
+2025-05-14 15:39:10,589 INFO c.o.o.s.i.GroupPurchaseServiceImplements [http-nio-4000-exec-8] 조회된 상품 리스트: 0
+2025-05-14 15:39:10,622 INFO c.o.o.s.i.GroupPurchaseServiceImplements [http-nio-4000-exec-8] null 카테고리의 이름이 null인 공동구매 상품 리스트를 불러옵니다.
+2025-05-14 15:39:10,643 INFO c.o.o.s.i.GroupPurchaseServiceImplements [http-nio-4000-exec-10] 조회된 상품 리스트: 0
+2025-05-14 15:39:10,644 INFO c.o.o.s.i.GroupPurchaseServiceImplements [http-nio-4000-exec-10] null 카테고리의 이름이 null인 공동구매 상품 리스트를 불러옵니다.
+2025-05-14 15:39:41,633 INFO c.o.o.c.AuthContoller [http-nio-4000-exec-10] zmzmzm1234
+2025-05-14 15:39:41,634 INFO c.o.o.c.AuthContoller [http-nio-4000-exec-10] 로그인 했습니다.
+2025-05-14 15:39:41,851 INFO c.o.o.s.i.GroupPurchaseServiceImplements [http-nio-4000-exec-8] 조회된 상품 리스트: 0
+2025-05-14 15:39:41,869 INFO c.o.o.s.i.GroupPurchaseServiceImplements [http-nio-4000-exec-8] null 카테고리의 이름이 null인 공동구매 상품 리스트를 불러옵니다.
+2025-05-14 15:39:41,876 INFO c.o.o.s.i.GroupPurchaseServiceImplements [http-nio-4000-exec-4] 조회된 상품 리스트: 0
+2025-05-14 15:39:41,878 INFO c.o.o.s.i.GroupPurchaseServiceImplements [http-nio-4000-exec-4] null 카테고리의 이름이 null인 공동구매 상품 리스트를 불러옵니다.
+2025-05-14 15:40:00,015 INFO c.o.o.h.ProductStatusScheduler [MessageBroker-4] 상품들의 상태를 체크합니다.
+2025-05-14 15:40:06,064 INFO c.o.o.c.AuthContoller [http-nio-4000-exec-2] adminsystem
+2025-05-14 15:40:06,067 INFO c.o.o.c.AuthContoller [http-nio-4000-exec-2] 로그인 했습니다.
+2025-05-14 15:40:06,239 INFO c.o.o.s.i.GroupPurchaseServiceImplements [http-nio-4000-exec-7] 조회된 상품 리스트: 0
+2025-05-14 15:40:06,246 INFO c.o.o.s.i.GroupPurchaseServiceImplements [http-nio-4000-exec-7] null 카테고리의 이름이 null인 공동구매 상품 리스트를 불러옵니다.
+2025-05-14 15:40:06,269 INFO c.o.o.s.i.GroupPurchaseServiceImplements [http-nio-4000-exec-2] 조회된 상품 리스트: 0
+2025-05-14 15:40:06,289 INFO c.o.o.s.i.GroupPurchaseServiceImplements [http-nio-4000-exec-2] null 카테고리의 이름이 null인 공동구매 상품 리스트를 불러옵니다.
+2025-05-14 15:41:00,008 INFO c.o.o.h.ProductStatusScheduler [MessageBroker-4] 상품들의 상태를 체크합니다.
+2025-05-14 15:42:00,014 INFO c.o.o.h.ProductStatusScheduler [MessageBroker-4] 상품들의 상태를 체크합니다.
+2025-05-14 15:42:14,112 INFO c.o.o.c.AuthContoller [http-nio-4000-exec-7] zmzmzm1234
+2025-05-14 15:42:14,113 INFO c.o.o.c.AuthContoller [http-nio-4000-exec-7] 로그인 했습니다.
+2025-05-14 15:42:14,346 INFO c.o.o.s.i.GroupPurchaseServiceImplements [http-nio-4000-exec-5] 조회된 상품 리스트: 0
+2025-05-14 15:42:14,369 INFO c.o.o.s.i.GroupPurchaseServiceImplements [http-nio-4000-exec-5] null 카테고리의 이름이 null인 공동구매 상품 리스트를 불러옵니다.
+2025-05-14 15:42:14,390 INFO c.o.o.s.i.GroupPurchaseServiceImplements [http-nio-4000-exec-3] 조회된 상품 리스트: 0
+2025-05-14 15:42:14,392 INFO c.o.o.s.i.GroupPurchaseServiceImplements [http-nio-4000-exec-3] null 카테고리의 이름이 null인 공동구매 상품 리스트를 불러옵니다.
+2025-05-14 15:42:55,686 INFO c.o.o.c.AuthContoller [http-nio-4000-exec-8] adminsystem
+2025-05-14 15:42:55,686 INFO c.o.o.c.AuthContoller [http-nio-4000-exec-8] 로그인 했습니다.
+2025-05-14 15:42:55,859 INFO c.o.o.s.i.GroupPurchaseServiceImplements [http-nio-4000-exec-10] 조회된 상품 리스트: 0
+2025-05-14 15:42:55,865 INFO c.o.o.s.i.GroupPurchaseServiceImplements [http-nio-4000-exec-10] null 카테고리의 이름이 null인 공동구매 상품 리스트를 불러옵니다.
+2025-05-14 15:42:55,886 INFO c.o.o.s.i.GroupPurchaseServiceImplements [http-nio-4000-exec-8] 조회된 상품 리스트: 0
+2025-05-14 15:42:55,902 INFO c.o.o.s.i.GroupPurchaseServiceImplements [http-nio-4000-exec-8] null 카테고리의 이름이 null인 공동구매 상품 리스트를 불러옵니다.
+2025-05-14 15:43:00,003 INFO c.o.o.h.ProductStatusScheduler [MessageBroker-10] 상품들의 상태를 체크합니다.
+2025-05-14 15:43:25,927 INFO c.o.o.c.AuthContoller [http-nio-4000-exec-1] asdf1234
+2025-05-14 15:43:25,928 INFO c.o.o.c.AuthContoller [http-nio-4000-exec-1] 로그인 했습니다.
+2025-05-14 15:43:26,104 INFO c.o.o.s.i.GroupPurchaseServiceImplements [http-nio-4000-exec-3] 조회된 상품 리스트: 0
+2025-05-14 15:43:26,105 INFO c.o.o.s.i.GroupPurchaseServiceImplements [http-nio-4000-exec-3] null 카테고리의 이름이 null인 공동구매 상품 리스트를 불러옵니다.
+2025-05-14 15:43:26,142 INFO c.o.o.s.i.GroupPurchaseServiceImplements [http-nio-4000-exec-1] 조회된 상품 리스트: 0
+2025-05-14 15:43:26,146 INFO c.o.o.s.i.GroupPurchaseServiceImplements [http-nio-4000-exec-1] null 카테고리의 이름이 null인 공동구매 상품 리스트를 불러옵니다.
+2025-05-14 15:43:57,450 INFO c.o.o.s.i.GroupPurchaseServiceImplements [http-nio-4000-exec-4] 조회된 상품 리스트: 0
+2025-05-14 15:43:57,451 INFO c.o.o.s.i.GroupPurchaseServiceImplements [http-nio-4000-exec-4] null 카테고리의 이름이 null인 공동구매 상품 리스트를 불러옵니다.
+2025-05-14 15:43:57,479 INFO c.o.o.s.i.GroupPurchaseServiceImplements [http-nio-4000-exec-1] 조회된 상품 리스트: 0
+2025-05-14 15:43:57,541 INFO c.o.o.s.i.GroupPurchaseServiceImplements [http-nio-4000-exec-1] null 카테고리의 이름이 null인 공동구매 상품 리스트를 불러옵니다.
+2025-05-14 15:44:00,000 INFO c.o.o.h.ProductStatusScheduler [MessageBroker-3] 상품들의 상태를 체크합니다.
+2025-05-14 15:45:00,010 INFO c.o.o.h.ProductStatusScheduler [MessageBroker-12] 상품들의 상태를 체크합니다.
+2025-05-14 15:45:13,436 INFO c.o.o.c.AuthContoller [http-nio-4000-exec-4] adminsystem
+2025-05-14 15:45:13,436 INFO c.o.o.c.AuthContoller [http-nio-4000-exec-4] 로그인 했습니다.
+2025-05-14 15:45:13,601 INFO c.o.o.s.i.GroupPurchaseServiceImplements [http-nio-4000-exec-2] 조회된 상품 리스트: 0
+2025-05-14 15:45:13,602 INFO c.o.o.s.i.GroupPurchaseServiceImplements [http-nio-4000-exec-2] null 카테고리의 이름이 null인 공동구매 상품 리스트를 불러옵니다.
+2025-05-14 15:45:13,637 INFO c.o.o.s.i.GroupPurchaseServiceImplements [http-nio-4000-exec-6] 조회된 상품 리스트: 0
+2025-05-14 15:45:13,637 INFO c.o.o.s.i.GroupPurchaseServiceImplements [http-nio-4000-exec-6] null 카테고리의 이름이 null인 공동구매 상품 리스트를 불러옵니다.
+2025-05-14 15:46:00,006 INFO c.o.o.h.ProductStatusScheduler [MessageBroker-11] 상품들의 상태를 체크합니다.
+2025-05-14 15:47:00,002 INFO c.o.o.h.ProductStatusScheduler [MessageBroker-11] 상품들의 상태를 체크합니다.
+2025-05-14 15:48:00,007 INFO c.o.o.h.ProductStatusScheduler [MessageBroker-11] 상품들의 상태를 체크합니다.
+2025-05-14 15:49:00,039 INFO c.o.o.h.ProductStatusScheduler [MessageBroker-2] 상품들의 상태를 체크합니다.
+2025-05-14 15:50:00,004 INFO c.o.o.h.ProductStatusScheduler [MessageBroker-2] 상품들의 상태를 체크합니다.
+2025-05-14 15:50:01,229 INFO c.o.o.c.AuthContoller [http-nio-4000-exec-10] qwer1234
+2025-05-14 15:50:01,229 INFO c.o.o.c.AuthContoller [http-nio-4000-exec-10] 로그인 했습니다.
+2025-05-14 15:50:01,400 INFO c.o.o.s.i.GroupPurchaseServiceImplements [http-nio-4000-exec-6] 조회된 상품 리스트: 0
+2025-05-14 15:50:01,403 INFO c.o.o.s.i.GroupPurchaseServiceImplements [http-nio-4000-exec-6] null 카테고리의 이름이 null인 공동구매 상품 리스트를 불러옵니다.
+2025-05-14 15:50:01,430 INFO c.o.o.s.i.GroupPurchaseServiceImplements [http-nio-4000-exec-5] 조회된 상품 리스트: 0
+2025-05-14 15:50:01,441 INFO c.o.o.s.i.GroupPurchaseServiceImplements [http-nio-4000-exec-5] null 카테고리의 이름이 null인 공동구매 상품 리스트를 불러옵니다.
+2025-05-14 15:51:00,002 INFO c.o.o.h.ProductStatusScheduler [MessageBroker-2] 상품들의 상태를 체크합니다.
+2025-05-14 15:52:00,013 INFO c.o.o.h.ProductStatusScheduler [MessageBroker-1] 상품들의 상태를 체크합니다.
+2025-05-14 15:53:00,010 INFO c.o.o.h.ProductStatusScheduler [MessageBroker-1] 상품들의 상태를 체크합니다.
+2025-05-14 15:54:00,010 INFO c.o.o.h.ProductStatusScheduler [MessageBroker-4] 상품들의 상태를 체크합니다.
+2025-05-14 15:55:00,014 INFO c.o.o.h.ProductStatusScheduler [MessageBroker-4] 상품들의 상태를 체크합니다.
+2025-05-14 15:56:00,012 INFO c.o.o.h.ProductStatusScheduler [MessageBroker-3] 상품들의 상태를 체크합니다.
+2025-05-14 15:57:00,013 INFO c.o.o.h.ProductStatusScheduler [MessageBroker-3] 상품들의 상태를 체크합니다.
+2025-05-14 15:58:00,000 INFO c.o.o.h.ProductStatusScheduler [MessageBroker-3] 상품들의 상태를 체크합니다.
+2025-05-14 15:59:00,010 INFO c.o.o.h.ProductStatusScheduler [MessageBroker-5] 상품들의 상태를 체크합니다.
+2025-05-14 16:00:00,014 INFO c.o.o.h.ProductStatusScheduler [MessageBroker-1] 상품들의 상태를 체크합니다.
+2025-05-14 16:00:09,079 INFO o.s.w.s.c.WebSocketMessageBrokerStats [MessageBroker-10] WebSocketSession[0 current WS(0)-HttpStream(0)-HttpPoll(0), 0 total, 0 closed abnormally (0 connect failure, 0 send limit, 0 transport error)], stompSubProtocol[processed CONNECT(0)-CONNECTED(0)-DISCONNECT(0)], stompBrokerRelay[null], inboundChannel[pool size = 0, active threads = 0, queued tasks = 0, completed tasks = 0], outboundChannel[pool size = 0, active threads = 0, queued tasks = 0, completed tasks = 0], sockJsScheduler[pool size = 12, active threads = 1, queued tasks = 5, completed tasks = 128]
+2025-05-14 16:01:00,015 INFO c.o.o.h.ProductStatusScheduler [MessageBroker-4] 상품들의 상태를 체크합니다.
+2025-05-14 16:02:00,002 INFO c.o.o.h.ProductStatusScheduler [MessageBroker-8] 상품들의 상태를 체크합니다.
+2025-05-14 16:03:00,008 INFO c.o.o.h.ProductStatusScheduler [MessageBroker-5] 상품들의 상태를 체크합니다.
+2025-05-14 16:04:00,014 INFO c.o.o.h.ProductStatusScheduler [MessageBroker-6] 상품들의 상태를 체크합니다.
+2025-05-14 16:05:00,003 INFO c.o.o.h.ProductStatusScheduler [MessageBroker-9] 상품들의 상태를 체크합니다.
+2025-05-14 16:06:00,012 INFO c.o.o.h.ProductStatusScheduler [MessageBroker-1] 상품들의 상태를 체크합니다.
+2025-05-14 16:07:00,003 INFO c.o.o.h.ProductStatusScheduler [MessageBroker-12] 상품들의 상태를 체크합니다.
+2025-05-14 16:08:00,012 INFO c.o.o.h.ProductStatusScheduler [MessageBroker-3] 상품들의 상태를 체크합니다.
+2025-05-14 16:09:00,003 INFO c.o.o.h.ProductStatusScheduler [MessageBroker-11] 상품들의 상태를 체크합니다.
+2025-05-14 16:09:18,803 INFO o.s.b.StartupInfoLogger [main] Starting OngiBackApplication using Java 21.0.6 with PID 18232 (C:\Users\dksoc\Documents\JAVA\ongi-project\ongi-back\build\classes\java\main started by dksoc in C:\Users\dksoc\Documents\JAVA\ongi-project\ongi-back)
+2025-05-14 16:09:18,814 DEBUG o.s.b.StartupInfoLogger [main] Running with Spring Boot v3.4.4, Spring v6.2.5
+2025-05-14 16:09:18,817 INFO o.s.b.SpringApplication [main] No active profile set, falling back to 1 default profile: "default"
+2025-05-14 16:09:21,048 INFO o.s.d.r.c.RepositoryConfigurationDelegate [main] Multiple Spring Data modules found, entering strict repository configuration mode
+2025-05-14 16:09:21,053 INFO o.s.d.r.c.RepositoryConfigurationDelegate [main] Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-05-14 16:09:21,629 INFO o.s.d.r.c.RepositoryConfigurationDelegate [main] Finished Spring Data repository scanning in 555 ms. Found 32 JPA repository interfaces.
+2025-05-14 16:09:21,690 INFO o.s.d.r.c.RepositoryConfigurationDelegate [main] Multiple Spring Data modules found, entering strict repository configuration mode
+2025-05-14 16:09:21,693 INFO o.s.d.r.c.RepositoryConfigurationDelegate [main] Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2025-05-14 16:09:21,757 INFO o.s.d.r.c.RepositoryConfigurationExtensionSupport [main] Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.ongi.ongi_back.repository.AlertRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2025-05-14 16:09:21,760 INFO o.s.d.r.c.RepositoryConfigurationExtensionSupport [main] Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.ongi.ongi_back.repository.BadgeRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2025-05-14 16:09:21,762 INFO o.s.d.r.c.RepositoryConfigurationExtensionSupport [main] Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.ongi.ongi_back.repository.CalendarRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2025-05-14 16:09:21,764 INFO o.s.d.r.c.RepositoryConfigurationExtensionSupport [main] Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.ongi.ongi_back.repository.ChatRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2025-05-14 16:09:21,766 INFO o.s.d.r.c.RepositoryConfigurationExtensionSupport [main] Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.ongi.ongi_back.repository.CommunityCommentRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2025-05-14 16:09:21,767 INFO o.s.d.r.c.RepositoryConfigurationExtensionSupport [main] Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.ongi.ongi_back.repository.CommunityPostRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2025-05-14 16:09:21,771 INFO o.s.d.r.c.RepositoryConfigurationExtensionSupport [main] Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.ongi.ongi_back.repository.EventApplyRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2025-05-14 16:09:21,773 INFO o.s.d.r.c.RepositoryConfigurationExtensionSupport [main] Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.ongi.ongi_back.repository.EventRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2025-05-14 16:09:21,778 INFO o.s.d.r.c.RepositoryConfigurationExtensionSupport [main] Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.ongi.ongi_back.repository.HelperApplyRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2025-05-14 16:09:21,779 INFO o.s.d.r.c.RepositoryConfigurationExtensionSupport [main] Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.ongi.ongi_back.repository.HelperCommentRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2025-05-14 16:09:21,781 INFO o.s.d.r.c.RepositoryConfigurationExtensionSupport [main] Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.ongi.ongi_back.repository.HelperLikedRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2025-05-14 16:09:21,782 INFO o.s.d.r.c.RepositoryConfigurationExtensionSupport [main] Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.ongi.ongi_back.repository.HelperPostRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2025-05-14 16:09:21,787 INFO o.s.d.r.c.RepositoryConfigurationExtensionSupport [main] Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.ongi.ongi_back.repository.LikedRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2025-05-14 16:09:21,792 INFO o.s.d.r.c.RepositoryConfigurationExtensionSupport [main] Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.ongi.ongi_back.repository.LikeKeywordRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2025-05-14 16:09:21,793 INFO o.s.d.r.c.RepositoryConfigurationExtensionSupport [main] Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.ongi.ongi_back.repository.MessageRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2025-05-14 16:09:21,794 INFO o.s.d.r.c.RepositoryConfigurationExtensionSupport [main] Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.ongi.ongi_back.repository.NoticeRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2025-05-14 16:09:21,797 INFO o.s.d.r.c.RepositoryConfigurationExtensionSupport [main] Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.ongi.ongi_back.repository.OrderItemRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2025-05-14 16:09:21,800 INFO o.s.d.r.c.RepositoryConfigurationExtensionSupport [main] Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.ongi.ongi_back.repository.OrderRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2025-05-14 16:09:21,813 INFO o.s.d.r.c.RepositoryConfigurationExtensionSupport [main] Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.ongi.ongi_back.repository.PaymentCancelRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2025-05-14 16:09:21,815 INFO o.s.d.r.c.RepositoryConfigurationExtensionSupport [main] Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.ongi.ongi_back.repository.PaymentConformRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2025-05-14 16:09:21,816 INFO o.s.d.r.c.RepositoryConfigurationExtensionSupport [main] Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.ongi.ongi_back.repository.ProductRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2025-05-14 16:09:21,817 INFO o.s.d.r.c.RepositoryConfigurationExtensionSupport [main] Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.ongi.ongi_back.repository.ProductReviewRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2025-05-14 16:09:21,821 INFO o.s.d.r.c.RepositoryConfigurationExtensionSupport [main] Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.ongi.ongi_back.repository.QuestionRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2025-05-14 16:09:21,823 INFO o.s.d.r.c.RepositoryConfigurationExtensionSupport [main] Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.ongi.ongi_back.repository.ReportRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2025-05-14 16:09:21,827 INFO o.s.d.r.c.RepositoryConfigurationExtensionSupport [main] Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.ongi.ongi_back.repository.ReviewImagesRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2025-05-14 16:09:21,829 INFO o.s.d.r.c.RepositoryConfigurationExtensionSupport [main] Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.ongi.ongi_back.repository.ShoppingCartRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2025-05-14 16:09:21,829 INFO o.s.d.r.c.RepositoryConfigurationExtensionSupport [main] Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.ongi.ongi_back.repository.StockReservationRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2025-05-14 16:09:21,830 INFO o.s.d.r.c.RepositoryConfigurationExtensionSupport [main] Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.ongi.ongi_back.repository.UserAddressRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2025-05-14 16:09:21,831 INFO o.s.d.r.c.RepositoryConfigurationExtensionSupport [main] Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.ongi.ongi_back.repository.UserRankRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2025-05-14 16:09:21,833 INFO o.s.d.r.c.RepositoryConfigurationExtensionSupport [main] Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.ongi.ongi_back.repository.UserRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2025-05-14 16:09:21,835 INFO o.s.d.r.c.RepositoryConfigurationExtensionSupport [main] Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.ongi.ongi_back.repository.VerificationCodeRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2025-05-14 16:09:21,838 INFO o.s.d.r.c.RepositoryConfigurationExtensionSupport [main] Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.ongi.ongi_back.repository.WishListRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2025-05-14 16:09:21,841 INFO o.s.d.r.c.RepositoryConfigurationDelegate [main] Finished Spring Data repository scanning in 125 ms. Found 0 Redis repository interfaces.
+2025-05-14 16:09:24,387 INFO o.s.b.w.e.t.TomcatWebServer [main] Tomcat initialized with port 4000 (http)
+2025-05-14 16:09:24,619 INFO o.s.b.w.s.c.ServletWebServerApplicationContext [main] Root WebApplicationContext: initialization completed in 5694 ms
+2025-05-14 16:09:26,530 INFO o.s.o.j.p.SpringPersistenceUnitInfo [main] No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-05-14 16:09:28,778 INFO o.s.o.j.AbstractEntityManagerFactoryBean [main] Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-05-14 16:09:29,353 INFO o.s.d.j.r.q.QueryEnhancerFactory [main] Hibernate is in classpath; If applicable, HQL parser will be used.
+2025-05-14 16:09:29,489 DEBUG o.s.w.f.GenericFilterBean [main] Filter 'jwtAuthenticationFilter' configured for use
+2025-05-14 16:09:33,874 WARN o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration [main] spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-05-14 16:09:34,617 DEBUG c.o.o.c.WebSecurityConfig [main] [+] WebConfig Start !!
+2025-05-14 16:09:35,293 INFO o.s.c.l.CompositeLog [main] Starting...
+2025-05-14 16:09:35,294 INFO o.s.c.l.CompositeLog [main] BrokerAvailabilityEvent[available=true, SimpleBrokerMessageHandler [org.springframework.messaging.simp.broker.DefaultSubscriptionRegistry@38b46854]]
+2025-05-14 16:09:35,297 INFO o.s.c.l.CompositeLog [main] Started.
+2025-05-14 16:09:35,336 INFO o.s.b.w.e.t.TomcatWebServer [main] Tomcat started on port 4000 (http) with context path '/'
+2025-05-14 16:09:35,363 INFO o.s.b.StartupInfoLogger [main] Started OngiBackApplication in 18.112 seconds (process running for 20.976)
+2025-05-14 16:09:39,506 INFO o.s.w.s.FrameworkServlet [http-nio-4000-exec-2] Initializing Servlet 'dispatcherServlet'
+2025-05-14 16:09:39,507 INFO o.s.w.s.FrameworkServlet [http-nio-4000-exec-2] Completed initialization in 1 ms
+2025-05-14 16:09:55,640 ERROR c.o.o.p.JwtProvider [http-nio-4000-exec-8] JWT expired at 2025-05-13T23:15:51.000+0900. Current time: 1747206595638. Error: JWT expired at 2025-05-13T14:15:51Z. Current time: 2025-05-14T07:09:55Z, a difference of 60844636 milliseconds.  Allowed clock skew: 0 milliseconds.
+2025-05-14 16:09:55,749 INFO c.o.o.c.AuthContoller [http-nio-4000-exec-8] qwer1234
+2025-05-14 16:09:55,749 INFO c.o.o.c.AuthContoller [http-nio-4000-exec-8] 로그인 했습니다.
+2025-05-14 16:10:00,008 INFO c.o.o.h.ProductStatusScheduler [MessageBroker-2] 상품들의 상태를 체크합니다.
+2025-05-14 16:10:35,291 INFO o.s.w.s.c.WebSocketMessageBrokerStats [MessageBroker-3] WebSocketSession[0 current WS(0)-HttpStream(0)-HttpPoll(0), 0 total, 0 closed abnormally (0 connect failure, 0 send limit, 0 transport error)], stompSubProtocol[processed CONNECT(0)-CONNECTED(0)-DISCONNECT(0)], stompBrokerRelay[null], inboundChannel[pool size = 0, active threads = 0, queued tasks = 0, completed tasks = 0], outboundChannel[pool size = 0, active threads = 0, queued tasks = 0, completed tasks = 0], sockJsScheduler[pool size = 8, active threads = 1, queued tasks = 5, completed tasks = 2]
+2025-05-14 16:11:00,014 INFO c.o.o.h.ProductStatusScheduler [MessageBroker-4] 상품들의 상태를 체크합니다.
+2025-05-14 16:12:00,003 INFO c.o.o.h.ProductStatusScheduler [MessageBroker-4] 상품들의 상태를 체크합니다.
+2025-05-14 16:13:00,000 INFO c.o.o.h.ProductStatusScheduler [MessageBroker-7] 상품들의 상태를 체크합니다.
+2025-05-14 16:14:00,008 INFO c.o.o.h.ProductStatusScheduler [MessageBroker-8] 상품들의 상태를 체크합니다.
+2025-05-14 16:15:00,007 INFO c.o.o.h.ProductStatusScheduler [MessageBroker-9] 상품들의 상태를 체크합니다.
+2025-05-14 16:16:00,010 INFO c.o.o.h.ProductStatusScheduler [MessageBroker-9] 상품들의 상태를 체크합니다.
+2025-05-14 16:17:00,005 INFO c.o.o.h.ProductStatusScheduler [MessageBroker-1] 상품들의 상태를 체크합니다.
+2025-05-14 16:18:00,001 INFO c.o.o.h.ProductStatusScheduler [MessageBroker-11] 상품들의 상태를 체크합니다.
+2025-05-14 16:19:00,008 INFO c.o.o.h.ProductStatusScheduler [MessageBroker-7] 상품들의 상태를 체크합니다.
+2025-05-14 16:20:00,009 INFO c.o.o.h.ProductStatusScheduler [MessageBroker-3] 상품들의 상태를 체크합니다.
+2025-05-14 16:21:00,008 INFO c.o.o.h.ProductStatusScheduler [MessageBroker-5] 상품들의 상태를 체크합니다.
+2025-05-14 16:22:00,014 INFO c.o.o.h.ProductStatusScheduler [MessageBroker-10] 상품들의 상태를 체크합니다.
+2025-05-14 16:23:00,001 INFO c.o.o.h.ProductStatusScheduler [MessageBroker-4] 상품들의 상태를 체크합니다.
+2025-05-14 16:24:00,003 INFO c.o.o.h.ProductStatusScheduler [MessageBroker-4] 상품들의 상태를 체크합니다.
+2025-05-14 16:24:41,431 INFO c.o.o.c.AuthContoller [http-nio-4000-exec-9] adminsystem
+2025-05-14 16:24:41,432 INFO c.o.o.c.AuthContoller [http-nio-4000-exec-9] 로그인 했습니다.
+2025-05-14 16:24:41,726 INFO c.o.o.s.i.GroupPurchaseServiceImplements [http-nio-4000-exec-4] 조회된 상품 리스트: 0
+2025-05-14 16:24:41,763 INFO c.o.o.s.i.GroupPurchaseServiceImplements [http-nio-4000-exec-4] null 카테고리의 이름이 null인 공동구매 상품 리스트를 불러옵니다.
+2025-05-14 16:24:41,787 INFO c.o.o.s.i.GroupPurchaseServiceImplements [http-nio-4000-exec-4] 조회된 상품 리스트: 0
+2025-05-14 16:24:41,790 INFO c.o.o.s.i.GroupPurchaseServiceImplements [http-nio-4000-exec-4] null 카테고리의 이름이 null인 공동구매 상품 리스트를 불러옵니다.
+2025-05-14 16:25:00,002 INFO c.o.o.h.ProductStatusScheduler [MessageBroker-4] 상품들의 상태를 체크합니다.
+2025-05-14 16:26:00,012 INFO c.o.o.h.ProductStatusScheduler [MessageBroker-8] 상품들의 상태를 체크합니다.
+2025-05-14 16:27:00,012 INFO c.o.o.h.ProductStatusScheduler [MessageBroker-8] 상품들의 상태를 체크합니다.
+2025-05-14 16:28:00,009 INFO c.o.o.h.ProductStatusScheduler [MessageBroker-9] 상품들의 상태를 체크합니다.
+2025-05-14 16:29:00,003 INFO c.o.o.h.ProductStatusScheduler [MessageBroker-9] 상품들의 상태를 체크합니다.
+2025-05-14 16:30:00,000 INFO c.o.o.h.ProductStatusScheduler [MessageBroker-11] 상품들의 상태를 체크합니다.
+2025-05-14 16:31:00,001 INFO c.o.o.h.ProductStatusScheduler [MessageBroker-7] 상품들의 상태를 체크합니다.
+2025-05-14 16:32:00,000 INFO c.o.o.h.ProductStatusScheduler [MessageBroker-3] 상품들의 상태를 체크합니다.
+2025-05-14 16:33:00,010 INFO c.o.o.h.ProductStatusScheduler [MessageBroker-5] 상품들의 상태를 체크합니다.
+2025-05-14 16:34:00,013 INFO c.o.o.h.ProductStatusScheduler [MessageBroker-10] 상품들의 상태를 체크합니다.
+2025-05-14 16:35:00,009 INFO c.o.o.h.ProductStatusScheduler [MessageBroker-10] 상품들의 상태를 체크합니다.
+2025-05-14 16:36:00,000 INFO c.o.o.h.ProductStatusScheduler [MessageBroker-10] 상품들의 상태를 체크합니다.
+2025-05-14 16:37:00,008 INFO c.o.o.h.ProductStatusScheduler [MessageBroker-4] 상품들의 상태를 체크합니다.
+2025-05-14 16:38:00,003 INFO c.o.o.h.ProductStatusScheduler [MessageBroker-6] 상품들의 상태를 체크합니다.
+2025-05-14 16:39:00,012 INFO c.o.o.h.ProductStatusScheduler [MessageBroker-8] 상품들의 상태를 체크합니다.
+2025-05-14 16:40:00,012 INFO c.o.o.h.ProductStatusScheduler [MessageBroker-8] 상품들의 상태를 체크합니다.
+2025-05-14 16:40:35,304 INFO o.s.w.s.c.WebSocketMessageBrokerStats [MessageBroker-3] WebSocketSession[0 current WS(0)-HttpStream(0)-HttpPoll(0), 0 total, 0 closed abnormally (0 connect failure, 0 send limit, 0 transport error)], stompSubProtocol[processed CONNECT(0)-CONNECTED(0)-DISCONNECT(0)], stompBrokerRelay[null], inboundChannel[pool size = 0, active threads = 0, queued tasks = 0, completed tasks = 0], outboundChannel[pool size = 0, active threads = 0, queued tasks = 0, completed tasks = 0], sockJsScheduler[pool size = 12, active threads = 1, queued tasks = 5, completed tasks = 33]
+2025-05-14 16:41:00,012 INFO c.o.o.h.ProductStatusScheduler [MessageBroker-2] 상품들의 상태를 체크합니다.
+2025-05-14 16:42:00,002 INFO c.o.o.h.ProductStatusScheduler [MessageBroker-2] 상품들의 상태를 체크합니다.
+2025-05-14 16:43:00,004 INFO c.o.o.h.ProductStatusScheduler [MessageBroker-6] 상품들의 상태를 체크합니다.
+2025-05-14 16:44:00,001 INFO c.o.o.h.ProductStatusScheduler [MessageBroker-6] 상품들의 상태를 체크합니다.
+2025-05-14 16:45:00,006 INFO c.o.o.h.ProductStatusScheduler [MessageBroker-7] 상품들의 상태를 체크합니다.
+2025-05-14 16:46:00,006 INFO c.o.o.h.ProductStatusScheduler [MessageBroker-5] 상품들의 상태를 체크합니다.
+2025-05-14 16:47:00,014 INFO c.o.o.h.ProductStatusScheduler [MessageBroker-5] 상품들의 상태를 체크합니다.
+2025-05-14 16:48:00,013 INFO c.o.o.h.ProductStatusScheduler [MessageBroker-5] 상품들의 상태를 체크합니다.
+2025-05-14 16:49:00,005 INFO c.o.o.h.ProductStatusScheduler [MessageBroker-1] 상품들의 상태를 체크합니다.
+2025-05-14 16:50:00,000 INFO c.o.o.h.ProductStatusScheduler [MessageBroker-1] 상품들의 상태를 체크합니다.
+2025-05-14 16:51:00,000 INFO c.o.o.h.ProductStatusScheduler [MessageBroker-11] 상품들의 상태를 체크합니다.
+2025-05-14 16:52:00,011 INFO c.o.o.h.ProductStatusScheduler [MessageBroker-3] 상품들의 상태를 체크합니다.
+2025-05-14 16:53:00,003 INFO c.o.o.h.ProductStatusScheduler [MessageBroker-3] 상품들의 상태를 체크합니다.
+2025-05-14 16:54:00,003 INFO c.o.o.h.ProductStatusScheduler [MessageBroker-2] 상품들의 상태를 체크합니다.
+2025-05-14 16:55:00,015 INFO c.o.o.h.ProductStatusScheduler [MessageBroker-8] 상품들의 상태를 체크합니다.
+2025-05-14 16:56:00,008 INFO c.o.o.h.ProductStatusScheduler [MessageBroker-8] 상품들의 상태를 체크합니다.
+2025-05-14 16:57:00,004 INFO c.o.o.h.ProductStatusScheduler [MessageBroker-8] 상품들의 상태를 체크합니다.
+2025-05-14 16:58:00,000 INFO c.o.o.h.ProductStatusScheduler [MessageBroker-12] 상품들의 상태를 체크합니다.
+2025-05-14 16:59:00,006 INFO c.o.o.h.ProductStatusScheduler [MessageBroker-12] 상품들의 상태를 체크합니다.
+2025-05-14 17:00:00,011 INFO c.o.o.h.ProductStatusScheduler [MessageBroker-12] 상품들의 상태를 체크합니다.
+2025-05-14 17:01:00,012 INFO c.o.o.h.ProductStatusScheduler [MessageBroker-9] 상품들의 상태를 체크합니다.
+2025-05-14 17:02:00,006 INFO c.o.o.h.ProductStatusScheduler [MessageBroker-1] 상품들의 상태를 체크합니다.
+2025-05-14 17:03:00,002 INFO c.o.o.h.ProductStatusScheduler [MessageBroker-11] 상품들의 상태를 체크합니다.
+2025-05-14 17:04:00,005 INFO c.o.o.h.ProductStatusScheduler [MessageBroker-10] 상품들의 상태를 체크합니다.
+2025-05-14 17:05:00,005 INFO c.o.o.h.ProductStatusScheduler [MessageBroker-10] 상품들의 상태를 체크합니다.
+2025-05-14 17:06:00,008 INFO c.o.o.h.ProductStatusScheduler [MessageBroker-10] 상품들의 상태를 체크합니다.
+2025-05-14 17:07:00,014 INFO c.o.o.h.ProductStatusScheduler [MessageBroker-6] 상품들의 상태를 체크합니다.
+2025-05-14 17:08:00,012 INFO c.o.o.h.ProductStatusScheduler [MessageBroker-7] 상품들의 상태를 체크합니다.
+2025-05-14 17:09:00,006 INFO c.o.o.h.ProductStatusScheduler [MessageBroker-7] 상품들의 상태를 체크합니다.
+2025-05-14 17:10:00,015 INFO c.o.o.h.ProductStatusScheduler [MessageBroker-11] 상품들의 상태를 체크합니다.
+2025-05-14 17:10:35,316 INFO o.s.w.s.c.WebSocketMessageBrokerStats [MessageBroker-3] WebSocketSession[0 current WS(0)-HttpStream(0)-HttpPoll(0), 0 total, 0 closed abnormally (0 connect failure, 0 send limit, 0 transport error)], stompSubProtocol[processed CONNECT(0)-CONNECTED(0)-DISCONNECT(0)], stompBrokerRelay[null], inboundChannel[pool size = 0, active threads = 0, queued tasks = 0, completed tasks = 0], outboundChannel[pool size = 0, active threads = 0, queued tasks = 0, completed tasks = 0], sockJsScheduler[pool size = 12, active threads = 1, queued tasks = 5, completed tasks = 65]
+2025-05-14 17:11:00,005 INFO c.o.o.h.ProductStatusScheduler [MessageBroker-2] 상품들의 상태를 체크합니다.
+2025-05-14 17:12:00,002 INFO c.o.o.h.ProductStatusScheduler [MessageBroker-6] 상품들의 상태를 체크합니다.
+2025-05-14 17:13:00,016 INFO c.o.o.h.ProductStatusScheduler [MessageBroker-7] 상품들의 상태를 체크합니다.
+2025-05-14 17:14:00,009 INFO c.o.o.h.ProductStatusScheduler [MessageBroker-5] 상품들의 상태를 체크합니다.
+2025-05-14 17:15:00,006 INFO c.o.o.h.ProductStatusScheduler [MessageBroker-5] 상품들의 상태를 체크합니다.
+2025-05-14 17:16:00,008 INFO c.o.o.h.ProductStatusScheduler [MessageBroker-11] 상품들의 상태를 체크합니다.
+2025-05-14 17:17:00,001 INFO c.o.o.h.ProductStatusScheduler [MessageBroker-11] 상품들의 상태를 체크합니다.
+2025-05-14 17:18:00,010 INFO c.o.o.h.ProductStatusScheduler [MessageBroker-8] 상품들의 상태를 체크합니다.
+2025-05-14 17:19:00,006 INFO c.o.o.h.ProductStatusScheduler [MessageBroker-1] 상품들의 상태를 체크합니다.
+2025-05-14 17:20:00,007 INFO c.o.o.h.ProductStatusScheduler [MessageBroker-12] 상품들의 상태를 체크합니다.
+2025-05-14 17:21:00,011 INFO c.o.o.h.ProductStatusScheduler [MessageBroker-9] 상품들의 상태를 체크합니다.
+2025-05-14 17:22:00,009 INFO c.o.o.h.ProductStatusScheduler [MessageBroker-3] 상품들의 상태를 체크합니다.
+2025-05-14 17:23:00,001 INFO c.o.o.h.ProductStatusScheduler [MessageBroker-3] 상품들의 상태를 체크합니다.
+2025-05-14 17:24:00,009 INFO c.o.o.h.ProductStatusScheduler [MessageBroker-6] 상품들의 상태를 체크합니다.
+2025-05-14 17:25:00,001 INFO c.o.o.h.ProductStatusScheduler [MessageBroker-6] 상품들의 상태를 체크합니다.
+2025-05-14 17:26:00,009 INFO c.o.o.h.ProductStatusScheduler [MessageBroker-4] 상품들의 상태를 체크합니다.
+2025-05-14 17:27:00,013 INFO c.o.o.h.ProductStatusScheduler [MessageBroker-5] 상품들의 상태를 체크합니다.
+2025-05-14 17:28:00,008 INFO c.o.o.h.ProductStatusScheduler [MessageBroker-10] 상품들의 상태를 체크합니다.
+2025-05-14 17:28:28,081 ERROR c.o.o.c.AuthenticationFailEntryPoint [http-nio-4000-exec-9] Authentication failed: Full authentication is required to access this resource
+2025-05-14 17:29:00,014 INFO c.o.o.h.ProductStatusScheduler [MessageBroker-11] 상품들의 상태를 체크합니다.
+2025-05-14 17:30:00,010 INFO c.o.o.h.ProductStatusScheduler [MessageBroker-11] 상품들의 상태를 체크합니다.
+2025-05-14 17:31:00,004 INFO c.o.o.h.ProductStatusScheduler [MessageBroker-1] 상품들의 상태를 체크합니다.
+2025-05-14 17:32:00,015 INFO c.o.o.h.ProductStatusScheduler [MessageBroker-12] 상품들의 상태를 체크합니다.
+2025-05-14 17:33:00,010 INFO c.o.o.h.ProductStatusScheduler [MessageBroker-9] 상품들의 상태를 체크합니다.
+2025-05-14 17:34:00,002 INFO c.o.o.h.ProductStatusScheduler [MessageBroker-2] 상품들의 상태를 체크합니다.
+2025-05-14 17:35:00,004 INFO c.o.o.h.ProductStatusScheduler [MessageBroker-3] 상품들의 상태를 체크합니다.
+2025-05-14 17:36:00,009 INFO c.o.o.h.ProductStatusScheduler [MessageBroker-7] 상품들의 상태를 체크합니다.
+2025-05-14 17:37:00,007 INFO c.o.o.h.ProductStatusScheduler [MessageBroker-6] 상품들의 상태를 체크합니다.
+2025-05-14 17:38:00,005 INFO c.o.o.h.ProductStatusScheduler [MessageBroker-4] 상품들의 상태를 체크합니다.
+2025-05-14 17:39:00,012 INFO c.o.o.h.ProductStatusScheduler [MessageBroker-5] 상품들의 상태를 체크합니다.
+2025-05-14 17:40:00,009 INFO c.o.o.h.ProductStatusScheduler [MessageBroker-10] 상품들의 상태를 체크합니다.
+2025-05-14 17:40:35,328 INFO o.s.w.s.c.WebSocketMessageBrokerStats [MessageBroker-11] WebSocketSession[0 current WS(0)-HttpStream(0)-HttpPoll(0), 0 total, 0 closed abnormally (0 connect failure, 0 send limit, 0 transport error)], stompSubProtocol[processed CONNECT(0)-CONNECTED(0)-DISCONNECT(0)], stompBrokerRelay[null], inboundChannel[pool size = 0, active threads = 0, queued tasks = 0, completed tasks = 0], outboundChannel[pool size = 0, active threads = 0, queued tasks = 0, completed tasks = 0], sockJsScheduler[pool size = 12, active threads = 1, queued tasks = 5, completed tasks = 96]
+2025-05-14 17:41:00,000 INFO c.o.o.h.ProductStatusScheduler [MessageBroker-2] 상품들의 상태를 체크합니다.
+2025-05-14 17:42:00,005 INFO c.o.o.h.ProductStatusScheduler [MessageBroker-7] 상품들의 상태를 체크합니다.
+=======
 =======
 2025-05-12 17:00:19,044 INFO o.s.b.StartupInfoLogger [main] Starting OngiBackApplication using Java 21.0.6 with PID 12648 (C:\Users\user\Documents\nakyung\ongi-back\build\classes\java\main started by user in C:\Users\user\Documents\nakyung\ongi-back)
 2025-05-12 17:00:19,050 DEBUG o.s.b.StartupInfoLogger [main] Running with Spring Boot v3.4.4, Spring v6.2.5
@@ -14093,3 +14628,4 @@ Identify and stop the process that's listening on port 4000 or configure this ap
 2025-05-14 17:38:00,010 INFO c.o.o.h.ProductStatusScheduler [scheduling-1] 상품들의 상태를 체크합니다.
 2025-05-14 17:39:00,003 INFO c.o.o.h.ProductStatusScheduler [scheduling-1] 상품들의 상태를 체크합니다.
 2025-05-14 17:40:00,001 INFO c.o.o.h.ProductStatusScheduler [scheduling-1] 상품들의 상태를 체크합니다.
+>>>>>>> 58a3258a88d60dca4b88086ec1b424bd1f2efadb
