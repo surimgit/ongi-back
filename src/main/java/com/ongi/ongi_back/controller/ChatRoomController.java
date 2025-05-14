@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.ongi.ongi_back.common.dto.response.ResponseDto;
 import com.ongi.ongi_back.common.dto.response.chat.GetChatRoomListResponseDto;
+import com.ongi.ongi_back.common.dto.response.chat.GetChatRoomResponseDto;
 import com.ongi.ongi_back.common.entity.MessageEntity;
 import com.ongi.ongi_back.repository.MessageRepository;
 import com.ongi.ongi_back.service.ChatService;
@@ -52,5 +53,14 @@ public class ChatRoomController {
     ResponseEntity<ResponseDto> response = chatService.acceptChat(userId, chatSequence, applicantId);
     return response;
   }
+
+    @GetMapping("/{chatSequence}/message")
+  publicResponseEntity<? super GetChatRoomResponseDto> getChatMessages(
+    @PathVariable Integer chatSequence,
+    @AuthenticationPrincipal String userId
+  ) {
+    ResponseEntity<ResponseDto> response = chatService.acceptChat(userId, chatSequence, applicantId);
+    return response;
+  }  
 
 }

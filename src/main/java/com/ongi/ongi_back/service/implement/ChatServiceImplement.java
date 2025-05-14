@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.ongi.ongi_back.common.dto.request.chat.SaveMessageRequestDto;
 import com.ongi.ongi_back.common.dto.response.ResponseDto;
 import com.ongi.ongi_back.common.dto.response.chat.GetChatRoomListResponseDto;
+import com.ongi.ongi_back.common.dto.response.chat.GetChatRoomResponseDto;
 import com.ongi.ongi_back.common.entity.ChatEntity;
 import com.ongi.ongi_back.common.entity.MessageEntity;
 import com.ongi.ongi_back.repository.ChatRepository;
@@ -25,7 +26,6 @@ public class ChatServiceImplement implements ChatService {
 
   private final MessageRepository messageRepository;
   private final ChatRepository chatRepository;
-  private final HelperApplyRepository helperApplyRepository;
 
   @Override
   public void saveMessage(SaveMessageRequestDto saveMessageRequestDto) {
@@ -49,7 +49,7 @@ public class ChatServiceImplement implements ChatService {
   @Override
   public ResponseEntity<ResponseDto> acceptChat(String requesterId, Integer needHelperSequence, String applicantId) {
     try {
-      ChatEntity chatEntity = chatRepository.findByRequesterIdAndApplicantId(requesterId, applicantId);
+      ChatEntity chatEntity = chatRepository.findByRequesterIdAndApplicantIdAndNeedHelperSequence(needHelperSequence, requesterId, applicantId);
       if (chatEntity == null) return ResponseDto.noExistChatRoom();
       chatEntity.setChatAvailable(true);
       chatRepository.save(chatEntity);
@@ -58,6 +58,19 @@ public class ChatServiceImplement implements ChatService {
       return ResponseDto.databaseError();
     }
     return ResponseDto.success(HttpStatus.OK);
+  }
+
+  @Override
+  public ResponseEntity<? super GetChatRoomResponseDto> getChatRoom(String userId, Integer chatSequence) {
+    ChatEntity chatEntity = null;
+    try {
+      chatEntity = chatRepository.findByRequesterIdAndChatSequence(userId, chatSequence);
+      if (chatEntity == null) return ResponseDto.noExistChatRoom();
+    } catch (Exception e) {
+      e.printStackTrace();
+      return ResponseDto.databaseError();
+    }
+    return GetChatRoomResponseDto.success(chatEntity);
   }
 
 }
