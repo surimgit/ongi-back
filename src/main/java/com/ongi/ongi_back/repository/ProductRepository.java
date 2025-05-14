@@ -7,7 +7,6 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import com.ongi.ongi_back.common.entity.ProductEntity;
-import com.ongi.ongi_back.common.vo.MySalesVO;
 import com.ongi.ongi_back.common.vo.ProductVO;
 
 @Repository
@@ -87,5 +86,7 @@ public interface ProductRepository extends JpaRepository<ProductEntity, Integer>
 
   @Query("SELECT p FROM product p WHERE p.userId = :userId AND p.deadline < :today ORDER BY p.sequence DESC")
   List<ProductVO> findByUserIdAndDeadlineBeforeNow(String userId, String today);
+
+  List<ProductVO> findByStatus(String status);
 
 }

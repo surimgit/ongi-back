@@ -17,7 +17,7 @@ public class GetUserIntroductionResponseDto extends ResponseDto {
   private List<LikeKeywordVO> likeKeywords;
 
   private String nickname;
-  private String birth;
+  private Integer birth;
   private String gender;
   private String profileImage;
   private String mbti;
